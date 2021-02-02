@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
@@ -9,6 +10,8 @@ namespace Persistence
     {
 
     }
+
+    public DbSet<Genome> Genomes {get; set;}
     
   }
 }
