@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using MediatR;
 using Persistence;
 
@@ -28,7 +30,7 @@ namespace Application.Genomes
 
         if (genome == null)
         {
-          throw new Exception("Delete : Could not find genome");
+          throw new RestException(HttpStatusCode.NotFound, new { activity = "Not Found" });
         }
 
         _context.Remove(genome);

@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using Domain;
 using MediatR;
 using Persistence;
@@ -34,7 +36,7 @@ namespace Application.Genomes
 
         if (genome == null)
         {
-          throw new Exception("Edit : Could not find genome");
+          throw new RestException(HttpStatusCode.NotFound, new { activity = "Not Found" });
         }
 
         genome.AccessionNumber = request.AccessionNumber ?? genome.AccessionNumber;

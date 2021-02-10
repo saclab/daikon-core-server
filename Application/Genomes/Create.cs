@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -17,6 +18,16 @@ namespace Application.Genomes
       public string Function { get; set; }
       public string Product { get; set; }
       public string FunctionalCategory { get; set; }
+    }
+
+    public class CommandValidator : AbstractValidator<Command>
+    {
+      public CommandValidator()
+      {
+        RuleFor(x => x.GeneName).NotEmpty();
+        RuleFor(x => x.AccessionNumber).NotEmpty();
+      }
+
     }
 
     public class Handler : IRequestHandler<Command, Genome>

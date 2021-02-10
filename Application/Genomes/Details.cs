@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using Domain;
 using MediatR;
 using Persistence;
@@ -25,6 +27,10 @@ namespace Application.Genomes
       public async Task<Genome> Handle(Query request, CancellationToken cancellationToken)
       {
         var genome = await _context.Genomes.FindAsync(request.Id);
+        if (genome == null)
+        {
+          throw new RestException(HttpStatusCode.NotFound, new { activity = "Not Found" });
+        }
 
         return genome;
       }
