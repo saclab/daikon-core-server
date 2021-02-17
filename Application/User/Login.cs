@@ -55,12 +55,13 @@ namespace Application.User
 
         if (result.Succeeded)
         {
-          //TODO: generate token
+          
           return new User
           {
             DisplayName = user.DisplayName,
             Token = _jwtGenerator.CreateToken(user),
             Username = user.UserName,
+            Email = user.Email,
             Image = null
           };
         }
