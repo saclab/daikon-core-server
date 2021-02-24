@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class GenomeEntityAdded : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,12 +11,12 @@ namespace Persistence.Migrations
                 name: "Genomes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    AccessionNumber = table.Column<string>(nullable: true),
-                    GeneName = table.Column<string>(nullable: true),
-                    Function = table.Column<string>(nullable: true),
-                    Product = table.Column<string>(nullable: true),
-                    FunctionalCategory = table.Column<string>(nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    AccessionNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    GeneName = table.Column<string>(type: "TEXT", nullable: true),
+                    Function = table.Column<string>(type: "TEXT", nullable: true),
+                    Product = table.Column<string>(type: "TEXT", nullable: true),
+                    FunctionalCategory = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -2,46 +2,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
-using Microsoft.AspNetCore.Identity;
+//using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
   public class Seed
   {
-    public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
+    //public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
+    public static async Task SeedData(DataContext context)
     {
-      if(!userManager.Users.Any())
-      {
-        var users = new List<AppUser>
-        {
-          new AppUser
-          {
-            DisplayName = "Bob",
-            UserName = "bob",
-            Email = "bob@test.com"
-          },
-          new AppUser
-          {
-            DisplayName = "Tom",
-            UserName = "tom",
-            Email = "tom@test.com"
-          },
-          new AppUser
-          {
-            DisplayName = "Jane",
-            UserName = "jane",
-            Email = "jane@test.com"
-          },
+    //   if(!userManager.Users.Any())
+    //   {
+    //     var users = new List<AppUser>
+    //     {
+    //       new AppUser
+    //       {
+    //         DisplayName = "Bob",
+    //         UserName = "bob",
+    //         Email = "bob@test.com"
+    //       },
+    //       new AppUser
+    //       {
+    //         DisplayName = "Tom",
+    //         UserName = "tom",
+    //         Email = "tom@test.com"
+    //       },
+    //       new AppUser
+    //       {
+    //         DisplayName = "Jane",
+    //         UserName = "jane",
+    //         Email = "jane@test.com"
+    //       },
 
-        };
+    //     };
 
-        foreach (var user in users)
-        {
-          await userManager.CreateAsync(user, "Pa$$w0rd");
-        }
+    //     foreach (var user in users)
+    //     {
+    //       await userManager.CreateAsync(user, "Pa$$w0rd");
+    //     }
 
 
-      }
+    //   }
       if (!context.Genomes.Any())
       {
         var genomes = new List<Genome>
@@ -128,8 +129,8 @@ namespace Persistence
           }
         };
 
-        context.Genomes.AddRange(genomes);
-        context.SaveChanges();
+        await context.Genomes.AddRangeAsync(genomes);
+        await context.SaveChangesAsync();
       }
     }
   }

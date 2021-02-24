@@ -9,41 +9,40 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-  [ApiController]
-  [Route("api/[controller]")]
-  public class GenomesController : BaseController
+  public class GenomesController : BaseApiController
   {
+
     [HttpGet]
-    public async Task<ActionResult<List<Genome>>> List()
+    public async Task<IActionResult> ListActivities()
     {
-      return await Mediator.Send(new List.Query());
+      return HandleResult(await Mediator.Send(new List.Query()));
     }
 
     [HttpGet("{id}")]
-    [Authorize]
-    public async Task<ActionResult<Genome>> Details(Guid id)
+    public async Task<IActionResult> GetActivity(Guid id)
     {
-      return await Mediator.Send(new Details.Query { Id = id });
+      return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
     }
 
     [HttpPost]
-    public async Task<ActionResult<Genome>> Create(Create.Command command)
+    public async Task<IActionResult> CreateActivity(Genome genome)
     {
-      return await Mediator.Send(command);
+      return HandleResult(await Mediator.Send(new Create.Command { Genome = genome }));
     }
 
     [HttpPost("{id}")]
-    public async Task<ActionResult<Genome>> Edit(Guid id, Edit.Command command)
+    public async Task<IActionResult> EditActivity(Guid id, Genome genome)
     {
-      command.Id = id;
-      return await Mediator.Send(command);
+      genome.Id = id;
+      return HandleResult(await Mediator.Send(new Edit.Command { Genome = genome }));
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult<Unit>> Delete(Guid id)
+    public async Task<IActionResult> DeleteActivity(Guid id)
     {
 
-      return await Mediator.Send(new Delete.Command { Id = id });
+      return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
     }
+
   }
 }
