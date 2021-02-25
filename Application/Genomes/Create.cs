@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Core;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -10,52 +11,45 @@ namespace Application.Genomes
 {
   public class Create
   {
-    public class Command : IRequest<Genome>
+    public class Command : IRequest<Result<Genome>>
     {
-      public Guid Id { get; set; }
-      public string AccessionNumber { get; set; }
-      public string GeneName { get; set; }
-      public string Function { get; set; }
-      public string Product { get; set; }
-      public string FunctionalCategory { get; set; }
+      public Genome Genome { get; set; }
     }
 
     public class CommandValidator : AbstractValidator<Command>
     {
       public CommandValidator()
       {
-        RuleFor(x => x.GeneName).NotEmpty();
-        RuleFor(x => x.AccessionNumber).NotEmpty();
+        RuleFor(cmd => cmd.Genome).SetValidator(new GenomeValidator());
       }
 
     }
 
-    public class Handler : IRequestHandler<Command, Genome>
+    public class Handler : IRequestHandler<Command, Result<Genome>>
     {
       private readonly DataContext _context;
       public Handler(DataContext context)
       {
         _context = context;
       }
-      public async Task<Genome> Handle(Command request, CancellationToken cancellationToken)
+      public async Task<Result<Genome>> Handle(Command request, CancellationToken cancellationToken)
       {
         Guid gid = Guid.NewGuid();
-        var genome = new Genome
+        var genomeToCreate = new Genome
         {
           Id = gid,
-          AccessionNumber = request.AccessionNumber,
-          GeneName = request.GeneName,
-          Function = request.Function,
-          Product = request.Product,
-          FunctionalCategory = request.FunctionalCategory
+          AccessionNumber = request.Genome.AccessionNumber,
+          GeneName = request.Genome.GeneName,
+          Function = request.Genome.Function,
+          Product = request.Genome.Product,
+          FunctionalCategory = request.Genome.FunctionalCategory
         };
 
-        _context.Genomes.Add(genome);
+        _context.Genomes.Add(genomeToCreate);
         var success = await _context.SaveChangesAsync() > 0;
 
-        if (success) return genome;
-
-        throw new Exception("Problem adding new Genome");
+        if (!success) return Result<Genome>.Failure("Failed to create Genome");
+        return Result<Genome>.Success(genomeToCreate);
 
       }
     }

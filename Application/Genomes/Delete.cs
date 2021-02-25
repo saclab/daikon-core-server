@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Core;
 using Application.Errors;
 using MediatR;
 using Persistence;
@@ -10,36 +11,32 @@ namespace Application.Genomes
 {
   public class Delete
   {
-    public class Command : IRequest
+    public class Command : IRequest<Result<Unit>>
     {
       public Guid Id { get; set; }
     }
 
-    public class Handler : IRequestHandler<Command>
+    public class Handler : IRequestHandler<Command, Result<Unit>>
     {
       private readonly DataContext _context;
       public Handler(DataContext context)
       {
         _context = context;
       }
-      public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+      public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
       {
 
-        var genome = await _context.Genomes.FindAsync(request.Id);
-        // Console.WriteLine(request.Id);
+        var genomeToDelete = await _context.Genomes.FindAsync(request.Id);
 
-        if (genome == null)
-        {
-          throw new RestException(HttpStatusCode.NotFound, new { activity = "Not Found" });
-        }
+        if (genomeToDelete == null) return null;
 
-        _context.Remove(genome);
+        _context.Remove(genomeToDelete);
+
         var success = await _context.SaveChangesAsync() > 0;
 
-        if (success) return Unit.Value;
+        if (!success) return Result<Unit>.Failure("Failed to delete Genome");
 
-        throw new Exception("Problem deleting Genome");
-
+        return Result<Unit>.Success(Unit.Value);
       }
     }
   }

@@ -128,8 +128,8 @@ namespace Persistence
           }
         };
 
-        context.Genomes.AddRange(genomes);
-        context.SaveChanges();
+        await context.Genomes.AddRangeAsync(genomes);
+        await context.SaveChangesAsync();
       }
     }
   }
