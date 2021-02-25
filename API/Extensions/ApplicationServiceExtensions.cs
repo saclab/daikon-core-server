@@ -1,5 +1,7 @@
 using Application.Core;
 using Application.Genomes;
+using Application.Interfaces;
+using Infrastructure.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +39,9 @@ namespace API.Extensions
 
       /* Auto Mapper */
       services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+      /* Add User Accessor from Indfrastructure */
+      services.AddScoped<IUserAccessor, UserAccessor>();
 
       return services;
     }
