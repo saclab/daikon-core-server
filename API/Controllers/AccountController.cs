@@ -2,6 +2,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Services;
+using Application.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-  
+
   [ApiController]
   [Route("api/[controller]")]
   public class AccountController : ControllerBase
@@ -17,37 +18,43 @@ namespace API.Controllers
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
     private readonly TokenService _tokenService;
-    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, TokenService tokenService)
+    private readonly IUserAccessor _userAccessor;
+    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, TokenService tokenService, IUserAccessor userAccessor)
     {
+      _userAccessor = userAccessor;
       _tokenService = tokenService;
       _signInManager = signInManager;
       _userManager = userManager;
 
     }
-    [AllowAnonymous]
-    [HttpPost("login")]
-    public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
-    {
-      var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-      if (user == null) return Unauthorized();
+    // [HttpPost("login")]
+    // public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+    // {
+    //   var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-      var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+    //   if (user == null) return Unauthorized();
 
-      if (result.Succeeded)
-      {
-        return CreateUserObject(user);
-      }
+    //   var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-      return Unauthorized();
+    //   if (result.Succeeded)
+    //   {
+    //     return CreateUserObject(user);
+    //   }
 
-    }
+    //   return Unauthorized();
+
+    // }
 
     [Authorize]
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
-      var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+      var userEmailFromToken = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+      var user = await _userManager.FindByEmailAsync(userEmailFromToken);
+
+      if (user == null) return NotFound();
+
       return CreateUserObject(user);
 
     }
@@ -58,7 +65,6 @@ namespace API.Controllers
       {
         DisplayName = user.DisplayName,
         Email = user.Email,
-        Token = _tokenService.CreateToken(user),
         Username = user.UserName
       };
     }
