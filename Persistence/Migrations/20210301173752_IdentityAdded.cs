@@ -49,6 +49,22 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Genomes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    AccessionNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    GeneName = table.Column<string>(type: "TEXT", nullable: true),
+                    Function = table.Column<string>(type: "TEXT", nullable: true),
+                    Product = table.Column<string>(type: "TEXT", nullable: true),
+                    FunctionalCategory = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genomes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -208,6 +224,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Genomes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

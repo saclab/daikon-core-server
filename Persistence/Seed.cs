@@ -10,7 +10,7 @@ namespace Persistence
   {
     public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
     {
-      if(!userManager.Users.Any())
+      if (!userManager.Users.Any())
       {
         var users = new List<AppUser>
         {
@@ -32,12 +32,18 @@ namespace Persistence
             UserName = "jane",
             Email = "jane@test.com"
           },
+          new AppUser
+          {
+            DisplayName = "Sid",
+            UserName = "sid",
+            Email = "sid@tamu.edu"
+          },
 
         };
 
         foreach (var user in users)
         {
-          await userManager.CreateAsync(user, "Pa$$w0rd");
+          await userManager.CreateAsync(user, "P@ssw0rd");
         }
 
 
@@ -46,7 +52,7 @@ namespace Persistence
       {
         var genomes = new List<Genome>
         {
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv1297",
             GeneName = "rho",
@@ -54,7 +60,7 @@ namespace Persistence
             Product = "Probable transcription termination factor Rho homolog",
             FunctionalCategory = "information pathways",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv2794c",
             GeneName = "pptT",
@@ -62,7 +68,7 @@ namespace Persistence
             Product = "Phosphopantetheinyl transferase PptT (CoA:APO-[ACP]pantetheinephosphotransferase) (CoA:APO-[acyl-carrier protein]pantetheinephosphotransferase)",
             FunctionalCategory = "lipid metabolism",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv1240",
             GeneName = "mdh",
@@ -70,7 +76,7 @@ namespace Persistence
             Product = "Probable malate dehydrogenase Mdh",
             FunctionalCategory = "intermediary metabolism and respiration",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv3457c",
             GeneName = "rpoA",
@@ -78,7 +84,7 @@ namespace Persistence
             Product = "Probable DNA-directed RNA polymerase (alpha chain) RpoA (transcriptase alpha chain) (RNA polymerase alpha subunit) (DNA-directed RNA nucleotidyltransferase)",
             FunctionalCategory = "information pathways",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv2202c",
             GeneName = "adoK",
@@ -86,7 +92,7 @@ namespace Persistence
             Product = "Adenosine kinase",
             FunctionalCategory = "intermediary metabolism and respiration",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv3279c",
             GeneName = "birA",
@@ -94,7 +100,7 @@ namespace Persistence
             Product = "Possible bifunctional protein BirA: biotin operon repressor + biotin--[acetyl-CoA-carboxylase] synthetase (biotin--protein ligase)",
             FunctionalCategory = "intermediary metabolism and respiration",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv0667",
             GeneName = "rpoB",
@@ -102,7 +108,7 @@ namespace Persistence
             Product = "DNA-directed RNA polymerase (beta chain) RpoB (transcriptase beta chain) (RNA polymerase beta subunit)",
             FunctionalCategory = "information pathways",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv0668",
             GeneName = "rpoC",
@@ -110,7 +116,7 @@ namespace Persistence
             Product = "DNA-directed RNA polymerase (beta' chain) RpoC (transcriptase beta' chain) (RNA polymerase beta' subunit).",
             FunctionalCategory = "information pathways",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv1390",
             GeneName = "rpoZ",
@@ -118,7 +124,7 @@ namespace Persistence
             Product = "Probable DNA-directed RNA polymerase (omega chain) RpoZ (transcriptase omega chain) (RNA polymerase omega subunit)",
             FunctionalCategory = "information pathways",
           },
-          new Genome 
+          new Genome
           {
             AccessionNumber = "Rv2523c",
             GeneName = "acpS",
