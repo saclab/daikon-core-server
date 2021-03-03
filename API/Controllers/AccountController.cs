@@ -53,7 +53,7 @@ namespace API.Controllers
       var userEmailFromToken = HttpContext.User.FindFirstValue(ClaimTypes.Email);
       var user = await _userManager.FindByEmailAsync(userEmailFromToken);
 
-      if (user == null) return NotFound();
+      if (user == null) return null;
 
       return CreateUserObject(user);
 
