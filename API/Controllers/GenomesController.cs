@@ -11,14 +11,14 @@ namespace API.Controllers
 {
   public class GenomesController : BaseApiController
   {
-
+    
     [HttpGet]
     public async Task<IActionResult> ListActivities()
     {
       return HandleResult(await Mediator.Send(new List.Query()));
     }
 
-    
+    [Authorize(Policy = "RequireUserRole")] 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetActivity(Guid id)
     {
