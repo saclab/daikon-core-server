@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -56,17 +57,18 @@ namespace API.Controllers
 
       
 
-      return CreateUserObject(user);
+      return CreateUserObject(user, roles);
 
     }
 
-    private UserDto CreateUserObject(AppUser user)
+    private UserDto CreateUserObject(AppUser user, IList<string> roles)
     {
       return new UserDto
       {
+        Id = user.Id,
         DisplayName = user.DisplayName,
         Email = user.Email,
-        Username = user.UserName
+        Roles = roles
       };
     }
 

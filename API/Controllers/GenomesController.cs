@@ -18,7 +18,7 @@ namespace API.Controllers
       return HandleResult(await Mediator.Send(new List.Query()));
     }
 
-    [Authorize(Policy = "RequireUserRole")] 
+    //[Authorize(Policy = "RequireUserRole")] 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetActivity(Guid id)
     {
