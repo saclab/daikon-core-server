@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+  [Authorize(Policy = "RequireUserRole")]
   public class GenomesController : BaseApiController
   {
     
@@ -18,7 +19,6 @@ namespace API.Controllers
       return HandleResult(await Mediator.Send(new List.Query()));
     }
 
-    //[Authorize(Policy = "RequireUserRole")] 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetActivity(Guid id)
     {

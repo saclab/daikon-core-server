@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers.Admin
 {
   [ApiController]
   [Route("api/admin/[controller]")]
+  [Authorize(Policy = "RequireAdministratorRole")]
   public class AccountsController : ControllerBase
   {
     private readonly UserManager<AppUser> _userManager;
