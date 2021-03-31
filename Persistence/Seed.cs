@@ -8,7 +8,7 @@ namespace Persistence
 {
   public class Seed
   {
-    public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
+    public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
     {
       if (!userManager.Users.Any())
       {
@@ -38,6 +38,12 @@ namespace Persistence
             UserName = "sid",
             Email = "sid@tamu.edu"
           },
+          new AppUser
+          {
+            DisplayName = "Siddhant Rath",
+            UserName = "sidx",
+            Email = "rath.siddhant@outlook.com"
+          },
 
         };
 
@@ -47,7 +53,46 @@ namespace Persistence
         }
 
 
+
+
       }
+      if (!roleManager.Roles.Any())
+      {
+        var roles = new List<AppRole>
+        {
+          new AppRole
+          {
+            Name = "root"
+          },
+          new AppRole
+          {
+            Name = "admin"
+          },
+          new AppRole
+          {
+           Name = "user"
+          }
+        };
+
+        foreach (var role in roles)
+        {
+          await roleManager.CreateAsync(role);
+        }
+      }
+
+
+      // Add sid@tamu.edu as admin
+        var userSid = await userManager.FindByEmailAsync("sid@tamu.edu");
+        var rolesOfSid = await userManager.GetRolesAsync(userSid);
+
+        if (!rolesOfSid.Any())
+        {
+          await userManager.AddToRoleAsync(userSid, "admin");
+        }
+
+      
+
+
       if (!context.Genomes.Any())
       {
         var genomes = new List<Genome>

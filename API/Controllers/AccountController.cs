@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -17,15 +18,13 @@ namespace API.Controllers
   {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
-    private readonly TokenService _tokenService;
+
     private readonly IUserAccessor _userAccessor;
-    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, TokenService tokenService, IUserAccessor userAccessor)
+    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IUserAccessor userAccessor)
     {
       _userAccessor = userAccessor;
-      _tokenService = tokenService;
       _signInManager = signInManager;
       _userManager = userManager;
-
     }
 
     // [HttpPost("login")]
@@ -46,26 +45,30 @@ namespace API.Controllers
 
     // }
 
-    [Authorize]
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
       var userEmailFromToken = HttpContext.User.FindFirstValue(ClaimTypes.Email);
       var user = await _userManager.FindByEmailAsync(userEmailFromToken);
 
+      var roles = await _userManager.GetRolesAsync(user);
+
       if (user == null) return null;
 
-      return CreateUserObject(user);
+      
+
+      return CreateUserObject(user, roles);
 
     }
 
-    private UserDto CreateUserObject(AppUser user)
+    private UserDto CreateUserObject(AppUser user, IList<string> roles)
     {
       return new UserDto
       {
+        Id = user.Id,
         DisplayName = user.DisplayName,
         Email = user.Email,
-        Username = user.UserName
+        Roles = roles
       };
     }
 
