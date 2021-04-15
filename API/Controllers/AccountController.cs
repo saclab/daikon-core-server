@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -48,7 +49,12 @@ namespace API.Controllers
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
+      
       var userEmailFromToken = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+      if(userEmailFromToken == null) {
+        return Unauthorized();
+      }
+
       var user = await _userManager.FindByEmailAsync(userEmailFromToken);
 
       var roles = await _userManager.GetRolesAsync(user);

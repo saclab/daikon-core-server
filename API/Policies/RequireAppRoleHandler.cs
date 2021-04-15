@@ -1,3 +1,4 @@
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Domain;
@@ -15,15 +16,21 @@ namespace API.Policies
     }
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, RequireAppRole requirement)
     {
-      var userEmailFromToken = context.User.FindFirstValue(ClaimTypes.Email);
-      var user = await _userManager.FindByEmailAsync(userEmailFromToken);
-      var roles = await _userManager.GetRolesAsync(user);
-
-      if (roles.Contains(requirement.RoleName))
+      try
       {
-        context.Succeed(requirement);
+        var userEmailFromToken = context.User.FindFirstValue(ClaimTypes.Email);
+        var user = await _userManager.FindByEmailAsync(userEmailFromToken);
+        var roles = await _userManager.GetRolesAsync(user);
+        if (roles.Contains(requirement.RoleName))
+        {
+          context.Succeed(requirement);
+        }
+
       }
-      
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.Message);
+      }
     }
   }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace API.Controllers.Admin
 {
@@ -23,6 +24,7 @@ namespace API.Controllers.Admin
     [HttpGet]
     public async Task<ActionResult> listUsers()
     {
+
       var users = _userManager.Users;
       var formattedUsers = new List<API.DTOs.UserDto> { };
       foreach (var user in users)

@@ -45,13 +45,13 @@ namespace API.Extensions
 
 
       services.AddAuthorization(options =>
-    {
-      options.AddPolicy("RequireAdministratorRole",
-           policy => policy.Requirements.Add(new RequireAppRole("admin")));
+      {
+        options.AddPolicy("RequireAdministratorRole",
+            policy => policy.Requirements.Add(new RequireAppRole("admin")));
 
-      options.AddPolicy("RequireUserRole",
-           policy => policy.Requirements.Add(new RequireAppRole("user")));
-    });
+        options.AddPolicy("RequireUserRole",
+            policy => policy.Requirements.Add(new RequireAppRole("user")));
+      });
 
       return services;
     }
