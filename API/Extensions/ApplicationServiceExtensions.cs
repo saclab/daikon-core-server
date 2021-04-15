@@ -30,7 +30,10 @@ namespace API.Extensions
                   .AllowAnyHeader()
                   .AllowCredentials()
                   .WithExposedHeaders("WWW-Authenticate", "Pagination")
-                  .WithOrigins("http://localhost:3000");
+                  .WithOrigins(
+                    "http://localhost:3000",
+                    "https://chef-auto.virt.snet.biobio.tamu.edu:3000"
+                    );
             });
         });
 
