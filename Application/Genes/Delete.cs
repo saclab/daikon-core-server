@@ -7,7 +7,7 @@ using Application.Errors;
 using MediatR;
 using Persistence;
 
-namespace Application.Genomes
+namespace Application.Genes
 {
   public class Delete
   {
@@ -26,11 +26,11 @@ namespace Application.Genomes
       public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
       {
 
-        var genomeToDelete = await _context.Genomes.FindAsync(request.Id);
+        var geneToDelete = await _context.Genes.FindAsync(request.Id);
 
-        if (genomeToDelete == null) return null;
+        if (geneToDelete == null) return null;
 
-        _context.Remove(genomeToDelete);
+        _context.Remove(geneToDelete);
 
         var success = await _context.SaveChangesAsync() > 0;
 

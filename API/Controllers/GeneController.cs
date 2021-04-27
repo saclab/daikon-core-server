@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.Genomes;
+using Application.Genes;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
   [Authorize(Policy = "RequireUserRole")]
-  public class GenomesController : BaseApiController
+  public class GeneController : BaseApiController
   {
     
     [HttpGet]
@@ -26,16 +26,16 @@ namespace API.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateActivity(Genome genome)
+    public async Task<IActionResult> CreateActivity(Gene gene)
     {
-      return HandleResult(await Mediator.Send(new Create.Command { Genome = genome }));
+      return HandleResult(await Mediator.Send(new Create.Command { Gene = gene }));
     }
 
     [HttpPost("{id}")]
-    public async Task<IActionResult> EditActivity(Guid id, Genome genome)
+    public async Task<IActionResult> EditActivity(Guid id, Gene gene)
     {
-      genome.Id = id;
-      return HandleResult(await Mediator.Send(new Edit.Command { Genome = genome }));
+      gene.Id = id;
+      return HandleResult(await Mediator.Send(new Edit.Command {  Gene = gene }));
     }
 
     [HttpDelete("{id}")]

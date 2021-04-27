@@ -93,11 +93,11 @@ namespace Persistence
       
 
 
-      if (!context.Genomes.Any())
+      if (!context.Genes.Any())
       {
-        var genomes = new List<Genome>
+        var genes = new List<Gene>
         {
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv1297",
             GeneName = "rho",
@@ -105,7 +105,7 @@ namespace Persistence
             Product = "Probable transcription termination factor Rho homolog",
             FunctionalCategory = "information pathways",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv2794c",
             GeneName = "pptT",
@@ -113,7 +113,7 @@ namespace Persistence
             Product = "Phosphopantetheinyl transferase PptT (CoA:APO-[ACP]pantetheinephosphotransferase) (CoA:APO-[acyl-carrier protein]pantetheinephosphotransferase)",
             FunctionalCategory = "lipid metabolism",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv1240",
             GeneName = "mdh",
@@ -121,7 +121,7 @@ namespace Persistence
             Product = "Probable malate dehydrogenase Mdh",
             FunctionalCategory = "intermediary metabolism and respiration",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv3457c",
             GeneName = "rpoA",
@@ -129,7 +129,7 @@ namespace Persistence
             Product = "Probable DNA-directed RNA polymerase (alpha chain) RpoA (transcriptase alpha chain) (RNA polymerase alpha subunit) (DNA-directed RNA nucleotidyltransferase)",
             FunctionalCategory = "information pathways",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv2202c",
             GeneName = "adoK",
@@ -137,7 +137,7 @@ namespace Persistence
             Product = "Adenosine kinase",
             FunctionalCategory = "intermediary metabolism and respiration",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv3279c",
             GeneName = "birA",
@@ -145,7 +145,7 @@ namespace Persistence
             Product = "Possible bifunctional protein BirA: biotin operon repressor + biotin--[acetyl-CoA-carboxylase] synthetase (biotin--protein ligase)",
             FunctionalCategory = "intermediary metabolism and respiration",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv0667",
             GeneName = "rpoB",
@@ -153,7 +153,7 @@ namespace Persistence
             Product = "DNA-directed RNA polymerase (beta chain) RpoB (transcriptase beta chain) (RNA polymerase beta subunit)",
             FunctionalCategory = "information pathways",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv0668",
             GeneName = "rpoC",
@@ -161,7 +161,7 @@ namespace Persistence
             Product = "DNA-directed RNA polymerase (beta' chain) RpoC (transcriptase beta' chain) (RNA polymerase beta' subunit).",
             FunctionalCategory = "information pathways",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv1390",
             GeneName = "rpoZ",
@@ -169,7 +169,7 @@ namespace Persistence
             Product = "Probable DNA-directed RNA polymerase (omega chain) RpoZ (transcriptase omega chain) (RNA polymerase omega subunit)",
             FunctionalCategory = "information pathways",
           },
-          new Genome
+          new Gene
           {
             AccessionNumber = "Rv2523c",
             GeneName = "acpS",
@@ -179,7 +179,7 @@ namespace Persistence
           }
         };
 
-        await context.Genomes.AddRangeAsync(genomes);
+        await context.Genes.AddRangeAsync(genes);
         await context.SaveChangesAsync();
       }
     }

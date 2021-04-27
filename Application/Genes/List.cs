@@ -8,14 +8,14 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Genomes
+namespace Application.Genes
 {
   public class List
   {
-    public class Query : IRequest<Result<List<Genome>>> { }
+    public class Query : IRequest<Result<List<Gene>>> { }
 
 
-    public class Handler : IRequestHandler<Query, Result<List<Genome>>>
+    public class Handler : IRequestHandler<Query, Result<List<Gene>>>
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
@@ -25,11 +25,11 @@ namespace Application.Genomes
         _context = context;
 
       }
-      public async Task<Result<List<Genome>>> Handle(Query request, CancellationToken cancellationToken)
+      public async Task<Result<List<Gene>>> Handle(Query request, CancellationToken cancellationToken)
       {
-        var genomes = await _context.Genomes.ToListAsync(cancellationToken);
+        var genes = await _context.Genes.ToListAsync(cancellationToken);
         
-        return Result<List<Genome>>.Success(genomes);
+        return Result<List<Gene>>.Success(genes);
       }
     }
   }

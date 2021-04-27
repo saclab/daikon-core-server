@@ -11,7 +11,7 @@ namespace Persistence
 
     }
 
-    public DbSet<Genome> Genomes { get; set; }
+    public DbSet<Gene> Genes { get; set; }
     
   }
 }

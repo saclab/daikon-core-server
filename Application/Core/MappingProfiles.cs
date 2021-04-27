@@ -7,7 +7,7 @@ namespace Application.Core
   {
     public MappingProfiles()
     {
-        CreateMap<Genome, Genome>();
+        CreateMap<Gene, Gene>();
     }
 
   }

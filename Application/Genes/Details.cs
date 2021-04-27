@@ -9,16 +9,16 @@ using Domain;
 using MediatR;
 using Persistence;
 
-namespace Application.Genomes
+namespace Application.Genes
 {
   public class Details
   {
-    public class Query : IRequest<Result<Genome>>
+    public class Query : IRequest<Result<Gene>>
     {
       public Guid Id { get; set; }
     }
 
-    public class Handler : IRequestHandler<Query, Result<Genome>>
+    public class Handler : IRequestHandler<Query, Result<Gene>>
     {
       private readonly DataContext _context;
       public Handler(DataContext context)
@@ -26,11 +26,11 @@ namespace Application.Genomes
         _context = context;
 
       }
-      public async Task<Result<Genome>> Handle(Query request, CancellationToken cancellationToken)
+      public async Task<Result<Gene>> Handle(Query request, CancellationToken cancellationToken)
       {
-        var genome = await _context.Genomes.FindAsync(request.Id);
+        var gene = await _context.Genes.FindAsync(request.Id);
         
-        return Result<Genome>.Success(genome);
+        return Result<Gene>.Success(gene);
       }
     }
   }
