@@ -11,7 +11,21 @@ namespace Persistence
 
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+      base.OnModelCreating(modelBuilder);
+
+        //  modelBuilder.Entity<Gene>()
+        //     .HasOne<GenePublicData>(g => g.GenePublicData)
+        //     .WithOne(gpd => gpd.Gene)
+        //     .HasForeignKey<GenePublicData>(gpd => gpd.RefGeneID);
+    }
+    
+
+
+
     public DbSet<Gene> Genes { get; set; }
+    public DbSet<GenePublicData> GenePublicData { get; set; }
     
   }
 }

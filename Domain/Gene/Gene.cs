@@ -10,7 +10,7 @@ namespace Domain
     public string Function { get; set; }
     public string Product { get; set; }
     public string FunctionalCategory { get; set; }
-    //public GenomePublicData genomePublicData { get; set; }
+    public GenePublicData GenePublicData { get; set; } = new GenePublicData();
 
   }
 }

@@ -1,13 +1,9 @@
 using System;
 
-namespace Domain
+namespace Application.Genes.DTOs
 {
-    public class GenePublicData
+    public class GenePublicDataDTO
     {
-        public Guid Id { get; set; }
-        public Gene Gene { get; set; }
-        public Guid GeneID { get; set; }
-
         /* Section 1: General annotation */
         public string Type { get; set; }
         public string Proteomics { get; set; }
@@ -47,5 +43,6 @@ namespace Domain
         public string XRay { get; set; }
         public string Model { get; set; }
         public string Ligand { get; set; }
+
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-  [Authorize(Policy = "RequireUserRole")]
+  // [Authorize(Policy = "RequireUserRole")]
   public class GeneController : BaseApiController
   {
     
