@@ -44,6 +44,12 @@ namespace Persistence
             UserName = "sidx",
             Email = "rath.siddhant@outlook.com"
           },
+          new AppUser
+          {
+            DisplayName = "Saswati Panda",
+            UserName = "panda",
+            Email = "panda@tamu.edu"
+          },
 
         };
 
@@ -90,9 +96,18 @@ namespace Persistence
         await userManager.AddToRoleAsync(userSid, "admin");
       }
 
+      // Add panda@tamu.edu as admin
+      var userPanda = await userManager.FindByEmailAsync("panda@tamu.edu");
+      var rolesOfPanda = await userManager.GetRolesAsync(userPanda);
+
+      if (!rolesOfPanda.Any())
+      {
+        await userManager.AddToRoleAsync(userPanda, "admin");
+      }
+ 
 
 
-
+ 
       if (!context.Genes.Any())
       {
         var genes = new List<Gene>
