@@ -1,5 +1,4 @@
 using Application.Core;
-using Application.Genomes;
 using Application.Interfaces;
 using Infrastructure.Security;
 using MediatR;
@@ -7,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence;
+using Application.Genes;
 
 namespace API.Extensions
 {
@@ -32,7 +32,7 @@ namespace API.Extensions
                   .WithExposedHeaders("WWW-Authenticate", "Pagination")
                   .WithOrigins(
                     "http://localhost:3000",
-                    "https://chef-auto.virt.snet.biobio.tamu.edu:3000"
+                    "https://chef-auto.virt.snet.biobio.tamu.edu"
                     );
             });
         });

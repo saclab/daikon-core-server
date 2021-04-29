@@ -2,7 +2,7 @@ using System;
 
 namespace Domain
 {
-  public class Genome
+  public class Gene
   {
     public Guid Id { get; set; }
     public string AccessionNumber { get; set; }
@@ -10,6 +10,7 @@ namespace Domain
     public string Function { get; set; }
     public string Product { get; set; }
     public string FunctionalCategory { get; set; }
+    public GenePublicData GenePublicData { get; set; } = new GenePublicData();
 
   }
 }

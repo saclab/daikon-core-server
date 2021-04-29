@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210427223441_GeneEntityAdded")]
+    partial class GeneEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,83 +140,6 @@ namespace Persistence.Migrations
                     b.ToTable("Genes");
                 });
 
-            modelBuilder.Entity("Domain.GenePublicData", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Cryo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("End")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("GeneID")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GeneLength")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("IsoelectricPoint")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Ligand")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("M_Leprae")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("M_Marinum")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("M_Smegmatis")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Model")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("MolecularMass")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Mutant")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Orientation")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PFAM")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProteinLength")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Proteomics")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Start")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("XRay")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GeneID")
-                        .IsUnique();
-
-                    b.ToTable("GenePublicData");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -317,17 +242,6 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Domain.GenePublicData", b =>
-                {
-                    b.HasOne("Domain.Gene", "Gene")
-                        .WithOne("GenePublicData")
-                        .HasForeignKey("Domain.GenePublicData", "GeneID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gene");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Domain.AppRole", null)
@@ -377,11 +291,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Gene", b =>
-                {
-                    b.Navigation("GenePublicData");
                 });
 #pragma warning restore 612, 618
         }

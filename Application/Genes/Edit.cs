@@ -10,13 +10,13 @@ using FluentValidation;
 using MediatR;
 using Persistence;
 
-namespace Application.Genomes
+namespace Application.Genes
 {
   public class Edit
   {
-    public class Command : IRequest<Result<Genome>>
+    public class Command : IRequest<Result<Gene>>
     {
-      public Genome Genome { get; set; }
+      public Gene Gene { get; set; }
     }
 
 
@@ -24,12 +24,12 @@ namespace Application.Genomes
     {
       public CommandValidator()
       {
-        RuleFor(cmd => cmd.Genome).SetValidator(new GenomeValidator());
+        RuleFor(cmd => cmd.Gene).SetValidator(new GeneValidator());
       }
 
     }
 
-    public class Handler : IRequestHandler<Command, Result<Genome>>
+    public class Handler : IRequestHandler<Command, Result<Gene>>
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
@@ -38,20 +38,20 @@ namespace Application.Genomes
         _mapper = mapper;
         _context = context;
       }
-      public async Task<Result<Genome>> Handle(Command request, CancellationToken cancellationToken)
+      public async Task<Result<Gene>> Handle(Command request, CancellationToken cancellationToken)
       {
 
-        var genomeToEdit = await _context.Genomes.FindAsync(request.Genome.Id);
+        var GeneToEdit = await _context.Genes.FindAsync(request.Gene.Id);
 
-        if (genomeToEdit == null) return null;
+        if (GeneToEdit == null) return null;
 
-        _mapper.Map(request.Genome, genomeToEdit);
+        _mapper.Map(request.Gene, GeneToEdit);
 
         var success = await _context.SaveChangesAsync() > 0;
 
-        if (!success) return Result<Genome>.Failure("Failed to edit genome");
+        if (!success) return Result<Gene>.Failure("Failed to edit genome");
 
-        return Result<Genome>.Success(genomeToEdit);
+        return Result<Gene>.Success(GeneToEdit);
 
       }
     }
