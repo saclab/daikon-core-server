@@ -26,6 +26,6 @@ namespace Persistence
 
     public DbSet<Gene> Genes { get; set; }
     public DbSet<GenePublicData> GenePublicData { get; set; }
-    
+    public DbSet<GeneNonPublicData> GeneNonPublicData { get; set; }
   }
 }
