@@ -38,6 +38,7 @@ namespace Application.Genes
       {
         var gene = await _context.Genes
         .Include(p => p.GenePublicData)
+        .Include(p => p.GeneNonPublicData)
         .FirstOrDefaultAsync(g => g.Id == request.Id);
       
         var genesToReturn = _mapper.Map<GeneViewDTO>(gene);

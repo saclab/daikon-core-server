@@ -12,6 +12,7 @@ namespace Application.Core
         CreateMap<Gene, GeneListDTO>();
         CreateMap<Gene, GeneViewDTO>();
         CreateMap<GenePublicData, GenePublicDataDTO>();
+        CreateMap<GeneNonPublicData, GeneNonPublicDataDTO>();
     }
 
   }
