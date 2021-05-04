@@ -12,5 +12,6 @@ namespace Application.Genes.DTOs
     public string Product { get; set; }
     public string FunctionalCategory { get; set; }
     public GenePublicDataDTO GenePublicData { get; set; }
+    public GeneNonPublicDataDTO GeneNonPublicData { get; set; }
   }
 }
