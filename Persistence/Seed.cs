@@ -4,33 +4,67 @@ using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Identity;
 
+/* CAUTION
+*  
+*  Data in the seed class are public and are commited to source control.
+*  Do **NOT** put any sensitive information in this file.
+*  The intention of the class is strictly for testing purposes only and will be removed on production builds
+*/
+
 namespace Persistence
 {
-    public class Seed
+  public class Seed
+  {
+    public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
     {
-        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+
+      /* Add Roles */
+      if (!roleManager.Roles.Any())
+      {
+        var roles = new List<AppRole>
         {
-            if (!userManager.Users.Any())
-            {
-                var users = new List<AppUser>
+          new AppRole
+          {
+            Name = "root"
+          },
+          new AppRole
+          {
+            Name = "admin"
+          },
+          new AppRole
+          {
+           Name = "user"
+          }
+        };
+
+        foreach (var role in roles)
+        {
+          await roleManager.CreateAsync(role);
+        }
+      }
+
+      /* Add test users */
+      if (!userManager.Users.Any())
+      {
+        var users = new List<AppUser>
         {
           new AppUser
           {
-            DisplayName = "Bob",
-            UserName = "bob",
-            Email = "bob@test.com"
+            DisplayName = "Steve Berthel",
+            UserName = "steve",
+            Email = "steve.berthel@panoramaglobal.org"
           },
           new AppUser
           {
-            DisplayName = "Tom",
-            UserName = "tom",
-            Email = "tom@test.com"
+            DisplayName = "Betsy Russel",
+            UserName = "betsy",
+            Email = "betsy.russell@gatesmri.org"
           },
           new AppUser
           {
-            DisplayName = "Jane",
-            UserName = "jane",
-            Email = "jane@test.com"
+            DisplayName = "James Sacchettini",
+            UserName = "jim",
+            Email = "sacchett@tamu.edu"
           },
           new AppUser
           {
@@ -52,65 +86,32 @@ namespace Persistence
           },
 
         };
-
-                foreach (var user in users)
-                {
-                    await userManager.CreateAsync(user, "P@ssw0rd");
-                }
-
-
-
-
-            }
-            if (!roleManager.Roles.Any())
-            {
-                var roles = new List<AppRole>
+        foreach (var user in users)
         {
-          new AppRole
+          await userManager.CreateAsync(user, "P@ssw0rd");
+        }
+        
+        /* Add Test users as admins */
+        string[] _admins = { "sid@tamu.edu", "panda@tamu.edu", "steve.berthel@panoramaglobal.org", "betsy.russell@gatesmri.org", "sacchett@tamu.edu" };
+
+        foreach (var _admin in _admins)
+        {
+          System.Console.WriteLine(_admin);
+          var _user = await userManager.FindByEmailAsync(_admin);
+          var _roles = await userManager.GetRolesAsync(_user);
+          if (!_roles.Any())
           {
-            Name = "root"
-          },
-          new AppRole
-          {
-            Name = "admin"
-          },
-          new AppRole
-          {
-           Name = "user"
+            await userManager.AddToRoleAsync(_user, "admin");
           }
-        };
-
-                foreach (var role in roles)
-                {
-                    await roleManager.CreateAsync(role);
-                }
-            }
-
-
-            // Add sid@tamu.edu as admin
-            var userSid = await userManager.FindByEmailAsync("sid@tamu.edu");
-            var rolesOfSid = await userManager.GetRolesAsync(userSid);
-
-            if (!rolesOfSid.Any())
-            {
-                await userManager.AddToRoleAsync(userSid, "admin");
-            }
-
-            // Add panda@tamu.edu as admin
-            var userPanda = await userManager.FindByEmailAsync("panda@tamu.edu");
-            var rolesOfPanda = await userManager.GetRolesAsync(userPanda);
-
-            if (!rolesOfPanda.Any())
-            {
-                await userManager.AddToRoleAsync(userPanda, "admin");
-            }
+        }
+      }
 
 
 
-
-            if (!context.Genes.Any())
-            {
-                var genes = new List<Gene>
+      /* Add test/sample genes */
+      if (!context.Genes.Any())
+      {
+        var genes = new List<Gene>
               {
                 new Gene
                 {
@@ -213,6 +214,37 @@ namespace Persistence
                   Function = "Biosynthesis of fatty acids and lipids. Transfers the 4'-phosphopantetheine moiety from coenzyme A to a SER of acyl-carrier protein. Catalyzes the formation of holo-ACP, which mediates the transfer of acyl fatty-acid intermediates during the biosynthesis of fatty acids and lipids [catalytic activity: CoA + APO-[acyl-carrier protein] = adenosine 3',5'-bisphosphate + holo-[acyl-carrier protein] ].",
                   Product = "Phosphopantetheinyl transferase PptT (CoA:APO-[ACP]pantetheinephosphotransferase) (CoA:APO-[acyl-carrier protein]pantetheinephosphotransferase)",
                   FunctionalCategory = "lipid metabolism",
+                  GenePublicData = new GenePublicData
+                  {
+                    /* Section 1: General annotation */
+                    Type = "CDS",
+                    Proteomics = "Identified in the cell membrane fraction of M. tuberculosis H37Rv using 2DLC/MS (See Mawuenyega et al., 2005).",
+                    Mutant = "Essential gene for in vitro growth of H37Rv in a MtbYM rich medium, by Himar1 transposon mutagenesis (see Minato et al. 2019). Essential gene for in vitro growth of H37Rv, by analysis of saturated Himar1 transposon libraries (see DeJesus et al. 2017). Essential gene in M. smegmatis and M. bovis BCG; C. glutamicum mutant does not produce corynomycolates, has altered colony morphology and slower growth rate compared to wild-type (See Chalut et al., 2006). Essential gene for in vitro growth of H37Rv, by Himar1 transposon mutagenesis (See Griffin et al., 2011).",
+                    Comments = "Rv2794c, (MTV002.59c), len: 227 aa. PptT, phosphopantetheinyl transferase, equivalent to Q9Z5I5|ML1547|MLCB596.23 putative iron-chelating complex subunit from Mycobacterium leprae (227 aa), FASTA scores: opt: 1248, E(): 9.1e-77, (79.75% identity in 227 aa overlap). Also highly similar to various proteins e.g. Q9F0Q6|PPTA phosphopantetheinyl transferase from Streptomyces verticillus (246 aa), FASTA scores: opt: 692, E(): 2.8e-39, (46.65% identity in 225 aa overlap); O88029|SC5A7.23 hypothetical 24.5 KDA protein from Streptomyces coelicolor (226 aa), FASTA scores: opt: 679, E(): 2e-38, (46.9% identity in 226 aa overlap); O24813 DNA for L-proline 3-hydroxylase from Streptomyces sp. (208 aa), FASTA scores: opt: 631, E(): 3.2e-35, (48.1% identity in 208 aa overlap); etc.",
+
+                    /* Section 2: Coordinates */
+                    Start = "3103257",
+                    End = "3103940",
+                    Orientation = "-",
+
+                    /* Section 3: Gene summary information */
+                    GeneLength = "684 bp",
+                    Location = "3103257 bp",
+
+                    /* Section 4: Protein summary information */
+                    MolecularMass = "24708.5 Da",
+                    IsoelectricPoint = "6.6705",
+                    ProteinLength = "227 amino acids",
+
+                    /* Section 5: Structural information */
+                    PFAM = "P66028",
+
+                    /* Section 6: Orthologues */
+                    M_Leprae = "ML1547",
+                    M_Marinum = "MMAR_1916",
+                    M_Smegmatis = "MSMEG_2648",
+
+                  }
                 },
                 new Gene
                 {
@@ -280,10 +312,10 @@ namespace Persistence
                 }
               };
 
-                await context.Genes.AddRangeAsync(genes);
-                await context.SaveChangesAsync();
-            }
-        }
+        await context.Genes.AddRangeAsync(genes);
+        await context.SaveChangesAsync();
+      }
     }
+  }
 }
 
