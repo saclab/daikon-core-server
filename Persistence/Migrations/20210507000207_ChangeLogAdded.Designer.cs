@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210507000207_ChangeLogAdded")]
+    partial class ChangeLogAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,9 +139,6 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PropertyName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Type")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -274,7 +273,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneID");
+                    b.HasIndex("GeneID")
+                        .IsUnique();
 
                     b.ToTable("GeneNonPublicData");
                 });
@@ -350,7 +350,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneID");
+                    b.HasIndex("GeneID")
+                        .IsUnique();
 
                     b.ToTable("GenePublicData");
                 });
@@ -460,8 +461,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.GeneNonPublicData", b =>
                 {
                     b.HasOne("Domain.Gene", "Gene")
-                        .WithMany()
-                        .HasForeignKey("GeneID")
+                        .WithOne("GeneNonPublicData")
+                        .HasForeignKey("Domain.GeneNonPublicData", "GeneID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -471,8 +472,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.GenePublicData", b =>
                 {
                     b.HasOne("Domain.Gene", "Gene")
-                        .WithMany()
-                        .HasForeignKey("GeneID")
+                        .WithOne("GenePublicData")
+                        .HasForeignKey("Domain.GenePublicData", "GeneID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -528,6 +529,13 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Gene", b =>
+                {
+                    b.Navigation("GeneNonPublicData");
+
+                    b.Navigation("GenePublicData");
                 });
 #pragma warning restore 612, 618
         }
