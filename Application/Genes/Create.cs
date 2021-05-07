@@ -43,6 +43,7 @@ namespace Application.Genes
           Function = request.Gene.Function,
           Product = request.Gene.Product,
           FunctionalCategory = request.Gene.FunctionalCategory
+          
         };
 
         _context.Genes.Add(GeneToCreate);

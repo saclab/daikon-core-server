@@ -120,91 +120,91 @@ namespace Persistence
                   Function = "Facilitates transcription termination by a mechanism that involves rho binding to the nascent RNA, activation of rho'S RNA-dependent ATPase activity, and release of the mRNA from the DNA template",
                   Product = "Probable transcription termination factor Rho homolog",
                   FunctionalCategory = "information pathways",
-                  // GenePublicData = new GenePublicData
-                  // {
-                  //   /* Section 1: General annotation */
-                  //   Type = "CDS",
-                  //   Proteomics = "Identified by proteomics (see Rosenkrands et al., 2000). Identified in the membrane fraction of M. tuberculosis H37Rv using 1D-SDS-PAGE and uLC-MS/MS (See Gu et al., 2003). Identified in the cell wall and cell membrane fractions of M. tuberculosis H37Rv using 2DLC/MS (See Mawuenyega et al., 2005). Identified by mass spectrometry in Triton X-114 extracts of M. tuberculosis H37Rv (See Malen et al., 2010). Identified by mass spectrometry in the membrane protein fraction and whole cell lysates of M. tuberculosis H37Rv but not the culture filtrate (See de Souza et al., 2011).",
-                  //   Mutant = "Essential gene for in vitro growth of H37Rv in a MtbYM rich medium, by Himar1 transposon mutagenesis (see Minato et al. 2019). Essential gene for in vitro growth of H37Rv, by analysis of saturated Himar1 transposon libraries (see DeJesus et al. 2017). Essential gene by Himar1 transposon mutagenesis in H37Rv strain (see Sassetti et al., 2003). Essential gene for in vitro growth of H37Rv, by Himar1 transposon mutagenesis (See Griffin et al., 2011).",
-                  //   Comments = "Rv1297, (MTCY373.17), len: 602 aa. Probable rho, transcription termination factor homolog, highly similar to many e.g. RHO_MYCLE|P45835 Mycobacterium leprae (610 aa), FASTA scores: (81.5% identity in 612 aa overlap). Contains 1 RNA recognition motif (RRM). Nucleotide position 1453608 in the genome sequence has been corrected, T:C resulting in G135G.",
+                  GenePublicData = new GenePublicData
+                  {
+                    /* Section 1: General annotation */
+                    Type = "CDS",
+                    Proteomics = "Identified by proteomics (see Rosenkrands et al., 2000). Identified in the membrane fraction of M. tuberculosis H37Rv using 1D-SDS-PAGE and uLC-MS/MS (See Gu et al., 2003). Identified in the cell wall and cell membrane fractions of M. tuberculosis H37Rv using 2DLC/MS (See Mawuenyega et al., 2005). Identified by mass spectrometry in Triton X-114 extracts of M. tuberculosis H37Rv (See Malen et al., 2010). Identified by mass spectrometry in the membrane protein fraction and whole cell lysates of M. tuberculosis H37Rv but not the culture filtrate (See de Souza et al., 2011).",
+                    Mutant = "Essential gene for in vitro growth of H37Rv in a MtbYM rich medium, by Himar1 transposon mutagenesis (see Minato et al. 2019). Essential gene for in vitro growth of H37Rv, by analysis of saturated Himar1 transposon libraries (see DeJesus et al. 2017). Essential gene by Himar1 transposon mutagenesis in H37Rv strain (see Sassetti et al., 2003). Essential gene for in vitro growth of H37Rv, by Himar1 transposon mutagenesis (See Griffin et al., 2011).",
+                    Comments = "Rv1297, (MTCY373.17), len: 602 aa. Probable rho, transcription termination factor homolog, highly similar to many e.g. RHO_MYCLE|P45835 Mycobacterium leprae (610 aa), FASTA scores: (81.5% identity in 612 aa overlap). Contains 1 RNA recognition motif (RRM). Nucleotide position 1453608 in the genome sequence has been corrected, T:C resulting in G135G.",
 
-                  //   /* Section 2: Coordinates */
-                  //   Start = "1453204",
-                  //   End = "1455012",
-                  //   Orientation = "+",
+                    /* Section 2: Coordinates */
+                    Start = "1453204",
+                    End = "1455012",
+                    Orientation = "+",
 
-                  //   /* Section 3: Gene summary information */
-                  //   GeneLength = "1809 bp",
-                  //   Location = "1453204 bp",
+                    /* Section 3: Gene summary information */
+                    GeneLength = "1809 bp",
+                    Location = "1453204 bp",
 
-                  //   /* Section 4: Protein summary information */
-                  //   MolecularMass = "65101.4 Da",
-                  //   IsoelectricPoint = "5.4216",
-                  //   ProteinLength = "602 amino acids",
+                    /* Section 4: Protein summary information */
+                    MolecularMass = "65101.4 Da",
+                    IsoelectricPoint = "5.4216",
+                    ProteinLength = "602 amino acids",
 
-                  //   /* Section 5: Structural information */
-                  //   PFAM = "P66028",
+                    /* Section 5: Structural information */
+                    PFAM = "P66028",
 
-                  //   /* Section 6: Orthologues */
-                  //   M_Leprae = "ML1132",
-                  //   M_Marinum = "MMAR_4100",
-                  //   M_Smegmatis = "MSMEG_4954",
+                    /* Section 6: Orthologues */
+                    M_Leprae = "ML1132",
+                    M_Marinum = "MMAR_4100",
+                    M_Smegmatis = "MSMEG_4954",
 
-                  //   /* Section 7: Protein Databank */
-                  //   Cryo = "",
-                  //   XRay = "",
-                  //   Model = "",
-                  //   Ligand = ""
-                  // },
+                    /* Section 7: Protein Databank */
+                    Cryo = "",
+                    XRay = "",
+                    Model = "",
+                    Ligand = ""
+                  },
 
-                  // GeneNonPublicData = new GeneNonPublicData
-                  // {
-                  //   /* Section 1: Essentiality  */
-                  //   Classification = "Classification Data",
-                  //   EssentialityCondition = "Essentiality Condition Data",
-                  //   Strain = "Strain Data",
-                  //   Method = "Method Data",
-                  //   Reference = "Reference Data",
-                  //   Notes = "Notes Data",
+                  GeneNonPublicData = new GeneNonPublicData
+                  {
+                    /* Section 1: Essentiality  */
+                    Classification = "Classification Data",
+                    EssentialityCondition = "Essentiality Condition Data",
+                    Strain = "Strain Data",
+                    Method = "Method Data",
+                    Reference = "Reference Data",
+                    Notes = "Notes Data",
                 
-                  //   /* Section 2: Protein Production List */
-                  //   ProteinProduction = "Protein Production Data",
+                    /* Section 2: Protein Production List */
+                    ProteinProduction = "Protein Production Data",
               
-                  //   /* Section 3: Protein Activity Assay List */
-                  //   ProteinActivityAssay = "Protein Activity Assay Data",
+                    /* Section 3: Protein Activity Assay List */
+                    ProteinActivityAssay = "Protein Activity Assay Data",
 
-                  //   /* Section 4: Hypomorph, Knockdown strain, Phenotype List */
-                  //   KnockdownStrain = "Knockdown Strain Data",
-                  //   Phenotype = "Phenotype Data",
+                    /* Section 4: Hypomorph, Knockdown strain, Phenotype List */
+                    KnockdownStrain = "Knockdown Strain Data",
+                    Phenotype = "Phenotype Data",
 
-                  //   /* Section 5: CRISPRi Strain List */
-                  //   CRISPRiStrain = "CRISPRiStrain Data",
+                    /* Section 5: CRISPRi Strain List */
+                    CRISPRiStrain = "CRISPRiStrain Data",
 
-                  //   /* Section 6: Resistance Mutations  */
-                  //   Mutation = "Mutation Data",
-                  //   Isolate = "Isolate Data",
-                  //   ParentStrain = "ParentStrain Data",
-                  //   CompoundSmiles = "CompoundSmiles Data",
-                  //   ShiftInMIC = "ShiftInMIC Data",
-                  //   Lab = "Lab Data",
+                    /* Section 6: Resistance Mutations  */
+                    Mutation = "Mutation Data",
+                    Isolate = "Isolate Data",
+                    ParentStrain = "ParentStrain Data",
+                    CompoundSmiles = "CompoundSmiles Data",
+                    ShiftInMIC = "ShiftInMIC Data",
+                    Lab = "Lab Data",
 
-                  //   /* Section 7: Vulnerability  */
-                  //   Rank = "Rank Data",
-                  //   U_Vi = "U_Vi Data",
-                  //   I_Vi = "I_Vi Data",
-                  //   Vi_Ratio = "Vi_Ratio Data",
-                  //   VulnerabilityCondition = "Vulnerability Condition Data",
-                  //   Operon = "Operon Data",
-                  //   Confounded = "Confounded Data",
-                  //   Shell_2015Operon = "Shell_2015Operon Data",
+                    /* Section 7: Vulnerability  */
+                    Rank = "Rank Data",
+                    U_Vi = "U_Vi Data",
+                    I_Vi = "I_Vi Data",
+                    Vi_Ratio = "Vi_Ratio Data",
+                    VulnerabilityCondition = "Vulnerability Condition Data",
+                    Operon = "Operon Data",
+                    Confounded = "Confounded Data",
+                    Shell_2015Operon = "Shell_2015Operon Data",
 
-                  //   /* Section 8: Unpublished Structural Information  */
-                  //   Organization = "Organization Data",
-                  //   UnpublishedMethod = "UnpublishedMethod Data",
-                  //   Resolution = "Resolution Data",
-                  //   UnpublishedCondition = "UnpublishedCondition Data",
-                  //   Ligand = "Ligand Data"
-                  //   }
+                    /* Section 8: Unpublished Structural Information  */
+                    Organization = "Organization Data",
+                    UnpublishedMethod = "UnpublishedMethod Data",
+                    Resolution = "Resolution Data",
+                    UnpublishedCondition = "UnpublishedCondition Data",
+                    Ligand = "Ligand Data"
+                    }
 
                 },
                 new Gene
@@ -214,37 +214,37 @@ namespace Persistence
                   Function = "Biosynthesis of fatty acids and lipids. Transfers the 4'-phosphopantetheine moiety from coenzyme A to a SER of acyl-carrier protein. Catalyzes the formation of holo-ACP, which mediates the transfer of acyl fatty-acid intermediates during the biosynthesis of fatty acids and lipids [catalytic activity: CoA + APO-[acyl-carrier protein] = adenosine 3',5'-bisphosphate + holo-[acyl-carrier protein] ].",
                   Product = "Phosphopantetheinyl transferase PptT (CoA:APO-[ACP]pantetheinephosphotransferase) (CoA:APO-[acyl-carrier protein]pantetheinephosphotransferase)",
                   FunctionalCategory = "lipid metabolism",
-                  // GenePublicData = new GenePublicData
-                  // {
-                  //   /* Section 1: General annotation */
-                  //   Type = "CDS",
-                  //   Proteomics = "Identified in the cell membrane fraction of M. tuberculosis H37Rv using 2DLC/MS (See Mawuenyega et al., 2005).",
-                  //   Mutant = "Essential gene for in vitro growth of H37Rv in a MtbYM rich medium, by Himar1 transposon mutagenesis (see Minato et al. 2019). Essential gene for in vitro growth of H37Rv, by analysis of saturated Himar1 transposon libraries (see DeJesus et al. 2017). Essential gene in M. smegmatis and M. bovis BCG; C. glutamicum mutant does not produce corynomycolates, has altered colony morphology and slower growth rate compared to wild-type (See Chalut et al., 2006). Essential gene for in vitro growth of H37Rv, by Himar1 transposon mutagenesis (See Griffin et al., 2011).",
-                  //   Comments = "Rv2794c, (MTV002.59c), len: 227 aa. PptT, phosphopantetheinyl transferase, equivalent to Q9Z5I5|ML1547|MLCB596.23 putative iron-chelating complex subunit from Mycobacterium leprae (227 aa), FASTA scores: opt: 1248, E(): 9.1e-77, (79.75% identity in 227 aa overlap). Also highly similar to various proteins e.g. Q9F0Q6|PPTA phosphopantetheinyl transferase from Streptomyces verticillus (246 aa), FASTA scores: opt: 692, E(): 2.8e-39, (46.65% identity in 225 aa overlap); O88029|SC5A7.23 hypothetical 24.5 KDA protein from Streptomyces coelicolor (226 aa), FASTA scores: opt: 679, E(): 2e-38, (46.9% identity in 226 aa overlap); O24813 DNA for L-proline 3-hydroxylase from Streptomyces sp. (208 aa), FASTA scores: opt: 631, E(): 3.2e-35, (48.1% identity in 208 aa overlap); etc.",
+                  GenePublicData = new GenePublicData
+                  {
+                    /* Section 1: General annotation */
+                    Type = "CDS",
+                    Proteomics = "Identified in the cell membrane fraction of M. tuberculosis H37Rv using 2DLC/MS (See Mawuenyega et al., 2005).",
+                    Mutant = "Essential gene for in vitro growth of H37Rv in a MtbYM rich medium, by Himar1 transposon mutagenesis (see Minato et al. 2019). Essential gene for in vitro growth of H37Rv, by analysis of saturated Himar1 transposon libraries (see DeJesus et al. 2017). Essential gene in M. smegmatis and M. bovis BCG; C. glutamicum mutant does not produce corynomycolates, has altered colony morphology and slower growth rate compared to wild-type (See Chalut et al., 2006). Essential gene for in vitro growth of H37Rv, by Himar1 transposon mutagenesis (See Griffin et al., 2011).",
+                    Comments = "Rv2794c, (MTV002.59c), len: 227 aa. PptT, phosphopantetheinyl transferase, equivalent to Q9Z5I5|ML1547|MLCB596.23 putative iron-chelating complex subunit from Mycobacterium leprae (227 aa), FASTA scores: opt: 1248, E(): 9.1e-77, (79.75% identity in 227 aa overlap). Also highly similar to various proteins e.g. Q9F0Q6|PPTA phosphopantetheinyl transferase from Streptomyces verticillus (246 aa), FASTA scores: opt: 692, E(): 2.8e-39, (46.65% identity in 225 aa overlap); O88029|SC5A7.23 hypothetical 24.5 KDA protein from Streptomyces coelicolor (226 aa), FASTA scores: opt: 679, E(): 2e-38, (46.9% identity in 226 aa overlap); O24813 DNA for L-proline 3-hydroxylase from Streptomyces sp. (208 aa), FASTA scores: opt: 631, E(): 3.2e-35, (48.1% identity in 208 aa overlap); etc.",
 
-                  //   /* Section 2: Coordinates */
-                  //   Start = "3103257",
-                  //   End = "3103940",
-                  //   Orientation = "-",
+                    /* Section 2: Coordinates */
+                    Start = "3103257",
+                    End = "3103940",
+                    Orientation = "-",
 
-                  //   /* Section 3: Gene summary information */
-                  //   GeneLength = "684 bp",
-                  //   Location = "3103257 bp",
+                    /* Section 3: Gene summary information */
+                    GeneLength = "684 bp",
+                    Location = "3103257 bp",
 
-                  //   /* Section 4: Protein summary information */
-                  //   MolecularMass = "24708.5 Da",
-                  //   IsoelectricPoint = "6.6705",
-                  //   ProteinLength = "227 amino acids",
+                    /* Section 4: Protein summary information */
+                    MolecularMass = "24708.5 Da",
+                    IsoelectricPoint = "6.6705",
+                    ProteinLength = "227 amino acids",
 
-                  //   /* Section 5: Structural information */
-                  //   PFAM = "P66028",
+                    /* Section 5: Structural information */
+                    PFAM = "P66028",
 
-                  //   /* Section 6: Orthologues */
-                  //   M_Leprae = "ML1547",
-                  //   M_Marinum = "MMAR_1916",
-                  //   M_Smegmatis = "MSMEG_2648",
+                    /* Section 6: Orthologues */
+                    M_Leprae = "ML1547",
+                    M_Marinum = "MMAR_1916",
+                    M_Smegmatis = "MSMEG_2648",
 
-                  // }
+                  }
                 },
                 new Gene
                 {

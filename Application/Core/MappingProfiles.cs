@@ -8,11 +8,16 @@ namespace Application.Core
   {
     public MappingProfiles()
     {
-        CreateMap<Gene, Gene>();
-        CreateMap<Gene, GeneListDTO>();
-        CreateMap<Gene, GeneViewDTO>();
-        CreateMap<GenePublicData, GenePublicDataDTO>();
-        CreateMap<GeneNonPublicData, GeneNonPublicDataDTO>();
+      CreateMap<Gene, Gene>();
+      CreateMap<Gene, GeneListDTO>();
+      CreateMap<Gene, GeneViewDTO>();
+
+      CreateMap<GenePublicData, GenePublicData>();
+      CreateMap<GenePublicData, GenePublicDataDTO>();
+
+      CreateMap<GeneNonPublicData, GeneNonPublicData>();
+      CreateMap<GeneNonPublicData, GeneNonPublicDataDTO>();
+
     }
 
   }
