@@ -75,14 +75,17 @@ namespace Persistence
           switch (entry.State)
           {
             case EntityState.Added:
+              /* Dont need to serialize as we can use ToString, serializing adds and extra quote to data */
               changeLog.OldValue = null;
-              changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
+              //changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
+              changeLog.NewValue = property.CurrentValue.ToString();
               changeLog.Type = ChangeType.Create.ToString();
               ChangeLogs.Add(changeLog);
               break;
 
             case EntityState.Deleted:
-              changeLog.OldValue = JsonSerializer.Serialize(property.CurrentValue);
+              //changeLog.OldValue = JsonSerializer.Serialize(property.CurrentValue);
+              changeLog.OldValue = property.OriginalValue.ToString();
               changeLog.NewValue = null;
               changeLog.Type = ChangeType.Delete.ToString();
               ChangeLogs.Add(changeLog);
@@ -91,8 +94,12 @@ namespace Persistence
             case EntityState.Modified:
               if (property.IsModified)
               {
-                changeLog.OldValue = JsonSerializer.Serialize(property.OriginalValue);
-                changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
+                /* Dont need to serialize as we can use ToString */
+                // changeLog.OldValue = JsonSerializer.Serialize(property.OriginalValue);
+                // changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
+
+                changeLog.OldValue = property.OriginalValue.ToString();
+                changeLog.NewValue = property.CurrentValue.ToString();
                 changeLog.Type = ChangeType.Update.ToString();
                 ChangeLogs.Add(changeLog);
               }

@@ -45,5 +45,11 @@ namespace API.Controllers
       return HandleResult(await Mediator.Send(new Delete.Command { Id = id }));
     }
 
+    [HttpGet("{id}/history")]
+    public async Task<IActionResult> GetHistory(Guid id)
+    {
+      return HandleResult(await Mediator.Send(new History.Query { Id = id }));
+    }
+
   }
 }
