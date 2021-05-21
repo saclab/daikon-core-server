@@ -43,12 +43,12 @@ namespace Application.Genes
 
         var history = await _context.ChangeLogs.Where(
             h =>
-            (h.EntityName == "GenePublicData"
-                && h.PrimaryKeyValue == gene.GenePublicData.Id.ToString())
-            || (h.EntityName == "GeneNonPublicData"
-                && h.PrimaryKeyValue == gene.GeneNonPublicData.Id.ToString())
-            || (h.EntityName == "Gene"
-                && h.PrimaryKeyValue == gene.Id.ToString())
+            (gene.GenePublicData != null && (h.EntityName == "GenePublicData"
+                && h.PrimaryKeyValue == gene.GenePublicData.Id.ToString()))
+            || (gene.GeneNonPublicData != null && (h.EntityName == "GeneNonPublicData"
+                && h.PrimaryKeyValue == gene.GeneNonPublicData.Id.ToString()))
+            || (gene != null && (h.EntityName == "Gene"
+                && h.PrimaryKeyValue == gene.Id.ToString()))
             ).OrderByDescending(h => h.DateChanged).ToListAsync();
 
         return Result<List<ChangeLog>>.Success(history);
