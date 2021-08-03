@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0
+
+WORKDIR /app
+EXPOSE 5000
+
+COPY ./tpt-backend.sln ./
+COPY ./Application/Application.csproj ./Application/
+COPY ./Domain/Domain.csproj ./Domain/
+COPY ./Infrastructure/Infrastructure.csproj ./Infrastructure/
+COPY ./Persistence/Persistence.csproj ./Persistence/
+COPY ./API/API.csproj ./API/
+
+RUN dotnet restore
+
+COPY . .
+
+WORKDIR /app/API
+ENTRYPOINT dotnet watch run

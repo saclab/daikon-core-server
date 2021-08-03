@@ -224,6 +224,10 @@ project.lock.json
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####
 
+# .env file contains default environment variables for docker
+.env
+.env.*
+
 # CUSTOM
 *.db
 appsettings.json

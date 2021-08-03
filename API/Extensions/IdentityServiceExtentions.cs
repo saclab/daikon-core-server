@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using API.Policies;
 using API.Services;
@@ -18,6 +19,9 @@ namespace API.Extensions
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
     {
       // IdentityBuilder builder = services.AddIdentityCore<AppUser>();
+      Console.WriteLine("*************************** ENVIRONMENT CONFIG *****************");
+      // Console.WriteLine("Authority : " + Environment.GetEnvironmentVariable("AZURE_AUTHORITY"));
+      // Console.WriteLine("ValidAudience : " + Environment.GetEnvironmentVariable("AZURE_VAILD_AUDIENCE"));
 
 
       services.AddScoped<IAuthorizationHandler, RequireAppRoleHandler>();
@@ -34,10 +38,10 @@ namespace API.Extensions
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
       .AddJwtBearer(options =>
       {
-        options.Authority = config["Authority"];
+        options.Authority = Environment.GetEnvironmentVariable("AZURE_AUTHORITY");
         options.TokenValidationParameters = new TokenValidationParameters()
         {
-          ValidAudience = config["ValidAudience"]
+          ValidAudience = Environment.GetEnvironmentVariable("AZURE_VAILD_AUDIENCE")
         };
       });
 
