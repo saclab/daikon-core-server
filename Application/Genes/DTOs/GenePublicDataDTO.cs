@@ -4,6 +4,8 @@ namespace Application.Genes.DTOs
 {
     public class GenePublicDataDTO
     {
+        public Guid Id { get; set; }
+
         /* Section 1: General annotation */
         public string Type { get; set; }
         public string Proteomics { get; set; }

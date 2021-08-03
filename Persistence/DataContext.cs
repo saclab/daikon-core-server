@@ -36,7 +36,7 @@ namespace Persistence
     }
 
 
-    private void TrackChanges(string userId)
+    private void TrackChanges(string userId = null)
     {
       ChangeTracker.DetectChanges();
 
@@ -77,8 +77,8 @@ namespace Persistence
             case EntityState.Added:
               /* Dont need to serialize as we can use ToString, serializing adds and extra quote to data */
               changeLog.OldValue = null;
-              //changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
-              changeLog.NewValue = property.CurrentValue.ToString();
+              changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
+              //changeLog.NewValue = property.CurrentValue.ToString();
               changeLog.Type = ChangeType.Create.ToString();
               ChangeLogs.Add(changeLog);
               break;

@@ -56,23 +56,41 @@ namespace Application.Genes
         if (geneToEdit == null) return null;
         // maintain IDs
         var geneId = geneToEdit.Id;
-        var geneNonPublicDataId = geneToEdit.GeneNonPublicData.Id;
-        var geneNonPublicDataRef = geneToEdit.GeneNonPublicData.Gene;
+        
         var genePublicDataId = geneToEdit.GenePublicData.Id;
         var genePublicDataRef = geneToEdit.GenePublicData.Gene;
-        
+
+        var geneNonPublicDataId = geneToEdit?.GeneNonPublicData?.Id;
+        var geneNonPublicDataRef = geneToEdit?.GeneNonPublicData?.Gene;
+
         _mapper.Map(request.Gene, geneToEdit);
 
         // This would ensure primary ids are maintained and does not depend on the user's request.
         geneToEdit.Id = geneId;
 
-        geneToEdit.GeneNonPublicData.Id = geneNonPublicDataId;
-        geneToEdit.GeneNonPublicData.GeneID = geneId;
-        geneToEdit.GeneNonPublicData.Gene = geneNonPublicDataRef;
-
         geneToEdit.GenePublicData.Id = genePublicDataId;
         geneToEdit.GenePublicData.GeneID = geneId;
         geneToEdit.GenePublicData.Gene = genePublicDataRef;
+
+
+        if (geneNonPublicDataId == null)
+        {
+          var newGeneNonPublicData = new GeneNonPublicData();
+          _mapper.Map(request.Gene.GeneNonPublicData, newGeneNonPublicData);
+          newGeneNonPublicData.Gene = geneToEdit;
+          newGeneNonPublicData.GeneID = geneId;
+          geneToEdit.GeneNonPublicData = newGeneNonPublicData;
+
+          _context.GeneNonPublicData.Add(newGeneNonPublicData);
+        }
+        else
+        {
+          geneToEdit.GeneNonPublicData.Id = (Guid)geneNonPublicDataId;
+          geneToEdit.GeneNonPublicData.GeneID = geneId;
+          geneToEdit.GeneNonPublicData.Gene = geneNonPublicDataRef;
+        }
+
+
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
         var geneMapped = _mapper.Map<GeneViewDTO>(geneToEdit);
@@ -81,6 +99,9 @@ namespace Application.Genes
         return Result<GeneViewDTO>.Success(geneMapped);
 
       }
+
+
+
     }
   }
 }
