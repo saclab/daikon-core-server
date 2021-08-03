@@ -19,7 +19,7 @@ namespace API.Extensions
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
     {
       // IdentityBuilder builder = services.AddIdentityCore<AppUser>();
-      Console.WriteLine("*************************** ENVIRONMENT CONFIG *****************");
+      // Console.WriteLine("*************************** ENVIRONMENT CONFIG *****************");
       // Console.WriteLine("Authority : " + Environment.GetEnvironmentVariable("AZURE_AUTHORITY"));
       // Console.WriteLine("ValidAudience : " + Environment.GetEnvironmentVariable("AZURE_VAILD_AUDIENCE"));
 
