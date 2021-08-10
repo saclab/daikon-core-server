@@ -8,6 +8,8 @@ using System.Text.Json.Serialization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Domain.Tasks;
+
 namespace Persistence
 {
   public class DataContext : IdentityDbContext<AppUser, AppRole, string>
@@ -117,6 +119,7 @@ namespace Persistence
     public DbSet<ChangeLog> ChangeLogs { get; set; }
     public DbSet<GenePublicData> GenePublicData { get; set; }
     public DbSet<GeneNonPublicData> GeneNonPublicData { get; set; }
+    public DbSet<BTask> BTask { get; set; }
 
   }
 }
