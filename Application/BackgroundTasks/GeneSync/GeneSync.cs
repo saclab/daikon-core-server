@@ -8,10 +8,16 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.BackgroundTasks.GeneSync.DTO;
+using Application.Genes;
+using AutoMapper;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Domain;
 using Domain.Tasks;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Persistence;
 
 namespace Application.BackgroundTasks.GeneSync
 {
@@ -19,6 +25,11 @@ namespace Application.BackgroundTasks.GeneSync
   {
     private readonly ILogger<GeneSync> _logger;
     private static readonly HttpClient _client = new HttpClient();
+    private readonly DataContext _context;
+    private readonly IMapper _mapper;
+
+    private IMediator _mediator;
+    
 
 
     CsvConfiguration MycobrowserCSVConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -33,9 +44,12 @@ namespace Application.BackgroundTasks.GeneSync
 
     };
 
-    public GeneSync(ILogger<GeneSync> logger)
+    public GeneSync(DataContext context, IMapper mapper, ILogger<GeneSync> logger, IMediator mediator)
     {
       _logger = logger;
+      _context = context;
+      _mapper = mapper;
+      _mediator = mediator;
     }
 
     public async Task Sync(BTask task, CancellationToken cancellationToken = default)
@@ -55,7 +69,21 @@ namespace Application.BackgroundTasks.GeneSync
         // 3. compare Rv Number, if Gene exists update, else create new
         // fetch gene from db
 
-        
+        var findGene = await _context.Genes
+          .FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
+
+        if (findGene == null) {
+          var newGene = new Gene();
+          var newGenePublicData = new GenePublicData();
+          
+          _mapper.Map(CSVGene, newGene);
+          _mapper.Map(CSVGene, newGenePublicData);
+          newGene.GenePublicData = newGenePublicData;
+
+          _logger.LogInformation("Adding ..." + newGene.AccessionNumber);
+          await _mediator.Send(new Create.Command { Gene = newGene });
+        }
+
           
       }
 
@@ -80,5 +108,8 @@ namespace Application.BackgroundTasks.GeneSync
 
       return records;
     }
+
+
+    
   }
 }

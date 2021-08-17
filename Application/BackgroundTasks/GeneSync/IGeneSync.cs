@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain.Tasks;
 
-namespace Application.BackgroundTasks
+namespace Application.BackgroundTasks.GeneSync
 {
   public interface IGeneSync
   {

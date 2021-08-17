@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 using Application.Genes;
 using Domain.Tasks;
-using Application.BackgroundTasks;
+using Application.BackgroundTasks.GeneSync;
 
 namespace API.Extensions
 {

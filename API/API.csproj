@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
+    <PackageReference Include="Xyaneon.Bioinformatics.FASTA" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>

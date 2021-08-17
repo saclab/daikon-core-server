@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.BackgroundTasks;
+using Application.BackgroundTasks.GeneSync;
 using Application.Interfaces;
 using Domain.Tasks;
 using Microsoft.Extensions.DependencyInjection;
