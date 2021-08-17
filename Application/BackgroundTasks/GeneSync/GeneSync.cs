@@ -18,6 +18,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Persistence;
+using Xyaneon.Bioinformatics.FASTA;
+using Xyaneon.Bioinformatics.FASTA.IO;
 
 namespace Application.BackgroundTasks.GeneSync
 {
@@ -29,7 +31,7 @@ namespace Application.BackgroundTasks.GeneSync
     private readonly IMapper _mapper;
 
     private IMediator _mediator;
-    
+
 
 
     CsvConfiguration MycobrowserCSVConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -60,34 +62,46 @@ namespace Application.BackgroundTasks.GeneSync
 
       // 1. Fetch CSV From Mycobrowser
 
-      var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser();
+      // var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser();
+      var GeneSequences = await fetchIndividualGeneSequencesFromMycobrowser();
 
       // 2. Read each line
 
-      foreach (var CSVGene in CSVRecordsFromMycobrowser)
-      {
-        // 3. compare Rv Number, if Gene exists update, else create new
-        // fetch gene from db
+      // foreach (var CSVGene in CSVRecordsFromMycobrowser)
+      // {
+      //   // 3. compare Rv Number, if Gene exists update, else create new
+      //   // fetch gene from db
 
-        var findGene = await _context.Genes
-          .FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
+      //   var findGene = await _context.Genes
+      //     .FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
 
-        if (findGene == null) {
-          var newGene = new Gene();
-          var newGenePublicData = new GenePublicData();
-          
-          _mapper.Map(CSVGene, newGene);
-          _mapper.Map(CSVGene, newGenePublicData);
-          newGene.GenePublicData = newGenePublicData;
+      //   if (findGene == null) {
+      //     var newGene = new Gene();
+      //     var newGenePublicData = new GenePublicData();
 
-          _logger.LogInformation("Adding ..." + newGene.AccessionNumber);
-          await _mediator.Send(new Create.Command { Gene = newGene });
-        }
+      //     _mapper.Map(CSVGene, newGene);
+      //     _mapper.Map(CSVGene, newGenePublicData);
+      //     newGene.GenePublicData = newGenePublicData;
 
-          
-      }
+      //     var geneD = from geneSequence in GeneSequences
+      //     where geneSequence.Header.Items[1].ToString() == CSVGene.AccessionNumber
+      //     select new {GeneLength = geneSequence.Header.Items[3]};
 
-      
+      //     _logger.LogInformation("Adding ..." + newGene.AccessionNumber);
+      //     await _mediator.Send(new Create.Command { Gene = newGene });
+      //   }
+
+
+      // }
+
+
+
+
+
+
+
+
+
 
       // 4. Update the job to complete 
 
@@ -96,7 +110,7 @@ namespace Application.BackgroundTasks.GeneSync
 
     public async Task<IEnumerable<GeneCSV>> fetchCSVFromMycobrowser()
     {
-      
+
       _client.DefaultRequestHeaders.Accept.Clear();
       Console.WriteLine(">>>>> Getting fetchJSONTextFromMycobrowser()");
       var stringTask = await _client.GetStreamAsync("https://mycobrowser.epfl.ch/releases/4/get_file?dir=txt&file=Mycobacterium_tuberculosis_H37Rv.txt");
@@ -110,6 +124,44 @@ namespace Application.BackgroundTasks.GeneSync
     }
 
 
-    
+    public async Task<IEnumerable<Sequence>> fetchIndividualGeneSequencesFromMycobrowser()
+    {
+      // _client.DefaultRequestHeaders.Accept.Clear();
+      // Console.WriteLine(">>>>> Getting fetchIndividualGeneSequencesFromMycobrowser()");
+      // var stringTask = await _client.GetStringAsync("https://mycobrowser.epfl.ch/releases/4/get_file?dir=fasta_genes&file=Mycobacterium_tuberculosis_H37Rv.fasta");
+
+      // using (StreamWriter outputFile = new StreamWriter("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.fasta"))
+      // {
+
+      //   outputFile.WriteLine(stringTask);
+      // }
+
+
+      // Console.WriteLine("<<>><<<<< Converting fetchIndividualGeneSequencesFromMycobrowser()");
+      IEnumerable<Sequence> sequences = SequenceFileReader.ReadMultipleFromFile("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.fasta");
+
+
+
+      var geneD = (from geneSequence in sequences
+                   where geneSequence.Header.Items[1].ToString() == "Rv3729"
+                   select new { 
+                     GeneLength = geneSequence.Header.Items[3],
+                     GeneName = geneSequence.Header.Items[1],
+                     geneSequence = geneSequence.Data.Characters}).FirstOrDefault();
+
+      string[] geneLengthString = geneD.GeneLength.ToString().Split('-');
+      var geneStartLocation = Int32.Parse(geneLengthString[0]);
+      var geneEndLocation = Int32.Parse(geneLengthString[1]);
+      var geneLength = geneEndLocation - geneStartLocation + 1;
+
+      Console.WriteLine("<<>><<<<< Gene Name = " + geneD.GeneName);
+      Console.WriteLine("<<>><<<<< Gene Start = " + geneStartLocation);
+      Console.WriteLine("<<>><<<<< Gene End = " + geneEndLocation);
+      Console.WriteLine("<<>><<<<< Gene Length = " + geneLength);
+      Console.WriteLine("<<>><<<<< Gene Sequence = " + geneD.geneSequence);
+
+
+      return sequences;
+    }
   }
 }
