@@ -312,7 +312,7 @@ namespace Persistence
                 }
               };
 
-        await context.Genes.AddRangeAsync(genes);
+        //await context.Genes.AddRangeAsync(genes);
         await context.SaveChangesAsync();
       }
     }

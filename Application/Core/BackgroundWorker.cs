@@ -23,12 +23,12 @@ namespace Application.Core
       _queue = queue;
       _scopeFactory = scopeFactory;
       _logger = logger;
-      Console.WriteLine(">>>  +++++ BackgroundWorker Constructor(): "); 
+      _logger.LogInformation("BackgroundWorker has been Inititated");
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-      Console.WriteLine(">>>  +++++ BackgroundWorker ExecuteAsync(): "); 
+      _logger.LogInformation("BackgroundWorker is active");
       while (!stoppingToken.IsCancellationRequested)
       {
         try
@@ -39,8 +39,8 @@ namespace Application.Core
           if (task == null) continue;
 
           _logger.LogInformation(" +++++ Task found! Starting to process ..");
-          Console.WriteLine(">>>  +++++ Task found! Starting to process ..: "); 
-          // TODO
+
+          // TODO:
           if (task.Type == "GeneSync")
           {
 
@@ -57,7 +57,7 @@ namespace Application.Core
         }
         catch (Exception ex)
         {
-          _logger.LogCritical("An error occurred when publishing a book. Exception: {@Exception}", ex);
+          _logger.LogCritical("An error occurred when running background task. Exception: {@Exception}", ex);
         }
       }
 

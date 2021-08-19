@@ -18,7 +18,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Persistence;
-using Xyaneon.Bioinformatics.FASTA;
 using Xyaneon.Bioinformatics.FASTA.IO;
 
 namespace Application.BackgroundTasks.GeneSync
@@ -31,7 +30,6 @@ namespace Application.BackgroundTasks.GeneSync
     private readonly IMapper _mapper;
 
     private IMediator _mediator;
-
 
 
     CsvConfiguration MycobrowserCSVConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -56,54 +54,100 @@ namespace Application.BackgroundTasks.GeneSync
 
     public async Task Sync(BTask task, CancellationToken cancellationToken = default)
     {
-      _logger.LogInformation("Doing heavy Gene Syncing logic ...");
+      _logger.LogInformation("Starting pulling data from mycobrowser.");
 
-      await Task.Delay(2500, cancellationToken);
+      /* 1. Fetch CSV From Mycobrowser */
 
-      // 1. Fetch CSV From Mycobrowser
-
-      // var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser();
+      var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser();
       var GeneSequences = await fetchIndividualGeneSequencesFromMycobrowser();
+      var ProteinSequences = await fetchIndividualProteinSequencesFromMycobrowser();
+      _logger.LogInformation("Genes pulled " + GeneSequences.Count());
 
-      // 2. Read each line
+      /* Read each line */
 
-      // foreach (var CSVGene in CSVRecordsFromMycobrowser)
-      // {
-      //   // 3. compare Rv Number, if Gene exists update, else create new
-      //   // fetch gene from db
+      foreach (var CSVGene in CSVRecordsFromMycobrowser)
+      {
+        /* compare Rv Number, if Gene exists update, else create new */
+        _logger.LogDebug("Dealing with : " + CSVGene.AccessionNumber);
 
-      //   var findGene = await _context.Genes
-      //     .FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
+        var findGene = await _context.Genes
+          .FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
 
-      //   if (findGene == null) {
-      //     var newGene = new Gene();
-      //     var newGenePublicData = new GenePublicData();
+        if (findGene == null)
+        {
+          _logger.LogDebug("Not Found. Creating new Gene: " + CSVGene.AccessionNumber);
+          var newGene = new Gene();
+          var newGenePublicData = new GenePublicData();
 
-      //     _mapper.Map(CSVGene, newGene);
-      //     _mapper.Map(CSVGene, newGenePublicData);
-      //     newGene.GenePublicData = newGenePublicData;
+          /*
+          First get data from the TSV
+          */
+          _mapper.Map(CSVGene, newGene);
+          _mapper.Map(CSVGene, newGenePublicData);
 
-      //     var geneD = from geneSequence in GeneSequences
-      //     where geneSequence.Header.Items[1].ToString() == CSVGene.AccessionNumber
-      //     select new {GeneLength = geneSequence.Header.Items[3]};
+          /*
+          Second get genome sequence data from the TSV
+          */
 
-      //     _logger.LogInformation("Adding ..." + newGene.AccessionNumber);
-      //     await _mediator.Send(new Create.Command { Gene = newGene });
-      //   }
+          try
+          {
 
+            var geneSequenceData = (from geneSequence in GeneSequences
+                                    where geneSequence.GeneName == CSVGene.AccessionNumber
+                                    select new
+                                    {
+                                      GeneLength = geneSequence.GeneLength,
+                                      GeneName = geneSequence.GeneName,
+                                      geneSequence = geneSequence.GeneSequenceData
+                                    }).FirstOrDefault();
 
-      // }
+            string[] geneLengthString = geneSequenceData.GeneLength.Split('-');
+            newGenePublicData.Location = geneLengthString[0];
+            newGenePublicData.GeneLength = (Int32.Parse(geneLengthString[1]) - Int32.Parse(geneLengthString[0]) + 1).ToString();
+            newGenePublicData.GeneSequence = geneSequenceData.geneSequence;
+          }
 
+          catch (Exception e)
+          {
+            _logger.LogCritical(e.Message);
+          }
 
+          /*
+          Third get protein data from TSV file
+          */
+          try
+          {
+            var proteinSequenceData = (from proteinSequence in ProteinSequences
+                                       where proteinSequence.ProteinName == CSVGene.AccessionNumber
+                                       select new
+                                       {
+                                         Product = proteinSequence.Product,
+                                         ProteinLength = proteinSequence.ProteinLength,
+                                         ProteinSequence = proteinSequence.ProteinSequenceData
+                                       }).FirstOrDefault();
 
+            newGenePublicData.ProteinLength = proteinSequenceData.ProteinLength;
+            newGenePublicData.ProteinSequence = proteinSequenceData.ProteinSequence;
+          }
+          catch (Exception e)
+          {
+            _logger.LogCritical(e.Message);
+          }
 
+          /*
+          Add Gene
+          */
+          newGene.GenePublicData = newGenePublicData;
+          _logger.LogInformation("Adding new Gene" + newGene);
+          await _mediator.Send(new Create.Command { Gene = newGene });
+        }
 
+        //TODO: Update existing genes
 
-
-
-
+      }
 
       // 4. Update the job to complete 
+
 
       _logger.LogInformation("\"{id} by {type}\" has been completed!", task.Id, task.Type);
     }
@@ -112,10 +156,27 @@ namespace Application.BackgroundTasks.GeneSync
     {
 
       _client.DefaultRequestHeaders.Accept.Clear();
-      Console.WriteLine(">>>>> Getting fetchJSONTextFromMycobrowser()");
-      var stringTask = await _client.GetStreamAsync("https://mycobrowser.epfl.ch/releases/4/get_file?dir=txt&file=Mycobacterium_tuberculosis_H37Rv.txt");
-      Console.WriteLine("<<>><<<<< Converting fetchJSONTextFromMycobrowser()");
-      StreamReader streamReader = new StreamReader(stringTask);
+      _logger.LogDebug("fetchCSVFromMycobrowser()");
+
+      string stringTask = null;
+
+      try
+      {
+        stringTask = await _client.GetStringAsync(
+       "https://mycobrowser.epfl.ch/releases/4/get_file?dir=txt&file=Mycobacterium_tuberculosis_H37Rv.txt");
+
+      }
+      catch (Exception e)
+      {
+        _logger.LogCritical(e.Message);
+      }
+
+      using (StreamWriter outputFile3 = new StreamWriter("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.txt"))
+      {
+        outputFile3.WriteLine(stringTask);
+      }
+
+      StreamReader streamReader = new StreamReader("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.txt");
 
       var csv = new CsvReader(streamReader, MycobrowserCSVConfig);
       var records = csv.GetRecords<GeneCSV>();
@@ -124,44 +185,124 @@ namespace Application.BackgroundTasks.GeneSync
     }
 
 
-    public async Task<IEnumerable<Sequence>> fetchIndividualGeneSequencesFromMycobrowser()
+    public async Task<List<GeneSequence>> fetchIndividualGeneSequencesFromMycobrowser()
     {
-      // _client.DefaultRequestHeaders.Accept.Clear();
-      // Console.WriteLine(">>>>> Getting fetchIndividualGeneSequencesFromMycobrowser()");
-      // var stringTask = await _client.GetStringAsync("https://mycobrowser.epfl.ch/releases/4/get_file?dir=fasta_genes&file=Mycobacterium_tuberculosis_H37Rv.fasta");
-
-      // using (StreamWriter outputFile = new StreamWriter("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.fasta"))
-      // {
-
-      //   outputFile.WriteLine(stringTask);
-      // }
+      _client.DefaultRequestHeaders.Accept.Clear();
+      _logger.LogDebug("fetchIndividualGeneSequencesFromMycobrowser()");
 
 
-      // Console.WriteLine("<<>><<<<< Converting fetchIndividualGeneSequencesFromMycobrowser()");
-      IEnumerable<Sequence> sequences = SequenceFileReader.ReadMultipleFromFile("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.fasta");
+      string stringTask = null;
+      try
+      {
+        stringTask = await _client.GetStringAsync(
+      "https://mycobrowser.epfl.ch/releases/4/get_file?dir=fasta_genes&file=Mycobacterium_tuberculosis_H37Rv.fasta");
+      }
+      catch (Exception e)
+      {
+        _logger.LogCritical(e.Message);
+      }
+
+
+      using (StreamWriter outputFile1 = new StreamWriter("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.fasta"))
+      {
+
+        outputFile1.WriteLine(stringTask);
+      }
+
+
+      List<GeneSequence> geneSequenceList = new List<GeneSequence>();
+
+      var geneSequences = SequenceFileReader.ReadMultipleFromFile("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.fasta");
+      foreach (var geneSeq in geneSequences)
+      {
+        try
+        {
+          geneSequenceList.Add(new GeneSequence()
+          {
+            GeneLength = geneSeq.Header.Items[3].ToString(),
+            GeneName = geneSeq.Header.Items[0].ToString(),
+            GeneSequenceData = geneSeq.Data.Characters
+          });
+        }
+        catch (Exception e)
+        {
+          _logger.LogCritical(e.Message);
+        }
+      }
 
 
 
-      var geneD = (from geneSequence in sequences
-                   where geneSequence.Header.Items[1].ToString() == "Rv3729"
-                   select new { 
-                     GeneLength = geneSequence.Header.Items[3],
-                     GeneName = geneSequence.Header.Items[1],
-                     geneSequence = geneSequence.Data.Characters}).FirstOrDefault();
+      return geneSequenceList;
+    }
 
-      string[] geneLengthString = geneD.GeneLength.ToString().Split('-');
-      var geneStartLocation = Int32.Parse(geneLengthString[0]);
-      var geneEndLocation = Int32.Parse(geneLengthString[1]);
-      var geneLength = geneEndLocation - geneStartLocation + 1;
+    public async Task<List<ProteinSequence>> fetchIndividualProteinSequencesFromMycobrowser()
+    {
+      _client.DefaultRequestHeaders.Accept.Clear();
+      _logger.LogDebug("fetchIndividualProteinSequencesFromMycobrowser()");
 
-      Console.WriteLine("<<>><<<<< Gene Name = " + geneD.GeneName);
-      Console.WriteLine("<<>><<<<< Gene Start = " + geneStartLocation);
-      Console.WriteLine("<<>><<<<< Gene End = " + geneEndLocation);
-      Console.WriteLine("<<>><<<<< Gene Length = " + geneLength);
-      Console.WriteLine("<<>><<<<< Gene Sequence = " + geneD.geneSequence);
+      string stringTask = null;
+      string[] lines = null;
+
+      try
+      {
+        stringTask = await _client.GetStringAsync("https://mycobrowser.epfl.ch/releases/4/get_file?dir=fasta_proteins&file=Mycobacterium_tuberculosis_H37Rv.fasta");
+        lines = stringTask.Split(
+                new[] { "\r\n", "\r", "\n" },
+                  StringSplitOptions.None
+                );
+      }
+      catch (Exception e)
+      {
+        _logger.LogCritical(e.Message);
+      }
 
 
-      return sequences;
+      using (StreamWriter outputFile2 = new StreamWriter("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv_protein.fasta"))
+      {
+
+        foreach (string line in lines)
+        {
+          if (line.Length != 0)
+          {
+            await outputFile2.WriteLineAsync(line);
+          }
+          else
+          {
+            await outputFile2.WriteLineAsync("NOTAVAIL");
+          }
+        }
+      }
+
+      List<ProteinSequence> protSequenceList = new List<ProteinSequence>();
+
+      try
+      {
+        var proteinSequences = SequenceFileReader.ReadMultipleFromFile("/app/TempFiles/Mycobacterium_tuberculosis_H37Rv_protein.fasta");
+
+
+        foreach (var protSeq in proteinSequences)
+        {
+          try
+          {
+            protSequenceList.Add(new ProteinSequence()
+            {
+              ProteinName = protSeq.Header.Items[0].ToString(),
+              Product = protSeq.Header.Items[2].ToString(),
+              ProteinLength = protSeq.Header.Items[3].ToString(),
+              ProteinSequenceData = protSeq.Data.Characters
+            });
+          }
+          catch (Exception e)
+          {
+            _logger.LogCritical(e.Message);
+          }
+        }
+      }
+      catch (Exception e)
+      {
+        _logger.LogCritical(e.Message);
+      }
+      return protSequenceList;
     }
   }
 }

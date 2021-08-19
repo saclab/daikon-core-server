@@ -232,3 +232,6 @@ project.lock.json
 *.db
 appsettings.json
 .DS_Store
+
+# Temp files directory
+TempFiles/

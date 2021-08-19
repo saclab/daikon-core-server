@@ -22,12 +22,14 @@ namespace Application.Genes.DTOs
         /* Section 3: Gene summary information */
         public string GeneLength { get; set; }
         public string Location { get; set; }
+        public string GeneSequence { get; set; }
 
 
         /* Section 4: Protein summary information */
         public string MolecularMass { get; set; }
         public string IsoelectricPoint { get; set; }
         public string ProteinLength { get; set; }
+        public string ProteinSequence { get; set; }
 
 
         /* Section 5: Structural information */
