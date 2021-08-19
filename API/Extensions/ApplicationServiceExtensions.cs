@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 using Application.Genes;
+using Domain.Tasks;
+using Application.BackgroundTasks.GeneSync;
 
 namespace API.Extensions
 {
@@ -45,6 +47,13 @@ namespace API.Extensions
 
       /* Add User Accessor from Indfrastructure */
       services.AddScoped<IUserAccessor, UserAccessor>();
+
+      /* Add Background Service */
+      services.AddHostedService<BackgroundWorker>();
+      services.AddSingleton<IBackgroundQueue<BTask>, BackgroundQueue<BTask>> ();
+
+      /* Background Tasks */
+      services.AddScoped<IGeneSync, GeneSync>();
 
       return services;
     }

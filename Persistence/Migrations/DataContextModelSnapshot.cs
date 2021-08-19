@@ -301,6 +301,9 @@ namespace Persistence.Migrations
                     b.Property<string>("GeneLength")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("GeneSequence")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("IsoelectricPoint")
                         .HasColumnType("TEXT");
 
@@ -335,6 +338,9 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProteinLength")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProteinSequence")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Proteomics")
