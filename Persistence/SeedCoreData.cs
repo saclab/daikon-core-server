@@ -25,18 +25,18 @@ namespace Persistence
     {
       /* Create Default Roles */
       if (!_roleManager.Roles.Any())
-        await seedAppRoles("/app/Data/Seeds/appRoles.yaml");
+        await seedAppRoles("/app/Data/Sample/appRoles.yaml");
 
       /* Create Default Users */
       if (!_userManager.Users.Any())
-        await seedAppUsers("/app/Data/Seeds/appUsers.yaml");
+        await seedAppUsers("/app/Data/Sample/appUsers.yaml");
 
       /* Create Default Admins */
-      await seedAdmins("/app/Data/Seeds/appAdmins.yaml");
+      await seedAdmins("/app/Data/Sample/appAdmins.yaml");
 
       /* Create Basic App Data */
       if (!_context.Questions.Any())
-        await seedTargetPromotionQuestions("/app/Data/Seeds/targetPromotionQuestions.yaml");
+        await seedTargetPromotionQuestions("/app/Data/Sample/targetPromotionQuestions.yaml");
 
 
       await _context.SaveChangesAsync();
