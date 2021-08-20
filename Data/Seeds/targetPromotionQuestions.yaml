@@ -1,0 +1,76 @@
+Name: TargetPromotionQuestions
+Type: Question
+Data:
+  - Identification : 2a1
+    Module : TargetPromotionQuestions
+    QuestionBody: Humans-Contributes to durable cure?
+    ToolTip: Humans-Contributes to durable cure?
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 2a1b
+    Module : TargetPromotionQuestions
+    QuestionBody: Humans-Active in EBA?
+    ToolTip: Humans-Active in EBA?
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 2a12
+    Module : TargetPromotionQuestions
+    QuestionBody: NHP
+    ToolTip: NHP
+    PossibleAnswers:
+      - Active
+      - Inactive
+      - Unknown
+  - Identification : 2a3a
+    Module : TargetPromotionQuestions
+    QuestionBody: C3HeB/FeJ-Acute infection
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Active
+      - Inactive
+      - Unknown
+  - Identification : 2a3b
+    Module : TargetPromotionQuestions
+    QuestionBody: C3He/FeJ-Chronic infection
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Active
+      - Inactive
+      - Unknown
+  - Identification : 2a4a
+    Module : TargetPromotionQuestions
+    QuestionBody: C57BL/6 or BALB/c-Acute infection
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Active
+      - Inactive
+      - Unknown
+  - Identification : 2a4b
+    Module : TargetPromotionQuestions
+    QuestionBody: C57BL/6 or BALB/c-Chronic infection
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Active
+      - Inactive
+      - Unknown
+  - Identification : 2a5
+    Module : TargetPromotionQuestions
+    QuestionBody: Macrophage
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Active
+      - Inactive
+      - Unknown
+  - Identification : 2a3a
+    Module : TargetPromotionQuestions
+    QuestionBody: C3HeB/FeJ-Acute infection
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Active
+      - Inactive
+      - Unknown
+  

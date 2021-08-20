@@ -1,0 +1,6 @@
+Name: InitialAppRoles
+Type: AppRole
+Data:
+  - Name : root
+  - Name : admin
+  - Name : user

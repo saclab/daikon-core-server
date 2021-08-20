@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Domain.Tasks;
+using Domain.Question;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Persistence
 {
@@ -28,6 +28,15 @@ namespace Persistence
       //     .HasOne<GenePublicData>(g => g.GenePublicData)
       //     .WithOne(gpd => gpd.Gene)
       //     .HasForeignKey<GenePublicData>(gpd => gpd.RefGeneID);
+
+      /* Questions Entity. handle PossibleAnswers Field to have multiple value */
+      var QuestionPossibleAnswersconverter = new ValueConverter<string[], string>(
+                v => string.Join(";", v),
+                v => v.Split(";", StringSplitOptions.RemoveEmptyEntries).Select(val => val).ToArray());
+
+      modelBuilder.Entity<Question>()
+      .Property(e => e.PossibleAnswers)
+                .HasConversion(QuestionPossibleAnswersconverter);
     }
 
     public virtual async Task<int> SaveChangesAsync(string userId = null)
@@ -120,6 +129,7 @@ namespace Persistence
     public DbSet<GenePublicData> GenePublicData { get; set; }
     public DbSet<GeneNonPublicData> GeneNonPublicData { get; set; }
     public DbSet<BTask> BTask { get; set; }
+    public DbSet<Question> Questions { get; set; }
 
   }
 }
