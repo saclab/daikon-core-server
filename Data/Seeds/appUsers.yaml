@@ -1,0 +1,21 @@
+Name: InitialAppRoles
+Type: AppRole
+Data:
+  - DisplayName : sid
+    UserName: sid
+    Email: sid@tamu.edu
+  - DisplayName : Siddhant Rath
+    UserName: sidx
+    Email: rath.siddhant@outlook.com
+  - DisplayName : Saswati Panda
+    UserName: panda
+    Email: panda@tamu.edu
+  - DisplayName : Steve Berthel
+    UserName: steve
+    Email: steve.berthel@panoramaglobal.org
+  - DisplayName : Betsy Russel
+    UserName: betsy
+    Email: betsy.russell@gatesmri.org
+  - DisplayName : James Sacchettini
+    UserName: jim
+    Email: sacchett@tamu.edu

@@ -1,0 +1,8 @@
+Name: InitialAppAdmins
+Type: string
+Data:
+  - sid@tamu.edu
+  - panda@tamu.edu
+  - steve.berthel@panoramaglobal.org
+  - betsy.russell@gatesmri.org
+  - sacchett@tamu.edu
