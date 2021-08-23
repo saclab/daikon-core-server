@@ -24,7 +24,7 @@ namespace Persistence
 
       /* Create Basic App Data */
       if (!_context.Genes.Any())
-        //await seedTestGenes();
+        await seedTestGenes();
 
         await _context.SaveChangesAsync();
     }
