@@ -130,6 +130,7 @@ namespace Persistence
     public DbSet<GeneNonPublicData> GeneNonPublicData { get; set; }
     public DbSet<BTask> BTask { get; set; }
     public DbSet<Question> Questions { get; set; }
+    public DbSet<GenePromotionQuestionaireAnswer> GenePromotionQuestionaireAnswers { get; set; }
 
   }
 }

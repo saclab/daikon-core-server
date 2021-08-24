@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Genes;
+using Application.Genes.DTOs;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -49,6 +50,19 @@ namespace API.Controllers
     public async Task<IActionResult> GetHistory(Guid id)
     {
       return HandleResult(await Mediator.Send(new History.Query { Id = id }));
+    }
+
+    [HttpPost("{id}/promote")]
+    public async Task<IActionResult> PromoteActivity(Guid id, GenePromotionQuestionaire genePromotionQuestionaire)
+    {
+      genePromotionQuestionaire.GeneID = id;
+      return HandleResult(await Mediator.Send(new SubmitGenePromotionQuestionaire.Command {  GenePromotionQuestionaireAnswers = genePromotionQuestionaire }));
+    }
+
+    [HttpGet("{id}/promote")]
+    public async Task<IActionResult> FetchPromoteQuestionaire(Guid id)
+    {
+      return HandleResult(await Mediator.Send(new FetchGenepromotionQustionaire.Query { Id = id }));
     }
 
   }
