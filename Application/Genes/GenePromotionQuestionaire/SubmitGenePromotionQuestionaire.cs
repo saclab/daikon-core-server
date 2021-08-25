@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -44,6 +45,12 @@ namespace Application.Genes
       {
         var gene = await _context.Genes.FindAsync(request.GenePromotionQuestionaireAnswers.GeneID);
         if (gene == null) return Result<Unit>.Failure("The Gene could not be found");
+
+        var checkIfExists = _context.GenePromotionQuestionaireAnswers.Where(q => (
+            q.GeneID == request.GenePromotionQuestionaireAnswers.GeneID &&
+            q.QuestionModule == "TargetPromotionQuestions"));
+
+        if (checkIfExists.Count() != 0) return Result<Unit>.Failure("There is already a submission");
 
         foreach (KeyValuePair<string, Answer> kvp in request.GenePromotionQuestionaireAnswers.Answers)
         {
