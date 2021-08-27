@@ -44,6 +44,8 @@ namespace Application.Genes
         var genePromotionQuestionaire = new GenePromotionQuestionaire();
         genePromotionQuestionaire.GeneID = request.Id;
         genePromotionQuestionaire.Answers = new Dictionary<string, Answer>();
+        string status="";
+        string submittedBy = "";
 
         var questionaire = _context.GenePromotionQuestionaireAnswers.Where(q => (
             q.GeneID == request.Id &&
@@ -55,7 +57,16 @@ namespace Application.Genes
             AnswerValue = item.Answer,
             AnswerDescription = item.Description
           });
+          /*As per policy there would be one staus and only one people can submit a questionaire for a gene
+            So fetching status and submitted by from one answer should be the same for all alnswers.
+          */
+          status = item.Status;
+          submittedBy = item.AnswerdBy;
         }
+        genePromotionQuestionaire.Status = status;
+        genePromotionQuestionaire.SubmittedBy = submittedBy;
+
+
 
         return Result<GenePromotionQuestionaire>.Success(genePromotionQuestionaire);
 
