@@ -1,12 +1,14 @@
 using Application.Core;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace API.Controllers
+namespace API.Controllers.Elevated
 {
   [ApiController]
-  [Route("api/[controller]")]
+  [Route("api/admin/[controller]")]
+  [Authorize(Policy = "RequireAdministratorRole")]
   public class BaseApiController : ControllerBase
   {
     private IMediator _mediator;
@@ -14,7 +16,7 @@ namespace API.Controllers
 
     protected ActionResult HandleResult<T>(Result<T> result)
     {
-      if(result == null) return NotFound();
+      if (result == null) return NotFound();
       if (result.IsSuccess && result.Value != null) return Ok(result.Value);
       if (result.IsSuccess && result.Value == null) return NotFound();
       return BadRequest(result.Error);

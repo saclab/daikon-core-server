@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210824210607_GenePromotionQuestionaire Added")]
+    partial class GenePromotionQuestionaireAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,7 +282,7 @@ namespace Persistence.Migrations
                     b.ToTable("GeneNonPublicData");
                 });
 
-            modelBuilder.Entity("Domain.GenePromotionQuestionaireAnswer", b =>
+            modelBuilder.Entity("Domain.GenePromotionQuestionaire", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -295,7 +297,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("GeneAccessionNumber")
+                    b.Property<Guid>("GeneAccessionNumber")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("GeneID")
@@ -307,9 +309,6 @@ namespace Persistence.Migrations
                     b.Property<string>("QuestionIdentification")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("QuestionModule")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Status")
                         .HasColumnType("TEXT");
 
@@ -319,7 +318,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("GenePromotionQuestionaireAnswers");
+                    b.ToTable("GenePromotionQuestionaire");
                 });
 
             modelBuilder.Entity("Domain.GenePublicData", b =>
@@ -570,7 +569,7 @@ namespace Persistence.Migrations
                     b.Navigation("Gene");
                 });
 
-            modelBuilder.Entity("Domain.GenePromotionQuestionaireAnswer", b =>
+            modelBuilder.Entity("Domain.GenePromotionQuestionaire", b =>
                 {
                     b.HasOne("Domain.Gene", "Gene")
                         .WithMany()
