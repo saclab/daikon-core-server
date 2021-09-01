@@ -2,7 +2,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
-using Domain.Question;
 using Microsoft.AspNetCore.Identity;
 using Persistence.YAMLDTOs;
 using YamlDotNet.Serialization;
