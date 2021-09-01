@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Test
 {
-  public class BuggyController : User.BaseApiController
+  public class BuggyController : General.BaseApiController
   {
     [HttpGet("not-found")]
     public ActionResult GetNotFound()

@@ -2,15 +2,15 @@ using System.Threading.Tasks;
 using API.Controllers.Elevated;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers.Admin.Gene
+namespace API.Controllers.Elevated
 {
-  [Route("api/admin/[controller]")]
-  public class GeneAdminController : BaseApiController
+  
+  public class GeneController : BaseApiController
   {
-    [HttpGet("submissions")]
+    [HttpGet("promotionrequests")]
     public async Task<IActionResult> ListActivities()
     {
-      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Submissions.Query()));
+      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Requests.Query()));
     }
   }
 }
