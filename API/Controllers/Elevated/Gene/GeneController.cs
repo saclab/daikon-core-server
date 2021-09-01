@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Application.Genes;
+using API.Controllers.Elevated;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Admin.Gene
@@ -7,10 +7,10 @@ namespace API.Controllers.Admin.Gene
   [Route("api/admin/[controller]")]
   public class GeneAdminController : BaseApiController
   {
-    [HttpGet("promotions")]
+    [HttpGet("submissions")]
     public async Task<IActionResult> ListActivities()
     {
-      return HandleResult(await Mediator.Send(new FetchGenePromotionSubmission.Query()));
+      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Submissions.Query()));
     }
   }
 }
