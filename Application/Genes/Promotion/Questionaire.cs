@@ -8,9 +8,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Genes.Config.TargetQuestionaire
+namespace Application.Genes.Promotion
 {
-  public class List
+  public class Questionaire
   {
     public class Query : IRequest<Result<List<Question>>> { }
 

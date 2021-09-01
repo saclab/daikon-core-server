@@ -9,9 +9,9 @@ using AutoMapper;
 using MediatR;
 using Persistence;
 
-namespace Application.Genes
+namespace Application.Genes.Promotion
 {
-  public class FetchGenePromotionSubmission
+  public class Submissions
   {
     public class Query : IRequest<Result<List<GenePromotionQuestionaire>>>
     {
@@ -64,7 +64,8 @@ namespace Application.Genes
 
           var questionaire = _context.GenePromotionQuestionaireAnswers.Where(q => (
            q.GeneID == geneID &&
-           q.QuestionModule == "TargetPromotionQuestions"));
+           q.QuestionModule == "TargetPromotionQuestions" &&
+            q.Status == "Submitted" ));
           foreach (var item in questionaire)
           {
             genePromotionQuestionaire.Answers.Add(item.QuestionIdentification, new Answer()

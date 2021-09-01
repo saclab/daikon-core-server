@@ -12,9 +12,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Genes
+namespace Application.Genes.Promotion
 {
-  public class SubmitGenePromotionQuestionaire
+  public class Request
   {
     public class Command : IRequest<Result<Unit>>
     {
