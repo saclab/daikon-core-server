@@ -7,12 +7,12 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using System;
 
-namespace API.Controllers.Admin
+namespace API.Controllers.Elevated
 {
   [ApiController]
-  [Route("api/admin/[controller]")]
-  [Authorize(Policy = "RequireAdministratorRole")]
-  public class AccountsController : ControllerBase
+
+
+  public class AccountsController : BaseApiController
   {
     private readonly UserManager<AppUser> _userManager;
     public AccountsController(UserManager<AppUser> userManager)

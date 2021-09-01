@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Controllers.General
 {
-  public class GeneConfigController : User.BaseApiController
+  public class GeneConfigController : BaseApiController
   {
     [HttpGet("promote/questionaire")]
     public async Task<IActionResult> GetActivity()

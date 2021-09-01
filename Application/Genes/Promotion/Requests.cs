@@ -11,7 +11,7 @@ using Persistence;
 
 namespace Application.Genes.Promotion
 {
-  public class Submissions
+  public class Requests
   {
     public class Query : IRequest<Result<List<GenePromotionQuestionaire>>>
     {

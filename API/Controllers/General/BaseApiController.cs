@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace API.Controllers.User
+namespace API.Controllers.General
 {
   [ApiController]
   [Route("api/[controller]")]
