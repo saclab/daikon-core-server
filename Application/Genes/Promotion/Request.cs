@@ -46,7 +46,7 @@ namespace Application.Genes.Promotion
         var gene = await _context.Genes.FindAsync(request.GenePromotionQuestionaireAnswers.GeneID);
         if (gene == null) return Result<Unit>.Failure("The Gene could not be found");
 
-        var checkIfExists = _context.GenePromotionQuestionaireAnswers.Where(q => (
+        var checkIfExists = _context.GenePromotionRequests.Where(q => (
             q.GeneID == request.GenePromotionQuestionaireAnswers.GeneID &&
             q.QuestionModule == "TargetPromotionQuestions"));
 
@@ -58,7 +58,7 @@ namespace Application.Genes.Promotion
           var question = await _context.Questions.FirstOrDefaultAsync(q => q.Identification == kvp.Key);
           if (question != null)
           {
-            var genePromotionQuestionaireAnswer = new GenePromotionQuestionaireAnswer()
+            var genePromotionQuestionaireAnswer = new GenePromotionRequest()
             {
               Id = new Guid(),
               Gene = gene,
@@ -74,7 +74,7 @@ namespace Application.Genes.Promotion
               AnswerdBy = _userAccessor.GetUsername()
             };
 
-            _context.GenePromotionQuestionaireAnswers.Add(genePromotionQuestionaireAnswer);
+            _context.GenePromotionRequests.Add(genePromotionQuestionaireAnswer);
 
           }
 
