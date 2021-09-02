@@ -137,11 +137,8 @@ namespace Persistence
     public DbSet<GenePromotionRequest> GenePromotionRequests { get; set; }
 
     /* Target */
-
-
-
-
-
+     public DbSet<Target> Targets { get; set; }
+     public DbSet<TargetScorecard> TargetScorecards { get; set; }
 
 
   }
