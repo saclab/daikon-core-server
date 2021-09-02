@@ -47,7 +47,7 @@ namespace Application.Genes.Promotion
         string status="";
         string submittedBy = "";
 
-        var questionaire = _context.GenePromotionQuestionaireAnswers.Where(q => (
+        var questionaire = _context.GenePromotionRequests.Where(q => (
             q.GeneID == request.Id &&
             q.QuestionModule == "TargetPromotionQuestions" &&
             q.Status == "Submitted"));

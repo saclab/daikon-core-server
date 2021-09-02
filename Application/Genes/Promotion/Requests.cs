@@ -43,7 +43,7 @@ namespace Application.Genes.Promotion
       {
         var genePromotionQuestionaires = new List<GenePromotionQuestionaire>();
 
-        var geneSubmissionIDs = _context.GenePromotionQuestionaireAnswers.Select(g => g.GeneID).Distinct();
+        var geneSubmissionIDs = _context.GenePromotionRequests.Select(g => g.GeneID).Distinct();
 
         Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++");
         foreach (var geneID in geneSubmissionIDs)
@@ -62,7 +62,7 @@ namespace Application.Genes.Promotion
           string status = "";
           string submittedBy = "";
 
-          var questionaire = _context.GenePromotionQuestionaireAnswers.Where(q => (
+          var questionaire = _context.GenePromotionRequests.Where(q => (
            q.GeneID == geneID &&
            q.QuestionModule == "TargetPromotionQuestions" &&
             q.Status == "Submitted" ));

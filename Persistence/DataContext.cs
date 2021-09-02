@@ -122,14 +122,27 @@ namespace Persistence
     }
 
 
-
-    public DbSet<Gene> Genes { get; set; }
+    /* App Core */
     public DbSet<ChangeLog> ChangeLogs { get; set; }
+    public DbSet<BTask> BTask { get; set; }
+
+
+    /* Business Core */
+    public DbSet<Question> Questions { get; set; }
+
+    /* Gene */
+    public DbSet<Gene> Genes { get; set; }
     public DbSet<GenePublicData> GenePublicData { get; set; }
     public DbSet<GeneNonPublicData> GeneNonPublicData { get; set; }
-    public DbSet<BTask> BTask { get; set; }
-    public DbSet<Question> Questions { get; set; }
-    public DbSet<GenePromotionQuestionaireAnswer> GenePromotionQuestionaireAnswers { get; set; }
+    public DbSet<GenePromotionRequest> GenePromotionRequests { get; set; }
+
+    /* Target */
+
+
+
+
+
+
 
   }
 }

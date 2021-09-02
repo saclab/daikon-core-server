@@ -2,7 +2,7 @@ using System;
 
 namespace Domain
 {
-  public class GenePromotionQuestionaireAnswer
+  public class GenePromotionRequest
   {
     public Guid Id { get; set; }
     public Gene Gene { get; set; }
