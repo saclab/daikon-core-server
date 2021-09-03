@@ -139,6 +139,7 @@ namespace Persistence
     /* Target */
      public DbSet<Target> Targets { get; set; }
      public DbSet<TargetScorecard> TargetScorecards { get; set; }
+     public DbSet<TargetScoreCardValue> TargetScoreCardValues { get; set; }
 
 
   }

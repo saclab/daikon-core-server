@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210902191241_Split TargetScorecard and targetScoreCardValues")]
+    partial class SplitTargetScorecardandtargetScoreCardValues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -477,7 +479,7 @@ namespace Persistence.Migrations
                     b.ToTable("Targets");
                 });
 
-            modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
+            modelBuilder.Entity("Domain.TargetScorecard", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -507,31 +509,12 @@ namespace Persistence.Migrations
                     b.Property<string>("TargetAccessionNumber")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("TargetScorecardId")
+                    b.Property<Guid>("TargetID")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("QuestionId");
-
-                    b.HasIndex("TargetScorecardId");
-
-                    b.ToTable("TargetScoreCardValues");
-                });
-
-            modelBuilder.Entity("Domain.TargetScorecard", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TargetAccessionNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("TargetID")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
 
                     b.HasIndex("TargetID")
                         .IsUnique();
@@ -714,7 +697,7 @@ namespace Persistence.Migrations
                     b.Navigation("BaseGene");
                 });
 
-            modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
+            modelBuilder.Entity("Domain.TargetScorecard", b =>
                 {
                     b.HasOne("Domain.Question", "Question")
                         .WithMany()
@@ -722,24 +705,13 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.TargetScorecard", "TargetScorecard")
-                        .WithMany("TargetScoreCardValues")
-                        .HasForeignKey("TargetScorecardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-
-                    b.Navigation("TargetScorecard");
-                });
-
-            modelBuilder.Entity("Domain.TargetScorecard", b =>
-                {
                     b.HasOne("Domain.Target", "Target")
                         .WithOne("TargetScorecard")
                         .HasForeignKey("Domain.TargetScorecard", "TargetID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Question");
 
                     b.Navigation("Target");
                 });
@@ -805,11 +777,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Target", b =>
                 {
                     b.Navigation("TargetScorecard");
-                });
-
-            modelBuilder.Entity("Domain.TargetScorecard", b =>
-                {
-                    b.Navigation("TargetScoreCardValues");
                 });
 #pragma warning restore 612, 618
         }
