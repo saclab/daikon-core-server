@@ -10,7 +10,7 @@ using Persistence;
 
 namespace Application.Targets
 {
-  public class EditTarget
+  public class Edit
   {
     public class Command : IRequest<Result<Target>>
     {
@@ -68,7 +68,7 @@ namespace Application.Targets
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
 
-        if (!success) return Result<Target>.Failure("Failed to edit genome");
+        if (!success) return Result<Target>.Failure("Failed to edit Target");
         return Result<Target>.Success(targetToEdit);
 
       }
