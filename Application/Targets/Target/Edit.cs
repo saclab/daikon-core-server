@@ -52,7 +52,7 @@ namespace Application.Targets
         targetToEdit.HTSFeasibility = request.ModifiedTarget.HTSFeasibility;
         targetToEdit.SBDFeasibility = request.ModifiedTarget.SBDFeasibility;
         targetToEdit.Progressibility = request.ModifiedTarget.Progressibility;
-        targetToEdit.Saftey = request.ModifiedTarget.Saftey;
+        targetToEdit.Safety = request.ModifiedTarget.Safety;
 
         if (request.ModifiedTarget.TargetScorecard != null)
         {
