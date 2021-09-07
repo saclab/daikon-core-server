@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210902192315_Added TargetScoreCardValues mods")]
+    partial class AddedTargetScoreCardValuesmods
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -449,7 +451,7 @@ namespace Persistence.Migrations
                     b.Property<string>("AccessionNumber")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("GeneId")
+                    b.Property<Guid?>("BaseGeneId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GeneName")
@@ -472,7 +474,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+                    b.HasIndex("BaseGeneId");
 
                     b.ToTable("Targets");
                 });
@@ -709,9 +711,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Gene", "BaseGene")
                         .WithMany()
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BaseGeneId");
 
                     b.Navigation("BaseGene");
                 });
@@ -724,22 +724,26 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.TargetScorecard", null)
+                    b.HasOne("Domain.TargetScorecard", "TargetScorecard")
                         .WithMany("TargetScoreCardValues")
                         .HasForeignKey("TargetScorecardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Question");
+
+                    b.Navigation("TargetScorecard");
                 });
 
             modelBuilder.Entity("Domain.TargetScorecard", b =>
                 {
-                    b.HasOne("Domain.Target", null)
+                    b.HasOne("Domain.Target", "Target")
                         .WithOne("TargetScorecard")
                         .HasForeignKey("Domain.TargetScorecard", "TargetID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Target");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
