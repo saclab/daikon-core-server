@@ -6,6 +6,7 @@ namespace API.Controllers.General
 {
   public class TargetController : BaseApiController
   {
+    // List all
     [HttpGet]
     public async Task<IActionResult> ListActivities()
     {
