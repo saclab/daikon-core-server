@@ -13,7 +13,7 @@ namespace Domain
     public double HTSFeasibility { get; set; }
     public double SBDFeasibility { get; set; }
     public double Progressibility { get; set; }
-    public double Saftey { get; set; }
+    public double Safety { get; set; }
     public TargetScorecard TargetScorecard { get; set; }
 
   }
