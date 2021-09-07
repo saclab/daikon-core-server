@@ -6,6 +6,7 @@ namespace Domain
   {
     public Guid Id { get; set; }
     public Gene BaseGene { get; set; }
+    public Guid GeneId { get; set; }
     public string AccessionNumber { get; set; }
     public string GeneName { get; set; }
     public double Score { get; set; }

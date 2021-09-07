@@ -50,6 +50,7 @@ namespace Application.Targets
         {
           Id = TargetGid,
           BaseGene = GeneToPromote,
+          GeneId = GeneToPromote.Id,
           AccessionNumber = GeneToPromote.AccessionNumber,
           GeneName = GeneToPromote.GeneName,
 
