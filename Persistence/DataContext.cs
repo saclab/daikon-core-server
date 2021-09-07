@@ -87,8 +87,8 @@ namespace Persistence
             case EntityState.Added:
               /* Dont need to serialize as we can use ToString, serializing adds and extra quote to data */
               changeLog.OldValue = null;
-              changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
-              //changeLog.NewValue = property.CurrentValue.ToString();
+              //changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
+              changeLog.NewValue = property.CurrentValue!=null?property.CurrentValue.ToString():null;
               changeLog.Type = ChangeType.Create.ToString();
               ChangeLogs.Add(changeLog);
               break;
@@ -137,11 +137,9 @@ namespace Persistence
     public DbSet<GenePromotionRequest> GenePromotionRequests { get; set; }
 
     /* Target */
-
-
-
-
-
+     public DbSet<Target> Targets { get; set; }
+     public DbSet<TargetScorecard> TargetScorecards { get; set; }
+     public DbSet<TargetScoreCardValue> TargetScoreCardValues { get; set; }
 
 
   }
