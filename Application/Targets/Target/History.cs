@@ -40,12 +40,16 @@ namespace Application.Targets
         .ThenInclude(s => s.TargetScoreCardValues)
         .FirstOrDefaultAsync(t => t.Id == request.Id);
 
+        var answerIds = await _context.TargetScoreCardValues.Where(t => t.TargetScorecardId == target.TargetScorecard.Id)
+        .Select(i => i.Id.ToString()).ToListAsync();
+
         var history = await _context.ChangeLogs.Where(
         h =>
         (target != null && (h.EntityName == "Target"
             && h.PrimaryKeyValue == target.Id.ToString()))
         || (target.TargetScorecard.TargetScoreCardValues != null && (h.EntityName == "TargetScoreCardValue"
-            && h.PrimaryKeyValue == target.TargetScorecard.Id.ToString()))
+            && (h.PropertyName == "Answer" || h.PropertyName== "Description")
+            && answerIds.Contains(h.PrimaryKeyValue)))
         ).OrderByDescending(h => h.DateChanged).ToListAsync();
 
         return Result<List<ChangeLog>>.Success(history);
