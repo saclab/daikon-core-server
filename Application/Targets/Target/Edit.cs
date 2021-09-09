@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -47,8 +48,10 @@ namespace Application.Targets
         .FirstOrDefaultAsync(t => t.Id == request.ModifiedTarget.Id);
 
 
+
         if (targetToEdit == null) return null;
 
+        targetToEdit.Score = request.ModifiedTarget.Score;
         targetToEdit.HTSFeasibility = request.ModifiedTarget.HTSFeasibility;
         targetToEdit.SBDFeasibility = request.ModifiedTarget.SBDFeasibility;
         targetToEdit.Progressibility = request.ModifiedTarget.Progressibility;
