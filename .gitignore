@@ -230,6 +230,7 @@ project.lock.json
 
 # CUSTOM
 *.db
+*.db-*
 appsettings.json
 .DS_Store
 
