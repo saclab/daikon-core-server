@@ -5,7 +5,6 @@ namespace Domain
   public class Hit
   {
     public Guid Id { get; set; }
-    public Target BaseScreen { get; set; }
     public Guid ScreenId { get; set; }
     public string Library { get; set; }
     public string CompoundId { get; set; }
