@@ -10,5 +10,11 @@ namespace API.Controllers.General
     {
       return HandleResult(await Mediator.Send(new Application.Screens.Create.Command { NewScreen = newScreen }));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> ListScreens()
+    {
+      return HandleResult(await Mediator.Send(new Application.Screens.List.Query()));
+    }
   }
 }
