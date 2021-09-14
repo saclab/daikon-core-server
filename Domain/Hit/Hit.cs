@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Hit
+namespace Domain
 {
   public class Hit
   {
@@ -14,6 +14,6 @@ namespace Domain.Hit
     public string MIC { get; set; }
     public string Structure { get; set; }
     public string ClusterGroup { get; set; }
-    
+
   }
 }
