@@ -148,6 +148,10 @@ namespace Persistence
         public DbSet<TargetScorecard> TargetScorecards { get; set; }
         public DbSet<TargetScoreCardValue> TargetScoreCardValues { get; set; }
 
+        /* Screen */
+        public DbSet<Screen> Screens { get; set; }
+        public DbSet<Hit> Hits { get; set; }
+
 
     }
 }
