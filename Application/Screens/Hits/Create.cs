@@ -77,10 +77,11 @@ namespace Application.Screens.Hits
                     ClusterGroup = request.NewHit.ClusterGroup,
                 };
 
-                baseScreen.Hits.Add(HitToCreate);
+                
 
 
                 _context.Hits.Add(HitToCreate);
+                baseScreen.Hits.Add(HitToCreate);
 
 
 
