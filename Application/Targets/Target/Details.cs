@@ -32,6 +32,7 @@ namespace Application.Targets
         var target = await _context.Targets
         .Include(t => t.TargetScorecard)
         .ThenInclude(s => s.TargetScoreCardValues)
+        .ThenInclude(q => q.Question)
         .FirstOrDefaultAsync(t => t.Id == request.Id);
 
         return Result<Target>.Success(target);

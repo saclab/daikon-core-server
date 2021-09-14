@@ -46,6 +46,23 @@ namespace Application.Targets
         var GeneToPromote = await _context.Genes.FirstOrDefaultAsync
             (g => g.Id == request.GenePromotionQuestionaireAnswers.GeneID);
 
+        /*chek if gene id is correct*/
+        if (GeneToPromote == null)
+        {
+          return Result<Target>.Failure("Invalid Gene ID");
+        }
+
+        /*check if target exists already */
+        var testTarget = await _context.Targets.FirstOrDefaultAsync(
+           t => t.GeneId == request.GenePromotionQuestionaireAnswers.GeneID
+        );
+        if(testTarget!=null) {
+          return Result<Target>.Failure("Target already exists");
+        }
+
+
+
+
         var TargetToCreate = new Target
         {
           Id = TargetGid,

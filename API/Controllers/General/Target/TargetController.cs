@@ -19,5 +19,11 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Targets.Details.Query { Id = id }));
     }
 
+    [HttpGet("{id}/history")]
+    public async Task<IActionResult> GetHistory(Guid id)
+    {
+      return HandleResult(await Mediator.Send(new Application.Targets.History.Query { Id = id }));
+    }
+
   }
 }
