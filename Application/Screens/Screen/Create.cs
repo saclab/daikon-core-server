@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -54,16 +55,24 @@ namespace Application.Screens
           return Result<Screen>.Failure("Invalid Target ID");
         }
 
-        /*check if screen exists already */
-        // var testTarget = await _context.Targets.FirstOrDefaultAsync(
-        //    t => t.GeneId == request.GenePromotionQuestionaireAnswers.GeneID
-        // );
-        // if(testTarget!=null) {
-        //   return Result<Target>.Failure("Target already exists");
-        // }
+
+        /*Screen Name Sequence Number */
+        string screenName = null;
+        
+        var testScreen = await _context.Screens.Where((s) => s.TargetId
+                                                          == request.NewScreen.TargetId)
+                                                          .OrderByDescending(s => s.ScreenName).ToListAsync();
 
 
-
+        if (testScreen == null) {
+          screenName = baseTarget.GeneName + "-" + "1";
+        }
+        else {
+          var lastScreenName = testScreen.First().ScreenName;
+          var lastScreenNumber = lastScreenName!=null?Int32.Parse(lastScreenName.Split('-').Last()):0;
+          lastScreenNumber = lastScreenNumber + 1;
+          screenName = baseTarget.GeneName + "-" + lastScreenNumber.ToString();
+        }
 
         var ScreenToCreate = new Screen
         {
@@ -72,7 +81,7 @@ namespace Application.Screens
           TargetId = baseTarget.Id,
           AccessionNumber = baseTarget.AccessionNumber,
           GeneName = baseTarget.GeneName,
-
+          ScreenName = screenName,
           Status = "New",
           Library = request.NewScreen.Library,
           Scientist = _userAccessor.GetUsername(),
