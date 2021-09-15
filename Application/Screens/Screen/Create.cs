@@ -64,7 +64,7 @@ namespace Application.Screens
                                                           .OrderByDescending(s => s.ScreenName).ToListAsync();
 
 
-        if (testScreen == null) {
+        if (!testScreen.Any()) {
           screenName = baseTarget.GeneName + "-" + "1";
         }
         else {
