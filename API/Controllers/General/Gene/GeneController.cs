@@ -24,6 +24,12 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.Details.Query { Id = id }));
     }
 
+    [HttpGet("by-accession/{accessionNo}")]
+    public async Task<IActionResult> GetGeneByAccessionNo(string accessionNo)
+    {
+      return HandleResult(await Mediator.Send(new Application.Genes.DetailsFromAccessionNo.Query { AccessionNumber = accessionNo }));
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateActivity(Gene gene)
     {
