@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210914205433_added screen name to screen")]
+    partial class addedscreennametoscreen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,7 +196,7 @@ namespace Persistence.Migrations
                     b.Property<string>("EssentialityCondition")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("GeneId")
+                    b.Property<Guid>("GeneID")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("I_Vi")
@@ -274,35 +276,13 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneId")
+                    b.HasIndex("GeneID")
                         .IsUnique();
 
                     b.ToTable("GeneNonPublicData");
                 });
 
             modelBuilder.Entity("Domain.GenePromotionRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GenePromotionRequestStatus")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GeneId");
-
-                    b.ToTable("GenePromotionRequests");
-                });
-
-            modelBuilder.Entity("Domain.GenePromotionRequestValue", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -317,19 +297,34 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("GenePromotionRequestId")
+                    b.Property<string>("GeneAccessionNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("GeneID")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("QuestionId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("QuestionIdentification")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("QuestionModule")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("QuestionSubModule")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("GenePromotionRequestId");
+                    b.HasIndex("GeneID");
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("GenePromotionRequestValues");
+                    b.ToTable("GenePromotionRequests");
                 });
 
             modelBuilder.Entity("Domain.GenePublicData", b =>
@@ -347,7 +342,7 @@ namespace Persistence.Migrations
                     b.Property<string>("End")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("GeneId")
+                    b.Property<Guid>("GeneID")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GeneLength")
@@ -409,7 +404,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneId")
+                    b.HasIndex("GeneID")
                         .IsUnique();
 
                     b.ToTable("GenePublicData");
@@ -760,29 +755,20 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.GeneNonPublicData", b =>
                 {
-                    b.HasOne("Domain.Gene", null)
-                        .WithOne("GeneNonPublicData")
-                        .HasForeignKey("Domain.GeneNonPublicData", "GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.GenePromotionRequest", b =>
-                {
                     b.HasOne("Domain.Gene", "Gene")
-                        .WithMany()
-                        .HasForeignKey("GeneId")
+                        .WithOne("GeneNonPublicData")
+                        .HasForeignKey("Domain.GeneNonPublicData", "GeneID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Gene");
                 });
 
-            modelBuilder.Entity("Domain.GenePromotionRequestValue", b =>
+            modelBuilder.Entity("Domain.GenePromotionRequest", b =>
                 {
-                    b.HasOne("Domain.GenePromotionRequest", null)
-                        .WithMany("GenePromotionRequestValues")
-                        .HasForeignKey("GenePromotionRequestId")
+                    b.HasOne("Domain.Gene", "Gene")
+                        .WithMany()
+                        .HasForeignKey("GeneID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -792,16 +778,20 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Gene");
+
                     b.Navigation("Question");
                 });
 
             modelBuilder.Entity("Domain.GenePublicData", b =>
                 {
-                    b.HasOne("Domain.Gene", null)
+                    b.HasOne("Domain.Gene", "Gene")
                         .WithOne("GenePublicData")
-                        .HasForeignKey("Domain.GenePublicData", "GeneId")
+                        .HasForeignKey("Domain.GenePublicData", "GeneID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Gene");
                 });
 
             modelBuilder.Entity("Domain.Hit", b =>
@@ -917,11 +907,6 @@ namespace Persistence.Migrations
                     b.Navigation("GeneNonPublicData");
 
                     b.Navigation("GenePublicData");
-                });
-
-            modelBuilder.Entity("Domain.GenePromotionRequest", b =>
-                {
-                    b.Navigation("GenePromotionRequestValues");
                 });
 
             modelBuilder.Entity("Domain.Screen", b =>

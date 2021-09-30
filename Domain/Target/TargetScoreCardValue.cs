@@ -5,7 +5,6 @@ namespace Domain
   public class TargetScoreCardValue
   {
     public Guid Id { get; set; }
-    //public TargetScorecard TargetScorecard { get; set; }
     public Guid TargetScorecardId { get; set; }
     public string TargetAccessionNumber { get; set; }
     public Question Question { get; set; }

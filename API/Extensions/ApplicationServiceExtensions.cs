@@ -10,6 +10,7 @@ using Application.Genes;
 using Domain.Tasks;
 using Application.BackgroundTasks.GeneSync;
 
+
 namespace API.Extensions
 {
   public static class ApplicationServiceExtensions
@@ -20,6 +21,8 @@ namespace API.Extensions
       services.AddDbContext<DataContext>(opt =>
         {
           opt.UseSqlite(config.GetConnectionString("SQLiteConnection"));
+          //opt.UseMySQL();
+          
         });
 
       /* Add CORS */

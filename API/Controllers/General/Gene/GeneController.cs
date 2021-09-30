@@ -24,6 +24,12 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.Details.Query { Id = id }));
     }
 
+    [HttpGet("by-accession/{accessionNo}")]
+    public async Task<IActionResult> GetGeneByAccessionNo(string accessionNo)
+    {
+      return HandleResult(await Mediator.Send(new Application.Genes.DetailsFromAccessionNo.Query { AccessionNumber = accessionNo }));
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateActivity(Gene gene)
     {
@@ -51,16 +57,16 @@ namespace API.Controllers.General
     }
 
     [HttpPost("{id}/promotionrequest")]
-    public async Task<IActionResult> PromoteActivity(Guid id, GenePromotionQuestionaire genePromotionQuestionaire)
+    public async Task<IActionResult> PromoteActivity(Guid id, GenePromotionRequest genePromotionRequest)
     {
-      genePromotionQuestionaire.GeneID = id;
-      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Request.Command { GenePromotionQuestionaireAnswers = genePromotionQuestionaire }));
+      genePromotionRequest.GeneId = id;
+      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Request.Command { GenePromotionRequest = genePromotionRequest }));
     }
 
     [HttpGet("{id}/promotionrequest")]
     public async Task<IActionResult> FetchPromoteQuestionaire(Guid id)
     {
-      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Details.Query { Id = id }));
+      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Details.Query { GeneId = id }));
     }
 
   }

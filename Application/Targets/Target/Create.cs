@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
 using Application.Genes.DTOs;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
@@ -17,7 +18,7 @@ namespace Application.Targets
   {
     public class Command : IRequest<Result<Target>>
     {
-      public GenePromotionQuestionaire GenePromotionQuestionaireAnswers { get; set; }
+      public GenePromotionRequest GenePromotionRequest { get; set; }
     }
 
     // public class CommandValidator : AbstractValidator<Command>
@@ -33,10 +34,12 @@ namespace Application.Targets
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
-      public Handler(DataContext context, IMapper mapper)
+      private readonly IUserAccessor _userAccessor;
+      public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
       {
         _context = context;
         _mapper = mapper;
+        _userAccessor = userAccessor;
       }
       public async Task<Result<Target>> Handle(Command request, CancellationToken cancellationToken)
       {
@@ -44,7 +47,7 @@ namespace Application.Targets
         Guid TargetScorecardGid = Guid.NewGuid();
 
         var GeneToPromote = await _context.Genes.FirstOrDefaultAsync
-            (g => g.Id == request.GenePromotionQuestionaireAnswers.GeneID);
+            (g => g.Id == request.GenePromotionRequest.GeneId);
 
         /*chek if gene id is correct*/
         if (GeneToPromote == null)
@@ -54,9 +57,10 @@ namespace Application.Targets
 
         /*check if target exists already */
         var testTarget = await _context.Targets.FirstOrDefaultAsync(
-           t => t.GeneId == request.GenePromotionQuestionaireAnswers.GeneID
+           t => t.GeneId == request.GenePromotionRequest.GeneId
         );
-        if(testTarget!=null) {
+        if (testTarget != null)
+        {
           return Result<Target>.Failure("Target already exists");
         }
 
@@ -80,10 +84,10 @@ namespace Application.Targets
           }
         };
 
-        foreach (var answer in request.GenePromotionQuestionaireAnswers.Answers)
+        foreach (var answer in request.GenePromotionRequest.GenePromotionRequestValues)
         {
           Guid targetScoreCardValueGid = Guid.NewGuid();
-          var question = await _context.Questions.FirstOrDefaultAsync(q => q.Identification == answer.Key);
+          var question = await _context.Questions.FirstOrDefaultAsync(q => q.Id == answer.QuestionId);
           var targetScoreCardValue = new TargetScoreCardValue
           {
             Id = targetScoreCardValueGid,
@@ -94,9 +98,9 @@ namespace Application.Targets
             QuestionIdentification = question.Identification,
             QuestionModule = question.Module,
             QuestionSubModule = question.SubModule,
-            Answer = answer.Value.AnswerValue,
-            Description = answer.Value.AnswerDescription,
-            AnswerdBy = request.GenePromotionQuestionaireAnswers.SubmittedBy
+            Answer = answer.Answer,
+            Description = answer.Description,
+            AnswerdBy = answer.AnswerdBy
           };
           TargetToCreate.TargetScorecard.TargetScoreCardValues.Add(targetScoreCardValue);
           _context.TargetScoreCardValues.Add(targetScoreCardValue);
@@ -105,8 +109,16 @@ namespace Application.Targets
         _context.TargetScorecards.Add(TargetToCreate.TargetScorecard);
         _context.Targets.Add(TargetToCreate);
 
+        // if a request exists change its status from submitted to promoted
 
-        var success = await _context.SaveChangesAsync() > 0;
+        var genePromotionReq = await _context.GenePromotionRequests.FirstOrDefaultAsync
+            (g => g.GeneId == request.GenePromotionRequest.GeneId);
+        if (genePromotionReq != null)
+        {
+            genePromotionReq.GenePromotionRequestStatus = "Promoted";
+        }
+
+        var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
         if (!success) return Result<Target>.Failure("Failed to create Genome");
         return Result<Target>.Success(TargetToCreate);

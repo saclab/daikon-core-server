@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210929214520_Gene Promotion Recreated")]
+    partial class GenePromotionRecreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,8 +299,6 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
-
                     b.ToTable("GenePromotionRequests");
                 });
 
@@ -326,8 +326,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("GenePromotionRequestId");
-
-                    b.HasIndex("QuestionId");
 
                     b.ToTable("GenePromotionRequestValues");
                 });
@@ -767,17 +765,6 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.GenePromotionRequest", b =>
-                {
-                    b.HasOne("Domain.Gene", "Gene")
-                        .WithMany()
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gene");
-                });
-
             modelBuilder.Entity("Domain.GenePromotionRequestValue", b =>
                 {
                     b.HasOne("Domain.GenePromotionRequest", null)
@@ -785,14 +772,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("GenePromotionRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Domain.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("Domain.GenePublicData", b =>

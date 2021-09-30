@@ -18,7 +18,7 @@ namespace Application.Genes.Promotion
   {
     public class Command : IRequest<Result<Unit>>
     {
-      public GenePromotionQuestionaire GenePromotionQuestionaireAnswers { get; set; }
+      public GenePromotionRequest GenePromotionRequest { get; set; }
     }
 
     // public class CommandValidator : AbstractValidator<Command>
@@ -43,42 +43,47 @@ namespace Application.Genes.Promotion
       }
       public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
       {
-        var gene = await _context.Genes.FindAsync(request.GenePromotionQuestionaireAnswers.GeneID);
+        var gene = await _context.Genes.FindAsync(request.GenePromotionRequest.GeneId);
         if (gene == null) return Result<Unit>.Failure("The Gene could not be found");
 
         var checkIfExists = _context.GenePromotionRequests.Where(q => (
-            q.GeneID == request.GenePromotionQuestionaireAnswers.GeneID &&
-            q.QuestionModule == "TargetPromotionQuestions"));
+            q.GeneId == request.GenePromotionRequest.GeneId));
 
         if (checkIfExists.Count() != 0) return Result<Unit>.Failure("There is already a submission");
 
-        foreach (KeyValuePair<string, Answer> kvp in request.GenePromotionQuestionaireAnswers.Answers)
+        var newGenePromotionRequestId = new Guid();
+        var newGenePromotionRequest = new GenePromotionRequest()
+        {
+          Id = newGenePromotionRequestId,
+          Gene = gene,
+          GeneId = gene.Id,
+          GeneAccessionNumber = gene.AccessionNumber,
+          GenePromotionRequestStatus = "Submitted",
+          GenePromotionRequestValues = new List<GenePromotionRequestValue>()
+        };
+
+        foreach (GenePromotionRequestValue genePromotionRequestValue in request.GenePromotionRequest.GenePromotionRequestValues)
         {
 
-          var question = await _context.Questions.FirstOrDefaultAsync(q => q.Identification == kvp.Key);
+          var question = await _context.Questions.FirstOrDefaultAsync(q => q.Id == genePromotionRequestValue.QuestionId);
           if (question != null)
           {
-            var genePromotionQuestionaireAnswer = new GenePromotionRequest()
+            var newGenePromotionRequestValue = new GenePromotionRequestValue()
             {
               Id = new Guid(),
-              Gene = gene,
-              GeneID = gene.Id,
-              GeneAccessionNumber = gene.AccessionNumber,
-              Status = "Submitted",
+              GenePromotionRequestId = newGenePromotionRequestId,
               Question = question,
-              QuestionId = question.Id,
-              QuestionIdentification = question.Identification,
-              QuestionModule = question.Module,
-              Answer = kvp.Value.AnswerValue,
-              Description = kvp.Value.AnswerDescription,
+              QuestionId = genePromotionRequestValue.QuestionId,
+              Answer = genePromotionRequestValue.Answer,
+              Description = genePromotionRequestValue.Description,
               AnswerdBy = _userAccessor.GetUsername()
             };
 
-            _context.GenePromotionRequests.Add(genePromotionQuestionaireAnswer);
-
+            newGenePromotionRequest.GenePromotionRequestValues.Add(newGenePromotionRequestValue);
+            _context.GenePromotionRequestValues.Add(newGenePromotionRequestValue);
           }
-
         }
+        _context.GenePromotionRequests.Add(newGenePromotionRequest);
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
