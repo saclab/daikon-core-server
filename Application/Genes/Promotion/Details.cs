@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 using Application.Core;
 using Application.Genes.DTOs;
 using AutoMapper;
+using Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Genes.Promotion
 {
   public class Details
   {
-    public class Query : IRequest<Result<GenePromotionQuestionaire>>
+    public class Query : IRequest<Result<GenePromotionRequest>>
     {
-      public Guid Id { get; set; }
+      public Guid GeneId { get; set; }
     }
 
     // public class CommandValidator : AbstractValidator<Command>
@@ -27,7 +29,7 @@ namespace Application.Genes.Promotion
 
     // }
 
-    public class Handler : IRequestHandler<Query, Result<GenePromotionQuestionaire>>
+    public class Handler : IRequestHandler<Query, Result<GenePromotionRequest>>
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
@@ -39,37 +41,16 @@ namespace Application.Genes.Promotion
 
       }
 
-      public async Task<Result<GenePromotionQuestionaire>> Handle(Query request, CancellationToken cancellationToken)
+      public async Task<Result<GenePromotionRequest>> Handle(Query request, CancellationToken cancellationToken)
       {
-        var genePromotionQuestionaire = new GenePromotionQuestionaire();
-        genePromotionQuestionaire.GeneID = request.Id;
-        genePromotionQuestionaire.Answers = new Dictionary<string, Answer>();
-        string status="";
-        string submittedBy = "";
-
-        var questionaire = _context.GenePromotionRequests.Where(q => (
-            q.GeneID == request.Id &&
-            q.QuestionModule == "TargetPromotionQuestions" &&
-            q.Status == "Submitted"));
-        foreach (var item in questionaire)
-        {
-          genePromotionQuestionaire.Answers.Add(item.QuestionIdentification, new Answer()
-          {
-            AnswerValue = item.Answer,
-            AnswerDescription = item.Description
-          });
-          /*As per policy there would be one staus and only one people can submit a questionaire for a gene
-            So fetching status and submitted by from one answer should be the same for all alnswers.
-          */
-          status = item.Status;
-          submittedBy = item.AnswerdBy;
-        }
-        genePromotionQuestionaire.Status = status;
-        genePromotionQuestionaire.SubmittedBy = submittedBy;
 
 
-
-        return Result<GenePromotionQuestionaire>.Success(genePromotionQuestionaire);
+        var genePromotionRequest = await _context.GenePromotionRequests
+        .Include(s => s.GenePromotionRequestValues)
+        .ThenInclude(q => q.Question)
+        .FirstOrDefaultAsync(q => (
+            q.GeneId == request.GeneId));
+        return Result<GenePromotionRequest>.Success(genePromotionRequest);
 
       }
     }

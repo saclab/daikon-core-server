@@ -5,8 +5,8 @@ namespace Domain
     public class GeneNonPublicData
     {
         public Guid Id { get; set; }
-        public Gene Gene { get; set; }
-        public Guid GeneID { get; set; }
+       
+        public Guid GeneId { get; set; }
 
         /* Section 1: Essentiality  */
         public string Classification { get; set; }

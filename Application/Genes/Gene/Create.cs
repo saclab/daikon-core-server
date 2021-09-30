@@ -52,16 +52,14 @@ namespace Application.Genes
          _mapper.Map(request.Gene.GenePublicData, newGenePublicData);
         Guid newGenePublicDataGid = Guid.NewGuid();
         newGenePublicData.Id = newGenePublicDataGid;
-        newGenePublicData.Gene = GeneToCreate;
-        newGenePublicData.GeneID = gid;
+        newGenePublicData.GeneId = gid;
         GeneToCreate.GenePublicData = newGenePublicData;
 
         var newGeneNonPublicData = new GeneNonPublicData();
         _mapper.Map(request.Gene.GeneNonPublicData, newGeneNonPublicData);
         Guid newGeneNonPublicDataGid = Guid.NewGuid();
         newGeneNonPublicData.Id = newGeneNonPublicDataGid;
-        newGeneNonPublicData.Gene = GeneToCreate;
-        newGeneNonPublicData.GeneID = gid;
+        newGeneNonPublicData.GeneId = gid;
         GeneToCreate.GeneNonPublicData = newGeneNonPublicData;
 
         

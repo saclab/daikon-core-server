@@ -5,8 +5,7 @@ namespace Domain
     public class GenePublicData
     {
         public Guid Id { get; set; }
-        public Gene Gene { get; set; }
-        public Guid GeneID { get; set; }
+        public Guid GeneId { get; set; }
 
         /* Section 1: General annotation */
         public string Type { get; set; }

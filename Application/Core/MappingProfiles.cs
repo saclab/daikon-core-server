@@ -9,18 +9,17 @@ namespace Application.Core
   {
     public MappingProfiles()
     {
-      CreateMap<Gene, Gene>();
-      CreateMap<GeneCSV, Gene>();
-      CreateMap<GeneCSV, GenePublicData>();
-      CreateMap<Gene, GeneListDTO>();
-      CreateMap<Gene, GeneViewDTO>();
-      
+      CreateMap<Gene, Gene>().ForMember(x => x.Id, opt => opt.Ignore());
+      CreateMap<GeneCSV, Gene>().ForMember(x => x.Id, opt => opt.Ignore()); ;
+      CreateMap<GeneCSV, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
 
-      CreateMap<GenePublicData, GenePublicData>();
-      CreateMap<GenePublicData, GenePublicDataDTO>();
 
-      CreateMap<GeneNonPublicData, GeneNonPublicData>();
-      CreateMap<GeneNonPublicData, GeneNonPublicDataDTO>();
+
+      CreateMap<GenePublicData, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
+
+
+      CreateMap<GeneNonPublicData, GeneNonPublicData>().ForMember(x => x.Id, opt => opt.Ignore());
+
 
     }
 
