@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
 using Application.Genes.DTOs;
+using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
@@ -33,10 +34,12 @@ namespace Application.Targets
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
-      public Handler(DataContext context, IMapper mapper)
+      private readonly IUserAccessor _userAccessor;
+      public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
       {
         _context = context;
         _mapper = mapper;
+        _userAccessor = userAccessor;
       }
       public async Task<Result<Target>> Handle(Command request, CancellationToken cancellationToken)
       {
@@ -56,7 +59,8 @@ namespace Application.Targets
         var testTarget = await _context.Targets.FirstOrDefaultAsync(
            t => t.GeneId == request.GenePromotionRequest.GeneId
         );
-        if(testTarget!=null) {
+        if (testTarget != null)
+        {
           return Result<Target>.Failure("Target already exists");
         }
 
@@ -105,8 +109,16 @@ namespace Application.Targets
         _context.TargetScorecards.Add(TargetToCreate.TargetScorecard);
         _context.Targets.Add(TargetToCreate);
 
+        // if a request exists change its status from submitted to promoted
 
-        var success = await _context.SaveChangesAsync() > 0;
+        var genePromotionReq = await _context.GenePromotionRequests.FirstOrDefaultAsync
+            (g => g.GeneId == request.GenePromotionRequest.GeneId);
+        if (genePromotionReq != null)
+        {
+            genePromotionReq.GenePromotionRequestStatus = "Promoted";
+        }
+
+        var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
         if (!success) return Result<Target>.Failure("Failed to create Genome");
         return Result<Target>.Success(TargetToCreate);
