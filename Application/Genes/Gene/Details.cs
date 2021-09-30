@@ -19,12 +19,12 @@ namespace Application.Genes
 {
   public class Details
   {
-    public class Query : IRequest<Result<GeneViewDTO>>
+    public class Query : IRequest<Result<Gene>>
     {
       public Guid Id { get; set; }
     }
 
-    public class Handler : IRequestHandler<Query, Result<GeneViewDTO>>
+    public class Handler : IRequestHandler<Query, Result<Gene>>
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
@@ -34,15 +34,13 @@ namespace Application.Genes
         _context = context;
 
       }
-      public async Task<Result<GeneViewDTO>> Handle(Query request, CancellationToken cancellationToken)
+      public async Task<Result<Gene>> Handle(Query request, CancellationToken cancellationToken)
       {
         var gene = await _context.Genes
         .Include(p => p.GenePublicData)
         .Include(p => p.GeneNonPublicData)
         .FirstOrDefaultAsync(g => g.Id == request.Id);
-      
-        var genesToReturn = _mapper.Map<GeneViewDTO>(gene);
-        return Result<GeneViewDTO>.Success(genesToReturn);
+        return Result<Gene>.Success(gene);
       }
     }
   }

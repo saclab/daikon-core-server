@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using Application.Core;
 using Application.Genes.DTOs;
 using AutoMapper;
+using Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Genes.Promotion
 {
   public class Requests
   {
-    public class Query : IRequest<Result<List<GenePromotionQuestionaire>>>
+    public class Query : IRequest<Result<List<GenePromotionRequest>>>
     {
 
     }
@@ -27,7 +29,7 @@ namespace Application.Genes.Promotion
 
     // }
 
-    public class Handler : IRequestHandler<Query, Result<List<GenePromotionQuestionaire>>>
+    public class Handler : IRequestHandler<Query, Result<List<GenePromotionRequest>>>
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
@@ -39,51 +41,14 @@ namespace Application.Genes.Promotion
 
       }
 
-      public async Task<Result<List<GenePromotionQuestionaire>>> Handle(Query request, CancellationToken cancellationToken)
+      public async Task<Result<List<GenePromotionRequest>>> Handle(Query request, CancellationToken cancellationToken)
       {
-        var genePromotionQuestionaires = new List<GenePromotionQuestionaire>();
-
-        var geneSubmissionIDs = _context.GenePromotionRequests.Select(g => g.GeneID).Distinct();
-
-        Console.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++");
-        foreach (var geneID in geneSubmissionIDs)
-        {
-          Console.WriteLine(geneID);
-        }
-
-
-        GenePromotionQuestionaire genePromotionQuestionaire = null;
-        foreach (var geneID in geneSubmissionIDs)
-        {
-          genePromotionQuestionaire = new GenePromotionQuestionaire();
-          genePromotionQuestionaire.GeneID = geneID;
-          genePromotionQuestionaire.Answers = new Dictionary<string, Answer>();
-
-          string status = "";
-          string submittedBy = "";
-
-          var questionaire = _context.GenePromotionRequests.Where(q => (
-           q.GeneID == geneID &&
-           q.QuestionModule == "TargetPromotionQuestions" &&
-            q.Status == "Submitted" ));
-          foreach (var item in questionaire)
-          {
-            genePromotionQuestionaire.Answers.Add(item.QuestionIdentification, new Answer()
-            {
-              AnswerValue = item.Answer,
-              AnswerDescription = item.Description
-            });
-            status = item.Status;
-            submittedBy = item.AnswerdBy;
-          }
-          genePromotionQuestionaire.Status = status;
-          genePromotionQuestionaire.SubmittedBy = submittedBy;
-
-          genePromotionQuestionaires.Add(genePromotionQuestionaire);
-        }
-
-
-        return Result<List<GenePromotionQuestionaire>>.Success(genePromotionQuestionaires);
+        
+        var genePromotionRequests = await _context.GenePromotionRequests
+        .Include(s => s.GenePromotionRequestValues)
+        .ThenInclude(q => q.Question)
+        .Where(r => r.GenePromotionRequestStatus == "Submitted").ToListAsync(cancellationToken);
+        return Result<List<GenePromotionRequest>>.Success(genePromotionRequests);
 
       }
     }

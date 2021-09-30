@@ -8,9 +8,9 @@ namespace API.Controllers.Elevated
   public class TargetController : BaseApiController
   {
     [HttpPost]
-    public async Task<IActionResult> CreateActivity(GenePromotionQuestionaire genePromotionQuestionaireAnswers)
+    public async Task<IActionResult> CreateActivity(Domain.GenePromotionRequest genePromotionRequest)
     {
-      return HandleResult(await Mediator.Send(new Application.Targets.Create.Command { GenePromotionQuestionaireAnswers = genePromotionQuestionaireAnswers }));
+      return HandleResult(await Mediator.Send(new Application.Targets.Create.Command { GenePromotionRequest = genePromotionRequest }));
     }
 
     [HttpPost("{id}")]
