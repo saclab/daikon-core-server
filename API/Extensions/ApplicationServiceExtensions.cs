@@ -9,7 +9,7 @@ using Persistence;
 using Application.Genes;
 using Domain.Tasks;
 using Application.BackgroundTasks.GeneSync;
-
+using System;
 
 namespace API.Extensions
 {
@@ -17,12 +17,14 @@ namespace API.Extensions
   {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
     {
+
       /* Add DB */
       services.AddDbContext<DataContext>(opt =>
         {
-          opt.UseSqlite(config.GetConnectionString("SQLiteConnection"));
-          //opt.UseMySQL();
-          
+
+          //opt.UseSqlite(config.GetConnectionString("SQLiteConnection"));
+          opt.UseNpgsql(config.GetConnectionString("PostConnection"));
+
         });
 
       /* Add CORS */
@@ -53,7 +55,7 @@ namespace API.Extensions
 
       /* Add Background Service */
       services.AddHostedService<BackgroundWorker>();
-      services.AddSingleton<IBackgroundQueue<BTask>, BackgroundQueue<BTask>> ();
+      services.AddSingleton<IBackgroundQueue<BTask>, BackgroundQueue<BTask>>();
 
       /* Background Tasks */
       services.AddScoped<IGeneSync, GeneSync>();

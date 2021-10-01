@@ -1,11 +1,22 @@
 version: "3"
 services:
-  
+  postgres:
+    image: postgres:10.5
+    restart: always
+    environment:
+      - POSTGRES_USER=tpt_user
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "4000:5432"
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
   api-backend:
-    
     build:
       context: .
       dockerfile: Dockerfile.dev
+    depends_on:
+      - "postgres"
     ports:
       - 5000:5000
     volumes:
