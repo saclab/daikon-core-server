@@ -2,6 +2,7 @@ version: "3"
 services:
   postgres:
     image: postgres:10.5
+    container_name: project_db
     restart: always
     environment:
       - POSTGRES_USER=tpt_user
@@ -12,6 +13,7 @@ services:
       - ./db:/var/lib/postgresql/data
 
   api-backend:
+    container_name: project_api
     build:
       context: .
       dockerfile: Dockerfile.dev
