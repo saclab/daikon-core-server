@@ -19,5 +19,11 @@ namespace API.Controllers.Elevated
       target.Id = id;
       return HandleResult(await Mediator.Send(new Application.Targets.Edit.Command { ModifiedTarget = target }));
     }
+
+    [HttpPost("import")]
+    public async Task<IActionResult> ImportActivity(Application.Targets.DTOs.TargetImportDTO TargetImportDTO)
+    {
+      return HandleResult(await Mediator.Send(new Application.Targets.Import.Command { TargetImportDTO = TargetImportDTO }));
+    }
   }
 }
