@@ -29,8 +29,8 @@ namespace API.Controllers.Elevated
       var formattedUsers = new List<API.DTOs.UserDto> { };
       foreach (var user in users)
       {
-        var roles = await _userManager.GetRolesAsync(user);
-        formattedUsers.Add(CreateUserObject(user, roles));
+        //var roles = await _userManager.GetRolesAsync(user);
+        formattedUsers.Add(CreateUserObject(user, new List<String>()));
       }
       return Ok(formattedUsers);
     }

@@ -1,14 +1,9 @@
-using System;
+using Domain;
 
-namespace Domain
+namespace Application.Targets.DTOs
 {
-  public class Target
+  public class TargetImportDTO : GenePromotionRequest
   {
-    public Guid Id { get; set; }
-    public Gene BaseGene { get; set; }
-    public Guid GeneId { get; set; }
-    public string AccessionNumber { get; set; }
-    public string GeneName { get; set; }
     public string Bucket { get; set; }
     public double ImpactScore { get; set; }
     public double LikeScore { get; set; }
@@ -16,7 +11,6 @@ namespace Domain
     public double SBDFeasibility { get; set; }
     public double Progressibility { get; set; }
     public double Safety { get; set; }
-    public TargetScorecard TargetScorecard { get; set; }
 
   }
 }

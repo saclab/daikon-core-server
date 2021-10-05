@@ -93,6 +93,26 @@ namespace Application.Screens
           Hits = new List<Hit>()
         };
 
+        if(request.NewScreen.Hits != null) {
+          foreach (var hit in request.NewScreen.Hits) {
+            var addHit = new Hit() {
+              Id = Guid.NewGuid(),
+              ScreenId = ScreenGid,
+              Library = request.NewScreen.Library,
+              CompoundId = hit.CompoundId,
+              EnzymeActivity = hit.EnzymeActivity,
+              Method = request.NewScreen.Method,
+              MIC = hit.MIC,
+              Structure = hit.Structure,
+              ClusterGroup = hit.ClusterGroup,
+            };
+
+            ScreenToCreate.Hits.Add(addHit);
+            _context.Hits.Add(addHit);
+
+          }
+        }
+
         _context.Screens.Add(ScreenToCreate);
 
 

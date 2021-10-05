@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -28,7 +29,8 @@ namespace Application.Genes
       }
       public async Task<Result<List<Gene>>> Handle(Query request, CancellationToken cancellationToken)
       {
-        var genes = await _context.Genes.ToListAsync(cancellationToken);
+        var genes = await _context.Genes.OrderByDescending(g => g.AccessionNumber).ToListAsync(cancellationToken);
+
 
         return Result<List<Gene>>.Success(genes);
       }

@@ -51,7 +51,9 @@ namespace Application.Targets
 
         if (targetToEdit == null) return null;
 
-        targetToEdit.Score = request.ModifiedTarget.Score;
+        targetToEdit.Bucket = request.ModifiedTarget.Bucket;
+        targetToEdit.LikeScore = request.ModifiedTarget.LikeScore;
+        targetToEdit.ImpactScore = request.ModifiedTarget.ImpactScore;
         targetToEdit.HTSFeasibility = request.ModifiedTarget.HTSFeasibility;
         targetToEdit.SBDFeasibility = request.ModifiedTarget.SBDFeasibility;
         targetToEdit.Progressibility = request.ModifiedTarget.Progressibility;
