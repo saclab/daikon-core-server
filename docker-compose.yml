@@ -8,7 +8,7 @@ services:
       - POSTGRES_USER=tpt_user
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - "4000:5432"
+      - "40000:5432"
     volumes:
       - ./db:/var/lib/postgresql/data
 
