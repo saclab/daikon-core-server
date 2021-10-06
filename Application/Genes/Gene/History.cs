@@ -36,9 +36,11 @@ namespace Application.Genes
       {
         //1 . Find Primary key of related tables
         var gene = await _context.Genes
-        .Include(p => p.GenePublicData)
-        .Include(p => p.GeneNonPublicData)
-        .FirstOrDefaultAsync(g => g.Id == request.Id);
+          .Include(g => g.GenePublicData)
+          .Include(g => g.GeneNonPublicData)
+          .Include(g => g.GeneEssentiality)
+          .Include(g=> g.GeneVulnerability)
+          .FirstOrDefaultAsync(g => g.Id == request.Id);
 
 
         var history = await _context.ChangeLogs.Where(
@@ -49,6 +51,8 @@ namespace Application.Genes
                 && h.PrimaryKeyValue == gene.GeneNonPublicData.Id.ToString()))
             || (gene != null && (h.EntityName == "Gene"
                 && h.PrimaryKeyValue == gene.Id.ToString()))
+            || (gene.GeneVulnerability != null && (h.EntityName == "GeneVulnerability"
+                && h.PrimaryKeyValue == gene.GeneVulnerability.Id.ToString()))
             ).OrderByDescending(h => h.DateChanged).ToListAsync();
 
         return Result<List<ChangeLog>>.Success(history);

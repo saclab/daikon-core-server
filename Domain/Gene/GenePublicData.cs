@@ -6,6 +6,7 @@ namespace Domain
     {
         public Guid Id { get; set; }
         public Guid GeneId { get; set; }
+        public string GeneAccessionNumber { get; set; }
 
         /* Section 1: General annotation */
         public string Type { get; set; }

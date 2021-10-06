@@ -48,8 +48,9 @@ namespace Application.Genes
       {
 
         var geneToEdit = await _context.Genes
-          .Include(p => p.GenePublicData)
-          .Include(p => p.GeneNonPublicData)
+          .Include(g => g.GenePublicData)
+          .Include(g => g.GeneNonPublicData)
+          .Include(g => g.GeneVulnerability)
           .FirstOrDefaultAsync(g => g.Id == request.Gene.Id);
 
 
@@ -58,8 +59,10 @@ namespace Application.Genes
         //var geneId = geneToEdit.Id;
         
         var genePublicDataId = geneToEdit?.GenePublicData?.Id;
-       
         var geneNonPublicDataId = geneToEdit?.GeneNonPublicData?.Id;
+        var geneVulnerabilityId = geneToEdit?.GeneVulnerability?.Id;
+
+
         
         _mapper.Map(request.Gene, geneToEdit);
 
@@ -101,6 +104,22 @@ namespace Application.Genes
         {
           // geneToEdit.GeneNonPublicData.Id = (Guid)geneNonPublicDataId;
           geneToEdit.GenePublicData.GeneId = geneToEdit.Id;
+        }
+
+        if (geneVulnerabilityId == null)
+        {
+          var newGeneVulnerability = new GeneVulnerability();
+          _mapper.Map(request.Gene.GeneVulnerability, newGeneVulnerability);
+         
+          newGeneVulnerability.GeneId = geneToEdit.Id;
+          geneToEdit.GeneVulnerability = newGeneVulnerability;
+
+          _context.GeneVulnerability.Add(newGeneVulnerability);
+        }
+        else
+        {
+          // geneToEdit.GeneNonPublicData.Id = (Guid)geneNonPublicDataId;
+          geneToEdit.GeneVulnerability.GeneId = geneToEdit.Id;
         }
 
 
