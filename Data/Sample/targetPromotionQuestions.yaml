@@ -3,6 +3,7 @@ Type: Question
 Data:
   - Identification : 2a1
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Humans-Contributes to durable cure?
     ToolTip: Humans-Contributes to durable cure?
     PossibleAnswers:
@@ -11,6 +12,7 @@ Data:
       - Unknown
   - Identification : 2a1b
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Humans-Active in EBA?
     ToolTip: Humans-Active in EBA?
     PossibleAnswers:
@@ -19,6 +21,7 @@ Data:
       - Unknown
   - Identification : 2a2
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: NHP
     ToolTip: NHP
     PossibleAnswers:
@@ -27,6 +30,7 @@ Data:
       - Unknown
   - Identification : 2a3a
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: C3HeB/FeJ-Acute infection
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -35,6 +39,7 @@ Data:
       - Unknown
   - Identification : 2a3b
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: C3He/FeJ-Chronic infection
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -43,6 +48,7 @@ Data:
       - Unknown
   - Identification : 2a4a
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: C57BL/6 or BALB/c-Acute infection
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -51,6 +57,7 @@ Data:
       - Unknown
   - Identification : 2a4b
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: C57BL/6 or BALB/c-Chronic infection
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -59,6 +66,7 @@ Data:
       - Unknown
   - Identification : 2a5
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Macrophage
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -67,6 +75,7 @@ Data:
       - Unknown
   - Identification : 2b1
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Standard media
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -75,6 +84,7 @@ Data:
       - Unknown
   - Identification : 2b2
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Gluconeogenic carbon source
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -83,6 +93,7 @@ Data:
       - Unknown
   - Identification : 2b4
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Other
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -91,6 +102,7 @@ Data:
       - Unknown
   - Identification : 2c1
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Multiple stress 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -99,6 +111,7 @@ Data:
       - Unknown
   - Identification : 2c2
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Low pH
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -107,6 +120,7 @@ Data:
       - Unknown
   - Identification : 2c3
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Caseum 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -115,6 +129,7 @@ Data:
       - Unknown
   - Identification : 2c4
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Caseum surrogate 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -123,6 +138,7 @@ Data:
       - Unknown
   - Identification : 2c5
     Module : TargetPromotionQuestions
+    SubModule : Impact of chemical inhibition
     QuestionBody: Other NR 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -131,6 +147,7 @@ Data:
       - Unknown
   - Identification : 3a1
     Module : TargetPromotionQuestions
+    SubModule : Chemical inhibition
     QuestionBody: Mutation in target causes resistance?  
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -139,6 +156,7 @@ Data:
       - Unknown
   - Identification : 3a2
     Module : TargetPromotionQuestions
+    SubModule : Chemical inhibition
     QuestionBody: Overexpression of target increases MIC?   
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -147,6 +165,7 @@ Data:
       - Unknown
   - Identification : 3a3
     Module : TargetPromotionQuestions
+    SubModule : Chemical inhibition
     QuestionBody: Underexpression of target decreases MIC?  
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -155,6 +174,7 @@ Data:
       - Unknown
   - Identification : 3a4
     Module : TargetPromotionQuestions
+    SubModule : Chemical inhibition
     QuestionBody: Impact on pathway  
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -163,6 +183,7 @@ Data:
       - Unknown
   - Identification : 3b1
     Module : TargetPromotionQuestions
+    SubModule : Chemical inhibition
     QuestionBody: Compound binds purified target  
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -171,6 +192,7 @@ Data:
       - Unknown                  
   - Identification : 3b2
     Module : TargetPromotionQuestions
+    SubModule : Chemical inhibition
     QuestionBody: Compound inhibits purified target  
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -179,6 +201,7 @@ Data:
       - Unknown
   - Identification : 4a1
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: NHP 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -187,6 +210,7 @@ Data:
       - Unknown
   - Identification : 4a2a
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: C3HeB/FeJ-Acute infection 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -195,6 +219,7 @@ Data:
       - Unknown
   - Identification : 4a2b
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: C3HeB/FeJ-Chronic infection 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -203,6 +228,7 @@ Data:
       - Unknown
   - Identification : 4a3a
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: C57BL/6 or BALB/c-Acute infection 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -211,6 +237,7 @@ Data:
       - Unknown
   - Identification : 4a3b
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: C57BL/6 or BALB/c-Chronic infection 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -219,6 +246,7 @@ Data:
       - Unknown
   - Identification : 4a4
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Macrophage 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -227,6 +255,7 @@ Data:
       - Unknown  
   - Identification : 4b1
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Standard media 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -235,6 +264,7 @@ Data:
       - Unknown  
   - Identification : 4b2
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Gluconeogenic carbon source 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -243,6 +273,7 @@ Data:
       - Unknown  
   - Identification : 4b3
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Other 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -251,6 +282,7 @@ Data:
       - Unknown
   - Identification : 4c1
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Multiple stress 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -259,6 +291,7 @@ Data:
       - Unknown  
   - Identification : 4c2
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Low pH 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -267,6 +300,7 @@ Data:
       - Unknown  
   - Identification : 4c3
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Caseum 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -275,6 +309,7 @@ Data:
       - Unknown  
   - Identification : 4c4
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Caseum surrogate 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -283,6 +318,7 @@ Data:
       - Unknown  
   - Identification : 4c5
     Module : TargetPromotionQuestions
+    SubModule : Impact of genetic inhibition
     QuestionBody: Other NR 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -291,24 +327,27 @@ Data:
       - Unknown
   - Identification : 5a1
     Module : TargetPromotionQuestions
+    SubModule : Liabilities
     QuestionBody: Target inhibition/activation can be neutralized by a supplement (eg a metabolite) or in specific media?
     ToolTip: Description goes here.
     PossibleAnswers:
       - Active
       - Inactive
       - Unknown 
-      - n/a 
+      - NA 
   - Identification : 5a2
     Module : TargetPromotionQuestions
+    SubModule : Liabilities
     QuestionBody: Concentration of supplement in human tissue is too low to neutralize inactivation? 
     ToolTip: Description goes here.
     PossibleAnswers:
       - Active
       - Inactive
       - Unknown 
-      - n/a 
+      - NA 
   - Identification : 5a3
     Module : TargetPromotionQuestions
+    SubModule : Liabilities
     QuestionBody: Does the Mtb genome contain functionally redundant genes? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -316,10 +355,221 @@ Data:
       - No  
   - Identification : 5b1
     Module : TargetPromotionQuestions
+    SubModule : Liabilities
     QuestionBody: Have inhibitors with low cellular toxicity been isolated or does the protein contain an active or allosteric site that is different from the human counterpart? 
     ToolTip: Description goes here.
     PossibleAnswers:
       - Active
       - Inactive
       - Unknown 
-      - n/a                                                                                  
+      - NA    
+  - Identification : 6a1
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Can protein be prepared in sufficient quantities?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown 
+  - Identification : 6a2
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Are assays for Mtb protein been established? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown 
+  - Identification : 6a3
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Are assays for orthologs from another species been established? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown  
+  - Identification : 6a4
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Is Highthroughput screening possible? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown   
+  - Identification : 6a5
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Is small scale screening possible? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 6a6
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Have large scale screens for the Mtb enzyme been performed? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown   
+  - Identification : 6a7
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Have compounds been identified that bind and inhibit purified target? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 6b1
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: How relevant is the available Mtb protein structure(s)? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - High
+      - Medium
+      - Low
+      - NA   
+  - Identification : 6b2
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: What quality is the Mtb protein structure(s)? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - High
+      - Medium
+      - Low
+      - NA
+  - Identification : 6b3
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: How relevant is the available ortholog protein structure(s)?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - High
+      - Medium
+      - Low
+      - NA   
+  - Identification : 6b4
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: What quality is the ortholog protein structure(s)? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - High
+      - Medium
+      - Low
+      - NA
+  - Identification : 6b5
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: How druggable is the Mtb protein pocket or binding epitope?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - High
+      - Medium
+      - Low
+      - NA   
+  - Identification : 6c1
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Are there Mtb strains that can confirm on target activity? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 6c2
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Have compounds been identified that have on-target whole cell activity?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 6c3
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Have inhibitors of orthologs in Mtb and/or other species identified?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown 
+  - Identification : 6c4
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Are there drugs that target orthologs in Mtb and/or other species?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown   
+  - Identification : 6c5
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: How progressible are compounds with on-target whole cell activity?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - High
+      - Medium
+      - Low 
+      - NA
+  - Identification : 6c6
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: How far have compounds that inhibit/activate this target progressed?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Drug
+      - Clinic
+      - PCD
+      - SP
+      - LO
+      - H2L
+      - FHA
+      - Screening hit 
+      - NA
+  - Identification : 6d1
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Does the human genome encode a structurally similar counterpart?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 6d2
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Is the consequence of inhibiting the human ortholog insignificant?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown 
+  - Identification : 6d3
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Have non-toxic inhibitors have been isolated?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 6d4
+    Module : TargetPromotionQuestions
+    SubModule : 
+    QuestionBody: Are non-Mtb strains which could be used to characterize compounds with broad spectrum activity available?
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown                                                                                                                 
