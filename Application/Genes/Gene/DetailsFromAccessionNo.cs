@@ -37,9 +37,11 @@ namespace Application.Genes
       public async Task<Result<Gene>> Handle(Query request, CancellationToken cancellationToken)
       {
         var gene = await _context.Genes
-        .Include(p => p.GenePublicData)
-        .Include(p => p.GeneNonPublicData)
-        .FirstOrDefaultAsync(g => g.AccessionNumber == request.AccessionNumber);
+          .Include(g => g.GenePublicData)
+          .Include(g => g.GeneNonPublicData)
+          .Include(g => g.GeneEssentiality)
+          .Include(g => g.GeneVulnerability)
+          .FirstOrDefaultAsync(g => g.AccessionNumber == request.AccessionNumber);
 
 
         return Result<Gene>.Success(gene);

@@ -54,6 +54,7 @@ namespace Application.Genes
         newGenePublicData.Id = newGenePublicDataGid;
         newGenePublicData.GeneId = gid;
         GeneToCreate.GenePublicData = newGenePublicData;
+        _context.GenePublicData.Add(newGenePublicData);
 
         var newGeneNonPublicData = new GeneNonPublicData();
         _mapper.Map(request.Gene.GeneNonPublicData, newGeneNonPublicData);
@@ -61,12 +62,18 @@ namespace Application.Genes
         newGeneNonPublicData.Id = newGeneNonPublicDataGid;
         newGeneNonPublicData.GeneId = gid;
         GeneToCreate.GeneNonPublicData = newGeneNonPublicData;
+        _context.GeneNonPublicData.Add(newGeneNonPublicData);
 
-        
+        var newGeneVulnerability = new GeneVulnerability();
+        _mapper.Map(request.Gene.GeneVulnerability, newGeneVulnerability);
+        newGeneVulnerability.Id = Guid.NewGuid();
+        newGeneVulnerability.GeneId = gid;
+        GeneToCreate.GeneVulnerability = newGeneVulnerability;
+        _context.GeneVulnerability.Add(newGeneVulnerability);
+
 
         _context.Genes.Add(GeneToCreate);
-        _context.GenePublicData.Add(newGenePublicData);
-        _context.GeneNonPublicData.Add(newGeneNonPublicData);
+        
 
         var success = await _context.SaveChangesAsync() > 0;
 

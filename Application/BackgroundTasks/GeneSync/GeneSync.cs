@@ -43,6 +43,16 @@ namespace Application.BackgroundTasks.GeneSync
       Encoding = Encoding.UTF8,
 
     };
+    CsvConfiguration DefaultCSVConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
+    {
+      HasHeaderRecord = true,
+      // TrimOptions = TrimOptions.Trim,
+      // Mode = CsvMode.RFC4180,
+      MissingFieldFound = null,
+      HeaderValidated = null,
+      Encoding = Encoding.UTF8,
+
+    };
 
     public GeneSync(DataContext context, IMapper mapper, ILogger<GeneSync> logger, IMediator mediator)
     {
@@ -61,6 +71,7 @@ namespace Application.BackgroundTasks.GeneSync
       var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser();
       var GeneSequences = await fetchIndividualGeneSequencesFromMycobrowser();
       var ProteinSequences = await fetchIndividualProteinSequencesFromMycobrowser();
+      var CSVVulnerabilities = fetchCSVVulnerability();
       _logger.LogInformation("Genes pulled " + GeneSequences.Count());
 
       /* Read each line */
@@ -142,9 +153,38 @@ namespace Application.BackgroundTasks.GeneSync
           await _mediator.Send(new Create.Command { Gene = newGene });
         }
 
+
         //TODO: Update existing genes
 
       }
+
+     _logger.LogInformation("Gene Vulnerability Data");
+
+      // Vulnerability Data
+      foreach (var CSVVulnerability in CSVVulnerabilities)
+      {
+        Gene findGene = await _context.Genes
+          .Include(g => g.GenePublicData)
+          .Include(g => g.GeneNonPublicData)
+          .Include(g => g.GeneEssentiality)
+          .Include(g => g.GeneVulnerability)
+          .FirstOrDefaultAsync(g => g.AccessionNumber == CSVVulnerability.GeneAccessionNumber);
+
+        if (findGene != null && findGene.GeneVulnerability == null)
+        {
+          var newGeneVulnerability = new GeneVulnerability();
+          _mapper.Map(CSVVulnerability, newGeneVulnerability);
+
+          newGeneVulnerability.GeneId = findGene.Id;
+          findGene.GeneVulnerability = newGeneVulnerability;
+
+          _context.GeneVulnerability.Add(newGeneVulnerability);
+          await _context.SaveChangesAsync();
+          _logger.LogInformation("Added Vulnerability for Gene" + CSVVulnerability.GeneAccessionNumber);
+        }
+
+      }
+
 
       // 4. Update the job to complete 
 
@@ -180,6 +220,17 @@ namespace Application.BackgroundTasks.GeneSync
 
       var csv = new CsvReader(streamReader, MycobrowserCSVConfig);
       var records = csv.GetRecords<GeneCSV>();
+
+      return records;
+    }
+
+    public IEnumerable<GeneVulnerabilityCSV> fetchCSVVulnerability()
+    {
+
+      StreamReader streamReader = new StreamReader("/app/TempFiles/GeneVulnerability.csv");
+
+      var csv = new CsvReader(streamReader, DefaultCSVConfig);
+      var records = csv.GetRecords<GeneVulnerabilityCSV>();
 
       return records;
     }

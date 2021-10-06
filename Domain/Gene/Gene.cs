@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain
 {
@@ -10,10 +11,16 @@ namespace Domain
     public string Function { get; set; }
     public string Product { get; set; }
     public string FunctionalCategory { get; set; }
-    //public GenePublicData GenePublicData { get; set; } = new GenePublicData();
     public GenePublicData GenePublicData { get; set; }
-    //public GeneNonPublicData GeneNonPublicData { get; set; } = new GeneNonPublicData();
+    
+    /* FOLLOWING ARE NON PUBLIC DATA */
     public GeneNonPublicData GeneNonPublicData { get; set; }
+    
+    /* Section 1: Essentiality  */
+    public List<GeneEssentiality> GeneEssentiality { get; set; }
+
+    /* Section 7: Vulnerability  */
+    public GeneVulnerability GeneVulnerability { get; set; }
 
   }
 }

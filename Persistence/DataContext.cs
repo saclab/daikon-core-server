@@ -141,6 +141,8 @@ namespace Persistence
     public DbSet<Gene> Genes { get; set; }
     public DbSet<GenePublicData> GenePublicData { get; set; }
     public DbSet<GeneNonPublicData> GeneNonPublicData { get; set; }
+    public DbSet<GeneVulnerability> GeneVulnerability { get; set; }
+    public DbSet<GeneEssentiality> GeneEssentiality { get; set; }
     public DbSet<GenePromotionRequest> GenePromotionRequests { get; set; }
     public DbSet<GenePromotionRequestValue> GenePromotionRequestValues { get; set; }
 

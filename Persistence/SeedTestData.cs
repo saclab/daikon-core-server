@@ -26,7 +26,7 @@ namespace Persistence
       if (!_context.Genes.Any())
         await seedTestGenes();
 
-        await _context.SaveChangesAsync();
+      await _context.SaveChangesAsync();
     }
 
     public async Task seedTestGenes()
@@ -76,16 +76,38 @@ namespace Persistence
                     Model = "",
                     Ligand = ""
                   },
+                  /* Section 7: Vulnerability  */
 
+                  GeneVulnerability = new GeneVulnerability
+                  {
+                    Rank = "Rank Data",
+                    UVi = "U_Vi Data",
+                    IVi = "I_Vi Data",
+                    ViRatio = "Vi_Ratio Data",
+                    VulnerabilityCondition = "Vulnerability Condition Data",
+                    Operon = "Operon Data",
+                    Confounded = "Confounded Data",
+                    Shell2015Operon = "Shell_2015Operon Data",
+                  },
+
+                  /* Section 1: Essentiality  */
+
+                  
+                  GeneEssentiality = new List<GeneEssentiality>
+                  {
+                    new GeneEssentiality{
+                      Classification = "Classification Data",
+                      EssentialityCondition = "Essentiality Condition Data",
+                      Strain = "Strain Data",
+                      Method = "Method Data",
+                      Reference = "Reference Data",
+                      Notes = "Notes Data",
+                    }
+                  },
+                  
                   GeneNonPublicData = new GeneNonPublicData
                   {
-                    /* Section 1: Essentiality  */
-                    Classification = "Classification Data",
-                    EssentialityCondition = "Essentiality Condition Data",
-                    Strain = "Strain Data",
-                    Method = "Method Data",
-                    Reference = "Reference Data",
-                    Notes = "Notes Data",
+                    
                 
                     /* Section 2: Protein Production List */
                     ProteinProduction = "Protein Production Data",
@@ -108,15 +130,8 @@ namespace Persistence
                     ShiftInMIC = "ShiftInMIC Data",
                     Lab = "Lab Data",
 
-                    /* Section 7: Vulnerability  */
-                    Rank = "Rank Data",
-                    U_Vi = "U_Vi Data",
-                    I_Vi = "I_Vi Data",
-                    Vi_Ratio = "Vi_Ratio Data",
-                    VulnerabilityCondition = "Vulnerability Condition Data",
-                    Operon = "Operon Data",
-                    Confounded = "Confounded Data",
-                    Shell_2015Operon = "Shell_2015Operon Data",
+                    
+                    
 
                     /* Section 8: Unpublished Structural Information  */
                     Organization = "Organization Data",
