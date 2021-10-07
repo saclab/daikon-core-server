@@ -365,7 +365,7 @@ Data:
       - NA    
   - Identification : 6a1
     Module : TargetPromotionQuestions
-    SubModule : High throughput screening feasibility
+    SubModule : Tractability
     QuestionBody: Can protein be prepared in sufficient quantities?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -374,7 +374,7 @@ Data:
       - Unknown 
   - Identification : 6a2
     Module : TargetPromotionQuestions
-    SubModule : High throughput screening feasibility
+    SubModule : Tractability
     QuestionBody: Are assays for Mtb protein been established? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -383,7 +383,7 @@ Data:
       - Unknown 
   - Identification : 6a3
     Module : TargetPromotionQuestions
-    SubModule : High throughput screening feasibility
+    SubModule : Tractability
     QuestionBody: Are assays for orthologs from another species been established? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -392,7 +392,7 @@ Data:
       - Unknown  
   - Identification : 6a4
     Module : TargetPromotionQuestions
-    SubModule : High throughput screening feasibility
+    SubModule : Tractability
     QuestionBody: Is Highthroughput screening possible? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -401,7 +401,7 @@ Data:
       - Unknown   
   - Identification : 6a5
     Module : TargetPromotionQuestions
-    SubModule : High throughput screening feasibility
+    SubModule : Tractability
     QuestionBody: Is small scale screening possible? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -410,7 +410,7 @@ Data:
       - Unknown
   - Identification : 6a6
     Module : TargetPromotionQuestions
-    SubModule : High throughput screening feasibility
+    SubModule : Tractability
     QuestionBody: Have large scale screens for the Mtb enzyme been performed? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -419,7 +419,7 @@ Data:
       - Unknown   
   - Identification : 6a7
     Module : TargetPromotionQuestions
-    SubModule : High throughput screening feasibility
+    SubModule : Tractability
     QuestionBody: Have compounds been identified that bind and inhibit purified target? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -428,7 +428,7 @@ Data:
       - Unknown
   - Identification : 6b1
     Module : TargetPromotionQuestions
-    SubModule : Structure based feasibility
+    SubModule : Tractability
     QuestionBody: How relevant is the available Mtb protein structure(s)? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -438,7 +438,7 @@ Data:
       - NA   
   - Identification : 6b2
     Module : TargetPromotionQuestions
-    SubModule : Structure based feasibility
+    SubModule : Tractability
     QuestionBody: What quality is the Mtb protein structure(s)? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -448,7 +448,7 @@ Data:
       - NA
   - Identification : 6b3
     Module : TargetPromotionQuestions
-    SubModule : Structure based feasibility
+    SubModule : Tractability
     QuestionBody: How relevant is the available ortholog protein structure(s)?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -458,7 +458,7 @@ Data:
       - NA   
   - Identification : 6b4
     Module : TargetPromotionQuestions
-    SubModule : Structure based feasibility
+    SubModule : Tractability
     QuestionBody: What quality is the ortholog protein structure(s)? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -468,7 +468,7 @@ Data:
       - NA
   - Identification : 6b5
     Module : TargetPromotionQuestions
-    SubModule : Structure based feasibility
+    SubModule : Tractability
     QuestionBody: How druggable is the Mtb protein pocket or binding epitope?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -478,7 +478,7 @@ Data:
       - NA   
   - Identification : 6c1
     Module : TargetPromotionQuestions
-    SubModule : Progressibility considerations
+    SubModule : Tractability
     QuestionBody: Are there Mtb strains that can confirm on target activity? 
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -487,7 +487,7 @@ Data:
       - Unknown
   - Identification : 6c2
     Module : TargetPromotionQuestions
-    SubModule : Progressibility considerations
+    SubModule : Tractability
     QuestionBody: Have compounds been identified that have on-target whole cell activity?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -496,7 +496,7 @@ Data:
       - Unknown
   - Identification : 6c3
     Module : TargetPromotionQuestions
-    SubModule : Progressibility considerations
+    SubModule : Tractability
     QuestionBody: Have inhibitors of orthologs in Mtb and/or other species identified?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -505,7 +505,7 @@ Data:
       - Unknown 
   - Identification : 6c4
     Module : TargetPromotionQuestions
-    SubModule : Progressibility considerations
+    SubModule : Tractability
     QuestionBody: Are there drugs that target orthologs in Mtb and/or other species?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -514,7 +514,7 @@ Data:
       - Unknown   
   - Identification : 6c5
     Module : TargetPromotionQuestions
-    SubModule : Progressibility considerations
+    SubModule : Tractability
     QuestionBody: How progressible are compounds with on-target whole cell activity?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -524,7 +524,7 @@ Data:
       - NA
   - Identification : 6c6
     Module : TargetPromotionQuestions
-    SubModule : Progressibility considerations
+    SubModule : Tractability
     QuestionBody: How far have compounds that inhibit/activate this target progressed?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -539,7 +539,7 @@ Data:
       - NA
   - Identification : 6d1
     Module : TargetPromotionQuestions
-    SubModule : Safety considerations
+    SubModule : Tractability
     QuestionBody: Does the human genome encode a structurally similar counterpart?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -548,7 +548,7 @@ Data:
       - Unknown
   - Identification : 6d2
     Module : TargetPromotionQuestions
-    SubModule : Safety considerations
+    SubModule : Tractability
     QuestionBody: Is the consequence of inhibiting the human ortholog insignificant?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -557,7 +557,7 @@ Data:
       - Unknown 
   - Identification : 6d3
     Module : TargetPromotionQuestions
-    SubModule : Safety considerations
+    SubModule : Tractability
     QuestionBody: Have non-toxic inhibitors have been isolated?
     ToolTip: Description goes here.
     PossibleAnswers:
@@ -566,7 +566,7 @@ Data:
       - Unknown
   - Identification : 6d4
     Module : TargetPromotionQuestions
-    SubModule : Safety considerations
+    SubModule : Tractability
     QuestionBody: Are non-Mtb strains which could be used to characterize compounds with broad spectrum activity available?
     ToolTip: Description goes here.
     PossibleAnswers:
