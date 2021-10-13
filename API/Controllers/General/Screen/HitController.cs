@@ -8,7 +8,7 @@ namespace API.Controllers.General
         [HttpPost]
         public async Task<IActionResult> CreateHit(Domain.Hit newHit)
         {
-            return HandleResult(await Mediator.Send(new Application.Screens.Hits.Create.Command { NewHit = newHit }));
+            return HandleResult(await Mediator.Send(new Application.Screens.ValidatedHits.Create.Command { NewHit = newHit }));
         }
     }
 }
