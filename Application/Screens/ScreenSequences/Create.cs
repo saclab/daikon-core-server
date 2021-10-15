@@ -72,7 +72,7 @@ namespace Application.Screens.ScreenSequences
           Method = request.NewScreenSequence.Method,
           Protocol = request.NewScreenSequence.Protocol,
           Library = request.NewScreenSequence.Library,
-          Scientist = request.NewScreenSequence.Scientist,
+          Scientist = _userAccessor.GetUsername(),
           StartDate = request.NewScreenSequence.StartDate,
           EndDate = request.NewScreenSequence.EndDate,
           UnverifiedHitCount = request.NewScreenSequence.UnverifiedHitCount
