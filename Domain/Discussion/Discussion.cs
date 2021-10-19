@@ -11,8 +11,8 @@ namespace Domain
     public string Topic { get; set; }
     public string PostedBy { get; set; }
     public DateTime Timestamp { get; set; }
-    public string Mentions { get; set; }
-    public string Tags { get; set; }
+    public string[] Mentions { get; set; }
+    public string[] Tags { get; set; }
     public List<Reply> Replies { get; set; }
 
   }

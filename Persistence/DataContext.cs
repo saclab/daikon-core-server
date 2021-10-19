@@ -33,16 +33,34 @@ namespace Persistence
       //     .WithOne(gpd => gpd.Gene)
       //     .HasForeignKey<GenePublicData>(gpd => gpd.RefGeneID);
 
+
+
+
       /* Questions Entity. handle PossibleAnswers Field to have multiple value */
 
 
-      var QuestionPossibleAnswersconverter = new ValueConverter<string[], string>(
+      var StringArrayToStringConverter = new ValueConverter<string[], string>(
                 v => string.Join(";", v),
                 v => v.Split(";", StringSplitOptions.RemoveEmptyEntries).Select(val => val).ToArray());
 
+      
       modelBuilder.Entity<Question>()
       .Property(e => e.PossibleAnswers)
-                .HasConversion(QuestionPossibleAnswersconverter);
+                .HasConversion(StringArrayToStringConverter );
+
+      modelBuilder.Entity<Discussion>()
+      .Property(e => e.Mentions)
+                .HasConversion(StringArrayToStringConverter);
+      modelBuilder.Entity<Discussion>()
+      .Property(e => e.Tags)
+                .HasConversion(StringArrayToStringConverter);
+      modelBuilder.Entity<Reply>()
+      .Property(e => e.Mentions)
+                .HasConversion(StringArrayToStringConverter);
+      modelBuilder.Entity<Reply>()
+      .Property(e => e.Tags)
+        .HasConversion(StringArrayToStringConverter);
+
     }
 
     public virtual async Task<int> SaveChangesAsync(string userId = null)

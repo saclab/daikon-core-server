@@ -9,7 +9,8 @@ namespace Domain
     public string Body { get; set; }
     public string PostedBy { get; set; }
     public DateTime Timestamp { get; set; }
-    public string Mentions { get; set; }
+    public string[] Mentions { get; set; }
+    public string[] Tags { get; set; }
     
   }
 }
