@@ -48,7 +48,7 @@ namespace Application.Discussions
         var newDiscussion = new Discussion
         {
           Id = Guid.NewGuid(),
-          Reference = request.Discussion.Reference,
+          Reference = request.Discussion.Reference.ToLower(),
           Section = request.Discussion.Section,
           Topic = request.Discussion.Topic,
           PostedBy = _userAccessor.GetUsername(),
