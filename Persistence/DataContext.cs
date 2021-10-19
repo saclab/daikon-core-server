@@ -132,6 +132,7 @@ namespace Persistence
     /* App Core */
     public DbSet<ChangeLog> ChangeLogs { get; set; }
     public DbSet<BTask> BTask { get; set; }
+    public DbSet<AppOrg> AppOrgs { get; set; }
 
 
     /* Business Core */
@@ -154,6 +155,7 @@ namespace Persistence
 
     /* Screen */
     public DbSet<Screen> Screens { get; set; }
+    public DbSet<ScreenSequence> ScreenSequences { get; set; }
     public DbSet<Hit> Hits { get; set; }
 
 

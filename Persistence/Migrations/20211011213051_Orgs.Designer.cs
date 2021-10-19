@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211011213051_Orgs")]
+    partial class Orgs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,9 +48,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -503,9 +502,6 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AccessionNumber")
-                        .HasColumnType("text");
-
                     b.Property<string>("ClusterGroup")
                         .HasColumnType("text");
 
@@ -578,10 +574,22 @@ namespace Persistence.Migrations
                     b.Property<string>("AccessionNumber")
                         .HasColumnType("text");
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("GeneName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Library")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Method")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Protocol")
                         .HasColumnType("text");
 
                     b.Property<string>("Scientist")
@@ -606,46 +614,6 @@ namespace Persistence.Migrations
                     b.ToTable("Screens");
                 });
 
-            modelBuilder.Entity("Domain.ScreenSequence", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("AccessionNumber")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Library")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Method")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Protocol")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Scientist")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("ScreenId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("UnverifiedHitCount")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ScreenId");
-
-                    b.ToTable("ScreenSequences");
-                });
-
             modelBuilder.Entity("Domain.Target", b =>
                 {
                     b.Property<Guid>("Id")
@@ -667,13 +635,7 @@ namespace Persistence.Migrations
                     b.Property<double>("HTSFeasibility")
                         .HasColumnType("double precision");
 
-                    b.Property<double>("ImpactComplete")
-                        .HasColumnType("double precision");
-
                     b.Property<double>("ImpactScore")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("LikeComplete")
                         .HasColumnType("double precision");
 
                     b.Property<double>("LikeScore")
@@ -686,24 +648,6 @@ namespace Persistence.Migrations
                         .HasColumnType("double precision");
 
                     b.Property<double>("Safety")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("ScreeningComplete")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("ScreeningScore")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("StructureComplete")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("StructureScore")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("VulnerabilityRank")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("VulnerabilityRatio")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
@@ -979,7 +923,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Hit", b =>
                 {
                     b.HasOne("Domain.Screen", null)
-                        .WithMany("ValidatedHits")
+                        .WithMany("Hits")
                         .HasForeignKey("ScreenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -994,15 +938,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("BaseTarget");
-                });
-
-            modelBuilder.Entity("Domain.ScreenSequence", b =>
-                {
-                    b.HasOne("Domain.Screen", null)
-                        .WithMany("ScreenSequences")
-                        .HasForeignKey("ScreenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Target", b =>
@@ -1111,9 +1046,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Screen", b =>
                 {
-                    b.Navigation("ScreenSequences");
-
-                    b.Navigation("ValidatedHits");
+                    b.Navigation("Hits");
                 });
 
             modelBuilder.Entity("Domain.Target", b =>

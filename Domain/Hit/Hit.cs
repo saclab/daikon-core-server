@@ -6,6 +6,7 @@ namespace Domain
   {
     public Guid Id { get; set; }
     public Guid ScreenId { get; set; }
+    public string AccessionNumber { get; set; }
     public string Library { get; set; }
     public string CompoundId { get; set; }
     public string EnzymeActivity { get; set; }

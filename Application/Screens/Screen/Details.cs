@@ -30,7 +30,8 @@ namespace Application.Screens
             public async Task<Result<Screen>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var screen = await _context.Screens
-                .Include(h => h.Hits)
+                .Include(h => h.ValidatedHits)
+                .Include(h => h.ScreenSequences)
                 .FirstOrDefaultAsync(s => s.Id == request.Id);
                 return Result<Screen>.Success(screen);
             }

@@ -9,7 +9,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Screens.Hits
+namespace Application.Screens.ValidatedHits
 {
     public class Create
     {
@@ -47,7 +47,7 @@ namespace Application.Screens.Hits
                 var baseScreen = await _context.Screens.FirstOrDefaultAsync
                     (s => s.Id == request.NewHit.ScreenId);
 
-                /*chek if gene id is correct*/
+                /*check if gene id is correct*/
                 if (baseScreen == null)
                 {
                     return Result<Hit>.Failure("Invalid Screen ID");
@@ -81,7 +81,7 @@ namespace Application.Screens.Hits
 
 
                 _context.Hits.Add(HitToCreate);
-                baseScreen.Hits.Add(HitToCreate);
+                baseScreen.ValidatedHits.Add(HitToCreate);
 
 
 
