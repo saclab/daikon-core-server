@@ -58,21 +58,25 @@ namespace Application.Screens
 
         /*Screen Name Sequence Number */
         string screenName = null;
-        
+
         var testScreen = await _context.Screens.Where((s) => s.TargetId
                                                           == request.NewScreen.TargetId)
                                                           .OrderByDescending(s => s.ScreenName).ToListAsync();
 
 
-        if (!testScreen.Any()) {
+        if (!testScreen.Any())
+        {
           screenName = baseTarget.GeneName + "-" + "1";
         }
-        else {
+        else
+        {
           var lastScreenName = testScreen.First().ScreenName;
-          var lastScreenNumber = lastScreenName!=null?Int32.Parse(lastScreenName.Split('-').Last()):0;
+          var lastScreenNumber = lastScreenName != null ? Int32.Parse(lastScreenName.Split('-').Last()) : 0;
           lastScreenNumber = lastScreenNumber + 1;
           screenName = baseTarget.GeneName + "-" + lastScreenNumber.ToString();
         }
+
+       
 
         var ScreenToCreate = new Screen
         {
@@ -83,39 +87,13 @@ namespace Application.Screens
           GeneName = baseTarget.GeneName,
           ScreenName = screenName,
           Status = "New",
-          Library = request.NewScreen.Library,
           Scientist = _userAccessor.GetUsername(),
           StartDate = request.NewScreen.StartDate,
-          EndDate = request.NewScreen.EndDate,
-          Method = request.NewScreen.Method,
-          Protocol = request.NewScreen.Protocol,
-          Comment = request.NewScreen.Comment,
-          Hits = new List<Hit>()
+          EndDate = request.NewScreen.EndDate
         };
 
-        if(request.NewScreen.Hits != null) {
-          foreach (var hit in request.NewScreen.Hits) {
-            var addHit = new Hit() {
-              Id = Guid.NewGuid(),
-              ScreenId = ScreenGid,
-              Library = request.NewScreen.Library,
-              CompoundId = hit.CompoundId,
-              EnzymeActivity = hit.EnzymeActivity,
-              Method = request.NewScreen.Method,
-              MIC = hit.MIC,
-              Structure = hit.Structure,
-              ClusterGroup = hit.ClusterGroup,
-            };
-
-            ScreenToCreate.Hits.Add(addHit);
-            _context.Hits.Add(addHit);
-
-          }
-        }
-
         _context.Screens.Add(ScreenToCreate);
-
-
+        
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
         if (!success) return Result<Screen>.Failure("Failed to create screen");
