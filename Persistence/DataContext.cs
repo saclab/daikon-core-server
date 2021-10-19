@@ -158,6 +158,9 @@ namespace Persistence
     public DbSet<ScreenSequence> ScreenSequences { get; set; }
     public DbSet<Hit> Hits { get; set; }
 
+    /* Discussion */
+    public DbSet<Discussion> Discussions { get; set; }
+    public DbSet<Reply> Replies { get; set; }
 
   }
 }
