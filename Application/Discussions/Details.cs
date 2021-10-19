@@ -34,7 +34,7 @@ namespace Application.Discussions
       {
         var discussion = await _context.Discussions
         .Include(r => r.Replies)
-        .Where(d => d.Reference == request.Reference)
+        .Where(d => d.Reference == request.Reference.ToLower())
         .ToListAsync();
 
         return Result<List<Discussion>>.Success(discussion);
