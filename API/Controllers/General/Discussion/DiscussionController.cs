@@ -33,6 +33,27 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Discussions.Delete.Command { Id = id }));
     }
 
+    [HttpPost("{discussionId}/reply")]
+    public async Task<IActionResult> NewReply(Guid discussionId, Reply reply)
+    {
+      reply.DiscussionId = discussionId;
+      return HandleResult(await Mediator.Send(new Application.Discussions.Replies.New.Command { Reply = reply }));
+    }
+
+    [HttpPost("{discussionId}/reply/{id}")]
+    public async Task<IActionResult> EditReply(Guid discussionId, Guid id, Reply reply)
+    {
+      reply.Id = id;
+      reply.DiscussionId = discussionId;
+      return HandleResult(await Mediator.Send(new Application.Discussions.Replies.Edit.Command { Reply = reply }));
+    }
+
+    [HttpDelete("{discussionId}/reply/{id}")]
+    public async Task<IActionResult> DeleteReply(Guid discussionId, Guid id)
+    {
+      return HandleResult(await Mediator.Send(new Application.Discussions.Replies.Delete.Command { Id = id }));
+    }
+
 
   }
 }

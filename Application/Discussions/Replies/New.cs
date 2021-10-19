@@ -12,65 +12,68 @@ using Persistence;
 
 namespace Application.Discussions.Replies
 {
-  public class Command : IRequest<Result<Reply>>
+  public class New
   {
-    public Reply Reply { get; set; }
-  }
-
-  public class CommandValidator : AbstractValidator<Command>
-  {
-    public CommandValidator()
+    public class Command : IRequest<Result<Reply>>
     {
-      RuleFor(cmd => cmd.Reply).SetValidator(new ReplyValidator());
+      public Reply Reply { get; set; }
     }
 
-  }
-
-
-  public class Handler : IRequestHandler<Command, Result<Reply>>
-  {
-    private readonly DataContext _context;
-    private readonly IMapper _mapper;
-    private readonly IUserAccessor _userAccessor;
-    public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
+    public class CommandValidator : AbstractValidator<Command>
     {
-      _context = context;
-      _mapper = mapper;
-      _userAccessor = userAccessor;
-    }
-
-
-    public async Task<Result<Reply>> Handle(Command request, CancellationToken cancellationToken)
-    {
-      var toDiscussion = await _context.Discussions
-        .Include(d => d.Replies)
-        .FirstOrDefaultAsync(d => d.Id == request.Reply.DiscussionId);
-
-      if (toDiscussion == null)
+      public CommandValidator()
       {
-        return Result<Reply>.Failure("The discussion id could not be found");
+        RuleFor(cmd => cmd.Reply).SetValidator(new ReplyValidator());
       }
 
-      var newReply = new Reply
+    }
+
+
+    public class Handler : IRequestHandler<Command, Result<Reply>>
+    {
+      private readonly DataContext _context;
+      private readonly IMapper _mapper;
+      private readonly IUserAccessor _userAccessor;
+      public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
       {
-        Id = new System.Guid(),
-        DiscussionId = toDiscussion.Id,
-        Body = request.Reply.Body,
-        PostedBy = _userAccessor.GetUsername(),
-        Timestamp = DateTime.Now,
-        Mentions = request.Reply.Mentions,
-        Tags = request.Reply.Tags,
-      };
+        _context = context;
+        _mapper = mapper;
+        _userAccessor = userAccessor;
+      }
 
-      _context.Replies.Add(newReply);
 
-      toDiscussion.Replies.Add(newReply);
+      public async Task<Result<Reply>> Handle(Command request, CancellationToken cancellationToken)
+      {
+        var toDiscussion = await _context.Discussions
+          .Include(d => d.Replies)
+          .FirstOrDefaultAsync(d => d.Id == request.Reply.DiscussionId);
 
-      var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
+        if (toDiscussion == null)
+        {
+          return Result<Reply>.Failure("The discussion id could not be found");
+        }
 
-      if (!success) return Result<Reply>.Failure("Failed to add a reply");
-      return Result<Reply>.Success(newReply);
+        var newReply = new Reply
+        {
+          Id = new System.Guid(),
+          DiscussionId = toDiscussion.Id,
+          Body = request.Reply.Body,
+          PostedBy = _userAccessor.GetUsername(),
+          Timestamp = DateTime.Now,
+          Mentions = request.Reply.Mentions,
+          Tags = request.Reply.Tags,
+        };
 
+        _context.Replies.Add(newReply);
+
+        toDiscussion.Replies.Add(newReply);
+
+        var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
+
+        if (!success) return Result<Reply>.Failure("Failed to add a reply");
+        return Result<Reply>.Success(newReply);
+
+      }
     }
   }
 }
