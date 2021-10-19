@@ -17,17 +17,17 @@ namespace Application.Discussions.Replies
   {
     public class Command : IRequest<Result<Reply>>
     {
-      public Discussion Reply { get; set; }
+      public Reply Reply { get; set; }
     }
 
-    // public class CommandValidator : AbstractValidator<Command>
-    // {
-    //   public CommandValidator()
-    //   {
-    //     RuleFor(cmd => cmd.Reply).SetValidator(new ReplyValidator());
-    //   }
+    public class CommandValidator : AbstractValidator<Command>
+    {
+      public CommandValidator()
+      {
+        RuleFor(cmd => cmd.Reply).SetValidator(new ReplyValidator());
+      }
 
-    // }
+    }
 
     public class Handler : IRequestHandler<Command, Result<Reply>>
     {
@@ -57,7 +57,7 @@ namespace Application.Discussions.Replies
           return Result<Reply>.Failure("Edits can only be made by the author");
         }
 
-        replyToEdit.Body = request.Reply.Topic;
+        replyToEdit.Body = request.Reply.Body;
         replyToEdit.Mentions = request.Reply.Mentions;
         replyToEdit.Tags = request.Reply.Tags;
 

@@ -120,7 +120,7 @@ namespace Persistence
 
             case EntityState.Deleted:
               //changeLog.OldValue = JsonSerializer.Serialize(property.CurrentValue);
-              changeLog.OldValue = property.OriginalValue.ToString();
+              changeLog.OldValue = property.OriginalValue != null ? property.OriginalValue.ToString() : null;
               changeLog.NewValue = null;
               changeLog.Type = ChangeType.Delete.ToString();
               ChangeLogs.Add(changeLog);
