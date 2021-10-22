@@ -51,6 +51,7 @@ namespace Application.Discussions
           Reference = request.Discussion.Reference.ToLower(),
           Section = request.Discussion.Section,
           Topic = request.Discussion.Topic,
+          Description = request.Discussion.Description,
           PostedBy = _userAccessor.GetUsername(),
           Timestamp = DateTime.Now,
           Mentions = request.Discussion.Mentions,
