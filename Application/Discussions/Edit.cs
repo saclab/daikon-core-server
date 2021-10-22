@@ -59,7 +59,7 @@ namespace Application.Discussions
           return Result<Discussion>.Failure("Edits can only be made by the author");
         }
 
-        discussionToEdit.Topic = request.Discussion.Topic;
+        discussionToEdit.Description = request.Discussion.Description;
         discussionToEdit.Mentions = request.Discussion.Mentions;
         discussionToEdit.Tags = request.Discussion.Tags;
 
