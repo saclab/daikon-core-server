@@ -33,16 +33,34 @@ namespace Persistence
       //     .WithOne(gpd => gpd.Gene)
       //     .HasForeignKey<GenePublicData>(gpd => gpd.RefGeneID);
 
+
+
+
       /* Questions Entity. handle PossibleAnswers Field to have multiple value */
 
 
-      var QuestionPossibleAnswersconverter = new ValueConverter<string[], string>(
+      var StringArrayToStringConverter = new ValueConverter<string[], string>(
                 v => string.Join(";", v),
                 v => v.Split(";", StringSplitOptions.RemoveEmptyEntries).Select(val => val).ToArray());
 
+      
       modelBuilder.Entity<Question>()
       .Property(e => e.PossibleAnswers)
-                .HasConversion(QuestionPossibleAnswersconverter);
+                .HasConversion(StringArrayToStringConverter );
+
+      modelBuilder.Entity<Discussion>()
+      .Property(e => e.Mentions)
+                .HasConversion(StringArrayToStringConverter);
+      modelBuilder.Entity<Discussion>()
+      .Property(e => e.Tags)
+                .HasConversion(StringArrayToStringConverter);
+      modelBuilder.Entity<Reply>()
+      .Property(e => e.Mentions)
+                .HasConversion(StringArrayToStringConverter);
+      modelBuilder.Entity<Reply>()
+      .Property(e => e.Tags)
+        .HasConversion(StringArrayToStringConverter);
+
     }
 
     public virtual async Task<int> SaveChangesAsync(string userId = null)
@@ -102,7 +120,7 @@ namespace Persistence
 
             case EntityState.Deleted:
               //changeLog.OldValue = JsonSerializer.Serialize(property.CurrentValue);
-              changeLog.OldValue = property.OriginalValue.ToString();
+              changeLog.OldValue = property.OriginalValue != null ? property.OriginalValue.ToString() : null;
               changeLog.NewValue = null;
               changeLog.Type = ChangeType.Delete.ToString();
               ChangeLogs.Add(changeLog);
@@ -158,6 +176,9 @@ namespace Persistence
     public DbSet<ScreenSequence> ScreenSequences { get; set; }
     public DbSet<Hit> Hits { get; set; }
 
+    /* Discussion */
+    public DbSet<Discussion> Discussions { get; set; }
+    public DbSet<Reply> Replies { get; set; }
 
   }
 }
