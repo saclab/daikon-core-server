@@ -77,6 +77,25 @@ namespace API.Controllers.Elevated
       return Ok();
     }
 
+    [HttpPost("orgs/{id}")]
+    public async Task<ActionResult> editOrg(Guid id, AppOrg editAppOrg)
+    {
+      var appOrg = await _context.AppOrgs.FirstOrDefaultAsync(a => a.Id == id);
+      if (appOrg == null)
+      {
+        return BadRequest("Could not find organization Id");
+      }
+
+      appOrg.Name = editAppOrg.Name;
+      appOrg.Alias = editAppOrg.Alias;
+      appOrg.Address = editAppOrg.Address;
+
+      var success = await _context.SaveChangesAsync() > 0;
+
+      if (!success) return UnprocessableEntity("Failed to edit org");
+      return Ok();
+    }
+
     [HttpPost("roles")]
     public async Task<ActionResult> addRole(AppRole newAppRole)
     {
@@ -105,7 +124,9 @@ namespace API.Controllers.Elevated
     public async Task<ActionResult> listUsers()
     {
 
-      var users = _userManager.Users;
+      var users = await _context.Users
+      .Include(u => u.Org)
+      .ToListAsync();
       var formattedUsers = new List<API.DTOs.UserDto> { };
       foreach (var user in users)
       {
@@ -124,16 +145,17 @@ namespace API.Controllers.Elevated
       .FirstOrDefaultAsync(u => u.Email == email);
       var roles = await _userManager.GetRolesAsync(user);
 
-      var formattedUser =  new RegisterDto {
+      var formattedUser = new RegisterDto
+      {
         Email = user.Email,
         DisplayName = user.DisplayName,
-        OrgId = user.Org != null?user.Org.Id:Guid.Empty,
+        OrgId = user.Org != null ? user.Org.Id : Guid.Empty,
         Bio = user.Bio,
         Roles = roles,
         Lock = user.Lock
       };
 
-      
+
       return formattedUser;
     }
 
@@ -184,27 +206,29 @@ namespace API.Controllers.Elevated
     public async Task<ActionResult> updateUser(string email, RegisterDto updatedUser)
     {
       var user = await _userManager.FindByEmailAsync(email);
-      if(user == null){
+      if (user == null)
+      {
         return BadRequest("Cannot Find User");
       }
-      
+
       if (updatedUser.OrgId == null)
       {
         return BadRequest("User must belong to an Organization");
       }
 
       var userOrg = await _context.AppOrgs.FirstOrDefaultAsync(o => o.Id == updatedUser.OrgId);
-      if(userOrg == null){
+      if (userOrg == null)
+      {
         return BadRequest("Invalid Org ID");
       }
       user.DisplayName = updatedUser.DisplayName;
       user.Bio = updatedUser.Bio;
       user.Lock = updatedUser.Lock;
       user.Org = userOrg;
-      
+
       var roles = await _userManager.GetRolesAsync(user);
 
-     
+
 
       // prevent admin from de promoting himself
       var userEmailFromToken = HttpContext.User.FindFirstValue(ClaimTypes.Email);
@@ -233,7 +257,9 @@ namespace API.Controllers.Elevated
         Id = user.Id,
         DisplayName = user.DisplayName,
         Email = user.Email,
-        Roles = roles
+        Roles = roles,
+        Org = user.Org,
+        Lock = user.Lock
       };
     }
 
