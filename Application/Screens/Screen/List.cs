@@ -30,7 +30,9 @@ namespace Application.Screens
       }
       public async Task<Result<List<Screen>>> Handle(Query request, CancellationToken cancellationToken)
       {
-        var screens =  await _context.Screens.ToListAsync();
+        var screens =  await _context.Screens
+        .Include(s => s.Org)
+        .ToListAsync();
 
 
         return Result<List<Screen>>.Success(screens);

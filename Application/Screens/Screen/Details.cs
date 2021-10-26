@@ -32,6 +32,7 @@ namespace Application.Screens
                 var screen = await _context.Screens
                 .Include(h => h.ValidatedHits)
                 .Include(h => h.ScreenSequences)
+                .Include(h => h.Org)
                 .FirstOrDefaultAsync(s => s.Id == request.Id);
                 return Result<Screen>.Success(screen);
             }

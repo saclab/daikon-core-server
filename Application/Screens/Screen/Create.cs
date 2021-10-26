@@ -55,6 +55,12 @@ namespace Application.Screens
           return Result<Screen>.Failure("Invalid Target ID");
         }
 
+        var org = await _context.AppOrgs.FirstOrDefaultAsync(a => a.Id == request.NewScreen.Org.Id);
+        if (org == null)
+        {
+          return Result<Screen>.Failure("Bad org id");
+        }
+
 
         /*Screen Name Sequence Number */
         string screenName = null;
@@ -76,7 +82,7 @@ namespace Application.Screens
           screenName = baseTarget.GeneName + "-" + lastScreenNumber.ToString();
         }
 
-       
+
 
         var ScreenToCreate = new Screen
         {
@@ -87,13 +93,15 @@ namespace Application.Screens
           GeneName = baseTarget.GeneName,
           ScreenName = screenName,
           Status = "New",
-          Scientist = _userAccessor.GetUsername(),
-          StartDate = request.NewScreen.StartDate,
-          EndDate = request.NewScreen.EndDate
+          Promoter = _userAccessor.GetUsername(),
+          PromotionDate = request.NewScreen.PromotionDate,
+          Org = org,
+          OrgId = org.Id,
+          Notes = request.NewScreen.Notes
         };
 
         _context.Screens.Add(ScreenToCreate);
-        
+
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
         if (!success) return Result<Screen>.Failure("Failed to create screen");
