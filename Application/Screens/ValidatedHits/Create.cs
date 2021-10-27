@@ -88,7 +88,7 @@ namespace Application.Screens.ValidatedHits
           Method = request.NewHit.Method,
           MIC = request.NewHit.MIC,
           IC50 = request.NewHit.IC50,
-          ClusterGroup = request.NewHit.ClusterGroup,
+          ClusterGroup = Int32.Parse(request.NewHit.ClusterGroup),
         };
 
         _context.Hits.Add(HitToCreate);
