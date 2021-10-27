@@ -184,6 +184,29 @@ namespace Persistence.Migrations
                     b.ToTable("ChangeLogs");
                 });
 
+            modelBuilder.Entity("Domain.Compound", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("MolArea")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MolWeight")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SaccId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Smile")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Compounds");
+                });
+
             modelBuilder.Entity("Domain.Discussion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -544,10 +567,10 @@ namespace Persistence.Migrations
                     b.Property<string>("ClusterGroup")
                         .HasColumnType("text");
 
-                    b.Property<string>("CompoundId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("CompoundId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("EnzymeActivity")
+                    b.Property<string>("IC50")
                         .HasColumnType("text");
 
                     b.Property<string>("Library")
@@ -562,10 +585,9 @@ namespace Persistence.Migrations
                     b.Property<Guid>("ScreenId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Structure")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CompoundId");
 
                     b.HasIndex("ScreenId");
 
@@ -1049,11 +1071,19 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Hit", b =>
                 {
+                    b.HasOne("Domain.Compound", "Compound")
+                        .WithMany()
+                        .HasForeignKey("CompoundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Screen", null)
                         .WithMany("ValidatedHits")
                         .HasForeignKey("ScreenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Compound");
                 });
 
             modelBuilder.Entity("Domain.Reply", b =>

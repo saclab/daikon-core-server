@@ -180,5 +180,8 @@ namespace Persistence
     public DbSet<Discussion> Discussions { get; set; }
     public DbSet<Reply> Replies { get; set; }
 
+    /* Compound */
+    public DbSet<Compound> Compounds { get; set; }
+
   }
 }
