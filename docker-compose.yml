@@ -20,7 +20,7 @@ services:
     depends_on:
       - "postgres"
     ports:
-      - 5000:5000
+      - 5005:5005
     volumes:
       - /app/API/bin
       - /app/Infrastructure/bin
@@ -38,5 +38,5 @@ services:
       - AZURE_AUTHORITY=${AZURE_AUTHORITY}
       - LOCAL_TOKENKEY=${LOCAL_TOKENKEY}
       - DOTNET_USE_POLLING_FILE_WATCHER=1
-      - ASPNETCORE_URLS=http://*:5000
+      - ASPNETCORE_URLS=http://*:5005
       - ASPNETCORE_ENVIRONMENT=Development

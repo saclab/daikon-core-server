@@ -11,7 +11,7 @@ namespace Domain
     public string Method { get; set; }
     public string MIC { get; set; }
     public string IC50 { get; set; }
-    public string ClusterGroup { get; set; }
+    public int ClusterGroup { get; set; }
     public Guid CompoundId { get; set; }
     public Compound Compound { get; set; }
 
