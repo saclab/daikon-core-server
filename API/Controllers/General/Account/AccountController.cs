@@ -49,9 +49,10 @@ namespace API.Controllers
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
-      
+
       var userEmailFromToken = HttpContext.User.FindFirstValue(ClaimTypes.Email);
-      if(userEmailFromToken == null) {
+      if (userEmailFromToken == null)
+      {
         return Unauthorized();
       }
 
@@ -61,11 +62,11 @@ namespace API.Controllers
 
       if (user == null) return null;
 
-      
-
       return CreateUserObject(user, roles);
 
     }
+
+
 
     private UserDto CreateUserObject(AppUser user, IList<string> roles)
     {
@@ -74,7 +75,11 @@ namespace API.Controllers
         Id = user.Id,
         DisplayName = user.DisplayName,
         Email = user.Email,
-        Roles = roles
+        Roles = roles,
+        Bio = user.Bio,
+        Org = user.Org,
+        Lock = user.Lock,
+        Archived = user.Archived
       };
     }
 
