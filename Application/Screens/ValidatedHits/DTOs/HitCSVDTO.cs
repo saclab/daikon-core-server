@@ -1,19 +1,22 @@
 using System;
 
-namespace Domain
+namespace Application.Screens.ValidatedHits.DTOs
 {
-  public class Hit
+  public class HitCSVDTO
   {
     public Guid Id { get; set; }
     public Guid ScreenId { get; set; }
+    public string SaccId { get; set; }
     public string AccessionNumber { get; set; }
     public string Library { get; set; }
     public string Method { get; set; }
     public string MIC { get; set; }
     public string IC50 { get; set; }
-    public int ClusterGroup { get; set; }
-    public Guid CompoundId { get; set; }
-    public Compound Compound { get; set; }
+    public string ClusterGroup { get; set; }
+    public string Smile { get; set; }
+    public string MolWeight { get; set; }
+    public string MolArea { get; set; }
 
+    
   }
 }

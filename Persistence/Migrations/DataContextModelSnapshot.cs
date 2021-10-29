@@ -184,6 +184,29 @@ namespace Persistence.Migrations
                     b.ToTable("ChangeLogs");
                 });
 
+            modelBuilder.Entity("Domain.Compound", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("MolArea")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MolWeight")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SaccId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Smile")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Compounds");
+                });
+
             modelBuilder.Entity("Domain.Discussion", b =>
                 {
                     b.Property<Guid>("Id")
@@ -541,13 +564,13 @@ namespace Persistence.Migrations
                     b.Property<string>("AccessionNumber")
                         .HasColumnType("text");
 
-                    b.Property<string>("ClusterGroup")
-                        .HasColumnType("text");
+                    b.Property<int>("ClusterGroup")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("CompoundId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("CompoundId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("EnzymeActivity")
+                    b.Property<string>("IC50")
                         .HasColumnType("text");
 
                     b.Property<string>("Library")
@@ -562,10 +585,9 @@ namespace Persistence.Migrations
                     b.Property<Guid>("ScreenId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Structure")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CompoundId");
 
                     b.HasIndex("ScreenId");
 
@@ -644,20 +666,23 @@ namespace Persistence.Migrations
                     b.Property<string>("AccessionNumber")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<string>("GeneName")
                         .HasColumnType("text");
 
-                    b.Property<string>("Scientist")
+                    b.Property<string>("Notes")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("OrgId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Promoter")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("PromotionDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("ScreenName")
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Status")
                         .HasColumnType("text");
@@ -666,6 +691,8 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrgId");
 
                     b.HasIndex("TargetId");
 
@@ -1044,11 +1071,19 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Hit", b =>
                 {
+                    b.HasOne("Domain.Compound", "Compound")
+                        .WithMany()
+                        .HasForeignKey("CompoundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Screen", null)
                         .WithMany("ValidatedHits")
                         .HasForeignKey("ScreenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Compound");
                 });
 
             modelBuilder.Entity("Domain.Reply", b =>
@@ -1062,6 +1097,12 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Screen", b =>
                 {
+                    b.HasOne("Domain.AppOrg", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Target", "BaseTarget")
                         .WithMany()
                         .HasForeignKey("TargetId")
@@ -1069,6 +1110,8 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("BaseTarget");
+
+                    b.Navigation("Org");
                 });
 
             modelBuilder.Entity("Domain.ScreenSequence", b =>

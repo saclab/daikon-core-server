@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0
 
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 5005
 
 COPY ./tpt-backend.sln ./
 COPY ./Application/Application.csproj ./Application/

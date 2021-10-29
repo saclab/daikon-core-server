@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210930233950_PGInitial")]
-    partial class PGInitial
+    [Migration("20211027164516_hit_cluster_group_to_int")]
+    partial class hit_cluster_group_to_int
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,26 @@ namespace Persistence.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("Domain.AppOrg", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Alias")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppOrgs");
+                });
+
             modelBuilder.Entity("Domain.AppRole", b =>
                 {
                     b.Property<string>("Id")
@@ -28,6 +48,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -55,6 +78,9 @@ namespace Persistence.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime>("Archived")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("Bio")
                         .HasColumnType("text");
 
@@ -72,6 +98,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("Lock")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
 
@@ -85,6 +114,9 @@ namespace Persistence.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<Guid?>("OrgId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");
@@ -113,6 +145,8 @@ namespace Persistence.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("OrgId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -152,6 +186,64 @@ namespace Persistence.Migrations
                     b.ToTable("ChangeLogs");
                 });
 
+            modelBuilder.Entity("Domain.Compound", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("MolArea")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MolWeight")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SaccId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Smile")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Compounds");
+                });
+
+            modelBuilder.Entity("Domain.Discussion", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Mentions")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PostedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Section")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Topic")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Discussions");
+                });
+
             modelBuilder.Entity("Domain.Gene", b =>
                 {
                     b.Property<Guid>("Id")
@@ -178,6 +270,43 @@ namespace Persistence.Migrations
                     b.ToTable("Genes");
                 });
 
+            modelBuilder.Entity("Domain.GeneEssentiality", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Classification")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EssentialityCondition")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GeneAccessionNumber")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GeneId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Method")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Strain")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneId");
+
+                    b.ToTable("GeneEssentiality");
+                });
+
             modelBuilder.Entity("Domain.GeneNonPublicData", b =>
                 {
                     b.Property<Guid>("Id")
@@ -187,23 +316,14 @@ namespace Persistence.Migrations
                     b.Property<string>("CRISPRiStrain")
                         .HasColumnType("text");
 
-                    b.Property<string>("Classification")
-                        .HasColumnType("text");
-
                     b.Property<string>("CompoundSmiles")
                         .HasColumnType("text");
 
-                    b.Property<string>("Confounded")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EssentialityCondition")
+                    b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
 
                     b.Property<Guid>("GeneId")
                         .HasColumnType("uuid");
-
-                    b.Property<string>("I_Vi")
-                        .HasColumnType("text");
 
                     b.Property<string>("Isolate")
                         .HasColumnType("text");
@@ -217,16 +337,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Ligand")
                         .HasColumnType("text");
 
-                    b.Property<string>("Method")
-                        .HasColumnType("text");
-
                     b.Property<string>("Mutation")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Operon")
                         .HasColumnType("text");
 
                     b.Property<string>("Organization")
@@ -244,37 +355,16 @@ namespace Persistence.Migrations
                     b.Property<string>("ProteinProduction")
                         .HasColumnType("text");
 
-                    b.Property<string>("Rank")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Reference")
-                        .HasColumnType("text");
-
                     b.Property<string>("Resolution")
                         .HasColumnType("text");
 
-                    b.Property<string>("Shell_2015Operon")
-                        .HasColumnType("text");
-
                     b.Property<string>("ShiftInMIC")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Strain")
-                        .HasColumnType("text");
-
-                    b.Property<string>("U_Vi")
                         .HasColumnType("text");
 
                     b.Property<string>("UnpublishedCondition")
                         .HasColumnType("text");
 
                     b.Property<string>("UnpublishedMethod")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Vi_Ratio")
-                        .HasColumnType("text");
-
-                    b.Property<string>("VulnerabilityCondition")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -352,6 +442,9 @@ namespace Persistence.Migrations
                     b.Property<string>("End")
                         .HasColumnType("text");
 
+                    b.Property<string>("GeneAccessionNumber")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("GeneId")
                         .HasColumnType("uuid");
 
@@ -420,19 +513,66 @@ namespace Persistence.Migrations
                     b.ToTable("GenePublicData");
                 });
 
+            modelBuilder.Entity("Domain.GeneVulnerability", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Confounded")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GeneAccessionNumber")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GeneId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("IVi")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Operon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Rank")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Shell2015Operon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UVi")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ViRatio")
+                        .HasColumnType("text");
+
+                    b.Property<string>("VulnerabilityCondition")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneId")
+                        .IsUnique();
+
+                    b.ToTable("GeneVulnerability");
+                });
+
             modelBuilder.Entity("Domain.Hit", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ClusterGroup")
+                    b.Property<string>("AccessionNumber")
                         .HasColumnType("text");
 
-                    b.Property<string>("CompoundId")
-                        .HasColumnType("text");
+                    b.Property<int>("ClusterGroup")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("EnzymeActivity")
+                    b.Property<Guid>("CompoundId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("IC50")
                         .HasColumnType("text");
 
                     b.Property<string>("Library")
@@ -447,10 +587,9 @@ namespace Persistence.Migrations
                     b.Property<Guid>("ScreenId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Structure")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CompoundId");
 
                     b.HasIndex("ScreenId");
 
@@ -489,6 +628,37 @@ namespace Persistence.Migrations
                     b.ToTable("Questions");
                 });
 
+            modelBuilder.Entity("Domain.Reply", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Body")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("DiscussionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Mentions")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PostedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiscussionId");
+
+                    b.ToTable("Replies");
+                });
+
             modelBuilder.Entity("Domain.Screen", b =>
                 {
                     b.Property<Guid>("Id")
@@ -498,14 +668,50 @@ namespace Persistence.Migrations
                     b.Property<string>("AccessionNumber")
                         .HasColumnType("text");
 
-                    b.Property<string>("Comment")
+                    b.Property<string>("GeneName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("OrgId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Promoter")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("PromotionDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ScreenName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TargetId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrgId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("Screens");
+                });
+
+            modelBuilder.Entity("Domain.ScreenSequence", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AccessionNumber")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("GeneName")
-                        .HasColumnType("text");
 
                     b.Property<string>("Library")
                         .HasColumnType("text");
@@ -519,23 +725,20 @@ namespace Persistence.Migrations
                     b.Property<string>("Scientist")
                         .HasColumnType("text");
 
-                    b.Property<string>("ScreenName")
-                        .HasColumnType("text");
+                    b.Property<Guid>("ScreenId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("TargetId")
-                        .HasColumnType("uuid");
+                    b.Property<int>("UnverifiedHitCount")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TargetId");
+                    b.HasIndex("ScreenId");
 
-                    b.ToTable("Screens");
+                    b.ToTable("ScreenSequences");
                 });
 
             modelBuilder.Entity("Domain.Target", b =>
@@ -547,6 +750,9 @@ namespace Persistence.Migrations
                     b.Property<string>("AccessionNumber")
                         .HasColumnType("text");
 
+                    b.Property<string>("Bucket")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("GeneId")
                         .HasColumnType("uuid");
 
@@ -554,6 +760,18 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<double>("HTSFeasibility")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("ImpactComplete")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("ImpactScore")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("LikeComplete")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("LikeScore")
                         .HasColumnType("double precision");
 
                     b.Property<double>("Progressibility")
@@ -565,7 +783,22 @@ namespace Persistence.Migrations
                     b.Property<double>("Safety")
                         .HasColumnType("double precision");
 
-                    b.Property<double>("Score")
+                    b.Property<double>("ScreeningComplete")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("ScreeningScore")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("StructureComplete")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("StructureScore")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("VulnerabilityRank")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("VulnerabilityRatio")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
@@ -765,6 +998,24 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.AppUser", b =>
+                {
+                    b.HasOne("Domain.AppOrg", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId");
+
+                    b.Navigation("Org");
+                });
+
+            modelBuilder.Entity("Domain.GeneEssentiality", b =>
+                {
+                    b.HasOne("Domain.Gene", null)
+                        .WithMany("GeneEssentiality")
+                        .HasForeignKey("GeneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.GeneNonPublicData", b =>
                 {
                     b.HasOne("Domain.Gene", null)
@@ -811,17 +1062,49 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.GeneVulnerability", b =>
+                {
+                    b.HasOne("Domain.Gene", null)
+                        .WithOne("GeneVulnerability")
+                        .HasForeignKey("Domain.GeneVulnerability", "GeneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Hit", b =>
                 {
+                    b.HasOne("Domain.Compound", "Compound")
+                        .WithMany()
+                        .HasForeignKey("CompoundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Screen", null)
-                        .WithMany("Hits")
+                        .WithMany("ValidatedHits")
                         .HasForeignKey("ScreenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compound");
+                });
+
+            modelBuilder.Entity("Domain.Reply", b =>
+                {
+                    b.HasOne("Domain.Discussion", null)
+                        .WithMany("Replies")
+                        .HasForeignKey("DiscussionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Screen", b =>
                 {
+                    b.HasOne("Domain.AppOrg", "Org")
+                        .WithMany()
+                        .HasForeignKey("OrgId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Target", "BaseTarget")
                         .WithMany()
                         .HasForeignKey("TargetId")
@@ -829,6 +1112,17 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("BaseTarget");
+
+                    b.Navigation("Org");
+                });
+
+            modelBuilder.Entity("Domain.ScreenSequence", b =>
+                {
+                    b.HasOne("Domain.Screen", null)
+                        .WithMany("ScreenSequences")
+                        .HasForeignKey("ScreenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Target", b =>
@@ -919,11 +1213,20 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Discussion", b =>
+                {
+                    b.Navigation("Replies");
+                });
+
             modelBuilder.Entity("Domain.Gene", b =>
                 {
+                    b.Navigation("GeneEssentiality");
+
                     b.Navigation("GeneNonPublicData");
 
                     b.Navigation("GenePublicData");
+
+                    b.Navigation("GeneVulnerability");
                 });
 
             modelBuilder.Entity("Domain.GenePromotionRequest", b =>
@@ -933,7 +1236,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Screen", b =>
                 {
-                    b.Navigation("Hits");
+                    b.Navigation("ScreenSequences");
+
+                    b.Navigation("ValidatedHits");
                 });
 
             modelBuilder.Entity("Domain.Target", b =>
