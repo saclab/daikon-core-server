@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211027164516_hit_cluster_group_to_int")]
-    partial class hit_cluster_group_to_int
+    [Migration("20211104150547_SP4")]
+    partial class SP4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

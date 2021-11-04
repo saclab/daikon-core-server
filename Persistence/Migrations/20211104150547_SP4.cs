@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class design2 : Migration
+    public partial class SP4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -577,7 +577,7 @@ namespace Persistence.Migrations
                     Method = table.Column<string>(type: "text", nullable: true),
                     MIC = table.Column<string>(type: "text", nullable: true),
                     IC50 = table.Column<string>(type: "text", nullable: true),
-                    ClusterGroup = table.Column<string>(type: "text", nullable: true),
+                    ClusterGroup = table.Column<int>(type: "integer", nullable: false),
                     CompoundId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
