@@ -84,5 +84,35 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.Essentiality.Edit.Command { GeneEssentiality = geneEssentiality }));
     }
 
+    [HttpPost("{geneId}/proteinproduction")]
+    public async Task<IActionResult> AddProteinProduction(Guid geneId, GeneProteinProduction geneProteinProduction)
+    {
+      geneProteinProduction.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.ProteinProduction.Add.Command { GeneProteinProduction = geneProteinProduction }));
+    }
+
+    [HttpPost("{geneId}/proteinproduction/{id}")]
+    public async Task<IActionResult> EditProteinProduction(Guid geneId, Guid id, GeneProteinProduction geneProteinProduction)
+    {
+      geneProteinProduction.Id = id;
+      geneProteinProduction.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.ProteinProduction.Edit.Command { GeneProteinProduction = geneProteinProduction }));
+    }
+
+    [HttpPost("{geneId}/geneproteinactivityassay")]
+    public async Task<IActionResult> AddGeneProteinActivityAssay(Guid geneId, GeneProteinActivityAssay geneProteinActivityAssay)
+    {
+      geneProteinActivityAssay.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.ProteinActivityAssay.Add.Command { GeneProteinActivityAssay = geneProteinActivityAssay }));
+    }
+
+    [HttpPost("{geneId}/geneproteinactivityassay/{id}")]
+    public async Task<IActionResult> EditGeneProteinActivityAssay(Guid geneId, Guid id, GeneProteinActivityAssay geneProteinActivityAssay)
+    {
+      geneProteinActivityAssay.Id = id;
+      geneProteinActivityAssay.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.ProteinActivityAssay.Edit.Command { GeneProteinActivityAssay = geneProteinActivityAssay }));
+    }
+
   }
 }
