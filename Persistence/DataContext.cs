@@ -133,8 +133,8 @@ namespace Persistence
                 // changeLog.OldValue = JsonSerializer.Serialize(property.OriginalValue);
                 // changeLog.NewValue = JsonSerializer.Serialize(property.CurrentValue);
 
-                changeLog.OldValue = property.OriginalValue.ToString();
-                changeLog.NewValue = property.CurrentValue.ToString();
+                changeLog.OldValue = property.OriginalValue != null ? property.OriginalValue.ToString() : null;
+                changeLog.NewValue = property.CurrentValue != null ? property.CurrentValue.ToString() : null;
                 changeLog.Type = ChangeType.Update.ToString();
                 ChangeLogs.Add(changeLog);
               }
