@@ -162,6 +162,12 @@ namespace Persistence
     public DbSet<GeneNonPublicData> GeneNonPublicData { get; set; }
     public DbSet<GeneVulnerability> GeneVulnerability { get; set; }
     public DbSet<GeneEssentiality> GeneEssentiality { get; set; }
+    public DbSet<GeneProteinProduction> GeneProteinProductions { get; set; }
+    public DbSet<GeneProteinActivityAssay> GeneProteinActivityAssays { get; set; }
+    public DbSet<GeneCRISPRiStrain> GeneCRISPRiStrains { get; set; }
+    public DbSet<GeneResistanceMutation> GeneResistanceMutations { get; set; }
+    public DbSet<GeneUnpublishedStructures> GeneUnpublishedStructures { get; set; }
+   
     public DbSet<GenePromotionRequest> GenePromotionRequests { get; set; }
     public DbSet<GenePromotionRequestValue> GenePromotionRequestValues { get; set; }
 
