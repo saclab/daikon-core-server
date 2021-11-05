@@ -99,14 +99,14 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.ProteinProduction.Edit.Command { GeneProteinProduction = geneProteinProduction }));
     }
 
-    [HttpPost("{geneId}/geneproteinactivityassay")]
+    [HttpPost("{geneId}/proteinactivityassay")]
     public async Task<IActionResult> AddGeneProteinActivityAssay(Guid geneId, GeneProteinActivityAssay geneProteinActivityAssay)
     {
       geneProteinActivityAssay.GeneId = geneId;
       return HandleResult(await Mediator.Send(new Application.Genes.ProteinActivityAssay.Add.Command { GeneProteinActivityAssay = geneProteinActivityAssay }));
     }
 
-    [HttpPost("{geneId}/geneproteinactivityassay/{id}")]
+    [HttpPost("{geneId}/proteinactivityassay/{id}")]
     public async Task<IActionResult> EditGeneProteinActivityAssay(Guid geneId, Guid id, GeneProteinActivityAssay geneProteinActivityAssay)
     {
       geneProteinActivityAssay.Id = id;
@@ -114,19 +114,34 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.ProteinActivityAssay.Edit.Command { GeneProteinActivityAssay = geneProteinActivityAssay }));
     }
 
-    [HttpPost("{geneId}/genecrispristrain")]
+    [HttpPost("{geneId}/crispristrain")]
     public async Task<IActionResult> AddGeneCRISPRiStrain(Guid geneId, GeneCRISPRiStrain geneCRISPRiStrain)
     {
       geneCRISPRiStrain.GeneId = geneId;
       return HandleResult(await Mediator.Send(new Application.Genes.CRISPRiStrain.Add.Command { GeneCRISPRiStrain = geneCRISPRiStrain }));
     }
 
-    [HttpPost("{geneId}/genecrispristrain/{id}")]
+    [HttpPost("{geneId}/crispristrain/{id}")]
     public async Task<IActionResult> EditGeneCRISPRiStrain(Guid geneId, Guid id, GeneCRISPRiStrain geneCRISPRiStrain)
     {
       geneCRISPRiStrain.Id = id;
       geneCRISPRiStrain.GeneId = geneId;
       return HandleResult(await Mediator.Send(new Application.Genes.CRISPRiStrain.Edit.Command { GeneCRISPRiStrain = geneCRISPRiStrain }));
+    }
+
+    [HttpPost("{geneId}/resistancemutation")]
+    public async Task<IActionResult> AddGeneResistanceMutation(Guid geneId, GeneResistanceMutation geneResistanceMutation)
+    {
+      geneResistanceMutation.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.ResistanceMutation.Add.Command { GeneResistanceMutation = geneResistanceMutation }));
+    }
+
+    [HttpPost("{geneId}/resistancemutation/{id}")]
+    public async Task<IActionResult> EditGeneResistanceMutation(Guid geneId, Guid id, GeneResistanceMutation geneResistanceMutation)
+    {
+      geneResistanceMutation.Id = id;
+      geneResistanceMutation.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.ResistanceMutation.Edit.Command { GeneResistanceMutation = geneResistanceMutation }));
     }
 
   }
