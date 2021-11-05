@@ -144,5 +144,20 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.ResistanceMutation.Edit.Command { GeneResistanceMutation = geneResistanceMutation }));
     }
 
+    [HttpPost("{geneId}/unpublishedstructures")]
+    public async Task<IActionResult> AddGeneUnpublishedStructures(Guid geneId, GeneUnpublishedStructures geneUnpublishedStructures)
+    {
+      geneUnpublishedStructures.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.UnpublishedStructures.Add.Command { GeneUnpublishedStructures = geneUnpublishedStructures }));
+    }
+
+    [HttpPost("{geneId}/unpublishedstructures/{id}")]
+    public async Task<IActionResult> EditGeneUnpublishedStructures(Guid geneId, Guid id, GeneUnpublishedStructures geneUnpublishedStructures)
+    {
+      geneUnpublishedStructures.Id = id;
+      geneUnpublishedStructures.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.UnpublishedStructures.Edit.Command { GeneUnpublishedStructures = geneUnpublishedStructures }));
+    }
+
   }
 }
