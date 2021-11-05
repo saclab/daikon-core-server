@@ -21,8 +21,8 @@ namespace Persistence
           The intention of the below data is strictly for testing purposes only 
           and will be removed on production builds.
       */
-       SeedTestData seedTestData = new SeedTestData(context);
-       await seedTestData.SeedTest();
+      //  SeedTestData seedTestData = new SeedTestData(context);
+      //  await seedTestData.SeedTest();
     }
   }
 }
