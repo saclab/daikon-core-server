@@ -17,11 +17,12 @@ namespace Application.Core
 
       CreateMap<GeneVulnerability, GeneVulnerability>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GeneEssentiality, GeneEssentiality>().ForMember(x => x.Id, opt => opt.Ignore());
-
-
-
+      CreateMap<GeneProteinProduction, GeneProteinProduction>().ForMember(x => x.Id, opt => opt.Ignore());
+      CreateMap<GeneProteinActivityAssay, GeneProteinActivityAssay>().ForMember(x => x.Id, opt => opt.Ignore());
+      CreateMap<GeneCRISPRiStrain, GeneCRISPRiStrain>().ForMember(x => x.Id, opt => opt.Ignore());
+      CreateMap<GeneResistanceMutation, GeneResistanceMutation>().ForMember(x => x.Id, opt => opt.Ignore());
+      CreateMap<GeneUnpublishedStructures, GeneUnpublishedStructures>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GenePublicData, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
-
 
       CreateMap<GeneNonPublicData, GeneNonPublicData>().ForMember(x => x.Id, opt => opt.Ignore());
 
