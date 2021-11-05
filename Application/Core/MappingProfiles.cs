@@ -16,6 +16,7 @@ namespace Application.Core
 
 
       CreateMap<GeneVulnerability, GeneVulnerability>().ForMember(x => x.Id, opt => opt.Ignore());
+      CreateMap<GeneEssentiality, GeneEssentiality>().ForMember(x => x.Id, opt => opt.Ignore());
 
 
 

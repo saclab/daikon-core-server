@@ -69,5 +69,20 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Details.Query { GeneId = id }));
     }
 
+    [HttpPost("{geneId}/essentiality")]
+    public async Task<IActionResult> AddEssentiality(Guid geneId, GeneEssentiality geneEssentiality)
+    {
+      geneEssentiality.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.Essentiality.Add.Command { GeneEssentiality = geneEssentiality }));
+    }
+
+    [HttpPost("{geneId}/essentiality/{id}")]
+    public async Task<IActionResult> EditEssentiality(Guid geneId, Guid id, GeneEssentiality geneEssentiality)
+    {
+      geneEssentiality.Id = id;
+      geneEssentiality.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.Essentiality.Edit.Command { GeneEssentiality = geneEssentiality }));
+    }
+
   }
 }
