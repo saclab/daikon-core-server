@@ -114,5 +114,20 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.ProteinActivityAssay.Edit.Command { GeneProteinActivityAssay = geneProteinActivityAssay }));
     }
 
+    [HttpPost("{geneId}/genecrispristrain")]
+    public async Task<IActionResult> AddGeneCRISPRiStrain(Guid geneId, GeneCRISPRiStrain geneCRISPRiStrain)
+    {
+      geneCRISPRiStrain.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.CRISPRiStrain.Add.Command { GeneCRISPRiStrain = geneCRISPRiStrain }));
+    }
+
+    [HttpPost("{geneId}/genecrispristrain/{id}")]
+    public async Task<IActionResult> EditGeneCRISPRiStrain(Guid geneId, Guid id, GeneCRISPRiStrain geneCRISPRiStrain)
+    {
+      geneCRISPRiStrain.Id = id;
+      geneCRISPRiStrain.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.CRISPRiStrain.Edit.Command { GeneCRISPRiStrain = geneCRISPRiStrain }));
+    }
+
   }
 }
