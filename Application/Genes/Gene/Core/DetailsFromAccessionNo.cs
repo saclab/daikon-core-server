@@ -41,6 +41,11 @@ namespace Application.Genes
           .Include(g => g.GeneNonPublicData)
           .Include(g => g.GeneEssentiality)
           .Include(g => g.GeneVulnerability)
+          .Include(g => g.GeneProteinProduction)
+          .Include(g => g.GeneProteinActivityAssay)
+          .Include(g => g.GeneCRISPRiStrain)
+          .Include(g => g.GeneResistanceMutation)
+          .Include(g => g.GeneUnpublishedStructures)
           .FirstOrDefaultAsync(g => g.AccessionNumber == request.AccessionNumber);
 
 
