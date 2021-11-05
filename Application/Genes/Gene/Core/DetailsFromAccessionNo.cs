@@ -17,11 +17,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Genes
 {
-  public class Details
+  public class DetailsFromAccessionNo
   {
     public class Query : IRequest<Result<Gene>>
     {
-      public Guid Id { get; set; }
+      public string AccessionNumber { get; set; }
     }
 
     public class Handler : IRequestHandler<Query, Result<Gene>>
@@ -37,11 +37,18 @@ namespace Application.Genes
       public async Task<Result<Gene>> Handle(Query request, CancellationToken cancellationToken)
       {
         var gene = await _context.Genes
-        .Include(g => g.GenePublicData)
-        .Include(g => g.GeneNonPublicData)
-        .Include(g => g.GeneEssentiality)
-        .Include(g=> g.GeneVulnerability)
-        .FirstOrDefaultAsync(g => g.Id == request.Id);
+          .Include(g => g.GenePublicData)
+          .Include(g => g.GeneNonPublicData)
+          .Include(g => g.GeneEssentiality)
+          .Include(g => g.GeneVulnerability)
+          .Include(g => g.GeneProteinProduction)
+          .Include(g => g.GeneProteinActivityAssay)
+          .Include(g => g.GeneCRISPRiStrain)
+          .Include(g => g.GeneResistanceMutation)
+          .Include(g => g.GeneUnpublishedStructures)
+          .FirstOrDefaultAsync(g => g.AccessionNumber == request.AccessionNumber);
+
+
         return Result<Gene>.Success(gene);
       }
     }
