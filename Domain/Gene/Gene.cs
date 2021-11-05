@@ -15,12 +15,15 @@ namespace Domain
     
     /* FOLLOWING ARE NON PUBLIC DATA */
     public GeneNonPublicData GeneNonPublicData { get; set; }
-    
-    /* Section 1: Essentiality  */
     public List<GeneEssentiality> GeneEssentiality { get; set; }
-
-    /* Section 7: Vulnerability  */
+    public List<GeneProteinProduction> GeneProteinProduction { get; set; }
+    public List<GeneProteinActivityAssay> GeneProteinActivityAssay { get; set; }
+    public List<GeneCRISPRiStrain> GeneCRISPRiStrain { get; set; }
+    public List<GeneResistanceMutation> GeneResistanceMutation { get; set; }
     public GeneVulnerability GeneVulnerability { get; set; }
+    public List<GeneUnpublishedStructures> GeneUnpublishedStructures { get; set; }
+
+
 
   }
 }
