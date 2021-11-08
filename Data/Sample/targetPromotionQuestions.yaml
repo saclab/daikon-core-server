@@ -572,4 +572,76 @@ Data:
     PossibleAnswers:
       - Yes
       - No
-      - Unknown                                                                                                                 
+      - Unknown    
+  - Identification : 7a1
+    Module : TargetPromotionQuestions
+    SubModule : Interaction with other drugs/compounds
+    QuestionBody: Does inhibition of the target synergize with current TB drugs or other inhibitors under development? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 7a2
+    Module : TargetPromotionQuestions
+    SubModule : Interaction with other drugs/compounds
+    QuestionBody: Does inhibition of the target antagonize with current TB drugs or other inhibitors under development? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown    
+  - Identification : 7b1
+    Module : TargetPromotionQuestions
+    SubModule : Interaction with other drugs/compounds
+    QuestionBody: Does inhibition of the target synergize with current TB drugs or other inhibitors under development? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 7b2
+    Module : TargetPromotionQuestions
+    SubModule : Interaction with other drugs/compounds
+    QuestionBody: Does inhibition of the target antagonize with current TB drugs or other inhibitors under development? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown 
+  - Identification : 7c1
+    Module : TargetPromotionQuestions
+    SubModule : Interaction with other drugs/compounds
+    QuestionBody: Does inhibition of the target synergize with current TB drugs or other inhibitors under development? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 7c2
+    Module : TargetPromotionQuestions
+    SubModule : Interaction with other drugs/compounds
+    QuestionBody: Does inhibition of the target antagonize with current TB drugs or other inhibitors under development? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown  
+  - Identification : 7d1
+    Module : TargetPromotionQuestions
+    SubModule : Interaction with other drugs/compounds
+    QuestionBody: Does inhibition of the target synergize with current TB drugs or other inhibitors under development? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : 7d2
+    Module : TargetPromotionQuestions
+    SubModule : Interaction with other drugs/compounds
+    QuestionBody: Does inhibition of the target antagonize with current TB drugs or other inhibitors under development? 
+    ToolTip: Description goes here.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown                                                                                                                    
