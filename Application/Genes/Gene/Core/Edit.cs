@@ -49,7 +49,7 @@ namespace Application.Genes
 
         var geneToEdit = await _context.Genes
           .Include(g => g.GenePublicData)
-          .Include(g => g.GeneNonPublicData)
+          // .Include(g => g.GeneNonPublicData)
           .Include(g => g.GeneVulnerability)
           .FirstOrDefaultAsync(g => g.Id == request.Gene.Id);
 
@@ -59,7 +59,7 @@ namespace Application.Genes
         //var geneId = geneToEdit.Id;
         
         var genePublicDataId = geneToEdit?.GenePublicData?.Id;
-        var geneNonPublicDataId = geneToEdit?.GeneNonPublicData?.Id;
+        // var geneNonPublicDataId = geneToEdit?.GeneNonPublicData?.Id;
         var geneVulnerabilityId = geneToEdit?.GeneVulnerability?.Id;
 
 
@@ -74,21 +74,21 @@ namespace Application.Genes
        
 
 
-        if (geneNonPublicDataId == null)
-        {
-          var newGeneNonPublicData = new GeneNonPublicData();
-          _mapper.Map(request.Gene.GeneNonPublicData, newGeneNonPublicData);
+        // if (geneNonPublicDataId == null)
+        // {
+        //   var newGeneNonPublicData = new GeneNonPublicData();
+        //   _mapper.Map(request.Gene.GeneNonPublicData, newGeneNonPublicData);
          
-          newGeneNonPublicData.GeneId = geneToEdit.Id;
-          geneToEdit.GeneNonPublicData = newGeneNonPublicData;
+        //   newGeneNonPublicData.GeneId = geneToEdit.Id;
+        //   geneToEdit.GeneNonPublicData = newGeneNonPublicData;
 
-          _context.GeneNonPublicData.Add(newGeneNonPublicData);
-        }
-        else
-        {
-          // geneToEdit.GeneNonPublicData.Id = (Guid)geneNonPublicDataId;
-          geneToEdit.GeneNonPublicData.GeneId = geneToEdit.Id;
-        }
+        //   _context.GeneNonPublicData.Add(newGeneNonPublicData);
+        // }
+        // else
+        // {
+        //   // geneToEdit.GeneNonPublicData.Id = (Guid)geneNonPublicDataId;
+        //   geneToEdit.GeneNonPublicData.GeneId = geneToEdit.Id;
+        // }
 
         if (genePublicDataId == null)
         {

@@ -104,42 +104,8 @@ namespace Persistence
                       Notes = "Notes Data",
                     }
                   },
-                  
-                  GeneNonPublicData = new GeneNonPublicData
-                  {
-                    
-                
-                    /* Section 2: Protein Production List */
-                    ProteinProduction = "Protein Production Data",
-              
-                    /* Section 3: Protein Activity Assay List */
-                    ProteinActivityAssay = "Protein Activity Assay Data",
 
-                    /* Section 4: Hypomorph, Knockdown strain, Phenotype List */
-                    KnockdownStrain = "Knockdown Strain Data",
-                    Phenotype = "Phenotype Data",
 
-                    /* Section 5: CRISPRi Strain List */
-                    CRISPRiStrain = "CRISPRiStrain Data",
-
-                    /* Section 6: Resistance Mutations  */
-                    Mutation = "Mutation Data",
-                    Isolate = "Isolate Data",
-                    ParentStrain = "ParentStrain Data",
-                    CompoundSmiles = "CompoundSmiles Data",
-                    ShiftInMIC = "ShiftInMIC Data",
-                    Lab = "Lab Data",
-
-                    
-                    
-
-                    /* Section 8: Unpublished Structural Information  */
-                    Organization = "Organization Data",
-                    UnpublishedMethod = "UnpublishedMethod Data",
-                    Resolution = "Resolution Data",
-                    UnpublishedCondition = "UnpublishedCondition Data",
-                    Ligand = "Ligand Data"
-                    }
 
                 },
                 new Gene
