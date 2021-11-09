@@ -37,9 +37,10 @@ namespace Application.Genes
         //1 . Find Primary key of related tables
         var gene = await _context.Genes
           .Include(g => g.GenePublicData)
-          .Include(g => g.GeneNonPublicData)
+          // .Include(g => g.GeneNonPublicData)
           .Include(g => g.GeneEssentiality)
           .Include(g=> g.GeneVulnerability)
+          .AsSplitQuery()
           .FirstOrDefaultAsync(g => g.Id == request.Id);
 
 
@@ -47,8 +48,8 @@ namespace Application.Genes
             h =>
             (gene.GenePublicData != null && (h.EntityName == "GenePublicData"
                 && h.PrimaryKeyValue == gene.GenePublicData.Id.ToString()))
-            || (gene.GeneNonPublicData != null && (h.EntityName == "GeneNonPublicData"
-                && h.PrimaryKeyValue == gene.GeneNonPublicData.Id.ToString()))
+            // || (gene.GeneNonPublicData != null && (h.EntityName == "GeneNonPublicData"
+            //     && h.PrimaryKeyValue == gene.GeneNonPublicData.Id.ToString()))
             || (gene != null && (h.EntityName == "Gene"
                 && h.PrimaryKeyValue == gene.Id.ToString()))
             || (gene.GeneVulnerability != null && (h.EntityName == "GeneVulnerability"

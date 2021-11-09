@@ -56,13 +56,13 @@ namespace Application.Genes
         GeneToCreate.GenePublicData = newGenePublicData;
         _context.GenePublicData.Add(newGenePublicData);
 
-        var newGeneNonPublicData = new GeneNonPublicData();
-        _mapper.Map(request.Gene.GeneNonPublicData, newGeneNonPublicData);
-        Guid newGeneNonPublicDataGid = Guid.NewGuid();
-        newGeneNonPublicData.Id = newGeneNonPublicDataGid;
-        newGeneNonPublicData.GeneId = gid;
-        GeneToCreate.GeneNonPublicData = newGeneNonPublicData;
-        _context.GeneNonPublicData.Add(newGeneNonPublicData);
+        // var newGeneNonPublicData = new GeneNonPublicData();
+        // _mapper.Map(request.Gene.GeneNonPublicData, newGeneNonPublicData);
+        // Guid newGeneNonPublicDataGid = Guid.NewGuid();
+        // newGeneNonPublicData.Id = newGeneNonPublicDataGid;
+        // newGeneNonPublicData.GeneId = gid;
+        // GeneToCreate.GeneNonPublicData = newGeneNonPublicData;
+        // _context.GeneNonPublicData.Add(newGeneNonPublicData);
 
         var newGeneVulnerability = new GeneVulnerability();
         _mapper.Map(request.Gene.GeneVulnerability, newGeneVulnerability);
