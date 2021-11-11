@@ -37,10 +37,10 @@ namespace API.Controllers.General
     }
 
     [HttpPost("{id}")]
-    public async Task<IActionResult> EditActivity(Guid id, Gene gene)
+    public async Task<IActionResult> EditActivity(Guid id, GenePublicEditDTO genePublicEditDTO)
     {
-      gene.Id = id;
-      return HandleResult(await Mediator.Send(new Application.Genes.Edit.Command { Gene = gene }));
+      genePublicEditDTO.Id = id;
+      return HandleResult(await Mediator.Send(new Application.Genes.Edit.Command { GenePublicEditDTO = genePublicEditDTO }));
     }
 
     [HttpDelete("{id}")]
