@@ -14,7 +14,7 @@ namespace Domain
     public GenePublicData GenePublicData { get; set; }
     
     /* FOLLOWING ARE NON PUBLIC DATA */
-    public GeneNonPublicData GeneNonPublicData { get; set; }
+    // public GeneNonPublicData GeneNonPublicData { get; set; }
     public List<GeneEssentiality> GeneEssentiality { get; set; }
     public List<GeneProteinProduction> GeneProteinProduction { get; set; }
     public List<GeneProteinActivityAssay> GeneProteinActivityAssay { get; set; }

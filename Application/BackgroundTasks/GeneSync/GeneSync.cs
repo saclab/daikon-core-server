@@ -165,7 +165,7 @@ namespace Application.BackgroundTasks.GeneSync
       {
         Gene findGene = await _context.Genes
           .Include(g => g.GenePublicData)
-          .Include(g => g.GeneNonPublicData)
+          // .Include(g => g.GeneNonPublicData)
           .Include(g => g.GeneEssentiality)
           .Include(g => g.GeneVulnerability)
           .FirstOrDefaultAsync(g => g.AccessionNumber == CSVVulnerability.GeneAccessionNumber);
