@@ -10,7 +10,7 @@ namespace Application.Core
     public MappingProfiles()
     {
       CreateMap<Gene, Gene>().ForMember(x => x.Id, opt => opt.Ignore());
-      CreateMap<GeneCSV, Gene>().ForMember(x => x.Id, opt => opt.Ignore()); ;
+      CreateMap<GeneCSV, Gene>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GeneCSV, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GeneVulnerabilityCSV, GeneVulnerability>().ForMember(x => x.Id, opt => opt.Ignore());
 
@@ -24,7 +24,7 @@ namespace Application.Core
       CreateMap<GeneUnpublishedStructures, GeneUnpublishedStructures>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GenePublicData, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
 
-      CreateMap<GeneNonPublicData, GeneNonPublicData>().ForMember(x => x.Id, opt => opt.Ignore());
+     
 
 
     }

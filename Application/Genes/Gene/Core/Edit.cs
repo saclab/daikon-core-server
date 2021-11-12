@@ -20,7 +20,7 @@ namespace Application.Genes
   {
     public class Command : IRequest<Result<Gene>>
     {
-      public Gene Gene { get; set; }
+      public GenePublicEditDTO GenePublicEditDTO { get; set; }
     }
 
 
@@ -28,7 +28,7 @@ namespace Application.Genes
     {
       public CommandValidator()
       {
-        RuleFor(cmd => cmd.Gene).SetValidator(new GeneValidator());
+        RuleFor(cmd => cmd.GenePublicEditDTO).SetValidator(new GenePublicEditDTOValidator());
       }
 
     }
@@ -49,52 +49,26 @@ namespace Application.Genes
 
         var geneToEdit = await _context.Genes
           .Include(g => g.GenePublicData)
-          .Include(g => g.GeneNonPublicData)
-          .Include(g => g.GeneVulnerability)
-          .FirstOrDefaultAsync(g => g.Id == request.Gene.Id);
+          .FirstOrDefaultAsync(g => g.Id == request.GenePublicEditDTO.Id);
+
+        Console.WriteLine("Gene to Edit=");
+        Console.WriteLine(geneToEdit);
 
 
         if (geneToEdit == null) return null;
-        // maintain IDs
-        //var geneId = geneToEdit.Id;
-        
+
         var genePublicDataId = geneToEdit?.GenePublicData?.Id;
-        var geneNonPublicDataId = geneToEdit?.GeneNonPublicData?.Id;
-        var geneVulnerabilityId = geneToEdit?.GeneVulnerability?.Id;
 
+        Console.WriteLine("Gene to genePublicDataId=");
+        Console.WriteLine(genePublicDataId);
 
-        
-        _mapper.Map(request.Gene, geneToEdit);
-
-        // This would ensure primary ids are maintained and does not depend on the user's request.
-        //geneToEdit.Id = geneId;
-
-        //geneToEdit.GenePublicData.Id = genePublicDataId;
-        //geneToEdit.GenePublicData.GeneId = geneId;
-       
-
-
-        if (geneNonPublicDataId == null)
-        {
-          var newGeneNonPublicData = new GeneNonPublicData();
-          _mapper.Map(request.Gene.GeneNonPublicData, newGeneNonPublicData);
-         
-          newGeneNonPublicData.GeneId = geneToEdit.Id;
-          geneToEdit.GeneNonPublicData = newGeneNonPublicData;
-
-          _context.GeneNonPublicData.Add(newGeneNonPublicData);
-        }
-        else
-        {
-          // geneToEdit.GeneNonPublicData.Id = (Guid)geneNonPublicDataId;
-          geneToEdit.GeneNonPublicData.GeneId = geneToEdit.Id;
-        }
+        geneToEdit.Function = request.GenePublicEditDTO.Function;
 
         if (genePublicDataId == null)
         {
           var newGenePublicData = new GenePublicData();
-          _mapper.Map(request.Gene.GenePublicData, newGenePublicData);
-         
+          _mapper.Map(request.GenePublicEditDTO.GenePublicData, geneToEdit.GenePublicData);
+
           newGenePublicData.GeneId = geneToEdit.Id;
           geneToEdit.GenePublicData = newGenePublicData;
 
@@ -102,30 +76,20 @@ namespace Application.Genes
         }
         else
         {
-          // geneToEdit.GeneNonPublicData.Id = (Guid)geneNonPublicDataId;
+          //geneToEdit.GenePublicData.Id = (Guid)genePublicDataId;
+          _mapper.Map(request.GenePublicEditDTO.GenePublicData, geneToEdit.GenePublicData);
           geneToEdit.GenePublicData.GeneId = geneToEdit.Id;
         }
 
-        if (geneVulnerabilityId == null)
-        {
-          var newGeneVulnerability = new GeneVulnerability();
-          _mapper.Map(request.Gene.GeneVulnerability, newGeneVulnerability);
-         
-          newGeneVulnerability.GeneId = geneToEdit.Id;
-          geneToEdit.GeneVulnerability = newGeneVulnerability;
-
-          _context.GeneVulnerability.Add(newGeneVulnerability);
-        }
-        else
-        {
-          // geneToEdit.GeneNonPublicData.Id = (Guid)geneNonPublicDataId;
-          geneToEdit.GeneVulnerability.GeneId = geneToEdit.Id;
-        }
+        Console.WriteLine("Made it till here, writing");
 
 
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
-       
+        Console.WriteLine("Success??");
+        Console.WriteLine(success);
+
+
 
         if (!success) return Result<Gene>.Failure("Failed to edit genome");
         return Result<Gene>.Success(geneToEdit);
