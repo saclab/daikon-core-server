@@ -159,5 +159,20 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.UnpublishedStructures.Edit.Command { GeneUnpublishedStructures = geneUnpublishedStructures }));
     }
 
+    [HttpPost("{geneId}/vulnerability")]
+    public async Task<IActionResult> AddGeneVulnerability(Guid geneId, GeneVulnerability geneVulnerability)
+    {
+      geneVulnerability.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.Vulnerability.Add.Command { GeneVulnerability = geneVulnerability }));
+    }
+
+    [HttpPost("{geneId}/vulnerability/{id}")]
+    public async Task<IActionResult> EditGeneVulnerability(Guid geneId, Guid id, GeneVulnerability geneVulnerability)
+    {
+      geneVulnerability.Id = id;
+      geneVulnerability.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.Vulnerability.Edit.Command { GeneVulnerability = geneVulnerability }));
+    }
+
   }
 }
