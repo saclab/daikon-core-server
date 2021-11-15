@@ -43,10 +43,10 @@ namespace Persistence
                 v => string.Join(";", v),
                 v => v.Split(";", StringSplitOptions.RemoveEmptyEntries).Select(val => val).ToArray());
 
-      
+
       modelBuilder.Entity<Question>()
       .Property(e => e.PossibleAnswers)
-                .HasConversion(StringArrayToStringConverter );
+                .HasConversion(StringArrayToStringConverter);
 
       modelBuilder.Entity<Discussion>()
       .Property(e => e.Mentions)
@@ -169,6 +169,7 @@ namespace Persistence
     public DbSet<GeneUnpublishedStructures> GeneUnpublishedStructures { get; set; }
     public DbSet<GenePromotionRequest> GenePromotionRequests { get; set; }
     public DbSet<GenePromotionRequestValue> GenePromotionRequestValues { get; set; }
+    public DbSet<GeneHypomorph> GeneHypomorphs { get; set; }
 
 
     /* Target */
