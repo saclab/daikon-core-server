@@ -174,5 +174,21 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.Vulnerability.Edit.Command { GeneVulnerability = geneVulnerability }));
     }
 
+
+     [HttpPost("{geneId}/hypomorph")]
+    public async Task<IActionResult> AddHypomorph(Guid geneId, GeneHypomorph geneHypomorph)
+    {
+      geneHypomorph.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.Hypomorph.Add.Command { GeneHypomorph = geneHypomorph }));
+    }
+
+    [HttpPost("{geneId}/hypomorph/{id}")]
+    public async Task<IActionResult> EditHypomorph(Guid geneId, Guid id, GeneHypomorph geneHypomorph)
+    {
+      geneHypomorph.Id = id;
+      geneHypomorph.GeneId = geneId;
+      return HandleResult(await Mediator.Send(new Application.Genes.Hypomorph.Edit.Command { GeneHypomorph = geneHypomorph }));
+    }
+
   }
 }
