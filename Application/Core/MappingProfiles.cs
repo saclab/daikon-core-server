@@ -1,4 +1,5 @@
 using Application.BackgroundTasks.GeneSync.DTO;
+using Application.General.Horizion.DTO;
 using Application.Genes.DTOs;
 using AutoMapper;
 using Domain;
@@ -24,6 +25,12 @@ namespace Application.Core
       CreateMap<GeneResistanceMutation, GeneResistanceMutation>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GeneUnpublishedStructures, GeneUnpublishedStructures>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GenePublicData, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
+
+
+      CreateMap<Gene, HorizionGene>();
+      CreateMap<Target, HorizionTarget>();
+      CreateMap<Screen, HorizionScreen>();
+
 
 
 
