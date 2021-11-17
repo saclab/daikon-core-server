@@ -40,11 +40,17 @@ namespace Application.General.Horizion
           return Result<HorizionGene>.Failure("Invalid accession number");
         }
 
-        var horizonGene = new HorizionGene();
-        horizonGene.Name = "Gene";
+        var horizonGene = new HorizionGene
+        {
+          Name = "Gene",
+          Attributes = {
+                Id = gene.Id,
+                AccessionNumber = gene.AccessionNumber,
+                GeneName = gene.GeneName,
+            }
 
-        horizonGene.Attributes.AccessionNumber = gene.AccessionNumber;
-        horizonGene.Attributes.GeneName = gene.GeneName;
+        };
+
 
         /*Now lets check if we have a target */
         var target = await _context.Targets
@@ -59,6 +65,7 @@ namespace Application.General.Horizion
         {
           Name = "Target",
           Attributes = {
+                Id = target.Id,
                 AccessionNumber = target.AccessionNumber,
                 ProteinName = target.GeneName,
                 BucketScore = target.Bucket
@@ -84,6 +91,7 @@ namespace Application.General.Horizion
           {
             Name = "Screen",
             Attributes = {
+                  Id = screen.Id,
                   ScreenName = screen.ScreenName,
                   AccessionNumber = screen.AccessionNumber,
                   ProteinName = screen.GeneName
