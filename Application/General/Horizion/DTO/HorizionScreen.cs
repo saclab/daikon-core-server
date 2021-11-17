@@ -10,9 +10,11 @@ namespace Application.General.Horizion.DTO
     public string Name { get; set; }
     public class Attribute
     {
+      public Guid Id { get; set; }
       public string AccessionNumber { get; set; }
       public string ScreenName { get; set; }
       public string ProteinName { get; set; }
+
     }
 
     public Attribute Attributes { get; set; }
