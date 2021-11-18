@@ -12,7 +12,7 @@ namespace Domain
     public string Product { get; set; }
     public string FunctionalCategory { get; set; }
     public GenePublicData GenePublicData { get; set; }
-    
+
     /* FOLLOWING ARE NON PUBLIC DATA */
     // public GeneNonPublicData GeneNonPublicData { get; set; }
     public List<GeneEssentiality> GeneEssentiality { get; set; }
@@ -21,6 +21,7 @@ namespace Domain
     public List<GeneCRISPRiStrain> GeneCRISPRiStrain { get; set; }
     public List<GeneResistanceMutation> GeneResistanceMutation { get; set; }
     public GeneVulnerability GeneVulnerability { get; set; }
+    public List<GeneHypomorph> GeneHypomorphs { get; set; }
     public List<GeneUnpublishedStructures> GeneUnpublishedStructures { get; set; }
 
 

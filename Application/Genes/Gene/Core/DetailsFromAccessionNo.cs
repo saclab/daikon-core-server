@@ -46,6 +46,7 @@ namespace Application.Genes
           .Include(g => g.GeneCRISPRiStrain)
           .Include(g => g.GeneResistanceMutation)
           .Include(g => g.GeneUnpublishedStructures)
+          .Include(g=> g.GeneHypomorphs)
           .AsSplitQuery()
           .FirstOrDefaultAsync(g => g.AccessionNumber == request.AccessionNumber);
 
