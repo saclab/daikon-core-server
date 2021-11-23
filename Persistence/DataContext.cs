@@ -191,6 +191,9 @@ namespace Persistence
 
     /* Project */
     public DbSet<Project> Projects { get; set; }
+    public DbSet<ProjectBaseHits> ProjectBaseHits { get; set; }
+    public DbSet<ProjectSupportingOrg> ProjectSupportingOrgs { get; set; }
+    public DbSet<ProjectParticipatingOrg> ProjectParticipatingOrgs { get; set; }
 
   }
 }
