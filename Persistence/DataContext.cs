@@ -189,5 +189,8 @@ namespace Persistence
     /* Compound */
     public DbSet<Compound> Compounds { get; set; }
 
+    /* Project */
+    public DbSet<Project> Projects { get; set; }
+
   }
 }
