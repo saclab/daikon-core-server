@@ -8,15 +8,16 @@ namespace Domain
     public Guid Id { get; set; }
     public string ProjectName { get; set; }
     public Guid ScreenId { get; set; }
-    public List<Hit> Compounds { get; set; }
+    public Screen BaseScreen { get; set; }
+    public List<ProjectBaseHits> BaseHits { get; set; }
     public Compound RepresentationStructure { get; set; }
     public string Status { get; set; }
     public string CurrentStage { get; set; }
     public string CurrentStageDescription { get; set; }
     public AppOrg PrimaryOrg { get; set; }
-    public List<AppOrg> SupportingOrg { get; set; }
+    public List<ProjectSupportingOrg> SupportingOrg { get; set; }
     public string ProjectDisclosure { get; set; }
-    public List<AppOrg> ParticipatingOrganizations { get; set; }
+    public List<ProjectParticipatingOrg> ParticipatingOrganizations { get; set; }
     public DateTime DisclosureDate { get; set; }
     public string Priority { get; set; }
     public string PriorityDescription { get; set; }
