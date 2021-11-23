@@ -25,12 +25,19 @@ namespace Domain
     public string Resource { get; set; }
     public string ResourceDescription { get; set; }
     public DateTime FHAStart { get; set; }
+    public string FHADescription { get; set; }
     public DateTime H2LStart { get; set; }
+    public string H2LDescription { get; set; }
     public DateTime LOStart { get; set; }
+    public string LODescription { get; set; }
     public DateTime SPStart { get; set; }
+    public string SPCDescription { get; set; }
     public DateTime PCDDate { get; set; }
+    public string PCDDescription { get; set; }
     public DateTime INDStart { get; set; }
+    public string INDDescription { get; set; }
     public DateTime P1Start { get; set; }
+    public string P1Description { get; set; }
 
   }
 }

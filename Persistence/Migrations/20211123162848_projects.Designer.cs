@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211123162848_projects")]
+    partial class projects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -733,41 +735,23 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("DisclosureDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("FHADescription")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("FHAStart")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("H2LDescription")
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("H2LStart")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("INDDescription")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("INDStart")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("LODescription")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("LOStart")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("P1Description")
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("P1Start")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("PCDDate")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("PCDDescription")
-                        .HasColumnType("text");
 
                     b.Property<Guid?>("PrimaryOrgId")
                         .HasColumnType("uuid");
@@ -797,9 +781,6 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("ResourceDescription")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SPCDescription")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("SPStart")
