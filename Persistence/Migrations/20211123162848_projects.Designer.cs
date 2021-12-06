@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211123162848_projects")]
+    partial class projects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,17 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ProjectId1")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("ProjectId1");
 
                     b.ToTable("AppOrgs");
                 });
@@ -691,12 +703,17 @@ namespace Persistence.Migrations
                     b.Property<string>("Method")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("ScreenId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompoundId");
+
+                    b.HasIndex("ProjectId");
 
                     b.HasIndex("ScreenId");
 
@@ -718,41 +735,23 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("DisclosureDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("FHADescription")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("FHAStart")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("H2LDescription")
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("H2LStart")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("INDDescription")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("INDStart")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("LODescription")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("LOStart")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("P1Description")
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("P1Start")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("PCDDate")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("PCDDescription")
-                        .HasColumnType("text");
 
                     b.Property<Guid?>("PrimaryOrgId")
                         .HasColumnType("uuid");
@@ -784,9 +783,6 @@ namespace Persistence.Migrations
                     b.Property<string>("ResourceDescription")
                         .HasColumnType("text");
 
-                    b.Property<string>("SPCDescription")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("SPStart")
                         .HasColumnType("timestamp without time zone");
 
@@ -802,72 +798,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("RepresentationStructureId");
 
-                    b.HasIndex("ScreenId");
-
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("Domain.ProjectBaseHits", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("HitId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HitId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectBaseHits");
-                });
-
-            modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AppOrgId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppOrgId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectParticipatingOrgs");
-                });
-
-            modelBuilder.Entity("Domain.ProjectSupportingOrg", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AppOrgId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppOrgId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectSupportingOrgs");
                 });
 
             modelBuilder.Entity("Domain.Question", b =>
@@ -1272,6 +1203,17 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Domain.AppOrg", b =>
+                {
+                    b.HasOne("Domain.Project", null)
+                        .WithMany("ParticipatingOrganizations")
+                        .HasForeignKey("ProjectId");
+
+                    b.HasOne("Domain.Project", null)
+                        .WithMany("SupportingOrg")
+                        .HasForeignKey("ProjectId1");
+                });
+
             modelBuilder.Entity("Domain.AppUser", b =>
                 {
                     b.HasOne("Domain.AppOrg", "Org")
@@ -1398,6 +1340,10 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Project", null)
+                        .WithMany("Compounds")
+                        .HasForeignKey("ProjectId");
+
                     b.HasOne("Domain.Screen", null)
                         .WithMany("ValidatedHits")
                         .HasForeignKey("ScreenId")
@@ -1417,74 +1363,9 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("RepresentationStructureId");
 
-                    b.HasOne("Domain.Screen", "BaseScreen")
-                        .WithMany()
-                        .HasForeignKey("ScreenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BaseScreen");
-
                     b.Navigation("PrimaryOrg");
 
                     b.Navigation("RepresentationStructure");
-                });
-
-            modelBuilder.Entity("Domain.ProjectBaseHits", b =>
-                {
-                    b.HasOne("Domain.Hit", "BaseHit")
-                        .WithMany()
-                        .HasForeignKey("HitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Project", "BaseProject")
-                        .WithMany("BaseHits")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BaseHit");
-
-                    b.Navigation("BaseProject");
-                });
-
-            modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
-                {
-                    b.HasOne("Domain.AppOrg", "AppOrg")
-                        .WithMany()
-                        .HasForeignKey("AppOrgId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Project", "BaseProject")
-                        .WithMany("ParticipatingOrganizations")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppOrg");
-
-                    b.Navigation("BaseProject");
-                });
-
-            modelBuilder.Entity("Domain.ProjectSupportingOrg", b =>
-                {
-                    b.HasOne("Domain.AppOrg", "AppOrg")
-                        .WithMany()
-                        .HasForeignKey("AppOrgId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Project", "BaseProject")
-                        .WithMany("SupportingOrg")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppOrg");
-
-                    b.Navigation("BaseProject");
                 });
 
             modelBuilder.Entity("Domain.Reply", b =>
@@ -1645,7 +1526,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Project", b =>
                 {
-                    b.Navigation("BaseHits");
+                    b.Navigation("Compounds");
 
                     b.Navigation("ParticipatingOrganizations");
 
