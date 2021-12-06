@@ -63,6 +63,7 @@ namespace Application.Projects
         }
 
         /* Create the new project */
+        Console.WriteLine("[Will try] to create new project");
         var newProject = new Project();
         var newProjectGuid = Guid.NewGuid();
         newProject.Id = newProjectGuid;
@@ -70,8 +71,12 @@ namespace Application.Projects
         newProject.BaseScreen = baseScreen;
         newProject.ProjectName = request.NewProject.ProjectName;
 
+        Console.WriteLine("[Complete] new project");
+
         /*Verify the hits and add them to the project*/
+        Console.WriteLine("[Will try] to create basehits");
         newProject.BaseHits = new List<ProjectBaseHits>();
+        Console.WriteLine("[Initialized] base hits");
         foreach (var hit in request.NewProject.BaseHits)
         {
           /* Check if the hit is valid */
@@ -88,7 +93,9 @@ namespace Application.Projects
             };
 
             newProject.BaseHits.Add(projectbaseHitToAdd);
+            Console.WriteLine("[x/Will try] add base hit");
             _context.ProjectBaseHits.Add(projectbaseHitToAdd);
+            Console.WriteLine("[x/ Added] basehit");
           }
         }
 
@@ -98,8 +105,10 @@ namespace Application.Projects
 
         if (compoundFromDb != null)
         {
-          newProject.RepresentationStructure.Id = compoundFromDb.Id;
+          Console.WriteLine("[Will try] to link compound (rep structure)");
+          newProject.RepresentationStructureId = compoundFromDb.Id;
           newProject.RepresentationStructure = compoundFromDb;
+           Console.WriteLine("[Complete] linking compound");
         }
 
         /* verify the primaryorg*/
@@ -107,8 +116,10 @@ namespace Application.Projects
           (o => o.Id == request.NewProject.PrimaryOrg.Id);
         if (primaryOrgFromDb != null)
         {
+          Console.WriteLine("[Will try] to link primary org");
           newProject.PrimaryOrgId = primaryOrgFromDb.Id;
           newProject.PrimaryOrg = primaryOrgFromDb;
+          Console.WriteLine("[Complete] link primary org");
         }
 
         /* verify the supporting orgs */
@@ -127,9 +138,10 @@ namespace Application.Projects
               AppOrgId = supportingOrgFromDb.Id,
               AppOrg = supportingOrgFromDb
             };
-
+            Console.WriteLine("[x/Will try] to link secondary org");
             newProject.SupportingOrgs.Add(supportingOrgToAdd);
             _context.ProjectSupportingOrgs.Add(supportingOrgToAdd);
+            Console.WriteLine("[x/ Complete] to link secondary org");
           }
         }
 
@@ -137,9 +149,16 @@ namespace Application.Projects
         newProject.FHAStart = request.NewProject.FHAStart;
         newProject.FHADescription = request.NewProject.FHADescription;
 
+        Console.WriteLine("[Will try] to add project");
+
         _context.Projects.Add(newProject);
 
+        Console.WriteLine("[complete] adding project");
+        Console.WriteLine("[Will try] to link primary org");
+        Console.WriteLine("[SAVING...]");
+
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
+         Console.WriteLine("[COMPLETE...]");
 
         if (!success) return Result<Project>.Failure("Failed to create screen");
         return Result<Project>.Success(newProject);
