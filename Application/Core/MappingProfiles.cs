@@ -1,6 +1,7 @@
 using Application.BackgroundTasks.GeneSync.DTO;
 using Application.General.Horizion.DTO;
 using Application.Genes.DTOs;
+using Application.Projects.DTOs;
 using AutoMapper;
 using Domain;
 
@@ -32,10 +33,7 @@ namespace Application.Core
       CreateMap<Gene, HorizionGene>();
       CreateMap<Target, HorizionTarget>();
       CreateMap<Screen, HorizionScreen>();
-
-
-
-
+      
 
     }
 
