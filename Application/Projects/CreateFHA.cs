@@ -87,7 +87,7 @@ namespace Application.Projects
             {
               Id = Guid.NewGuid(),
               ProjectId = newProjectGuid,
-              BaseProject = newProject,
+              //BaseProject = newProject,
               HitId = hitFromDb.Id,
               BaseHit = hitFromDb,
             };
@@ -134,7 +134,7 @@ namespace Application.Projects
             {
               Id = Guid.NewGuid(),
               ProjectId = newProjectGuid,
-              BaseProject = newProject,
+              //BaseProject = newProject,
               AppOrgId = supportingOrgFromDb.Id,
               AppOrg = supportingOrgFromDb
             };
@@ -148,6 +148,7 @@ namespace Application.Projects
         // FHA Details
         newProject.FHAStart = request.NewProject.FHAStart;
         newProject.FHADescription = request.NewProject.FHADescription;
+        newProject.CurrentStage = ProjectStage.FHA.Value;
 
         Console.WriteLine("[Will try] to add project");
 
