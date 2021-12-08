@@ -30,12 +30,12 @@ namespace Application.Projects
       public async Task<Result<List<Project>>> Handle(Query request, CancellationToken cancellationToken)
       {
         var projects = await _context.Projects
-        .Include(p => p.BaseHits)
-        .ThenInclude(h => h.BaseHit)
-        .Include(p => p.RepresentationStructure)
+        // .Include(p => p.BaseHits)
+        // .ThenInclude(h => h.BaseHit)
+        // .Include(p => p.RepresentationStructure)
         .Include(P => P.PrimaryOrg)
-        .Include(p => p.SupportingOrgs)
-        .ThenInclude(o => o.AppOrg)
+        // .Include(p => p.SupportingOrgs)
+        // .ThenInclude(o => o.AppOrg)
         .ToListAsync();
 
         return Result<List<Project>>.Success(projects);
