@@ -13,5 +13,11 @@ namespace API.Controllers.General.Project
     {
       return HandleResult(await Mediator.Send(new Application.Projects.List.Query()));
     }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetActivity(Guid id)
+    {
+      return HandleResult(await Mediator.Send(new Application.Projects.Details.Query { Id = id }));
+    }
   }
 }

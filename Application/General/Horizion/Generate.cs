@@ -100,6 +100,29 @@ namespace Application.General.Horizion
           horizonTarget.Children.Add(horizionScreen);
 
           // Start nesting from here
+          var fhas = await _context.Projects.Where(p => p.ScreenId == screen.Id).ToListAsync();
+          if (fhas != null)
+          {
+             horizionScreen.Children = new List<HorizionFHA>();
+            foreach (var fha in fhas)
+            {
+              var horizionFHA = new HorizionFHA
+              {
+                Name = "FHA",
+                Attributes = {
+                  Id = fha.Id,
+                  AccessionNumber = fha.AccessionNo,
+                  ProjectName = fha.ProjectName,
+                  Status = fha.Status,
+                 
+                }
+              };
+              horizionScreen.Children.Add(horizionFHA);
+
+
+
+            }
+          }
         }
 
 
