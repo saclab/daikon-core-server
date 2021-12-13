@@ -195,5 +195,8 @@ namespace Persistence
     public DbSet<ProjectSupportingOrg> ProjectSupportingOrgs { get; set; }
     public DbSet<ProjectParticipatingOrg> ProjectParticipatingOrgs { get; set; }
 
+    //ProjectCompoundEvolution
+    public DbSet<ProjectCompoundEvolution> ProjectCompoundEvolutions { get; set; }
+
   }
 }
