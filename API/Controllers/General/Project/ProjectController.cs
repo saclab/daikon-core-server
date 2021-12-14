@@ -19,5 +19,11 @@ namespace API.Controllers.General.Project
     {
       return HandleResult(await Mediator.Send(new Application.Projects.Details.Query { Id = id }));
     }
+
+    [HttpGet("{projectId}/compoundevolution")]
+    public async Task<IActionResult> GetCompoundEvolution(Guid projectId)
+    {
+      return HandleResult(await Mediator.Send(new Application.Projects.CompoundEvolution.Details.Query { ProjectId = projectId }));
+    }
   }
 }

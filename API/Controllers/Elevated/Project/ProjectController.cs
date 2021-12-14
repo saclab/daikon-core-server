@@ -21,5 +21,14 @@ namespace API.Controllers.Elevated
       h2LDetails.Id = id;
       return HandleResult(await Mediator.Send(new Application.Projects.CreateH2L.Command { H2LDetails = h2LDetails }));
     }
+
+    [HttpPost("{projectId}/compoundevolution")]
+    public async Task<IActionResult> AddCompoundEvolution(Guid projectId, Application.Projects.DTOs.CompoundEvolutionAddDTO projectCompoundEvolution)
+    {
+      projectCompoundEvolution.ProjectId = projectId;
+      return HandleResult(await Mediator.Send(new Application.Projects.CompoundEvolution.Add.Command { NewProjectCompoundEvolution = projectCompoundEvolution }));
+    }
+
+    
   }
 }
