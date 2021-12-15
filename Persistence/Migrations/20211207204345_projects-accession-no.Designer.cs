@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211207204345_projects-accession-no")]
+    partial class projectsaccessionno
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -724,9 +726,6 @@ namespace Persistence.Migrations
                     b.Property<string>("FHADescription")
                         .HasColumnType("text");
 
-                    b.Property<bool>("FHAEnabled")
-                        .HasColumnType("boolean");
-
                     b.Property<DateTime>("FHAStart")
                         .HasColumnType("timestamp without time zone");
 
@@ -736,17 +735,11 @@ namespace Persistence.Migrations
                     b.Property<string>("H2LDescription")
                         .HasColumnType("text");
 
-                    b.Property<bool>("H2LEnabled")
-                        .HasColumnType("boolean");
-
                     b.Property<DateTime>("H2LStart")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("INDDescription")
                         .HasColumnType("text");
-
-                    b.Property<bool>("INDEnabled")
-                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("INDStart")
                         .HasColumnType("timestamp without time zone");
@@ -754,17 +747,11 @@ namespace Persistence.Migrations
                     b.Property<string>("LODescription")
                         .HasColumnType("text");
 
-                    b.Property<bool>("LOEnabled")
-                        .HasColumnType("boolean");
-
                     b.Property<DateTime>("LOStart")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("P1Description")
                         .HasColumnType("text");
-
-                    b.Property<bool>("P1Enabled")
-                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("P1Start")
                         .HasColumnType("timestamp without time zone");
@@ -774,9 +761,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("PCDDescription")
                         .HasColumnType("text");
-
-                    b.Property<bool>("PCDEnabled")
-                        .HasColumnType("boolean");
 
                     b.Property<Guid>("PrimaryOrgId")
                         .HasColumnType("uuid");
@@ -808,11 +792,8 @@ namespace Persistence.Migrations
                     b.Property<string>("ResourceDescription")
                         .HasColumnType("text");
 
-                    b.Property<string>("SPDescription")
+                    b.Property<string>("SPCDescription")
                         .HasColumnType("text");
-
-                    b.Property<bool>("SPEnabled")
-                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("SPStart")
                         .HasColumnType("timestamp without time zone");
@@ -853,40 +834,6 @@ namespace Persistence.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("ProjectBaseHits");
-                });
-
-            modelBuilder.Entity("Domain.ProjectCompoundEvolution", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("AddedOnDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("AddedOnStage")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("CompoundId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("IC50")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MIC")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompoundId");
-
-                    b.ToTable("ProjectCompoundEvolutions");
                 });
 
             modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
@@ -1510,17 +1457,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("BaseHit");
-                });
-
-            modelBuilder.Entity("Domain.ProjectCompoundEvolution", b =>
-                {
-                    b.HasOne("Domain.Compound", "Compound")
-                        .WithMany()
-                        .HasForeignKey("CompoundId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Compound");
                 });
 
             modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211208162343_projects-stage-enable")]
+    partial class projectsstageenable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -855,40 +857,6 @@ namespace Persistence.Migrations
                     b.ToTable("ProjectBaseHits");
                 });
 
-            modelBuilder.Entity("Domain.ProjectCompoundEvolution", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("AddedOnDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("AddedOnStage")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("CompoundId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("IC50")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MIC")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompoundId");
-
-                    b.ToTable("ProjectCompoundEvolutions");
-                });
-
             modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1510,17 +1478,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("BaseHit");
-                });
-
-            modelBuilder.Entity("Domain.ProjectCompoundEvolution", b =>
-                {
-                    b.HasOne("Domain.Compound", "Compound")
-                        .WithMany()
-                        .HasForeignKey("CompoundId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Compound");
                 });
 
             modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
