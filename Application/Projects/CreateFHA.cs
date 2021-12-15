@@ -70,6 +70,8 @@ namespace Application.Projects
         newProject.ScreenId = baseScreen.Id;
         newProject.BaseScreen = baseScreen;
         newProject.ProjectName = request.NewProject.ProjectName;
+        newProject.AccessionNo = baseScreen.AccessionNumber;
+        newProject.GeneName = baseScreen.GeneName;
 
         Console.WriteLine("[Complete] new project");
 
@@ -87,7 +89,7 @@ namespace Application.Projects
             {
               Id = Guid.NewGuid(),
               ProjectId = newProjectGuid,
-              BaseProject = newProject,
+              //BaseProject = newProject,
               HitId = hitFromDb.Id,
               BaseHit = hitFromDb,
             };
@@ -134,7 +136,7 @@ namespace Application.Projects
             {
               Id = Guid.NewGuid(),
               ProjectId = newProjectGuid,
-              BaseProject = newProject,
+              //BaseProject = newProject,
               AppOrgId = supportingOrgFromDb.Id,
               AppOrg = supportingOrgFromDb
             };
@@ -148,6 +150,9 @@ namespace Application.Projects
         // FHA Details
         newProject.FHAStart = request.NewProject.FHAStart;
         newProject.FHADescription = request.NewProject.FHADescription;
+        newProject.CurrentStage = ProjectStage.FHA.Value;
+        newProject.Status = ProjectStatus.Active.Value;
+        newProject.FHAEnabled = true;
 
         Console.WriteLine("[Will try] to add project");
 

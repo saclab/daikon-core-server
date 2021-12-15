@@ -100,6 +100,52 @@ namespace Application.General.Horizion
           horizonTarget.Children.Add(horizionScreen);
 
           // Start nesting from here
+          var projects = await _context.Projects.Where(p => p.ScreenId == screen.Id).ToListAsync();
+          if (projects != null)
+          {
+            horizionScreen.Children = new List<HorizionFHA>();
+            foreach (var project in projects)
+            {
+              var horizionFHA = new HorizionFHA
+              {
+                Name = "FHA",
+                Attributes = {
+                  Id = project.Id,
+                  AccessionNumber = project.AccessionNo,
+                  ProjectName = project.ProjectName,
+                  Status = project.Status,
+                }
+              };
+
+              // now check if it has a portfolio
+
+              if (project.H2LEnabled || project.LOEnabled || project.SPEnabled)
+              {
+                var horizionPortfolio = new HorizionPortfolio
+                {
+                  Name = "Portfolio",
+                  Attributes =
+                  {
+                  Id = project.Id,
+                  AccessionNumber = project.AccessionNo,
+                  ProjectName = project.ProjectName,
+                  Status = project.Status,
+                  CurrentStage = project.CurrentStage
+                  }
+                };
+
+                /* Insetr new if ans post portfolio */
+                // {if}
+
+
+                horizionFHA.Children = new List<HorizionPortfolio>();
+                horizionFHA.Children.Add(horizionPortfolio);
+
+              }
+
+              horizionScreen.Children.Add(horizionFHA);
+            }
+          }
         }
 
 
