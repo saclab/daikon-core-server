@@ -34,6 +34,7 @@ namespace Application.Projects.CompoundEvolution
         var ProjectCompoundEvolutions = await _context.ProjectCompoundEvolutions
         .Include(p => p.Compound)
         .Where(p => p.ProjectId == request.ProjectId)
+        .OrderByDescending(p => p.AddedOnDate)
         .ToListAsync();
 
         return Result<List<ProjectCompoundEvolution>>.Success(ProjectCompoundEvolutions);
