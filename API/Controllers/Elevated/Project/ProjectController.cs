@@ -23,11 +23,19 @@ namespace API.Controllers.Elevated
     }
 
     /* Promote to lo */
-    [HttpPost("{id}/createH2L")]
+    [HttpPost("{id}/createLO")]
     public async Task<IActionResult> CreateLO(Guid id, Application.Projects.DTOs.LODTO lODetails)
     {
       lODetails.Id = id;
       return HandleResult(await Mediator.Send(new Application.Projects.CreateLO.Command { LODetails = lODetails }));
+    }
+
+    /* Promote to SP */
+    [HttpPost("{id}/createSP")]
+    public async Task<IActionResult> CreateSP(Guid id, Application.Projects.DTOs.SPDTO sPDetails)
+    {
+      sPDetails.Id = id;
+      return HandleResult(await Mediator.Send(new Application.Projects.CreateSP.Command { SPDetails = sPDetails }));
     }
 
 
