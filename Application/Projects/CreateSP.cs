@@ -53,7 +53,7 @@ namespace Application.Projects
 
         /* check if the project is in FHA Stage */
 
-        if (Project.CurrentStage != ProjectStage.H2L.Value)
+        if (Project.CurrentStage != ProjectStage.LO.Value)
         {
           return Result<Project>.Failure("Denied : Invalid previous stage");
         }
