@@ -22,6 +22,15 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Projects.CreateH2L.Command { H2LDetails = h2LDetails }));
     }
 
+    /* Promote to lo */
+    [HttpPost("{id}/createH2L")]
+    public async Task<IActionResult> CreateLO(Guid id, Application.Projects.DTOs.LODTO lODetails)
+    {
+      lODetails.Id = id;
+      return HandleResult(await Mediator.Send(new Application.Projects.CreateLO.Command { LODetails = lODetails }));
+    }
+
+
     [HttpPost("{projectId}/compoundevolution")]
     public async Task<IActionResult> AddCompoundEvolution(Guid projectId, Application.Projects.DTOs.CompoundEvolutionAddDTO projectCompoundEvolution)
     {
@@ -29,6 +38,6 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Projects.CompoundEvolution.Add.Command { NewProjectCompoundEvolution = projectCompoundEvolution }));
     }
 
-    
+
   }
 }
