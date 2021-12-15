@@ -55,7 +55,7 @@ namespace Application.Projects
 
         if (Project.CurrentStage != ProjectStage.H2L.Value)
         {
-          return Result<Project>.Failure("Denied : Invalid previous stage");
+          return Result<Project>.Failure("Denied : Invalid previous stage " + Project.CurrentStage);
         }
 
         /* Promote the project to H2L*/
