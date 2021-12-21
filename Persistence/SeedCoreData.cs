@@ -38,7 +38,7 @@ namespace Persistence
         await seedTargetPromotionQuestions("/app/Data/Sample/targetPromotionQuestions.yaml");
 
       if (!_context.AppVals.Any())
-        await seedTargetPromotionQuestions("/app/Data/Sample/appVals.yaml");
+        await seedAppVals("/app/Data/Sample/appVals.yaml");
 
 
       await _context.SaveChangesAsync();

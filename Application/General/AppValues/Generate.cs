@@ -50,6 +50,11 @@ namespace Application.General.AppValues
           appValues.AppUsersFlattened.Add(user.UserName);
         }
 
+        var screeningMethods = await _context.AppVals.Where(a => a.Key == "ScreeningMethod")
+          .ToListAsync();
+
+        appValues.ScreeningMethods = new List<string>(screeningMethods.Select(e => e.Value)
+          .ToList());
 
         return Result<AppValuesDTO>.Success(appValues);
       }
