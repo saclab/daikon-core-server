@@ -37,6 +37,9 @@ namespace Persistence
       if (!_context.Questions.Any())
         await seedTargetPromotionQuestions("/app/Data/Sample/targetPromotionQuestions.yaml");
 
+      if (!_context.AppVals.Any())
+        await seedTargetPromotionQuestions("/app/Data/Sample/appVals.yaml");
+
 
       await _context.SaveChangesAsync();
 
@@ -101,5 +104,17 @@ namespace Persistence
       }
 
     }
+
+    private async Task seedAppVals(string path)
+    {
+      string ymlFileContent = File.ReadAllText(path);
+      var deserializer = new DeserializerBuilder()
+      .Build();
+
+      var appValueYml = deserializer.Deserialize<YAMLListDTO<AppVals>>(ymlFileContent);
+      await _context.AppVals.AddRangeAsync(appValueYml.Data);
+
+    }
+
   }
 }
