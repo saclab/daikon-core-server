@@ -9,6 +9,7 @@ namespace Application.Screens.ValidatedHits.DTOs
     public string SaccId { get; set; }
     public string AccessionNumber { get; set; }
     public string Library { get; set; }
+    public string Source { get; set; }
     public string Method { get; set; }
     public string MIC { get; set; }
     public string IC50 { get; set; }
