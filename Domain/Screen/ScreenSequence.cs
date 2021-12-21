@@ -14,5 +14,8 @@ namespace Domain
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public int UnverifiedHitCount { get; set; }
+    public int NoOfCompoundsScreened { get; set; }
+    public float Concentration { get; set; }
+
   }
 }
