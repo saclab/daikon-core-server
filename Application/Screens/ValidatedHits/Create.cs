@@ -82,6 +82,7 @@ namespace Application.Screens.ValidatedHits
           Id = HitGid,
           ScreenId = request.NewHit.ScreenId,
           Library = request.NewHit.Library,
+          Source = request.NewHit.Source,
           AccessionNumber = baseScreen.AccessionNumber,
           CompoundId = CompoundGid,
           Compound = CompoundToCreate,

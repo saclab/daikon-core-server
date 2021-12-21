@@ -13,5 +13,8 @@ namespace Application.General.AppValues.DTO
     public List<AppOrg> AppOrgs { get; set; }
     public List<string> AppUsersFlattened { get; set; }
 
+    /* Screening methods are used in the ongoing screens */
+    public List<string> ScreeningMethods { get; set; }
+
   }
 }
