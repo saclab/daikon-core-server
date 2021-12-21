@@ -155,6 +155,7 @@ namespace Persistence
 
     /* Business Core */
     public DbSet<Question> Questions { get; set; }
+    public DbSet<AppVals> AppVals { get; set; }
 
     /* Gene */
     public DbSet<Gene> Genes { get; set; }

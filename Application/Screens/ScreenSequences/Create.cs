@@ -75,7 +75,9 @@ namespace Application.Screens.ScreenSequences
           Scientist = _userAccessor.GetUsername(),
           StartDate = request.NewScreenSequence.StartDate,
           EndDate = request.NewScreenSequence.EndDate,
-          UnverifiedHitCount = request.NewScreenSequence.UnverifiedHitCount
+          UnverifiedHitCount = request.NewScreenSequence.UnverifiedHitCount,
+          Concentration = request.NewScreenSequence.Concentration,
+          NoOfCompoundsScreened = request.NewScreenSequence.NoOfCompoundsScreened
         };
 
 

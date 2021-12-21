@@ -1,0 +1,13 @@
+Name: InitialAppVals
+Type: AppVals
+Data:
+  - Key: ScreeningMethod
+    Value: Virtual Screening
+  - Key: ScreeningMethod
+    Value: DNA Encoded Del Screen
+  - Key: ScreeningMethod
+    Value: Biochemical screen
+  - Key: ScreeningMethod
+    Value: Hypomorph
+  - Key: ScreeningMethod
+    Value: Fragment screen

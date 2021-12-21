@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211221165349_project-app-value")]
+    partial class projectappvalue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -711,9 +713,6 @@ namespace Persistence.Migrations
                     b.Property<Guid>("ScreenId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Source")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompoundId");
@@ -1065,9 +1064,6 @@ namespace Persistence.Migrations
                     b.Property<string>("AccessionNumber")
                         .HasColumnType("text");
 
-                    b.Property<float>("Concentration")
-                        .HasColumnType("real");
-
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -1076,9 +1072,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Method")
                         .HasColumnType("text");
-
-                    b.Property<int>("NoOfCompoundsScreened")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Protocol")
                         .HasColumnType("text");
