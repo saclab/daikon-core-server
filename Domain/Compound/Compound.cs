@@ -6,6 +6,7 @@ namespace Domain
   public class Compound
   {
     public Guid Id { get; set; }
+    public Guid StrainId { get; set; }
     public string SaccId { get; set; }
     public String Smile { get; set; }
     public string MolWeight { get; set; }
