@@ -5,6 +5,7 @@ namespace Domain
   public class Target
   {
     public Guid Id { get; set; }
+    public Guid StrainId { get; set; }
     public Gene BaseGene { get; set; }
     public Guid GeneId { get; set; }
     public string AccessionNumber { get; set; }

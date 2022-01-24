@@ -6,6 +6,7 @@ namespace Domain
   public class Gene
   {
     public Guid Id { get; set; }
+    public Guid StrainId { get; set; }
     public string AccessionNumber { get; set; }
     public string GeneName { get; set; }
     public string Function { get; set; }

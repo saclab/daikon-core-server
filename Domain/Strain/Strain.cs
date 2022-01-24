@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-  public class AppVals
+  public class Strain
   {
     public Guid Id { get; set; }
-    public Guid StrainId { get; set; }
-    public string Key { get; set; }
-    public string Value { get; set; }
+    public string CanonicalName { get; set; }
+    public string Name { get; set; }
 
   }
 }
