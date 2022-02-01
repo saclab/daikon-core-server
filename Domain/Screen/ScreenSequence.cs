@@ -6,7 +6,7 @@ namespace Domain
   {
     public Guid Id { get; set; }
     public Guid ScreenId { get; set; }
-    public string AccessionNumber { get; set; }
+    public string TargetName { get; set; }
     public string Method { get; set; }
     public string Protocol { get; set; }
     public string Library { get; set; }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Domain.Tasks;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 namespace Persistence
 {
   public class DataContext : IdentityDbContext<AppUser, AppRole, string>
@@ -25,7 +26,7 @@ namespace Persistence
 
       /* Making Gene Id column unique*/
       modelBuilder.Entity<Target>()
-            .HasIndex(gd => gd.GeneId)
+            .HasIndex(gd => gd.Name)
             .IsUnique();
 
       //  modelBuilder.Entity<Gene>()
@@ -157,6 +158,9 @@ namespace Persistence
     public DbSet<Question> Questions { get; set; }
     public DbSet<AppVals> AppVals { get; set; }
 
+    /* Strain */
+    public DbSet<Strain> Strains { get; set; }
+
     /* Gene */
     public DbSet<Gene> Genes { get; set; }
     public DbSet<GenePublicData> GenePublicData { get; set; }
@@ -169,12 +173,14 @@ namespace Persistence
     public DbSet<GeneResistanceMutation> GeneResistanceMutations { get; set; }
     public DbSet<GeneUnpublishedStructures> GeneUnpublishedStructures { get; set; }
     public DbSet<GenePromotionRequest> GenePromotionRequests { get; set; }
+    public DbSet<GenePromtionRequestGene> GenePromtionRequestGenes { get; set; }
     public DbSet<GenePromotionRequestValue> GenePromotionRequestValues { get; set; }
     public DbSet<GeneHypomorph> GeneHypomorphs { get; set; }
 
 
     /* Target */
     public DbSet<Target> Targets { get; set; }
+    public DbSet<TargetGene> TargetGenes { get; set; }
     public DbSet<TargetScorecard> TargetScorecards { get; set; }
     public DbSet<TargetScoreCardValue> TargetScoreCardValues { get; set; }
 

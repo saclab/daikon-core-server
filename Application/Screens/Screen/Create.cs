@@ -72,14 +72,14 @@ namespace Application.Screens
 
         if (!testScreen.Any())
         {
-          screenName = baseTarget.GeneName + "-" + "1";
+          screenName = baseTarget.Name + "-" + "1";
         }
         else
         {
           var lastScreenName = testScreen.First().ScreenName;
           var lastScreenNumber = lastScreenName != null ? Int32.Parse(lastScreenName.Split('-').Last()) : 0;
           lastScreenNumber = lastScreenNumber + 1;
-          screenName = baseTarget.GeneName + "-" + lastScreenNumber.ToString();
+          screenName = baseTarget.Name + "-" + lastScreenNumber.ToString();
         }
 
 
@@ -89,8 +89,7 @@ namespace Application.Screens
           Id = ScreenGid,
           BaseTarget = baseTarget,
           TargetId = baseTarget.Id,
-          AccessionNumber = baseTarget.AccessionNumber,
-          GeneName = baseTarget.GeneName,
+          TargetName = baseTarget.Name,
           ScreenName = screenName,
           Status = "New",
           Promoter = _userAccessor.GetUsername(),

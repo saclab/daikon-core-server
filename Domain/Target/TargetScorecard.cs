@@ -7,7 +7,7 @@ namespace Domain
   {
     public Guid Id { get; set; }
     public Guid TargetID { get; set; }
-    public string TargetAccessionNumber { get; set; }
+    public string TargetName { get; set; }
     public List<TargetScoreCardValue> TargetScoreCardValues { get; set; }
 
   }

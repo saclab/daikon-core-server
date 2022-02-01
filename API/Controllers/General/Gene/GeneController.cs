@@ -56,17 +56,23 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.History.Query { Id = id }));
     }
 
-    [HttpPost("{id}/promotionrequest")]
-    public async Task<IActionResult> PromoteActivity(Guid id, GenePromotionRequest genePromotionRequest)
+    [HttpPost("promotionrequest/{targetName}")]
+    public async Task<IActionResult> PromoteActivity(string targetName, GenePromotionRequest genePromotionRequest)
     {
-      genePromotionRequest.GeneId = id;
+      genePromotionRequest.TargetName = targetName;
       return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Request.Command { GenePromotionRequest = genePromotionRequest }));
     }
 
     [HttpGet("{id}/promotionrequest")]
-    public async Task<IActionResult> FetchPromoteQuestionaire(Guid id)
+    public async Task<IActionResult> FetchPromoteQuestionaire(String targetName)
     {
-      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Details.Query { GeneId = id }));
+      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Details.Query { TargetName = targetName }));
+    }
+
+    [HttpGet("{targetName}/validateNewTargetName")]
+    public async Task<IActionResult> ValidateNewTargetName(String targetName)
+    {
+      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.NameValidator.Query { TargetName = targetName }));
     }
 
     [HttpPost("{geneId}/essentiality")]
@@ -189,6 +195,9 @@ namespace API.Controllers.General
       geneHypomorph.GeneId = geneId;
       return HandleResult(await Mediator.Send(new Application.Genes.Hypomorph.Edit.Command { GeneHypomorph = geneHypomorph }));
     }
+
+
+    
 
   }
 }

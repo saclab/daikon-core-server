@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -46,43 +47,51 @@ namespace Application.Targets
         Guid TargetGid = Guid.NewGuid();
         Guid TargetScorecardGid = Guid.NewGuid();
 
-        var GeneToPromote = await _context.Genes.FirstOrDefaultAsync
-            (g => g.Id == request.GenePromotionRequest.GeneId);
-
-        /*chek if gene id is correct*/
-        if (GeneToPromote == null)
-        {
-          return Result<Target>.Failure("Invalid Gene ID");
-        }
 
         /*check if target exists already */
-        var testTarget = await _context.Targets.FirstOrDefaultAsync(
-           t => t.GeneId == request.GenePromotionRequest.GeneId
-        );
-        if (testTarget != null)
-        {
-          return Result<Target>.Failure("Target already exists");
-        }
+        var checkIfTargetExists = _context.Targets.Where(q => (
+          q.Name == request.GenePromotionRequest.TargetName));
 
-
+        if (checkIfTargetExists.Count() != 0) return Result<Target>.Failure("The inteded target is already promoted");
 
 
         var TargetToCreate = new Target
         {
           Id = TargetGid,
-          BaseGene = GeneToPromote,
-          GeneId = GeneToPromote.Id,
-          AccessionNumber = GeneToPromote.AccessionNumber,
-          GeneName = GeneToPromote.GeneName,
+          Name = request.GenePromotionRequest.TargetName,
+          Type = request.GenePromotionRequest.TargetType,
+
+          TargetGenes = new List<TargetGene>(),
 
           TargetScorecard = new TargetScorecard
           {
             Id = TargetScorecardGid,
             TargetID = TargetGid,
-            TargetAccessionNumber = GeneToPromote.AccessionNumber,
+            TargetName = request.GenePromotionRequest.TargetName,
             TargetScoreCardValues = new List<TargetScoreCardValue>()
           }
         };
+
+        foreach (var genePromotionRequestGene in request.GenePromotionRequest.GenePromtionRequestGenes)
+        {
+          var gene = await _context.Genes.FirstOrDefaultAsync(g => g.Id == genePromotionRequestGene.GeneId);
+          if (gene == null)
+          {
+            return Result<Target>.Failure("Invalid Gene Id");
+          }
+          var targetGeneToAdd = new TargetGene()
+          {
+            Id = new Guid(),
+            TargetId = TargetGid,
+            GeneId = genePromotionRequestGene.GeneId,
+            Gene = gene,
+            AccessionNumber = gene.AccessionNumber
+
+          };
+
+          TargetToCreate.TargetGenes.Add(targetGeneToAdd);
+          _context.TargetGenes.Add(targetGeneToAdd);
+        }
 
         foreach (var answer in request.GenePromotionRequest.GenePromotionRequestValues)
         {
@@ -92,7 +101,7 @@ namespace Application.Targets
           {
             Id = targetScoreCardValueGid,
             TargetScorecardId = TargetScorecardGid,
-            TargetAccessionNumber = GeneToPromote.AccessionNumber,
+            TargetName = request.GenePromotionRequest.TargetName,
             Question = question,
             QuestionId = question.Id,
             QuestionIdentification = question.Identification,
@@ -112,10 +121,12 @@ namespace Application.Targets
         // if a request exists change its status from submitted to promoted
 
         var genePromotionReq = await _context.GenePromotionRequests.FirstOrDefaultAsync
-            (g => g.GeneId == request.GenePromotionRequest.GeneId);
+            (g => g.TargetName == request.GenePromotionRequest.TargetName);
+
+
         if (genePromotionReq != null)
         {
-            genePromotionReq.GenePromotionRequestStatus = "Promoted";
+          genePromotionReq.GenePromotionRequestStatus = "Promoted";
         }
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
