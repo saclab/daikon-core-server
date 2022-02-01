@@ -43,24 +43,44 @@ namespace Application.Genes.Promotion
       }
       public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
       {
-        var gene = await _context.Genes.FindAsync(request.GenePromotionRequest.GeneId);
-        if (gene == null) return Result<Unit>.Failure("The Gene could not be found");
 
-        var checkIfExists = _context.GenePromotionRequests.Where(q => (
-            q.GeneId == request.GenePromotionRequest.GeneId));
+        Console.WriteLine("+++++++++++++++++++Application.Genes.Promotion");
+        var checkIfTargetExists = _context.Targets.Where(q => (
+           q.Name == request.GenePromotionRequest.TargetName));
 
-        if (checkIfExists.Count() != 0) return Result<Unit>.Failure("There is already a submission");
+        if (checkIfTargetExists.Count() != 0) return Result<Unit>.Failure("The inteded target is already promoted");
+
+        var checkIfSubmissionExists = _context.GenePromotionRequests.Where(q => (
+            q.TargetName == request.GenePromotionRequest.TargetName));
+
+        if (checkIfSubmissionExists.Count() != 0) return Result<Unit>.Failure("There is already a submission");
 
         var newGenePromotionRequestId = new Guid();
+
+
         var newGenePromotionRequest = new GenePromotionRequest()
         {
           Id = newGenePromotionRequestId,
-          Gene = gene,
-          GeneId = gene.Id,
-          GeneAccessionNumber = gene.AccessionNumber,
+          TargetName = request.GenePromotionRequest.TargetName,
+          TargetType = request.GenePromotionRequest.TargetType,
+          GenePromtionRequestGenes = new List<GenePromtionRequestGene>(),
           GenePromotionRequestStatus = "Submitted",
           GenePromotionRequestValues = new List<GenePromotionRequestValue>()
         };
+
+        foreach (var gene in request.GenePromotionRequest.GenePromtionRequestGenes)
+        {
+          var geneToAdd = new GenePromtionRequestGene()
+          {
+            Id = new Guid(),
+            GenePromotionRequestId = newGenePromotionRequestId,
+            GeneId = gene.GeneId
+          };
+
+          newGenePromotionRequest.GenePromtionRequestGenes.Add(geneToAdd);
+          _context.GenePromtionRequestGenes.Add(geneToAdd);
+
+        }
 
         foreach (GenePromotionRequestValue genePromotionRequestValue in request.GenePromotionRequest.GenePromotionRequestValues)
         {

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220124210216_redesign-genes")]
+    partial class redesigngenes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,13 +285,23 @@ namespace Persistence.Migrations
                     b.Property<string>("GeneName")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("GenePromotionRequestId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Product")
                         .HasColumnType("text");
 
                     b.Property<Guid>("StrainId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("TargetId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("GenePromotionRequestId");
+
+                    b.HasIndex("TargetId");
 
                     b.ToTable("Genes");
                 });
@@ -426,25 +438,6 @@ namespace Persistence.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("GenePromotionRequestValues");
-                });
-
-            modelBuilder.Entity("Domain.GenePromtionRequestGene", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("GenePromotionRequestId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GenePromotionRequestId");
-
-                    b.ToTable("GenePromtionRequestGenes");
                 });
 
             modelBuilder.Entity("Domain.GeneProteinActivityAssay", b =>
@@ -1216,33 +1209,6 @@ namespace Persistence.Migrations
                     b.ToTable("Targets");
                 });
 
-            modelBuilder.Entity("Domain.TargetGene", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("AccessionNumber")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("TargetId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GeneId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("TargetGenes");
-                });
-
             modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1441,6 +1407,17 @@ namespace Persistence.Migrations
                     b.Navigation("Org");
                 });
 
+            modelBuilder.Entity("Domain.Gene", b =>
+                {
+                    b.HasOne("Domain.GenePromotionRequest", null)
+                        .WithMany("Genes")
+                        .HasForeignKey("GenePromotionRequestId");
+
+                    b.HasOne("Domain.Target", null)
+                        .WithMany("Genes")
+                        .HasForeignKey("TargetId");
+                });
+
             modelBuilder.Entity("Domain.GeneCRISPRiStrain", b =>
                 {
                     b.HasOne("Domain.Gene", null)
@@ -1483,15 +1460,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("Domain.GenePromtionRequestGene", b =>
-                {
-                    b.HasOne("Domain.GenePromotionRequest", null)
-                        .WithMany("GenePromtionRequestGenes")
-                        .HasForeignKey("GenePromotionRequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.GeneProteinActivityAssay", b =>
@@ -1691,23 +1659,6 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.TargetGene", b =>
-                {
-                    b.HasOne("Domain.Gene", "Gene")
-                        .WithMany()
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Target", null)
-                        .WithMany("TargetGenes")
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gene");
-                });
-
             modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
                 {
                     b.HasOne("Domain.Question", "Question")
@@ -1815,7 +1766,7 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("GenePromotionRequestValues");
 
-                    b.Navigation("GenePromtionRequestGenes");
+                    b.Navigation("Genes");
                 });
 
             modelBuilder.Entity("Domain.Project", b =>
@@ -1836,7 +1787,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Target", b =>
                 {
-                    b.Navigation("TargetGenes");
+                    b.Navigation("Genes");
 
                     b.Navigation("TargetScorecard");
                 });

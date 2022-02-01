@@ -68,7 +68,7 @@ namespace Application.Screens.ScreenSequences
         {
           Id = ScreenSequenceGid,
           ScreenId = request.NewScreenSequence.ScreenId,
-          AccessionNumber = baseScreen.AccessionNumber,
+          TargetName = baseScreen.TargetName,
           Method = request.NewScreenSequence.Method,
           Protocol = request.NewScreenSequence.Protocol,
           Library = request.NewScreenSequence.Library,
