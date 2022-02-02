@@ -71,6 +71,7 @@ namespace Application.Projects
         newProject.BaseScreen = baseScreen;
         newProject.ProjectName = request.NewProject.ProjectName;
         newProject.TargetName = baseScreen.TargetName;
+        newProject.TargetId = baseScreen.TargetId;
        
 
         Console.WriteLine("[Complete] new project");
