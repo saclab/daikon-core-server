@@ -11,6 +11,7 @@ namespace Domain
     public Guid ScreenId { get; set; }
     public Screen BaseScreen { get; set; }
     public string TargetName { get; set; }
+    public Guid TargetId { get; set; }
 
     public List<ProjectBaseHits> BaseHits { get; set; }
     public Guid RepresentationStructureId { get; set; }
@@ -34,7 +35,7 @@ namespace Domain
 
     public string Probability { get; set; }
     public string ProbabilityDescription { get; set; }
-    
+
     public string Resource { get; set; }
     public string ResourceDescription { get; set; }
 

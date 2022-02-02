@@ -31,6 +31,7 @@ namespace Application.Targets
       public async Task<Result<List<Target>>> Handle(Query request, CancellationToken cancellationToken)
       {
         var targets = await _context.Targets
+        .Include(t => t.TargetGenes)
         .ToListAsync(cancellationToken);
 
         return Result<List<Target>>.Success(targets);
