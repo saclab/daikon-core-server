@@ -11,7 +11,7 @@ namespace Application.General.Horizion.DTO
     public class Attribute
     {
       public Guid Id { get; set; }
-      public string AccessionNumber { get; set; }
+      public string TargetName { get; set; }
       public string ProjectName { get; set; }
       public string Status { get; set; }
       public string OrgAlias { get; set; }
