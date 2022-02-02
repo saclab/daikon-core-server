@@ -11,9 +11,9 @@ namespace Application.General.Horizion.DTO
     public class Attribute
     {
       public Guid Id { get; set; }
-      public string AccessionNumber { get; set; }
+      public string TargetName { get; set; }
       public string ScreenName { get; set; }
-      public string ProteinName { get; set; }
+     
 
     }
 
