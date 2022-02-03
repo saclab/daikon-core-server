@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Application.General.Horizion.DTO
+namespace Application.General.Horizon.DTO
 {
-  public class HorizionFHA
+  public class HorizonScreen
   {
     public string Name { get; set; }
     public class Attribute
     {
       public Guid Id { get; set; }
       public string TargetName { get; set; }
-      public string ProjectName { get; set; }
-      public string Status { get; set; }
-      public string OrgAlias { get; set; }
+      public string ScreenName { get; set; }
+     
 
     }
 
     public Attribute Attributes { get; set; }
-    public List<HorizionPortfolio> Children { get; set; }
+    public List<HorizonFHA> Children { get; set; }
 
-    public HorizionFHA()
+    public HorizonScreen()
     {
       this.Attributes = new Attribute();
     }
