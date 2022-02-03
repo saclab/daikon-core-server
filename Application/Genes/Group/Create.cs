@@ -60,7 +60,7 @@ namespace Application.Genes.Group
 
         foreach (var gene in request.GeneGroup.Genes)
         {
-          var geneToAdd = await _context.Genes.FirstOrDefaultAsync(g => g.Id == gene.Id);
+          var geneToAdd = await _context.Genes.FirstOrDefaultAsync(g => g.Id == gene.GeneId);
           var newGeneGroupGenes = new GeneGroupGenes()
           {
             Id = new Guid(),
