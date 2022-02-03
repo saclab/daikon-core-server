@@ -4,22 +4,22 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
-using Application.General.Horizion.DTO;
+using Application.General.Horizon.DTO;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.General.Horizion
+namespace Application.General.Horizon
 {
   public class Generate
   {
-    public class Query : IRequest<Result<HorizionRoot>>
+    public class Query : IRequest<Result<HorizonRoot>>
     {
       public String TargetName { get; set; }
     }
 
-    public class Handler : IRequestHandler<Query, Result<HorizionRoot>>
+    public class Handler : IRequestHandler<Query, Result<HorizonRoot>>
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
@@ -29,7 +29,7 @@ namespace Application.General.Horizion
         _context = context;
 
       }
-      public async Task<Result<HorizionRoot>> Handle(Query request, CancellationToken cancellationToken)
+      public async Task<Result<HorizonRoot>> Handle(Query request, CancellationToken cancellationToken)
       {
 
         // var gene = await _context.Genes
@@ -37,11 +37,11 @@ namespace Application.General.Horizion
 
         // if (gene == null)
         // {
-        //   return Result<HorizionGene>.Failure("Invalid accession number");
+        //   return Result<HorizonGene>.Failure("Invalid accession number");
         // }
 
-        var horizonRoot = new HorizionRoot();
-        horizonRoot.Children = new List<HorizionTarget>();
+        var horizonRoot = new HorizonRoot();
+        horizonRoot.Children = new List<HorizonTarget>();
         // {
         //   Name = "Gene",
         //   Attributes = {
@@ -60,7 +60,7 @@ namespace Application.General.Horizion
 
         if (target == null)
         {
-          return Result<HorizionRoot>.Failure("The Target Does Not Exists");
+          return Result<HorizonRoot>.Failure("The Target Does Not Exists");
         }
 
         horizonRoot.Attributes.TargetName = target.Name;
@@ -77,7 +77,7 @@ namespace Application.General.Horizion
           horizonRoot.Name = "GeneGroup";
         }
 
-        var horizonTarget = new HorizionTarget
+        var horizonTarget = new HorizonTarget
         {
           Name = "Target",
           Attributes = {
@@ -98,13 +98,13 @@ namespace Application.General.Horizion
 
         if (screens == null)
         {
-          return Result<HorizionRoot>.Success(horizonRoot);
+          return Result<HorizonRoot>.Success(horizonRoot);
         }
 
-        horizonTarget.Children = new List<HorizionScreen>();
+        horizonTarget.Children = new List<HorizonScreen>();
         foreach (var screen in screens)
         {
-          var horizionScreen = new HorizionScreen
+          var horizionScreen = new HorizonScreen
           {
             Name = "Screen",
             Attributes = {
@@ -120,10 +120,10 @@ namespace Application.General.Horizion
           var projects = await _context.Projects.Where(p => p.ScreenId == screen.Id).ToListAsync();
           if (projects != null)
           {
-            horizionScreen.Children = new List<HorizionFHA>();
+            horizionScreen.Children = new List<HorizonFHA>();
             foreach (var project in projects)
             {
-              var horizionFHA = new HorizionFHA
+              var horizionFHA = new HorizonFHA
               {
                 Name = "FHA",
                 Attributes = {
@@ -138,7 +138,7 @@ namespace Application.General.Horizion
 
               if (project.H2LEnabled || project.LOEnabled || project.SPEnabled)
               {
-                var horizionPortfolio = new HorizionPortfolio
+                var horizionPortfolio = new HorizonPortfolio
                 {
                   Name = "Portfolio",
                   Attributes =
@@ -155,7 +155,7 @@ namespace Application.General.Horizion
                 // {if}
 
 
-                horizionFHA.Children = new List<HorizionPortfolio>();
+                horizionFHA.Children = new List<HorizonPortfolio>();
                 horizionFHA.Children.Add(horizionPortfolio);
 
               }
@@ -166,7 +166,7 @@ namespace Application.General.Horizion
         }
 
 
-        return Result<HorizionRoot>.Success(horizonRoot);
+        return Result<HorizonRoot>.Success(horizonRoot);
       }
     }
   }
