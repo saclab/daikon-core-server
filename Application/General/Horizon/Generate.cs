@@ -104,7 +104,7 @@ namespace Application.General.Horizon
         horizonTarget.Children = new List<HorizonScreen>();
         foreach (var screen in screens)
         {
-          var horizionScreen = new HorizonScreen
+          var horizonScreen = new HorizonScreen
           {
             Name = "Screen",
             Attributes = {
@@ -114,13 +114,13 @@ namespace Application.General.Horizon
 
               }
           };
-          horizonTarget.Children.Add(horizionScreen);
+          horizonTarget.Children.Add(horizonScreen);
 
           // Start nesting from here
           var projects = await _context.Projects.Where(p => p.ScreenId == screen.Id).ToListAsync();
           if (projects != null)
           {
-            horizionScreen.Children = new List<HorizonFHA>();
+            horizonScreen.Children = new List<HorizonFHA>();
             foreach (var project in projects)
             {
               var horizionFHA = new HorizonFHA
@@ -138,7 +138,7 @@ namespace Application.General.Horizon
 
               if (project.H2LEnabled || project.LOEnabled || project.SPEnabled)
               {
-                var horizionPortfolio = new HorizonPortfolio
+                var horizonPortfolio = new HorizonPortfolio
                 {
                   Name = "Portfolio",
                   Attributes =
@@ -156,11 +156,11 @@ namespace Application.General.Horizon
 
 
                 horizionFHA.Children = new List<HorizonPortfolio>();
-                horizionFHA.Children.Add(horizionPortfolio);
+                horizionFHA.Children.Add(horizonPortfolio);
 
               }
 
-              horizionScreen.Children.Add(horizionFHA);
+              horizonScreen.Children.Add(horizionFHA);
             }
           }
         }
