@@ -12,7 +12,7 @@ using Persistence;
 
 namespace Application.Genes.Group
 {
-  public class Search
+  public class SearchByGeneId
   {
     public class Query : IRequest<Result<List<GeneGroup>>>
     {
@@ -40,7 +40,9 @@ namespace Application.Genes.Group
 
         foreach (var geneGroupId in geneGroupsIds)
         {
-          var geneGroup = await _context.GeneGroups.FirstOrDefaultAsync(g => g.Id == geneGroupId);
+          var geneGroup = await _context.GeneGroups
+          .Include(g => g.Genes)
+          .FirstOrDefaultAsync(g => g.Id == geneGroupId);
           geneGroups.Add(geneGroup);
         }
 

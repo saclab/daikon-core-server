@@ -12,9 +12,11 @@ using Persistence;
 
 namespace Application.Genes.Group
 {
+  public class List
+  {
     public class Query : IRequest<Result<List<GeneGroup>>>
     {
-     
+
     }
 
     public class Handler : IRequestHandler<Query, Result<List<GeneGroup>>>
@@ -37,4 +39,5 @@ namespace Application.Genes.Group
       }
 
     }
+  }
 }
