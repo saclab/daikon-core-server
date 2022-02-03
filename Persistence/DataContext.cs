@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Tasks;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
+using Domain.Models;
 
 namespace Persistence
 {
@@ -204,6 +204,9 @@ namespace Persistence
 
     //ProjectCompoundEvolution
     public DbSet<ProjectCompoundEvolution> ProjectCompoundEvolutions { get; set; }
+
+    public DbSet<GeneGroup> GeneGroups { get; set; }
+    public DbSet<GeneGroupGenes> GeneGroupGenes { get; set; }
 
   }
 }
