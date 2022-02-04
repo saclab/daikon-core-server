@@ -32,11 +32,7 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Genes.Group.Create.Command { GeneGroup = geneGroup }));
     }
 
-    [HttpGet("groups/search-by-gene-id/{geneId}")]
-    public async Task<IActionResult> SearchByGeneIdGroups(Guid geneId)
-    {
-      return HandleResult(await Mediator.Send(new Application.Genes.Group.SearchByGeneId.Query { GeneId = geneId }));
-    }
+    
 
 
   }

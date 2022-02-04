@@ -44,17 +44,17 @@ namespace Application.Genes.Promotion
       public async Task<Result<String>> Handle(Query request, CancellationToken cancellationToken)
       {
 
-        var validateNamePromotionReq = await _context.GenePromotionRequests
-        .FirstOrDefaultAsync(q => (
-            q.TargetName == request.TargetName));
-
-        if (validateNamePromotionReq != null) return Result<String>.Success("PromotionRequestExists");
-
         var validateNameTarget = await _context.Targets
         .FirstOrDefaultAsync(q => (
             q.Name == request.TargetName));
 
         if (validateNameTarget != null) return Result<String>.Success("TargetExists");
+
+        var validateNamePromotionReq = await _context.GenePromotionRequests
+        .FirstOrDefaultAsync(q => (
+            q.TargetName == request.TargetName));
+
+        if (validateNamePromotionReq != null) return Result<String>.Success("PromotionRequestExists");
 
         return Result<String>.Success("Valid");
 
