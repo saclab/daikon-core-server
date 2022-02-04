@@ -13,5 +13,11 @@ namespace API.Controllers.General
     {
       return HandleResult(await Mediator.Send(new Application.General.Horizon.Generate.Query { TargetName = targetName }));
     }
+
+    [HttpGet("by-accession/{accessionNumber}")]
+    public async Task<IActionResult> GenerateHorizonByAccession(String accessionNumber)
+    {
+      return HandleResult(await Mediator.Send(new Application.General.Horizon.GenerateByAccession.Query { AccessionNumber = accessionNumber }));
+    }
   }
 }
