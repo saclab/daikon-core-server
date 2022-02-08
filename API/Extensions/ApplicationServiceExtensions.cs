@@ -23,7 +23,7 @@ namespace API.Extensions
         {
 
           //opt.UseSqlite(config.GetConnectionString("SQLiteConnection"));
-          opt.UseNpgsql(config.GetConnectionString("PostConnection"));
+          opt.UseNpgsql(Environment.GetEnvironmentVariable("PGSQL_CONNECTION_STRING"));
 
         });
 
@@ -37,10 +37,7 @@ namespace API.Extensions
                   .AllowAnyHeader()
                   .AllowCredentials()
                   .WithExposedHeaders("WWW-Authenticate", "Pagination")
-                  .WithOrigins(
-                    "http://localhost:3000",
-                    "https://in.virt.snet.biobio.tamu.edu:3000"
-                    );
+                  .WithOrigins(Environment.GetEnvironmentVariable("CORS_ORIGINS"));
             });
         });
 

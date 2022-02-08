@@ -23,4 +23,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS tpt-backend-prod
 WORKDIR /app/
 EXPOSE 5005
 COPY --from=tpt-backend-prod-build /app/API/out .
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+ENTRYPOINT ["dotnet", "API.dll"]
