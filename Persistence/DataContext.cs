@@ -208,5 +208,10 @@ namespace Persistence
     public DbSet<GeneGroup> GeneGroups { get; set; }
     public DbSet<GeneGroupGenes> GeneGroupGenes { get; set; }
 
+
+    //Vote
+    public DbSet<Vote> Votes { get; set; }
+    public DbSet<Voter> Voters { get; set; }
+
   }
 }
