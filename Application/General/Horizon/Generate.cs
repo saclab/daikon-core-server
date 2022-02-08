@@ -74,7 +74,7 @@ namespace Application.General.Horizon
 
         if (target.Type == "protein-complex")
         {
-          horizonRoot.Name = "GeneGroup";
+          horizonRoot.Name = "ProteinComplex";
           var accessionNumbers = new List<string>();
           foreach (var gene in target.TargetGenes)
           {
