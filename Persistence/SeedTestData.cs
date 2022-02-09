@@ -97,7 +97,7 @@ namespace Persistence
                   {
                     new GeneEssentiality{
                       Classification = "Classification Data",
-                      EssentialityCondition = "Essentiality Condition Data",
+                      Condition = "Essentiality Condition Data",
                       Strain = "Strain Data",
                       Method = "Method Data",
                       Reference = "Reference Data",
