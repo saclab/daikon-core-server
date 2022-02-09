@@ -8,7 +8,7 @@ namespace Domain
     public Guid GeneId { get; set; }
     public string GeneAccessionNumber { get; set; }
     public string Classification { get; set; }
-    public string EssentialityCondition { get; set; }
+    public string Condition { get; set; }
     public string Strain { get; set; }
     public string Method { get; set; }
     public string Reference { get; set; }

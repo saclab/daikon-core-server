@@ -13,7 +13,6 @@ namespace Domain
     public string Organization { get; set; }
     public string Method { get; set; }
     public string Resolution { get; set; }
-    public string Condition { get; set; }
-    public string Ligand { get; set; }
+    public string Ligands { get; set; }
   }
 }

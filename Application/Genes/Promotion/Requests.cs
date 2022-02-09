@@ -45,6 +45,7 @@ namespace Application.Genes.Promotion
       {
         
         var genePromotionRequests = await _context.GenePromotionRequests
+        .Include(p => p.GenePromtionRequestGenes)
         .Include(s => s.GenePromotionRequestValues)
         .ThenInclude(q => q.Question)
         .Where(r => r.GenePromotionRequestStatus == "Submitted").ToListAsync(cancellationToken);

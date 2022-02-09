@@ -6,10 +6,11 @@ namespace Domain
   public class Screen
   {
     public Guid Id { get; set; }
+    public Guid StrainId { get; set; }
     public Target BaseTarget { get; set; }
     public Guid TargetId { get; set; }
     public String ScreenName { get; set; }
-    public string AccessionNumber { get; set; }
+    public string TargetName { get; set; }
     public string GeneName { get; set; }
     public string Status { get; set; }
     public AppOrg Org { get; set; }
