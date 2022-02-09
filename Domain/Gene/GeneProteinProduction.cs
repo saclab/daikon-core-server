@@ -10,8 +10,8 @@ namespace Domain
     public Guid Id { get; set; }
     public Guid GeneId { get; set; }
     public string GeneAccessionNumber { get; set; }
-    public string ProteinProduction { get; set; }
-    public string Quantity { get; set; }
+    public string Production { get; set; }
+    public string Method { get; set; }
     public string Purity { get; set; }
     public DateTime Date { get; set; }
   }

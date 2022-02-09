@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Application.General.Horizion.DTO
+namespace Application.General.Horizon.DTO
 {
-  public class HorizionTarget
+
+  public class HorizonAccessionRoot
   {
+
     public string Name { get; set; }
     public class Attribute
     {
       public Guid Id { get; set; }
+      public List<string> AccessionNumbers { get; set; }
       public string AccessionNumber { get; set; }
-      public string ProteinName { get; set; }
-      public string BucketScore { get; set; }
+      public string RootName { get; set; }
+      public string TargetName { get; set; }
 
     }
 
     public Attribute Attributes { get; set; }
-    public List<HorizionScreen> Children { get; set; }
+    public List<HorizonRoot> Children { get; set; }
 
-    public HorizionTarget()
+    public HorizonAccessionRoot()
     {
       this.Attributes = new Attribute();
     }

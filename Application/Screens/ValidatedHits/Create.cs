@@ -83,7 +83,7 @@ namespace Application.Screens.ValidatedHits
           ScreenId = request.NewHit.ScreenId,
           Library = request.NewHit.Library,
           Source = request.NewHit.Source,
-          AccessionNumber = baseScreen.AccessionNumber,
+          TargetName = baseScreen.TargetName,
           CompoundId = CompoundGid,
           Compound = CompoundToCreate,
           Method = request.NewHit.Method,

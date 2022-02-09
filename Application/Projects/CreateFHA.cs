@@ -70,8 +70,9 @@ namespace Application.Projects
         newProject.ScreenId = baseScreen.Id;
         newProject.BaseScreen = baseScreen;
         newProject.ProjectName = request.NewProject.ProjectName;
-        newProject.AccessionNo = baseScreen.AccessionNumber;
-        newProject.GeneName = baseScreen.GeneName;
+        newProject.TargetName = baseScreen.TargetName;
+        newProject.TargetId = baseScreen.TargetId;
+       
 
         Console.WriteLine("[Complete] new project");
 

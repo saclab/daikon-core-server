@@ -1,14 +1,16 @@
 using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain
 {
   public class Target
   {
     public Guid Id { get; set; }
-    public Gene BaseGene { get; set; }
-    public Guid GeneId { get; set; }
-    public string AccessionNumber { get; set; }
-    public string GeneName { get; set; }
+    public Guid StrainId { get; set; }
+    public string Name { get; set; }
+    public string Type { get; set; }
+    public List<TargetGene> TargetGenes { get; set; }
     public string Bucket { get; set; }
     public double ImpactScore { get; set; }
     public double ImpactComplete { get; set; }

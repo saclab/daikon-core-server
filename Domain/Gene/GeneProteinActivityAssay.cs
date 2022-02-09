@@ -10,8 +10,8 @@ namespace Domain
     public Guid Id { get; set; }
     public Guid GeneId { get; set; }
     public string GeneAccessionNumber { get; set; }
-    public string ProteinActivityAssay { get; set; }
-    public string AssayType { get; set; }
-    public string AssayThroughput { get; set; }
+    public string Activity { get; set; }
+    public string Type { get; set; }
+    public string Throughput { get; set; }
   }
 }

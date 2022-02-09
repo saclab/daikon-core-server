@@ -17,7 +17,7 @@ namespace Application.Genes.Promotion
   {
     public class Query : IRequest<Result<GenePromotionRequest>>
     {
-      public Guid GeneId { get; set; }
+      public string TargetName { get; set; }
     }
 
     // public class CommandValidator : AbstractValidator<Command>
@@ -49,7 +49,7 @@ namespace Application.Genes.Promotion
         .Include(s => s.GenePromotionRequestValues)
         .ThenInclude(q => q.Question)
         .FirstOrDefaultAsync(q => (
-            q.GeneId == request.GeneId));
+            q.TargetName == request.TargetName));
         return Result<GenePromotionRequest>.Success(genePromotionRequest);
 
       }

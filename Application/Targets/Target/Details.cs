@@ -30,6 +30,7 @@ namespace Application.Targets
       public async Task<Result<Target>> Handle(Query request, CancellationToken cancellationToken)
       {
         var target = await _context.Targets
+        .Include(t => t.TargetGenes)
         .Include(t => t.TargetScorecard)
         .ThenInclude(s => s.TargetScoreCardValues)
         .ThenInclude(q => q.Question)
