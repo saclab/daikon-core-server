@@ -117,7 +117,7 @@ namespace Application.General.Horizon
             Attributes = {
                   Id = screen.Id,
                   ScreenName = screen.ScreenName,
-                  TargetName = screen.TargetName
+                  TargetName = screen.TargetName,
 
               }
           };

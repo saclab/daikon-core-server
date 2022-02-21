@@ -91,6 +91,7 @@ namespace Application.Screens
           TargetId = baseTarget.Id,
           TargetName = baseTarget.Name,
           ScreenName = screenName,
+          Method = request.NewScreen.Method,
           Status = "New",
           Promoter = _userAccessor.GetUsername(),
           PromotionDate = request.NewScreen.PromotionDate,

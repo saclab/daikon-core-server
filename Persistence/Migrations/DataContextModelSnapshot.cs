@@ -737,11 +737,16 @@ namespace Persistence.Migrations
                     b.Property<string>("TargetName")
                         .HasColumnType("text");
 
+                    b.Property<Guid>("VoteId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompoundId");
 
                     b.HasIndex("ScreenId");
+
+                    b.HasIndex("VoteId");
 
                     b.ToTable("Hits");
                 });
@@ -1096,6 +1101,9 @@ namespace Persistence.Migrations
                     b.Property<string>("GeneName")
                         .HasColumnType("text");
 
+                    b.Property<string>("Method")
+                        .HasColumnType("text");
+
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
@@ -1141,7 +1149,7 @@ namespace Persistence.Migrations
                     b.Property<float>("Concentration")
                         .HasColumnType("real");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Library")
@@ -1433,6 +1441,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("VoteId");
+
                     b.ToTable("Voters");
                 });
 
@@ -1670,7 +1680,15 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Vote", "Vote")
+                        .WithMany()
+                        .HasForeignKey("VoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Compound");
+
+                    b.Navigation("Vote");
                 });
 
             modelBuilder.Entity("Domain.Models.GeneGroupGenes", b =>
@@ -1859,6 +1877,15 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Voter", b =>
+                {
+                    b.HasOne("Domain.Vote", null)
+                        .WithMany("Voters")
+                        .HasForeignKey("VoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Domain.AppRole", null)
@@ -1974,6 +2001,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.TargetScorecard", b =>
                 {
                     b.Navigation("TargetScoreCardValues");
+                });
+
+            modelBuilder.Entity("Domain.Vote", b =>
+                {
+                    b.Navigation("Voters");
                 });
 #pragma warning restore 612, 618
         }

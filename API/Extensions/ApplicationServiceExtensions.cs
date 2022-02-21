@@ -23,8 +23,10 @@ namespace API.Extensions
         {
 
           //opt.UseSqlite(config.GetConnectionString("SQLiteConnection"));
-          opt.UseNpgsql(Environment.GetEnvironmentVariable("PGSQL_CONNECTION_STRING"));
-
+          var buildConnectionString = "Username=" + Environment.GetEnvironmentVariable("PGPGUSER") + ";"
+          + "Password=" + Environment.GetEnvironmentVariable("PGPASSWORD") + ";"
+          + Environment.GetEnvironmentVariable("PGSQL_CONNECTION_STRING");
+          opt.UseNpgsql(buildConnectionString);
         });
 
       /* Add CORS */

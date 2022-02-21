@@ -14,5 +14,6 @@ namespace Domain
     public int Negative { get; set; }
     public bool IsVotingAllowed { get; set; }
     public DateTime LastModified { get; set; }
+    public List<Voter> Voters { get; set; }
   }
 }
