@@ -1,6 +1,8 @@
 using Application.BackgroundTasks.GeneSync.DTO;
 using Application.Genes.DTOs;
 using Application.Projects.DTOs;
+using Application.Screens.DTOs;
+using Application.Votes.DTOs;
 using AutoMapper;
 using Domain;
 
@@ -27,10 +29,14 @@ namespace Application.Core
       CreateMap<GenePublicData, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
 
 
-      CreateMap<Project, Project>().ForMember(x => x.Id, opt => opt.Ignore());
+      CreateMap<Project, Project>();
 
+      CreateMap<Screen, ScreenDTO>();
+      CreateMap<ScreenSequence, ScreenSequenceDTO>();
+      CreateMap<Hit, HitDTO>();
+      CreateMap<Vote, VoteDTO>();
 
-
+      CreateMap<Compound, Compound>();
 
     }
 
