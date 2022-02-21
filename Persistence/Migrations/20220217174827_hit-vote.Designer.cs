@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220124210216_redesign-genes")]
-    partial class redesigngenes
+    [Migration("20220217174827_hit-vote")]
+    partial class hitvote
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -285,23 +285,13 @@ namespace Persistence.Migrations
                     b.Property<string>("GeneName")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("GenePromotionRequestId")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Product")
                         .HasColumnType("text");
 
                     b.Property<Guid>("StrainId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("TargetId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("GenePromotionRequestId");
-
-                    b.HasIndex("TargetId");
 
                     b.ToTable("Genes");
                 });
@@ -337,7 +327,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Classification")
                         .HasColumnType("text");
 
-                    b.Property<string>("EssentialityCondition")
+                    b.Property<string>("Condition")
                         .HasColumnType("text");
 
                     b.Property<string>("GeneAccessionNumber")
@@ -440,16 +430,32 @@ namespace Persistence.Migrations
                     b.ToTable("GenePromotionRequestValues");
                 });
 
+            modelBuilder.Entity("Domain.GenePromtionRequestGene", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("GeneId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("GenePromotionRequestId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GenePromotionRequestId");
+
+                    b.ToTable("GenePromtionRequestGenes");
+                });
+
             modelBuilder.Entity("Domain.GeneProteinActivityAssay", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AssayThroughput")
-                        .HasColumnType("text");
-
-                    b.Property<string>("AssayType")
+                    b.Property<string>("Activity")
                         .HasColumnType("text");
 
                     b.Property<string>("GeneAccessionNumber")
@@ -458,7 +464,10 @@ namespace Persistence.Migrations
                     b.Property<Guid>("GeneId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProteinActivityAssay")
+                    b.Property<string>("Throughput")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -483,13 +492,13 @@ namespace Persistence.Migrations
                     b.Property<Guid>("GeneId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ProteinProduction")
+                    b.Property<string>("Method")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Production")
                         .HasColumnType("text");
 
                     b.Property<string>("Purity")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Quantity")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -628,16 +637,13 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Condition")
-                        .HasColumnType("text");
-
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
 
                     b.Property<Guid>("GeneId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Ligand")
+                    b.Property<string>("Ligands")
                         .HasColumnType("text");
 
                     b.Property<string>("Method")
@@ -733,13 +739,65 @@ namespace Persistence.Migrations
                     b.Property<string>("TargetName")
                         .HasColumnType("text");
 
+                    b.Property<Guid>("VoteId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompoundId");
 
                     b.HasIndex("ScreenId");
 
+                    b.HasIndex("VoteId");
+
                     b.ToTable("Hits");
+                });
+
+            modelBuilder.Entity("Domain.Models.GeneGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("StrainId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GeneGroups");
+                });
+
+            modelBuilder.Entity("Domain.Models.GeneGroupGenes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AccessionNumber")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GeneGroupId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("GeneId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("StrainId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneGroupId");
+
+                    b.HasIndex("GeneId");
+
+                    b.ToTable("GeneGroupGenes");
                 });
 
             modelBuilder.Entity("Domain.Project", b =>
@@ -857,6 +915,9 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("StrainId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TargetId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("TargetName")
@@ -1042,6 +1103,9 @@ namespace Persistence.Migrations
                     b.Property<string>("GeneName")
                         .HasColumnType("text");
 
+                    b.Property<string>("Method")
+                        .HasColumnType("text");
+
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
@@ -1209,6 +1273,33 @@ namespace Persistence.Migrations
                     b.ToTable("Targets");
                 });
 
+            modelBuilder.Entity("Domain.TargetGene", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AccessionNumber")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GeneId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("StrainId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TargetId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneId");
+
+                    b.HasIndex("TargetId");
+
+                    b.ToTable("TargetGenes");
+                });
+
             modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1292,6 +1383,69 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BTask");
+                });
+
+            modelBuilder.Entity("Domain.Vote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ElementId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsVotingAllowed")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Negative")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Neutral")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Positive")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Votes");
+                });
+
+            modelBuilder.Entity("Domain.Voter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("VoteId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("VotedNegative")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("VotedNeutral")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("VotedOn")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("VotedPositive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("VoterEmail")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VoteId");
+
+                    b.ToTable("Voters");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1407,17 +1561,6 @@ namespace Persistence.Migrations
                     b.Navigation("Org");
                 });
 
-            modelBuilder.Entity("Domain.Gene", b =>
-                {
-                    b.HasOne("Domain.GenePromotionRequest", null)
-                        .WithMany("Genes")
-                        .HasForeignKey("GenePromotionRequestId");
-
-                    b.HasOne("Domain.Target", null)
-                        .WithMany("Genes")
-                        .HasForeignKey("TargetId");
-                });
-
             modelBuilder.Entity("Domain.GeneCRISPRiStrain", b =>
                 {
                     b.HasOne("Domain.Gene", null)
@@ -1460,6 +1603,15 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("Domain.GenePromtionRequestGene", b =>
+                {
+                    b.HasOne("Domain.GenePromotionRequest", null)
+                        .WithMany("GenePromtionRequestGenes")
+                        .HasForeignKey("GenePromotionRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.GeneProteinActivityAssay", b =>
@@ -1530,7 +1682,32 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Vote", "Vote")
+                        .WithMany()
+                        .HasForeignKey("VoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Compound");
+
+                    b.Navigation("Vote");
+                });
+
+            modelBuilder.Entity("Domain.Models.GeneGroupGenes", b =>
+                {
+                    b.HasOne("Domain.Models.GeneGroup", null)
+                        .WithMany("Genes")
+                        .HasForeignKey("GeneGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Gene", "Gene")
+                        .WithMany()
+                        .HasForeignKey("GeneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gene");
                 });
 
             modelBuilder.Entity("Domain.Project", b =>
@@ -1659,6 +1836,23 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.TargetGene", b =>
+                {
+                    b.HasOne("Domain.Gene", "Gene")
+                        .WithMany()
+                        .HasForeignKey("GeneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Target", null)
+                        .WithMany("TargetGenes")
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Gene");
+                });
+
             modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
                 {
                     b.HasOne("Domain.Question", "Question")
@@ -1681,6 +1875,15 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Target", null)
                         .WithOne("TargetScorecard")
                         .HasForeignKey("Domain.TargetScorecard", "TargetID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Voter", b =>
+                {
+                    b.HasOne("Domain.Vote", null)
+                        .WithMany("Voters")
+                        .HasForeignKey("VoteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1766,6 +1969,11 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("GenePromotionRequestValues");
 
+                    b.Navigation("GenePromtionRequestGenes");
+                });
+
+            modelBuilder.Entity("Domain.Models.GeneGroup", b =>
+                {
                     b.Navigation("Genes");
                 });
 
@@ -1787,7 +1995,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Target", b =>
                 {
-                    b.Navigation("Genes");
+                    b.Navigation("TargetGenes");
 
                     b.Navigation("TargetScorecard");
                 });
@@ -1795,6 +2003,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.TargetScorecard", b =>
                 {
                     b.Navigation("TargetScoreCardValues");
+                });
+
+            modelBuilder.Entity("Domain.Vote", b =>
+                {
+                    b.Navigation("Voters");
                 });
 #pragma warning restore 612, 618
         }

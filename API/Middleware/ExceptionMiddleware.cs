@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Application.Core;
 using Microsoft.AspNetCore.Http;
@@ -24,27 +25,30 @@ namespace API.Middleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        try
+      try
+      {
+        await _next(context);
+      }
+
+      catch (Exception ex)
+      {
+        _logger.LogError(ex, ex.Message);
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+        var response = _env.IsDevelopment()
+        ? new AppException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
+        : new AppException(context.Response.StatusCode, "Server Error");
+
+        var options = new JsonSerializerOptions
         {
-            await _next(context);
-        }
+          PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
 
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, ex.Message);
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+        var json = JsonSerializer.Serialize(response, options);
 
-            var response = _env.IsDevelopment()
-            ? new AppException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
-            : new AppException(context.Response.StatusCode, "Server Error");
-
-            var options = new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase};
-
-            var json = JsonSerializer.Serialize(response, options);
-
-            await context.Response.WriteAsync(json);
-        }
+        await context.Response.WriteAsync(json);
+      }
     }
   }
 }

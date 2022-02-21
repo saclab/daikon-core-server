@@ -32,7 +32,7 @@ namespace API
         var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         opt.Filters.Add(new AuthorizeFilter(policy));
       })
-      
+
       .AddFluentValidation(config =>
      {
        config.RegisterValidatorsFromAssemblyContaining<Create>();

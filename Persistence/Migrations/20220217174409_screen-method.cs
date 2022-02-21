@@ -2,13 +2,13 @@
 
 namespace Persistence.Migrations
 {
-    public partial class redesigngenes2 : Migration
+    public partial class screenmethod : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "AccessionNumber",
-                table: "TargetGenes",
+                name: "Method",
+                table: "Screens",
                 type: "text",
                 nullable: true);
         }
@@ -16,8 +16,8 @@ namespace Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "AccessionNumber",
-                table: "TargetGenes");
+                name: "Method",
+                table: "Screens");
         }
     }
 }
