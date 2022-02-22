@@ -118,6 +118,7 @@ namespace Application.General.Horizon
                   Id = screen.Id,
                   ScreenName = screen.ScreenName,
                   TargetName = screen.TargetName,
+                  ScreenMethod = screen.Method
 
               }
           };
