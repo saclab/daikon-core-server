@@ -35,12 +35,14 @@ namespace Application.Projects
       private readonly DataContext _context;
       private readonly IMapper _mapper;
       private readonly IUserAccessor _userAccessor;
+      private IMediator _mediator;
 
-      public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
+      public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor, IMediator mediator)
       {
         _context = context;
         _mapper = mapper;
         _userAccessor = userAccessor;
+        _mediator = mediator;
       }
       public async Task<Result<Project>> Handle(Command request, CancellationToken cancellationToken)
       {
@@ -72,7 +74,7 @@ namespace Application.Projects
         newProject.ProjectName = request.NewProject.ProjectName;
         newProject.TargetName = baseScreen.TargetName;
         newProject.TargetId = baseScreen.TargetId;
-       
+
 
         Console.WriteLine("[Complete] new project");
 
@@ -111,7 +113,7 @@ namespace Application.Projects
           Console.WriteLine("[Will try] to link compound (rep structure)");
           newProject.RepresentationStructureId = compoundFromDb.Id;
           newProject.RepresentationStructure = compoundFromDb;
-           Console.WriteLine("[Complete] linking compound");
+          Console.WriteLine("[Complete] linking compound");
         }
 
         /* verify the primaryorg*/
@@ -164,7 +166,20 @@ namespace Application.Projects
         Console.WriteLine("[SAVING...]");
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
-         Console.WriteLine("[COMPLETE...]");
+        Console.WriteLine("[COMPLETE...]");
+
+        var projectCompoundEvolution = new CompoundEvolutionAddDTO
+        {
+          Smile = compoundFromDb.Smile,
+          MolWeight = compoundFromDb.MolWeight,
+          MolArea = compoundFromDb.MolArea,
+          ProjectId = newProjectGuid,
+          Notes = "Initial FHA Compound",
+          MIC = request.NewProject.BaseHits.Find((h) => h.CompoundId == compoundFromDb.Id).MIC,
+          IC50 = request.NewProject.BaseHits.Find((h) => h.CompoundId == compoundFromDb.Id).IC50,
+        };
+
+        await _mediator.Send(new Application.Projects.CompoundEvolution.Add.Command { NewProjectCompoundEvolution = projectCompoundEvolution });
 
         if (!success) return Result<Project>.Failure("Failed to create screen");
         return Result<Project>.Success(newProject);
