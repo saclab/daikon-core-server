@@ -16,5 +16,10 @@ namespace Domain
     public Guid CompoundId { get; set; }
     public Compound Compound { get; set; }
 
+    public Guid VoteId { get; set; }
+    public Vote Vote { get; set; }
+
+    
+
   }
 }

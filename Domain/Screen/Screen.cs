@@ -10,6 +10,7 @@ namespace Domain
     public Target BaseTarget { get; set; }
     public Guid TargetId { get; set; }
     public String ScreenName { get; set; }
+    public string Method { get; set; }
     public string TargetName { get; set; }
     public string GeneName { get; set; }
     public string Status { get; set; }

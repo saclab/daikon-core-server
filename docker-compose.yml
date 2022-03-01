@@ -3,10 +3,9 @@ services:
   postgres:
     image: postgres:10.5
     container_name: project_db
-    restart: always
     environment:
       - POSTGRES_USER=tpt_user
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=${PGPASSWORD}
     ports:
       - "40000:5432"
     volumes:
@@ -41,4 +40,6 @@ services:
       - ASPNETCORE_URLS=http://*:5005
       - ASPNETCORE_ENVIRONMENT=Development
       - PGSQL_CONNECTION_STRING=${PGSQL_CONNECTION_STRING}
+      - PGPGUSER=${PGPGUSER}
+      - PGPASSWORD=${PGPASSWORD}
       - CORS_ORIGINS=${CORS_ORIGINS}
