@@ -76,6 +76,20 @@ namespace Application.Screens.ValidatedHits
 
         _context.Compounds.Add(CompoundToCreate);
 
+        Guid VoteGid = Guid.NewGuid();
+
+        var VoteToCreate = new Vote
+        {
+          Id = VoteGid,
+          ElementId = HitGid,
+          Positive = 0,
+          Neutral = 0,
+          Negative = 0,
+          IsVotingAllowed = true
+        };
+
+        _context.Votes.Add(VoteToCreate);
+
 
         var HitToCreate = new Hit
         {
@@ -90,6 +104,8 @@ namespace Application.Screens.ValidatedHits
           MIC = request.NewHit.MIC,
           IC50 = request.NewHit.IC50,
           ClusterGroup = Int32.Parse(request.NewHit.ClusterGroup),
+          Vote = VoteToCreate,
+          VoteId = VoteGid
         };
 
         _context.Hits.Add(HitToCreate);

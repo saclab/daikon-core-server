@@ -13,7 +13,7 @@ namespace Application.General.Horizon.DTO
       public Guid Id { get; set; }
       public string TargetName { get; set; }
       public string ScreenName { get; set; }
-     
+      public string ScreenMethod { get; set; }
 
     }
 

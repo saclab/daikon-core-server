@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220217174409_screen-method")]
+    partial class screenmethod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -737,16 +739,11 @@ namespace Persistence.Migrations
                     b.Property<string>("TargetName")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("VoteId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CompoundId");
 
                     b.HasIndex("ScreenId");
-
-                    b.HasIndex("VoteId");
 
                     b.ToTable("Hits");
                 });
@@ -1149,7 +1146,7 @@ namespace Persistence.Migrations
                     b.Property<float>("Concentration")
                         .HasColumnType("real");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Library")
@@ -1680,15 +1677,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Vote", "Vote")
-                        .WithMany()
-                        .HasForeignKey("VoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Compound");
-
-                    b.Navigation("Vote");
                 });
 
             modelBuilder.Entity("Domain.Models.GeneGroupGenes", b =>
