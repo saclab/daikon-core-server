@@ -8,6 +8,8 @@ namespace Domain
     public Guid Id { get; set; }
     public Guid StrainId { get; set; }
     public string ProjectName { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
     public Guid ScreenId { get; set; }
     public Screen BaseScreen { get; set; }
     public string TargetName { get; set; }

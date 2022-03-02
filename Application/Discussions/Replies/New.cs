@@ -59,7 +59,7 @@ namespace Application.Discussions.Replies
           DiscussionId = toDiscussion.Id,
           Body = request.Reply.Body,
           PostedBy = _userAccessor.GetUsername(),
-          Timestamp = DateTime.Now,
+          Timestamp = DateTime.UtcNow,
           Mentions = request.Reply.Mentions,
           Tags = request.Reply.Tags,
         };

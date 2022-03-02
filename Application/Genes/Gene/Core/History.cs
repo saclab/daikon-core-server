@@ -52,8 +52,6 @@ namespace Application.Genes
             //     && h.PrimaryKeyValue == gene.GeneNonPublicData.Id.ToString()))
             || (gene != null && (h.EntityName == "Gene"
                 && h.PrimaryKeyValue == gene.Id.ToString()))
-            || (gene.GeneVulnerability != null && (h.EntityName == "GeneVulnerability"
-                && h.PrimaryKeyValue == gene.GeneVulnerability.Id.ToString()))
             ).OrderByDescending(h => h.DateChanged).ToListAsync();
 
         return Result<List<ChangeLog>>.Success(history);

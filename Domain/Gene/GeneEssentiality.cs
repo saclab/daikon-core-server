@@ -13,5 +13,7 @@ namespace Domain
     public string Method { get; set; }
     public string Reference { get; set; }
     public string Notes { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
   }
 }

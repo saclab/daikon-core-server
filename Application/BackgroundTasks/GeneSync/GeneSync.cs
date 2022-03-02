@@ -64,99 +64,99 @@ namespace Application.BackgroundTasks.GeneSync
 
     public async Task Sync(BTask task, CancellationToken cancellationToken = default)
     {
-      _logger.LogInformation("Starting pulling data from mycobrowser.");
+      // _logger.LogInformation("Starting pulling data from mycobrowser.");
 
-      /* 1. Fetch CSV From Mycobrowser */
+      // /* 1. Fetch CSV From Mycobrowser */
 
-      var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser();
-      var GeneSequences = await fetchIndividualGeneSequencesFromMycobrowser();
-      var ProteinSequences = await fetchIndividualProteinSequencesFromMycobrowser();
+      // var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser();
+      // var GeneSequences = await fetchIndividualGeneSequencesFromMycobrowser();
+      // var ProteinSequences = await fetchIndividualProteinSequencesFromMycobrowser();
       var CSVVulnerabilities = fetchCSVVulnerability();
-      _logger.LogInformation("Genes pulled " + GeneSequences.Count());
+      // _logger.LogInformation("Genes pulled " + GeneSequences.Count());
 
-      /* Read each line */
+      // /* Read each line */
 
-      foreach (var CSVGene in CSVRecordsFromMycobrowser)
-      {
-        /* compare Rv Number, if Gene exists update, else create new */
-        _logger.LogDebug("Dealing with : " + CSVGene.AccessionNumber);
+      // foreach (var CSVGene in CSVRecordsFromMycobrowser)
+      // {
+      //   /* compare Rv Number, if Gene exists update, else create new */
+      //   _logger.LogDebug("Dealing with : " + CSVGene.AccessionNumber);
 
-        var findGene = await _context.Genes
-          .FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
+      //   var findGene = await _context.Genes
+      //     .FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
 
-        if (findGene == null)
-        {
-          _logger.LogDebug("Not Found. Creating new Gene: " + CSVGene.AccessionNumber);
-          var newGene = new Gene();
-          var newGenePublicData = new GenePublicData();
+      //   if (findGene == null)
+      //   {
+      //     _logger.LogDebug("Not Found. Creating new Gene: " + CSVGene.AccessionNumber);
+      //     var newGene = new Gene();
+      //     var newGenePublicData = new GenePublicData();
 
-          /*
-          First get data from the TSV
-          */
-          _mapper.Map(CSVGene, newGene);
-          _mapper.Map(CSVGene, newGenePublicData);
+      //     /*
+      //     First get data from the TSV
+      //     */
+      //     _mapper.Map(CSVGene, newGene);
+      //     _mapper.Map(CSVGene, newGenePublicData);
 
-          /*
-          Second get genome sequence data from the TSV
-          */
+      //     /*
+      //     Second get genome sequence data from the TSV
+      //     */
 
-          try
-          {
+      //     try
+      //     {
 
-            var geneSequenceData = (from geneSequence in GeneSequences
-                                    where geneSequence.GeneName == CSVGene.AccessionNumber
-                                    select new
-                                    {
-                                      GeneLength = geneSequence.GeneLength,
-                                      GeneName = geneSequence.GeneName,
-                                      geneSequence = geneSequence.GeneSequenceData
-                                    }).FirstOrDefault();
+      //       var geneSequenceData = (from geneSequence in GeneSequences
+      //                               where geneSequence.GeneName == CSVGene.AccessionNumber
+      //                               select new
+      //                               {
+      //                                 GeneLength = geneSequence.GeneLength,
+      //                                 GeneName = geneSequence.GeneName,
+      //                                 geneSequence = geneSequence.GeneSequenceData
+      //                               }).FirstOrDefault();
 
-            string[] geneLengthString = geneSequenceData.GeneLength.Split('-');
-            newGenePublicData.Location = geneLengthString[0];
-            newGenePublicData.GeneLength = (Int32.Parse(geneLengthString[1]) - Int32.Parse(geneLengthString[0]) + 1).ToString();
-            newGenePublicData.GeneSequence = geneSequenceData.geneSequence;
-          }
+      //       string[] geneLengthString = geneSequenceData.GeneLength.Split('-');
+      //       newGenePublicData.Location = geneLengthString[0];
+      //       newGenePublicData.GeneLength = (Int32.Parse(geneLengthString[1]) - Int32.Parse(geneLengthString[0]) + 1).ToString();
+      //       newGenePublicData.GeneSequence = geneSequenceData.geneSequence;
+      //     }
 
-          catch (Exception e)
-          {
-            _logger.LogCritical(e.Message);
-          }
+      //     catch (Exception e)
+      //     {
+      //       _logger.LogCritical(e.Message);
+      //     }
 
-          /*
-          Third get protein data from TSV file
-          */
-          try
-          {
-            var proteinSequenceData = (from proteinSequence in ProteinSequences
-                                       where proteinSequence.ProteinName == CSVGene.AccessionNumber
-                                       select new
-                                       {
-                                         Product = proteinSequence.Product,
-                                         ProteinLength = proteinSequence.ProteinLength,
-                                         ProteinSequence = proteinSequence.ProteinSequenceData
-                                       }).FirstOrDefault();
+      //     /*
+      //     Third get protein data from TSV file
+      //     */
+      //     try
+      //     {
+      //       var proteinSequenceData = (from proteinSequence in ProteinSequences
+      //                                  where proteinSequence.ProteinName == CSVGene.AccessionNumber
+      //                                  select new
+      //                                  {
+      //                                    Product = proteinSequence.Product,
+      //                                    ProteinLength = proteinSequence.ProteinLength,
+      //                                    ProteinSequence = proteinSequence.ProteinSequenceData
+      //                                  }).FirstOrDefault();
 
-            newGenePublicData.ProteinLength = proteinSequenceData.ProteinLength;
-            newGenePublicData.ProteinSequence = proteinSequenceData.ProteinSequence;
-          }
-          catch (Exception e)
-          {
-            _logger.LogCritical(e.Message);
-          }
+      //       newGenePublicData.ProteinLength = proteinSequenceData.ProteinLength;
+      //       newGenePublicData.ProteinSequence = proteinSequenceData.ProteinSequence;
+      //     }
+      //     catch (Exception e)
+      //     {
+      //       _logger.LogCritical(e.Message);
+      //     }
 
-          /*
-          Add Gene
-          */
-          newGene.GenePublicData = newGenePublicData;
-          _logger.LogInformation("Adding new Gene" + newGene);
-          await _mediator.Send(new Create.Command { Gene = newGene });
-        }
+      //     /*
+      //     Add Gene
+      //     */
+      //     newGene.GenePublicData = newGenePublicData;
+      //     _logger.LogInformation("Adding new Gene" + newGene);
+      //     await _mediator.Send(new Create.Command { Gene = newGene });
+      //   }
 
 
-        //TODO: Update existing genes
+      //   //TODO: Update existing genes
 
-      }
+      // }
 
      _logger.LogInformation("Gene Vulnerability Data");
 
@@ -170,13 +170,17 @@ namespace Application.BackgroundTasks.GeneSync
           .Include(g => g.GeneVulnerability)
           .FirstOrDefaultAsync(g => g.AccessionNumber == CSVVulnerability.GeneAccessionNumber);
 
-        if (findGene != null && findGene.GeneVulnerability == null)
+        if (findGene != null && findGene.GeneVulnerability.Count == 0)
         {
           var newGeneVulnerability = new GeneVulnerability();
           _mapper.Map(CSVVulnerability, newGeneVulnerability);
-
           newGeneVulnerability.GeneId = findGene.Id;
-          findGene.GeneVulnerability = newGeneVulnerability;
+          newGeneVulnerability.GeneAccessionNumber = findGene.AccessionNumber;
+          newGeneVulnerability.CreatedAt = DateTime.UtcNow;
+          newGeneVulnerability.CreatedBy = "System Sync";
+          newGeneVulnerability.GeneId = findGene.Id;
+          findGene.GeneVulnerability = new List<GeneVulnerability>();
+          findGene.GeneVulnerability.Add(newGeneVulnerability);
 
           _context.GeneVulnerability.Add(newGeneVulnerability);
           await _context.SaveChangesAsync();

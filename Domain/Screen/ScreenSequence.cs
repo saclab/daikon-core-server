@@ -19,6 +19,8 @@ namespace Domain
     public int UnverifiedHitCount { get; set; }
     public int NoOfCompoundsScreened { get; set; }
     public float Concentration { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
 
   }
 }

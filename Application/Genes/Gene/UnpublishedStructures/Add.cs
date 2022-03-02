@@ -61,6 +61,7 @@ namespace Application.Genes.UnpublishedStructures
         newGeneUnpublishedStructures.GeneAccessionNumber = BaseGene.AccessionNumber;
 
 
+
         // Add reference to base gene
         // 1. If no essentiality exists, create a new list
         if (BaseGene.GeneUnpublishedStructures == null)

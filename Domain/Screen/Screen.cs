@@ -21,6 +21,8 @@ namespace Domain
     public List<ScreenSequence> ScreenSequences { get; set; }
     public List<Hit> ValidatedHits { get; set; }
     public string Notes { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
 
   }
 }

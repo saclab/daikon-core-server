@@ -59,6 +59,8 @@ namespace Application.Genes.Essentiality
         newGeneEssentiality.Id = gid;
         newGeneEssentiality.GeneId = BaseGene.Id;
         newGeneEssentiality.GeneAccessionNumber = BaseGene.AccessionNumber;
+        newGeneEssentiality.CreatedAt = DateTime.UtcNow;
+        newGeneEssentiality.CreatedBy = _userAccessor.GetUsername();
 
 
         // Add reference to base gene

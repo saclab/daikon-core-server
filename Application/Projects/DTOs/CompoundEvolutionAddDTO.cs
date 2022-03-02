@@ -12,7 +12,9 @@ namespace Application.Projects.DTOs
     public string MolArea { get; set; }
     public Guid ProjectId { get; set; }
     public string Notes { get; set; }
-    public string MIC { get; set; }
-    public string IC50 { get; set; }
+    public double MIC { get; set; }
+    public double IC50 { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
   }
 }

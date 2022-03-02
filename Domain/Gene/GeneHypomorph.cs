@@ -12,5 +12,7 @@ namespace Domain
     public string GeneAccessionNumber { get; set; }
     public string KnockdownStrain { get; set; }
     public string Phenotype { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
   }
 }

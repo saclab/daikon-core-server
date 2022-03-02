@@ -177,6 +177,8 @@ namespace Application.Projects
           Notes = "Initial FHA Compound",
           MIC = request.NewProject.BaseHits.Find((h) => h.CompoundId == compoundFromDb.Id).MIC,
           IC50 = request.NewProject.BaseHits.Find((h) => h.CompoundId == compoundFromDb.Id).IC50,
+          CreatedAt = DateTime.UtcNow,
+          CreatedBy = _userAccessor.GetUsername()
         };
 
         await _mediator.Send(new Application.Projects.CompoundEvolution.Add.Command { NewProjectCompoundEvolution = projectCompoundEvolution });
