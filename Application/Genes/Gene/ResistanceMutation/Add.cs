@@ -59,6 +59,8 @@ namespace Application.Genes.ResistanceMutation
         newGeneResistanceMutation.Id = gid;
         newGeneResistanceMutation.GeneId = BaseGene.Id;
         newGeneResistanceMutation.GeneAccessionNumber = BaseGene.AccessionNumber;
+        newGeneResistanceMutation.CreatedAt = DateTime.UtcNow;
+        newGeneResistanceMutation.CreatedBy = _userAccessor.GetUsername();
 
 
         // Add reference to base gene

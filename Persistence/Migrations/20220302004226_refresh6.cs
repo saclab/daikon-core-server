@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class consolidated1 : Migration
+    public partial class refresh6 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -91,10 +91,11 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     StrainId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SaccId = table.Column<string>(type: "text", nullable: true),
+                    ExternalCompundIds = table.Column<string>(type: "text", nullable: true),
                     Smile = table.Column<string>(type: "text", nullable: true),
                     MolWeight = table.Column<string>(type: "text", nullable: true),
-                    MolArea = table.Column<string>(type: "text", nullable: true)
+                    MolArea = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,7 +190,9 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CanonicalName = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -218,7 +221,9 @@ namespace Persistence.Migrations
                     HTSFeasibility = table.Column<double>(type: "double precision", nullable: false),
                     SBDFeasibility = table.Column<double>(type: "double precision", nullable: false),
                     Progressibility = table.Column<double>(type: "double precision", nullable: false),
-                    Safety = table.Column<double>(type: "double precision", nullable: false)
+                    Safety = table.Column<double>(type: "double precision", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -235,7 +240,9 @@ namespace Persistence.Migrations
                     Neutral = table.Column<int>(type: "integer", nullable: false),
                     Negative = table.Column<int>(type: "integer", nullable: false),
                     IsVotingAllowed = table.Column<bool>(type: "boolean", nullable: false),
-                    LastModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    LastModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -309,8 +316,10 @@ namespace Persistence.Migrations
                     AddedOnDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     AddedOnStage = table.Column<string>(type: "text", nullable: true),
                     Notes = table.Column<string>(type: "text", nullable: true),
-                    MIC = table.Column<string>(type: "text", nullable: true),
-                    IC50 = table.Column<string>(type: "text", nullable: true)
+                    MIC = table.Column<double>(type: "double precision", nullable: false),
+                    IC50 = table.Column<double>(type: "double precision", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -372,7 +381,9 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     GeneId = table.Column<Guid>(type: "uuid", nullable: false),
                     GeneAccessionNumber = table.Column<string>(type: "text", nullable: true),
-                    CRISPRiStrain = table.Column<string>(type: "text", nullable: true)
+                    CRISPRiStrain = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -397,7 +408,9 @@ namespace Persistence.Migrations
                     Strain = table.Column<string>(type: "text", nullable: true),
                     Method = table.Column<string>(type: "text", nullable: true),
                     Reference = table.Column<string>(type: "text", nullable: true),
-                    Notes = table.Column<string>(type: "text", nullable: true)
+                    Notes = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -445,7 +458,9 @@ namespace Persistence.Migrations
                     GeneId = table.Column<Guid>(type: "uuid", nullable: false),
                     GeneAccessionNumber = table.Column<string>(type: "text", nullable: true),
                     KnockdownStrain = table.Column<string>(type: "text", nullable: true),
-                    Phenotype = table.Column<string>(type: "text", nullable: true)
+                    Phenotype = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -467,7 +482,9 @@ namespace Persistence.Migrations
                     GeneAccessionNumber = table.Column<string>(type: "text", nullable: true),
                     Activity = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<string>(type: "text", nullable: true),
-                    Throughput = table.Column<string>(type: "text", nullable: true)
+                    Throughput = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -490,7 +507,9 @@ namespace Persistence.Migrations
                     Production = table.Column<string>(type: "text", nullable: true),
                     Method = table.Column<string>(type: "text", nullable: true),
                     Purity = table.Column<string>(type: "text", nullable: true),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -556,7 +575,9 @@ namespace Persistence.Migrations
                     ParentStrain = table.Column<string>(type: "text", nullable: true),
                     Compound = table.Column<string>(type: "text", nullable: true),
                     ShiftInMIC = table.Column<string>(type: "text", nullable: true),
-                    Org = table.Column<string>(type: "text", nullable: true)
+                    Org = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -579,7 +600,9 @@ namespace Persistence.Migrations
                     Organization = table.Column<string>(type: "text", nullable: true),
                     Method = table.Column<string>(type: "text", nullable: true),
                     Resolution = table.Column<string>(type: "text", nullable: true),
-                    Ligands = table.Column<string>(type: "text", nullable: true)
+                    Ligands = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -606,7 +629,9 @@ namespace Persistence.Migrations
                     VulnerabilityCondition = table.Column<string>(type: "text", nullable: true),
                     Operon = table.Column<string>(type: "text", nullable: true),
                     Confounded = table.Column<string>(type: "text", nullable: true),
-                    Shell2015Operon = table.Column<string>(type: "text", nullable: true)
+                    Shell2015Operon = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -655,13 +680,16 @@ namespace Persistence.Migrations
                     StrainId = table.Column<Guid>(type: "uuid", nullable: false),
                     TargetId = table.Column<Guid>(type: "uuid", nullable: false),
                     ScreenName = table.Column<string>(type: "text", nullable: true),
+                    Method = table.Column<string>(type: "text", nullable: true),
                     TargetName = table.Column<string>(type: "text", nullable: true),
                     GeneName = table.Column<string>(type: "text", nullable: true),
                     Status = table.Column<string>(type: "text", nullable: true),
                     OrgId = table.Column<Guid>(type: "uuid", nullable: false),
                     PromotionDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Promoter = table.Column<string>(type: "text", nullable: true),
-                    Notes = table.Column<string>(type: "text", nullable: true)
+                    Notes = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -713,7 +741,9 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TargetID = table.Column<Guid>(type: "uuid", nullable: false),
-                    TargetName = table.Column<string>(type: "text", nullable: true)
+                    TargetName = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -845,10 +875,14 @@ namespace Persistence.Migrations
                     Library = table.Column<string>(type: "text", nullable: true),
                     Source = table.Column<string>(type: "text", nullable: true),
                     Method = table.Column<string>(type: "text", nullable: true),
-                    MIC = table.Column<string>(type: "text", nullable: true),
-                    IC50 = table.Column<string>(type: "text", nullable: true),
+                    MIC = table.Column<double>(type: "double precision", nullable: false),
+                    MICCondition = table.Column<string>(type: "text", nullable: true),
+                    IC50 = table.Column<double>(type: "double precision", nullable: false),
                     ClusterGroup = table.Column<int>(type: "integer", nullable: false),
-                    CompoundId = table.Column<Guid>(type: "uuid", nullable: false)
+                    CompoundId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    VoteId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -865,6 +899,12 @@ namespace Persistence.Migrations
                         principalTable: "Screens",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Hits_Votes_VoteId",
+                        column: x => x.VoteId,
+                        principalTable: "Votes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -874,6 +914,8 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     StrainId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProjectName = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
                     ScreenId = table.Column<Guid>(type: "uuid", nullable: false),
                     TargetName = table.Column<string>(type: "text", nullable: true),
                     TargetId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -947,10 +989,12 @@ namespace Persistence.Migrations
                     Library = table.Column<string>(type: "text", nullable: true),
                     Scientist = table.Column<string>(type: "text", nullable: true),
                     StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UnverifiedHitCount = table.Column<int>(type: "integer", nullable: false),
                     NoOfCompoundsScreened = table.Column<int>(type: "integer", nullable: false),
-                    Concentration = table.Column<float>(type: "real", nullable: false)
+                    Concentration = table.Column<float>(type: "real", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1181,8 +1225,7 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_GeneVulnerability_GeneId",
                 table: "GeneVulnerability",
-                column: "GeneId",
-                unique: true);
+                column: "GeneId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Hits_CompoundId",
@@ -1193,6 +1236,11 @@ namespace Persistence.Migrations
                 name: "IX_Hits_ScreenId",
                 table: "Hits",
                 column: "ScreenId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hits_VoteId",
+                table: "Hits",
+                column: "VoteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectBaseHits_HitId",

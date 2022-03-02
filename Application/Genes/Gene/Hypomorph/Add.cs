@@ -58,6 +58,8 @@ namespace Application.Genes.Hypomorph
         newGeneHypomorph.Id = gid;
         newGeneHypomorph.GeneId = BaseGene.Id;
         newGeneHypomorph.GeneAccessionNumber = BaseGene.AccessionNumber;
+        newGeneHypomorph.CreatedAt = DateTime.UtcNow;
+        newGeneHypomorph.CreatedBy = _userAccessor.GetUsername();
 
 
         // Add reference to base gene

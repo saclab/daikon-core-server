@@ -59,6 +59,8 @@ namespace Application.Genes.ProteinActivityAssay
         newGeneProteinActivityAssay.Id = gid;
         newGeneProteinActivityAssay.GeneId = BaseGene.Id;
         newGeneProteinActivityAssay.GeneAccessionNumber = BaseGene.AccessionNumber;
+        newGeneProteinActivityAssay.CreatedAt = DateTime.UtcNow;
+        newGeneProteinActivityAssay.CreatedBy = _userAccessor.GetUsername();
 
 
         // Add reference to base gene

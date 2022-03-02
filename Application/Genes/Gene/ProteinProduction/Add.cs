@@ -59,6 +59,8 @@ namespace Application.Genes.ProteinProduction
         newGeneProteinProduction.Id = gid;
         newGeneProteinProduction.GeneId = BaseGene.Id;
         newGeneProteinProduction.GeneAccessionNumber = BaseGene.AccessionNumber;
+        newGeneProteinProduction.CreatedAt = DateTime.UtcNow;
+        newGeneProteinProduction.CreatedBy = _userAccessor.GetUsername();
 
 
         // Add reference to base gene

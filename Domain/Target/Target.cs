@@ -27,6 +27,8 @@ namespace Domain
     public double Progressibility { get; set; }
     public double Safety { get; set; }
     public TargetScorecard TargetScorecard { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
 
   }
 }
