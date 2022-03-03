@@ -11,6 +11,8 @@ Data:
     Value: Hypomorph
   - Key: ScreeningMethod
     Value: Fragment screen
+  - Key: FHAAnticipatedDays
+    Value: 350
   - Key: H2LAnticipatedDays
     Value: 475
   - Key: LOAnticipatedDays

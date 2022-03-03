@@ -158,15 +158,15 @@ namespace Application.Projects
         newProject.FHAEnabled = true;
 
         /* Prediction of Next Stage Start Date */
-        var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "H2LAnticipatedDays");
+        var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "FHAAnticipatedDays");
         
-        double daysToAdd = 475; /* This is the default value, unless overidden by database */
+        double daysToAdd = 350; /* This is the default value, unless overridden by database */
         if (fetchPredictedDaysToAdd != null)
         {
           daysToAdd = Double.Parse(fetchPredictedDaysToAdd.Value);
         }
        
-        newProject.LOPredictedStart = newProject.FHAStart.AddDays(daysToAdd);
+        newProject.H2LPredictedStart = newProject.FHAStart.AddDays(daysToAdd);
         
         _context.Projects.Add(newProject);
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
