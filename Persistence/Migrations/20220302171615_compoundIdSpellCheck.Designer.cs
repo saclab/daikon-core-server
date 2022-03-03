@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -9,9 +10,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220302171615_compoundIdSpellCheck")]
+    partial class compoundIdSpellCheck
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -863,18 +865,6 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ClinicalP1Description")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("ClinicalP1Enabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("ClinicalP1PredictedStart")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("ClinicalP1Start")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
@@ -896,9 +886,6 @@ namespace Persistence.Migrations
                     b.Property<bool>("FHAEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("FHAPredictedStart")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<DateTime>("FHAStart")
                         .HasColumnType("timestamp without time zone");
 
@@ -907,9 +894,6 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("H2LEnabled")
                         .HasColumnType("boolean");
-
-                    b.Property<DateTime>("H2LPredictedStart")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("H2LStart")
                         .HasColumnType("timestamp without time zone");
@@ -920,9 +904,6 @@ namespace Persistence.Migrations
                     b.Property<bool>("INDEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("INDPredictedStart")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<DateTime>("INDStart")
                         .HasColumnType("timestamp without time zone");
 
@@ -932,10 +913,16 @@ namespace Persistence.Migrations
                     b.Property<bool>("LOEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LOPredictedStart")
+                    b.Property<DateTime>("LOStart")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("LOStart")
+                    b.Property<string>("P1Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("P1Enabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("P1Start")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("PCDDate")
@@ -982,9 +969,6 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("SPEnabled")
                         .HasColumnType("boolean");
-
-                    b.Property<DateTime>("SPPredictedStart")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("SPStart")
                         .HasColumnType("timestamp without time zone");

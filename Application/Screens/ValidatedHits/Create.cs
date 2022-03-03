@@ -69,7 +69,7 @@ namespace Application.Screens.ValidatedHits
         {
           Id = CompoundGid,
           Smile = request.NewHit.Smile,
-          ExternalCompundIds = request.NewHit.ExternalCompundIds,
+          ExternalCompoundIds = request.NewHit.ExternalCompoundIds,
           MolWeight = request.NewHit.MolWeight,
           MolArea = request.NewHit.MolArea
         };
