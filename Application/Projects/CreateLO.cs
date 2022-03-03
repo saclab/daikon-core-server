@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -66,6 +67,17 @@ namespace Application.Projects
         Project.CurrentStage = ProjectStage.LO.Value;
         Project.Status = ProjectStatus.Active.Value;
         Project.LOEnabled = true;
+
+        /* Prediction of Next Stage Start Date */
+        var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "LOAnticipatedDays");
+
+        double daysToAdd = 585; /* This is the default value, unless overridden by database */
+        if (fetchPredictedDaysToAdd != null)
+        {
+          daysToAdd = Double.Parse(fetchPredictedDaysToAdd.Value);
+        }
+
+        Project.SPPredictedStart = Project.LOStart.AddDays(daysToAdd);
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
