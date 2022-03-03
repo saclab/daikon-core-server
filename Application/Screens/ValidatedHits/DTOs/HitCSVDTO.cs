@@ -6,7 +6,7 @@ namespace Application.Screens.ValidatedHits.DTOs
   {
     public Guid Id { get; set; }
     public Guid ScreenId { get; set; }
-    public string ExternalCompundIds { get; set; }
+    public string ExternalCompoundIds { get; set; }
     public string TargetName { get; set; }
     public string Library { get; set; }
     public string Source { get; set; }
