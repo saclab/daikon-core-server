@@ -157,17 +157,21 @@ namespace Application.Projects
         newProject.Status = ProjectStatus.Active.Value;
         newProject.FHAEnabled = true;
 
-        Console.WriteLine("[Will try] to add project");
-
+        /* Prediction of Next Stage Start Date */
+        var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "H2LAnticipatedDays");
+        
+        double daysToAdd = 475; /* This is the default value, unless overidden by database */
+        if (fetchPredictedDaysToAdd != null)
+        {
+          daysToAdd = Double.Parse(fetchPredictedDaysToAdd.Value);
+        }
+       
+        newProject.LOPredictedStart = newProject.FHAStart.AddDays(daysToAdd);
+        
         _context.Projects.Add(newProject);
-
-        Console.WriteLine("[complete] adding project");
-        Console.WriteLine("[Will try] to link primary org");
-        Console.WriteLine("[SAVING...]");
-
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
-        Console.WriteLine("[COMPLETE...]");
 
+        /* To Strat of the compond evolution timeline, add the primary hit as a starting point */
         var projectCompoundEvolution = new CompoundEvolutionAddDTO
         {
           Smile = compoundFromDb.Smile,
@@ -180,10 +184,9 @@ namespace Application.Projects
           CreatedAt = DateTime.UtcNow,
           CreatedBy = _userAccessor.GetUsername()
         };
-
         await _mediator.Send(new Application.Projects.CompoundEvolution.Add.Command { NewProjectCompoundEvolution = projectCompoundEvolution });
 
-        if (!success) return Result<Project>.Failure("Failed to create screen");
+        if (!success) return Result<Project>.Failure("Failed to create H2L");
         return Result<Project>.Success(newProject);
 
       }
