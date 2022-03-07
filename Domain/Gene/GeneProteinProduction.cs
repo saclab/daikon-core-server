@@ -14,5 +14,7 @@ namespace Domain
     public string Method { get; set; }
     public string Purity { get; set; }
     public DateTime Date { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
   }
 }

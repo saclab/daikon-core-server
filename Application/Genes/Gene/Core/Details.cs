@@ -38,7 +38,7 @@ namespace Application.Genes
       {
         var gene = await _context.Genes
         .Include(g => g.GenePublicData)
-        // .Include(g => g.GeneNonPublicData)
+        .Include(g => g.GeneVulnerability)
         .Include(g => g.GeneEssentiality)
         .Include(g=> g.GeneVulnerability)
         .Include(g=> g.GeneProteinProduction)

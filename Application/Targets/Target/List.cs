@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -32,6 +33,7 @@ namespace Application.Targets
       {
         var targets = await _context.Targets
         .Include(t => t.TargetGenes)
+        .OrderBy(t => t.Name)
         .ToListAsync(cancellationToken);
 
         return Result<List<Target>>.Success(targets);

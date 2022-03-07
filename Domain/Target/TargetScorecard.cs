@@ -9,6 +9,8 @@ namespace Domain
     public Guid TargetID { get; set; }
     public string TargetName { get; set; }
     public List<TargetScoreCardValue> TargetScoreCardValues { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
 
   }
 }

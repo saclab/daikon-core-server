@@ -72,6 +72,9 @@ namespace Application.Targets
           }
         };
 
+        TargetToCreate.CreatedAt = DateTime.UtcNow;
+        TargetToCreate.CreatedBy = _userAccessor.GetUsername();
+
         foreach (var genePromotionRequestGene in request.GenePromotionRequest.GenePromtionRequestGenes)
         {
           var gene = await _context.Genes.FirstOrDefaultAsync(g => g.Id == genePromotionRequestGene.GeneId);

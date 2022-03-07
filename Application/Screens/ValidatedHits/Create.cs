@@ -69,7 +69,7 @@ namespace Application.Screens.ValidatedHits
         {
           Id = CompoundGid,
           Smile = request.NewHit.Smile,
-          SaccId = request.NewHit.SaccId,
+          ExternalCompoundIds = request.NewHit.ExternalCompoundIds,
           MolWeight = request.NewHit.MolWeight,
           MolArea = request.NewHit.MolArea
         };
@@ -85,8 +85,11 @@ namespace Application.Screens.ValidatedHits
           Positive = 0,
           Neutral = 0,
           Negative = 0,
-          IsVotingAllowed = true
+          IsVotingAllowed = true,
+          CreatedAt = DateTime.UtcNow,
+          CreatedBy = _userAccessor.GetUsername(),
         };
+
 
         _context.Votes.Add(VoteToCreate);
 
@@ -102,11 +105,15 @@ namespace Application.Screens.ValidatedHits
           Compound = CompoundToCreate,
           Method = request.NewHit.Method,
           MIC = request.NewHit.MIC,
+          MICCondition = request.NewHit.MICCondition,
           IC50 = request.NewHit.IC50,
           ClusterGroup = Int32.Parse(request.NewHit.ClusterGroup),
           Vote = VoteToCreate,
           VoteId = VoteGid
         };
+
+        HitToCreate.CreatedAt = DateTime.UtcNow;
+        HitToCreate.CreatedBy = _userAccessor.GetUsername();
 
         _context.Hits.Add(HitToCreate);
 

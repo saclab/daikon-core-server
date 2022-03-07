@@ -78,8 +78,8 @@ namespace Persistence
                   },
                   /* Section 7: Vulnerability  */
 
-                  GeneVulnerability = new GeneVulnerability
-                  {
+                  GeneVulnerability = new List<GeneVulnerability>{
+                    new GeneVulnerability {
                     Rank = "Rank Data",
                     UVi = "U_Vi Data",
                     IVi = "I_Vi Data",
@@ -88,7 +88,8 @@ namespace Persistence
                     Operon = "Operon Data",
                     Confounded = "Confounded Data",
                     Shell2015Operon = "Shell_2015Operon Data",
-                  },
+                  }}
+                  ,
 
                   /* Section 1: Essentiality  */
 

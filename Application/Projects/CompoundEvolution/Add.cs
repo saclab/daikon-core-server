@@ -56,6 +56,7 @@ namespace Application.Projects.CompoundEvolution
 
         
         Console.WriteLine("[Project] Found");
+        
         /* check if the compound smile exists */
         var compound = await _context.Compounds.FirstOrDefaultAsync
         (c => c.Smile == request.NewProjectCompoundEvolution.Smile);
@@ -90,6 +91,9 @@ namespace Application.Projects.CompoundEvolution
         newProjectCompoundEvolution.Notes = request.NewProjectCompoundEvolution.Notes;
         newProjectCompoundEvolution.MIC = request.NewProjectCompoundEvolution.MIC;
         newProjectCompoundEvolution.IC50 = request.NewProjectCompoundEvolution.IC50;
+
+        newProjectCompoundEvolution.CreatedAt = DateTime.UtcNow;
+        newProjectCompoundEvolution.CreatedBy = _userAccessor.GetUsername();
 
         _context.ProjectCompoundEvolutions.Add(newProjectCompoundEvolution);
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;

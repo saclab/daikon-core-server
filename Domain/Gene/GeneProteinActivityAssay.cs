@@ -13,5 +13,7 @@ namespace Domain
     public string Activity { get; set; }
     public string Type { get; set; }
     public string Throughput { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
   }
 }

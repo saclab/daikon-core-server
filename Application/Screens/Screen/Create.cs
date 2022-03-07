@@ -100,6 +100,9 @@ namespace Application.Screens
           Notes = request.NewScreen.Notes
         };
 
+        ScreenToCreate.CreatedAt = DateTime.UtcNow;
+        ScreenToCreate.CreatedBy = _userAccessor.GetUsername();
+
         _context.Screens.Add(ScreenToCreate);
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
