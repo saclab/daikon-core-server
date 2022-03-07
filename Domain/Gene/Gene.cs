@@ -21,7 +21,7 @@ namespace Domain
     public List<GeneProteinActivityAssay> GeneProteinActivityAssay { get; set; }
     public List<GeneCRISPRiStrain> GeneCRISPRiStrain { get; set; }
     public List<GeneResistanceMutation> GeneResistanceMutation { get; set; }
-    public GeneVulnerability GeneVulnerability { get; set; }
+    public List<GeneVulnerability> GeneVulnerability { get; set; }
     public List<GeneHypomorph> GeneHypomorphs { get; set; }
     public List<GeneUnpublishedStructures> GeneUnpublishedStructures { get; set; }
 

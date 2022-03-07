@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220217174827_hit-vote")]
-    partial class hitvote
+    [Migration("20220302004226_refresh6")]
+    partial class refresh6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -212,13 +212,16 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ExternalCompundIds")
+                        .HasColumnType("text");
+
                     b.Property<string>("MolArea")
                         .HasColumnType("text");
 
                     b.Property<string>("MolWeight")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SaccId")
                         .HasColumnType("text");
 
                     b.Property<string>("Smile")
@@ -305,6 +308,12 @@ namespace Persistence.Migrations
                     b.Property<string>("CRISPRiStrain")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
 
@@ -328,6 +337,12 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Condition")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
                     b.Property<string>("GeneAccessionNumber")
@@ -360,6 +375,12 @@ namespace Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
@@ -458,6 +479,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Activity")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
 
@@ -482,6 +509,12 @@ namespace Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
@@ -603,6 +636,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Compound")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
 
@@ -636,6 +675,12 @@ namespace Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
@@ -671,6 +716,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Confounded")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
 
@@ -700,8 +751,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneId")
-                        .IsUnique();
+                    b.HasIndex("GeneId");
 
                     b.ToTable("GeneVulnerability");
                 });
@@ -718,13 +768,22 @@ namespace Persistence.Migrations
                     b.Property<Guid>("CompoundId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("IC50")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
                         .HasColumnType("text");
+
+                    b.Property<double>("IC50")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Library")
                         .HasColumnType("text");
 
-                    b.Property<string>("MIC")
+                    b.Property<double>("MIC")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("MICCondition")
                         .HasColumnType("text");
 
                     b.Property<string>("Method")
@@ -805,6 +864,12 @@ namespace Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("CurrentStage")
                         .HasColumnType("text");
@@ -970,11 +1035,17 @@ namespace Persistence.Migrations
                     b.Property<Guid>("CompoundId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("IC50")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<string>("MIC")
-                        .HasColumnType("text");
+                    b.Property<double>("IC50")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("MIC")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Notes")
                         .HasColumnType("text");
@@ -1100,6 +1171,12 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
                     b.Property<string>("GeneName")
                         .HasColumnType("text");
 
@@ -1151,7 +1228,13 @@ namespace Persistence.Migrations
                     b.Property<float>("Concentration")
                         .HasColumnType("real");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Library")
@@ -1197,6 +1280,12 @@ namespace Persistence.Migrations
                     b.Property<string>("CanonicalName")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -1212,6 +1301,12 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Bucket")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
                     b.Property<double>("HTSFeasibility")
@@ -1348,6 +1443,12 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("TargetID")
                         .HasColumnType("uuid");
 
@@ -1390,6 +1491,12 @@ namespace Persistence.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<Guid>("ElementId")
                         .HasColumnType("uuid");
@@ -1662,8 +1769,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.GeneVulnerability", b =>
                 {
                     b.HasOne("Domain.Gene", null)
-                        .WithOne("GeneVulnerability")
-                        .HasForeignKey("Domain.GeneVulnerability", "GeneId")
+                        .WithMany("GeneVulnerability")
+                        .HasForeignKey("GeneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

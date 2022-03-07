@@ -59,6 +59,8 @@ namespace Application.Genes.CRISPRiStrain
         newGeneCRISPRiStrain.Id = gid;
         newGeneCRISPRiStrain.GeneId = BaseGene.Id;
         newGeneCRISPRiStrain.GeneAccessionNumber = BaseGene.AccessionNumber;
+        newGeneCRISPRiStrain.CreatedAt = DateTime.UtcNow;
+        newGeneCRISPRiStrain.CreatedBy =  _userAccessor.GetUsername();
 
 
         // Add reference to base gene

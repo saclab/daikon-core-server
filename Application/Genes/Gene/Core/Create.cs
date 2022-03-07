@@ -64,12 +64,12 @@ namespace Application.Genes
         // GeneToCreate.GeneNonPublicData = newGeneNonPublicData;
         // _context.GeneNonPublicData.Add(newGeneNonPublicData);
 
-        var newGeneVulnerability = new GeneVulnerability();
-        _mapper.Map(request.Gene.GeneVulnerability, newGeneVulnerability);
-        newGeneVulnerability.Id = Guid.NewGuid();
-        newGeneVulnerability.GeneId = gid;
-        GeneToCreate.GeneVulnerability = newGeneVulnerability;
-        _context.GeneVulnerability.Add(newGeneVulnerability);
+        // var newGeneVulnerability = new GeneVulnerability();
+        // _mapper.Map(request.Gene.GeneVulnerability, newGeneVulnerability);
+        // newGeneVulnerability.Id = Guid.NewGuid();
+        // newGeneVulnerability.GeneId = gid;
+        // GeneToCreate.GeneVulnerability = newGeneVulnerability;
+        // _context.GeneVulnerability.Add(newGeneVulnerability);
 
 
         _context.Genes.Add(GeneToCreate);
@@ -77,7 +77,7 @@ namespace Application.Genes
 
         var success = await _context.SaveChangesAsync() > 0;
 
-        if (!success) return Result<Gene>.Failure("Failed to create Genome");
+        if (!success) return Result<Gene>.Failure("Failed to create Gene");
         return Result<Gene>.Success(GeneToCreate);
 
       }

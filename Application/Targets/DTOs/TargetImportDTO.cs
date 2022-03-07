@@ -4,7 +4,9 @@ namespace Application.Targets.DTOs
 {
   public class TargetImportDTO : GenePromotionRequest
   {
-     public string Bucket { get; set; }
+
+    public string Bucket { get; set; }
+    public string SimpleProteinAccessionNumber { get; set; }
     public double ImpactScore { get; set; }
     public double ImpactComplete { get; set; }
     public double LikeScore { get; set; }

@@ -15,5 +15,7 @@ namespace Domain
     public bool IsVotingAllowed { get; set; }
     public DateTime LastModified { get; set; }
     public List<Voter> Voters { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public string CreatedBy { get; set; }
   }
 }

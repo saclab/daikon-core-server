@@ -29,7 +29,7 @@ namespace Application.Genes
       }
       public async Task<Result<List<Gene>>> Handle(Query request, CancellationToken cancellationToken)
       {
-        var genes = await _context.Genes.OrderByDescending(g => g.AccessionNumber).ToListAsync(cancellationToken);
+        var genes = await _context.Genes.OrderBy(g => g.GeneName).ToListAsync(cancellationToken);
 
 
         return Result<List<Gene>>.Success(genes);

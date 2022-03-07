@@ -53,7 +53,7 @@ namespace Application.Discussions
           Topic = request.Discussion.Topic,
           Description = request.Discussion.Description,
           PostedBy = _userAccessor.GetUsername(),
-          Timestamp = DateTime.Now,
+          Timestamp = DateTime.UtcNow,
           Mentions = request.Discussion.Mentions,
           Tags = request.Discussion.Tags,
           Replies = new List<Reply>()

@@ -25,5 +25,12 @@ namespace API.Controllers.General.Project
     {
       return HandleResult(await Mediator.Send(new Application.Projects.CompoundEvolution.Details.Query { ProjectId = projectId }));
     }
+
+    [HttpPost("{id}")]
+    public async Task<IActionResult> ModifyPriorityProbability(Guid id, Application.Projects.DTOs.ProjectPriorityProbabilityDTO projectPriorityProbability)
+    {
+      projectPriorityProbability.Id = id;
+      return HandleResult(await Mediator.Send(new Application.Projects.SetPriorityProbability.Command { projectPriorityProbabilityDTO = projectPriorityProbability }));
+    }
   }
 }
