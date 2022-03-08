@@ -4,3 +4,6 @@ Data:
   - Name : root
   - Name : admin
   - Name : user
+  - Name : projectManager
+  - Name : screener
+  - Name : voter
