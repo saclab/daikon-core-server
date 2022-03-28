@@ -46,6 +46,14 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Projects.CreateIND.Command { INDDetails = iNDDetails }));
     }
 
+    /* Promote to P1 */
+    [HttpPost("{id}/createP1")]
+    public async Task<IActionResult> CreateP1(Guid id, Application.Projects.DTOs.P1DTO p1Details)
+    {
+      p1Details.Id = id;
+      return HandleResult(await Mediator.Send(new Application.Projects.CreateP1.Command { P1Details = p1Details }));
+    }
+
 
     [HttpPost("{projectId}/compoundevolution")]
     public async Task<IActionResult> AddCompoundEvolution(Guid projectId, Application.Projects.DTOs.CompoundEvolutionAddDTO projectCompoundEvolution)
