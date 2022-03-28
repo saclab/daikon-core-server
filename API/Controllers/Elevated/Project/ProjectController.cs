@@ -38,6 +38,14 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Projects.CreateSP.Command { SPDetails = sPDetails }));
     }
 
+    /* Promote to IND */
+    [HttpPost("{id}/createIND")]
+    public async Task<IActionResult> CreateIND(Guid id, Application.Projects.DTOs.INDDTO iNDDetails)
+    {
+      iNDDetails.Id = id;
+      return HandleResult(await Mediator.Send(new Application.Projects.CreateIND.Command { INDDetails = iNDDetails }));
+    }
+
 
     [HttpPost("{projectId}/compoundevolution")]
     public async Task<IActionResult> AddCompoundEvolution(Guid projectId, Application.Projects.DTOs.CompoundEvolutionAddDTO projectCompoundEvolution)
