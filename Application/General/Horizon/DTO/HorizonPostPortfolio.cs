@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Application.General.Horizon.DTO
 {
-  public class HorizonPortfolio
+  public class HorizonPostPortfolio
   {
     public string Name { get; set; }
     public class Attribute
@@ -20,9 +20,9 @@ namespace Application.General.Horizon.DTO
     }
 
     public Attribute Attributes { get; set; }
-    public List<HorizonPostPortfolio> Children { get; set; }
+    //public List<HorizonTarget> Children { get; set; }
 
-    public HorizonPortfolio()
+    public HorizonPostPortfolio()
     {
       this.Attributes = new Attribute();
     }
