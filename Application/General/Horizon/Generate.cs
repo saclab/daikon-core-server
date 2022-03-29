@@ -162,6 +162,24 @@ namespace Application.General.Horizon
                 /* Insetr new if ans post portfolio */
                 // {if}
 
+                if (project.INDEnabled || project.ClinicalP1Enabled)
+                {
+                  var horizionPostPortfolio = new HorizonPostPortfolio
+                  {
+                    Name = "PostPortfolio",
+                    Attributes =
+                  {
+                  Id = project.Id,
+                  TargetName = project.TargetName,
+                  ProjectName = project.ProjectName,
+                  Status = project.Status,
+                  CurrentStage = project.CurrentStage
+                  }
+                  };
+
+                  horizonPortfolio.Children = new List<HorizonPostPortfolio>();
+                  horizonPortfolio.Children.Add(horizionPostPortfolio);
+                }
 
                 horizionFHA.Children = new List<HorizonPortfolio>();
                 horizionFHA.Children.Add(horizonPortfolio);
