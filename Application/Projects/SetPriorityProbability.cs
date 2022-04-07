@@ -40,10 +40,10 @@ namespace Application.Projects
 
         if (project == null) return Result<Project>.Failure("Invalid Project Id");
 
-        project.Probability = request.projectPriorityProbabilityDTO.Probability;
-        project.ProbabilityDescription = request.projectPriorityProbabilityDTO.ProbabilityDescription;
-        project.Priority = request.projectPriorityProbabilityDTO.Priority;
-        project.PriorityDescription = request.projectPriorityProbabilityDTO.PriorityDescription;
+        project.TeamProbability = request.projectPriorityProbabilityDTO.TeamProbability;
+        project.TeamProbabilityDescription = request.projectPriorityProbabilityDTO.TeamProbabilityDescription;
+        project.TeamPriority = request.projectPriorityProbabilityDTO.TeamPriority;
+        project.TeamPriorityDescription = request.projectPriorityProbabilityDTO.TeamPriorityDescription;
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
