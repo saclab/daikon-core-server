@@ -14,6 +14,15 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Projects.CreateFHA.Command { NewProject = newProject }));
     }
 
+    /* Edit Project */
+
+    [HttpPost("{id}")]
+    public async Task<IActionResult> EditProject(Guid id, Application.Projects.DTOs.ProjectEditDTO project)
+    {
+      project.Id = id;
+      return HandleResult(await Mediator.Send(new Application.Projects.Edit.Command { project = project }));
+    }
+
     /* Promote to h2l */
     [HttpPost("{id}/createH2L")]
     public async Task<IActionResult> CreateH2L(Guid id, Application.Projects.DTOs.H2LDTO h2LDetails)
