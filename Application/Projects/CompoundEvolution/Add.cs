@@ -54,6 +54,12 @@ namespace Application.Projects.CompoundEvolution
           return Result<ProjectCompoundEvolution>.Failure("Invalid Project ID" + request.NewProjectCompoundEvolution.ProjectId);
         }
 
+        if (baseProject.Status == ProjectStatus.Terminated.Value)
+        {
+          return Result<ProjectCompoundEvolution>.Failure("Denied : Cannot modify a terminated project");
+        }
+
+
         
         Console.WriteLine("[Project] Found");
         

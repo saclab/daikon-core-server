@@ -52,6 +52,12 @@ namespace Application.Projects
           return Result<Project>.Failure("Invalid Project ID");
         }
 
+        if (Project.Status == ProjectStatus.Terminated.Value)
+        {
+          return Result<Project>.Failure("Denied : Cannot modify a terminated project");
+        }
+
+
         /* check if the project is in SP Stage */
 
         if (Project.CurrentStage != ProjectStage.SP.Value)
