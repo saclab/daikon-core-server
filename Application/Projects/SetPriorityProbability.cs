@@ -40,6 +40,14 @@ namespace Application.Projects
 
         if (project == null) return Result<Project>.Failure("Invalid Project Id");
 
+        /* check if the project is in Terminated State */
+
+        if (project.Status == ProjectStatus.Terminated.Value)
+        {
+          return Result<Project>.Failure("Denied : Cannot modify a terminated project");
+        }
+
+
         project.TeamProbability = request.projectPriorityProbabilityDTO.TeamProbability;
         project.TeamProbabilityDescription = request.projectPriorityProbabilityDTO.TeamProbabilityDescription;
         project.TeamPriority = request.projectPriorityProbabilityDTO.TeamPriority;

@@ -8,6 +8,7 @@ namespace Application.Projects
 
     public static ProjectStatus Active { get { return new ProjectStatus("Active"); } }
     public static ProjectStatus Terminated { get { return new ProjectStatus("Terminated"); } }
+    public static ProjectStatus Complete { get { return new ProjectStatus("Complete"); } }
 
   }
 }

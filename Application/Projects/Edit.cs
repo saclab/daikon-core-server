@@ -100,7 +100,7 @@ namespace Application.Projects
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
-        if (!success) return Result<Project>.Failure("Failed to promote project to H2L");
+        if (!success) return Result<Project>.Failure("Failed to edit project");
         return Result<Project>.Success(projectToEdit);
 
       }
