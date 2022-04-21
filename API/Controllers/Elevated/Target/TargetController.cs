@@ -25,5 +25,11 @@ namespace API.Controllers.Elevated
     {
       return HandleResult(await Mediator.Send(new Application.Targets.Import.Command { TargetImportDTO = TargetImportDTO }));
     }
+
+    [HttpPost("importComplex")]
+    public async Task<IActionResult> ImportComplexActivity(Application.Targets.DTOs.TargetImportDTO TargetImportDTO)
+    {
+      return HandleResult(await Mediator.Send(new Application.Targets.ImportComplex.Command { TargetImportDTO = TargetImportDTO }));
+    }
   }
 }
