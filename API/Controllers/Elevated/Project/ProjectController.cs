@@ -14,6 +14,13 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Projects.CreateFHA.Command { NewProject = newProject }));
     }
 
+    /* Create a new unlinked project with FHA Data */
+    [HttpPost("unlinked")]
+    public async Task<IActionResult> CreateUnlinkedProject(Application.Projects.DTOs.UnlinkedProjectCreateDTO newProject)
+    {
+      return HandleResult(await Mediator.Send(new Application.Projects.CreateUnlinkedProject.Command { NewProjectForm = newProject }));
+    }
+
     /* Edit Project */
 
     [HttpPost("{id}")]
