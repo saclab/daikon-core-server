@@ -41,7 +41,7 @@ namespace Application.General.Horizon
         // }
 
         var horizonRoot = new HorizonRoot();
-        horizonRoot.Children = new List<HorizonTarget>();
+
         // {
         //   Name = "Gene",
         //   Attributes = {
@@ -51,8 +51,6 @@ namespace Application.General.Horizon
         //     }
 
         // };
-
-
         /*Now lets check if we have a target */
         var target = await _context.Targets
           .Include(t => t.TargetGenes)
@@ -60,8 +58,109 @@ namespace Application.General.Horizon
 
         if (target == null)
         {
-          return Result<HorizonRoot>.Failure("The Target Does Not Exists");
+          /* check if it is an unlinked project */
+          var project = await _context.Projects.FirstOrDefaultAsync(p => p.ProjectName == request.TargetName);
+
+          if (project == null)
+          {
+            return Result<HorizonRoot>.Failure("The Target Does Not Exists");
+          }
+          horizonRoot.Children = new List<HorizonTarget>();
+          horizonRoot.Name = "Gene";
+          horizonRoot.Attributes.AccessionNumber = "Unknown";
+
+          var blankHorizonTarget = new HorizonTarget
+          {
+            Name = "Target",
+            Attributes = {
+                TargetName = "Unknown",
+                TargetType = "simple-protein",
+            }
+          };
+
+          horizonRoot.Children.Add(blankHorizonTarget);
+
+          blankHorizonTarget.Children = new List<HorizonScreen>();
+
+          var blankHorizonScreen = new HorizonScreen
+          {
+            Name = "Screen",
+            Attributes = {
+
+                  ScreenName = "Unknown",
+                  TargetName = "Unknown",
+                  ScreenMethod = "Phenotypic"
+
+              }
+          };
+          blankHorizonTarget.Children.Add(blankHorizonScreen);
+
+          blankHorizonScreen.Children = new List<HorizonFHA>();
+          var unlinkedHorizionFHA = new HorizonFHA
+          {
+            Name = "FHA",
+            Attributes = {
+                  Id = project.Id,
+                  TargetName = "Unknown",
+                  ProjectName = project.ProjectName,
+                  Status = project.Status,
+                }
+          };
+
+          if (project.H2LEnabled || project.LOEnabled || project.SPEnabled)
+          {
+            var unlinkedHorizonPortfolio = new HorizonPortfolio
+            {
+              Name = "Portfolio",
+              Attributes =
+                  {
+                  Id = project.Id,
+                  TargetName = project.TargetName,
+                  ProjectName = project.ProjectName,
+                  Status = project.Status,
+                  CurrentStage = project.CurrentStage
+                  }
+            };
+
+            /* Insetr new if ans post portfolio */
+            // {if}
+
+            if (project.INDEnabled || project.ClinicalP1Enabled)
+            {
+              var unlinkedHorizionPostPortfolio = new HorizonPostPortfolio
+              {
+                Name = "PostPortfolio",
+                Attributes =
+                  {
+                  Id = project.Id,
+                  TargetName = project.TargetName,
+                  ProjectName = project.ProjectName,
+                  Status = project.Status,
+                  CurrentStage = project.CurrentStage
+                  }
+              };
+
+              unlinkedHorizonPortfolio.Children = new List<HorizonPostPortfolio>();
+              unlinkedHorizonPortfolio.Children.Add(unlinkedHorizionPostPortfolio);
+            }
+
+            unlinkedHorizionFHA.Children = new List<HorizonPortfolio>();
+            unlinkedHorizionFHA.Children.Add(unlinkedHorizonPortfolio);
+
+          }
+
+          blankHorizonScreen.Children.Add(unlinkedHorizionFHA);
+
+          return Result<HorizonRoot>.Success(horizonRoot);
+
+
         }
+
+
+
+
+
+        horizonRoot.Children = new List<HorizonTarget>();
 
         horizonRoot.Attributes.TargetName = target.Name;
 
