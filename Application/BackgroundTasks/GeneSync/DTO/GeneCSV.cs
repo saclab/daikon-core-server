@@ -67,5 +67,9 @@ namespace Application.BackgroundTasks.GeneSync.DTO
     [Name("Orthologues M. bovis")]
     public string M_Bovis { get; set; }
 
+
+    [Name("UniProt")]
+    public string UniProt { get; set; }
+
   }
 }

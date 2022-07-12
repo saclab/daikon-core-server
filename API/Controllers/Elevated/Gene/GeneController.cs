@@ -32,7 +32,12 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Genes.Group.Create.Command { GeneGroup = geneGroup }));
     }
 
-    
+    [HttpPost("{accessionNo}/externalId")]
+    public async Task<IActionResult> AddExternalId(string accessionNo, Domain.GeneExternalId geneExtaernalId)
+    {
+      geneExtaernalId.GeneAccessionNumber = accessionNo;
+      return HandleResult(await Mediator.Send(new Application.Genes.AddExternalId.Command { GeneExternalId = geneExtaernalId }));
+    }
 
 
   }
