@@ -53,7 +53,16 @@ namespace Application.Genes
           .FirstOrDefaultAsync(g => g.AccessionNumber == request.GeneExternalId.GeneAccessionNumber);
 
         Console.WriteLine("Gene to Edit=");
-        Console.WriteLine(geneToEdit);
+        Console.WriteLine(request.GeneExternalId.GeneAccessionNumber);
+        Console.WriteLine(geneToEdit.AccessionNumber);
+
+        // var user = "System-Batch";
+        // if (!object.ReferenceEquals(null, _userAccessor))
+        // {
+        //   user = _userAccessor.GetUsername();
+        // }
+
+        //Console.WriteLine("User = " + user);
 
 
         if (geneToEdit == null) return null;
@@ -64,7 +73,9 @@ namespace Application.Genes
           GeneId = geneToEdit.Id,
           GeneAccessionNumber = geneToEdit.AccessionNumber,
           ExternalIdRef = request.GeneExternalId.ExternalIdRef,
-          ExternalId = request.GeneExternalId.ExternalId
+          ExternalId = request.GeneExternalId.ExternalId,
+          CreatedAt = DateTime.UtcNow,
+          // CreatedBy = user
         };
 
         if (geneToEdit.GeneExternalIds == null)
@@ -89,7 +100,7 @@ namespace Application.Genes
 
         }
 
-        var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
+        var success = await _context.SaveChangesAsync() > 0;
         Console.WriteLine("Success??");
         Console.WriteLine(success);
 
