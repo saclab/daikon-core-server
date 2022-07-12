@@ -163,6 +163,7 @@ namespace Persistence
 
     /* Gene */
     public DbSet<Gene> Genes { get; set; }
+    public DbSet<GeneExternalId> GeneExternalIds { get; set; }
     public DbSet<GenePublicData> GenePublicData { get; set; }
     // public DbSet<GeneNonPublicData> GeneNonPublicData { get; set; }
     public DbSet<GeneVulnerability> GeneVulnerability { get; set; }
