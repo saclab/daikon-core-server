@@ -153,12 +153,58 @@ namespace Application.BackgroundTasks.GeneSync
           await _mediator.Send(new Create.Command { Gene = newGene });
         }
 
+        else
+        {
+          /* TODO: Update existing genes */
 
-        //TODO: Update existing genes
+          /* Right now we are only updating Gene Extternal IDs */
+
+
+          /* STEP 1 : Update UNIPROT IDs */
+
+          //var gene = await _context.Genes
+          //.Include(g => g.GeneExternalIds)
+          //.FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
+
+          //var uniprotGeneExternalID = new GeneExternalId
+          //{
+          //  Id = Guid.NewGuid(),
+          //  GeneId = gene.Id,
+          //  GeneAccessionNumber = gene.AccessionNumber,
+          //  ExternalIdRef = "UniProt",
+          //  ExternalId = CSVGene.UniProt
+          //};
+
+          //if (gene.GeneExternalIds == null)
+          //{
+          //  gene.GeneExternalIds = new List<GeneExternalId>();
+          //  gene.GeneExternalIds.Add(uniprotGeneExternalID);
+          //  _context.GeneExternalIds.Add(newGenePublicData);
+          //}
+          //else
+          //{
+          //  var uniprotRef = gene.GeneExternalIds.FirstOrDefault(i => i.ExternalIdRef == "UniProt");
+          //  if (uniprotRef == null)
+          //  {
+          //    gene.GeneExternalIds.Add(uniprotGeneExternalID);
+          //    _context.GeneExternalIds.Add(newGenePublicData);
+          //  }
+          //  else
+          //  {
+          //    uniprotRef.ExternalId = CSVGene.UniProt;
+          //  }
+
+          //}
+
+
+        }
+
+
+
 
       }
 
-     _logger.LogInformation("Gene Vulnerability Data");
+      _logger.LogInformation("Gene Vulnerability Data");
 
       // Vulnerability Data
       foreach (var CSVVulnerability in CSVVulnerabilities)
