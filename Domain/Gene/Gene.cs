@@ -12,6 +12,7 @@ namespace Domain
     public string Function { get; set; }
     public string Product { get; set; }
     public string FunctionalCategory { get; set; }
+    public List<GeneExternalId> GeneExternalIds { get; set; }
     public GenePublicData GenePublicData { get; set; }
 
     /* FOLLOWING ARE NON PUBLIC DATA */
