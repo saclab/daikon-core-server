@@ -146,62 +146,50 @@ namespace Application.BackgroundTasks.GeneSync
           }
 
           /*
-          Add Gene
+          Fourth Add Gene
           */
           newGene.GenePublicData = newGenePublicData;
           _logger.LogInformation("Adding new Gene" + newGene);
           await _mediator.Send(new Create.Command { Gene = newGene });
+
+
+          /* Fifth Update UNIPROT IDs */
+          var uniprotGeneExternalID = new GeneExternalId
+          {
+            GeneAccessionNumber = CSVGene.AccessionNumber,
+            ExternalIdRef = "UniProt",
+            ExternalId = CSVGene.UniProt
+          };
+          await _mediator.Send(new AddExternalId.Command { GeneExternalId = uniprotGeneExternalID });
+
         }
 
         else
         {
           /* TODO: Update existing genes */
+          _logger.LogInformation("Modifying Gene" + CSVGene.AccessionNumber);
 
           /* Right now we are only updating Gene Extternal IDs */
 
-
           /* STEP 1 : Update UNIPROT IDs */
+          var uniprotGeneExternalID = new GeneExternalId
+          {
+            GeneAccessionNumber = CSVGene.AccessionNumber,
+            ExternalIdRef = "UniProt",
+            ExternalId = CSVGene.UniProt
+          };
 
-          //var gene = await _context.Genes
-          //.Include(g => g.GeneExternalIds)
-          //.FirstOrDefaultAsync(g => g.AccessionNumber == CSVGene.AccessionNumber);
+          try
+          {
+            await _mediator.Send(new AddExternalId.Command { GeneExternalId = uniprotGeneExternalID });
 
-          //var uniprotGeneExternalID = new GeneExternalId
-          //{
-          //  Id = Guid.NewGuid(),
-          //  GeneId = gene.Id,
-          //  GeneAccessionNumber = gene.AccessionNumber,
-          //  ExternalIdRef = "UniProt",
-          //  ExternalId = CSVGene.UniProt
-          //};
-
-          //if (gene.GeneExternalIds == null)
-          //{
-          //  gene.GeneExternalIds = new List<GeneExternalId>();
-          //  gene.GeneExternalIds.Add(uniprotGeneExternalID);
-          //  _context.GeneExternalIds.Add(newGenePublicData);
-          //}
-          //else
-          //{
-          //  var uniprotRef = gene.GeneExternalIds.FirstOrDefault(i => i.ExternalIdRef == "UniProt");
-          //  if (uniprotRef == null)
-          //  {
-          //    gene.GeneExternalIds.Add(uniprotGeneExternalID);
-          //    _context.GeneExternalIds.Add(newGenePublicData);
-          //  }
-          //  else
-          //  {
-          //    uniprotRef.ExternalId = CSVGene.UniProt;
-          //  }
-
-          //}
-
+          }
+          catch (Exception e)
+          {
+            _logger.LogCritical(e.Message);
+          }
 
         }
-
-
-
-
       }
 
       _logger.LogInformation("Gene Vulnerability Data");
