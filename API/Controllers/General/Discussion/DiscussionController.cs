@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-  public class DiscussionController : BaseApiController
+  public class DiscussionController : ApiControllerBase
   {
     [HttpGet("{reference}")]
     public async Task<IActionResult> GetDiscussion(string reference)

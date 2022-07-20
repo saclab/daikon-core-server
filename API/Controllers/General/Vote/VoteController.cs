@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-  public class VoteController : BaseApiController
+  public class VoteController : ApiControllerBase
   {
 
 

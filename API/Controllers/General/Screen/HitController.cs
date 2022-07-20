@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-    public class HitController : BaseApiController
+    public class HitController : ApiControllerBase
     {
         [HttpPost]
         public async Task<IActionResult> CreateHit(Application.Screens.ValidatedHits.DTOs.HitCSVDTO newHit)

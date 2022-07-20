@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-  public class ScreenController : BaseApiController
+  public class ScreenController : ApiControllerBase
   {
     [HttpPost]
     public async Task<IActionResult> CreateScreen(Domain.Screen newScreen)
