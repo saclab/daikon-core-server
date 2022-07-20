@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
@@ -11,6 +12,7 @@ namespace API.Controllers.General
 
 
     [HttpPost("{id}")]
+    [Authorize(Policy = "RequireVoterRole")]
     public async Task<IActionResult> RegisterVote(Guid id, Application.Votes.DTOs.RegisterVoteDTO registerVoteDTO)
     {
       registerVoteDTO.VoteId = id;
