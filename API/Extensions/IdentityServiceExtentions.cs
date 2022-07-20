@@ -55,6 +55,15 @@ namespace API.Extensions
 
         options.AddPolicy("RequireUserRole",
             policy => policy.Requirements.Add(new RequireAppRole("user")));
+
+        options.AddPolicy("RequireProjectManagerRole",
+            policy => policy.Requirements.Add(new RequireAppRole("projectManager")));
+
+        options.AddPolicy("RequireScreenerRole",
+            policy => policy.Requirements.Add(new RequireAppRole("screener")));
+
+        options.AddPolicy("RequireVoterRole",
+            policy => policy.Requirements.Add(new RequireAppRole("voter")));
       });
 
       return services;

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Elevated
 {
-  public class VoteController : BaseApiController
+  public class VoteController : ApiControllerBaseElevated
   {
 
     [HttpPost("freeze")]

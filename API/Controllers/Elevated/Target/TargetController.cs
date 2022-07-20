@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Elevated
 {
-  public class TargetController : BaseApiController
+  public class TargetController : ApiControllerBaseElevated
   {
     [HttpPost]
     public async Task<IActionResult> CreateActivity(Domain.GenePromotionRequest genePromotionRequest)

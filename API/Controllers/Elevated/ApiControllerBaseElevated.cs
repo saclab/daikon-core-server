@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 namespace API.Controllers.Elevated
 {
   [ApiController]
-  [Route("api/admin/[controller]")]
+  [Route("api/elevated/[controller]")]
   [Authorize(Policy = "RequireAdministratorRole")]
-  public class BaseApiController : ControllerBase
+  public class ApiControllerBaseElevated : ControllerBase
   {
     private IMediator _mediator;
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
