@@ -5,6 +5,12 @@ namespace Domain
 {
   public class Gene
   {
+    /*
+      Define: A gene is a basic unit of heredity and a sequence of nucleotides 
+      in DNA that encodes the synthesis of a gene product, either RNA or protein.
+    */
+
+    
     public Guid Id { get; set; }
     public Guid StrainId { get; set; }
     public string AccessionNumber { get; set; }
