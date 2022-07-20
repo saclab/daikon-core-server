@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-  public class GeneralController : BaseApiController
+  public class GeneralController : ApiControllerBase
   {
 
     [HttpGet("app-vars")]

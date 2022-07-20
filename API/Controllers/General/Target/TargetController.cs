@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-  public class TargetController : BaseApiController
+  public class TargetController : ApiControllerBase
   {
     // List all
     [HttpGet]

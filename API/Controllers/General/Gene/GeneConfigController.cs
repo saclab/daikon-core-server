@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-  public class GeneConfigController : BaseApiController
+  public class GeneConfigController : ApiControllerBase
   {
     [HttpGet("promote/questionaire")]
     public async Task<IActionResult> GetActivity()

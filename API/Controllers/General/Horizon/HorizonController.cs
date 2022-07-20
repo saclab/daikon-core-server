@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-  public class HorizonController : BaseApiController
+  public class HorizonController : ApiControllerBase
   {
     [HttpGet("{targetName}")]
     public async Task<IActionResult> GenerateHorizon(String targetName)

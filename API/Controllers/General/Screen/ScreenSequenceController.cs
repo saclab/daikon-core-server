@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General
 {
-  public class ScreenSequenceController : BaseApiController
+  public class ScreenSequenceController : ApiControllerBase
   {
     [HttpPost("{screenId}")]
     public async Task<IActionResult> PostScreenSequemce(Guid screenId, ScreenSequence screenSequence)

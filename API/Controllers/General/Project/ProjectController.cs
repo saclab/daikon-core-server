@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.General.Project
 {
-  public class ProjectController : BaseApiController
+  public class ProjectController : ApiControllerBase
   {
     [HttpGet]
     public async Task<IActionResult> ListProjects()
