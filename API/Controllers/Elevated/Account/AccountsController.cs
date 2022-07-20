@@ -16,7 +16,7 @@ namespace API.Controllers.Elevated
   [ApiController]
 
 
-  public class AccountsController : BaseApiController
+  public class AccountsController : ApiControllerBaseElevated
   {
     private readonly UserManager<AppUser> _userManager;
     private readonly RoleManager<AppRole> _roleManager;

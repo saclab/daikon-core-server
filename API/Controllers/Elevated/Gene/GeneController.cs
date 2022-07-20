@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers.Elevated
 {
 
-  public class GeneController : BaseApiController
+  public class GeneController : ApiControllerBaseElevated
   {
     [HttpGet("promotionrequests")]
     public async Task<IActionResult> ListActivities()

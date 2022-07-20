@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Elevated
 {
-  public class ProjectController : BaseApiController
+  public class ProjectController : ApiControllerBaseElevated
   {
 
     /* Create a new project with FHA Data */
