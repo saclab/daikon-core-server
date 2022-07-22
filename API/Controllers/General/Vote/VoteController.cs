@@ -4,12 +4,12 @@ using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers.General
 {
   public class VoteController : ApiControllerBase
   {
-
 
     [HttpPost("{id}")]
     [Authorize(Policy = "RequireVoterRole")]

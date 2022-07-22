@@ -2,11 +2,13 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers.General
 {
   public class ScreenController : ApiControllerBase
   {
+
     [HttpPost]
     [Authorize(Policy = "RequireScreenerRole")]
     public async Task<IActionResult> CreateScreen(Domain.Screen newScreen)
