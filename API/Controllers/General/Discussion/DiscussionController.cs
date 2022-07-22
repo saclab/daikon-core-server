@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers.General
 {
   public class DiscussionController : ApiControllerBase
   {
+
     [HttpGet("{reference}")]
     public async Task<IActionResult> GetDiscussion(string reference)
     {

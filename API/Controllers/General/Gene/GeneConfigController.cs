@@ -1,11 +1,13 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers.General
 {
   public class GeneConfigController : ApiControllerBase
   {
+
     [HttpGet("promote/questionaire")]
     public async Task<IActionResult> GetActivity()
     {

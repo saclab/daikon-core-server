@@ -1,10 +1,13 @@
 using System;
+using API.Controllers.General;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers.Test
 {
   public class BuggyController : General.ApiControllerBase
   {
+
     [HttpGet("not-found")]
     public ActionResult GetNotFound()
     {

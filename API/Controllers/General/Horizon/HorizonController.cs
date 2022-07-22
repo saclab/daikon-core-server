@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers.General
 {
   public class HorizonController : ApiControllerBase
   {
+
     [HttpGet("{targetName}")]
     public async Task<IActionResult> GenerateHorizon(String targetName)
     {

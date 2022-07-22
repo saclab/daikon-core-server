@@ -5,6 +5,7 @@ using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace API.Controllers.General
 {
@@ -181,7 +182,7 @@ namespace API.Controllers.General
     }
 
 
-     [HttpPost("{geneId}/hypomorph")]
+    [HttpPost("{geneId}/hypomorph")]
     public async Task<IActionResult> AddHypomorph(Guid geneId, GeneHypomorph geneHypomorph)
     {
       geneHypomorph.GeneId = geneId;
@@ -197,7 +198,7 @@ namespace API.Controllers.General
     }
 
 
-    
+
 
   }
 }
