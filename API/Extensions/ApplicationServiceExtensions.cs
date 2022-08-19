@@ -45,6 +45,7 @@ namespace API.Extensions
 
       /* Mediator */
       services.AddMediatR(typeof(List.Handler).Assembly);
+      services.AddMediatR(typeof(DataView.TargetDash.Handler).Assembly);
 
       /* Auto Mapper */
       services.AddAutoMapper(typeof(MappingProfiles).Assembly);
