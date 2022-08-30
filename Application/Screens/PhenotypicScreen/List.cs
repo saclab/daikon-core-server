@@ -9,7 +9,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Screens
+namespace Application.Screens.Phenotypic
 {
   public class List
   {
@@ -31,7 +31,7 @@ namespace Application.Screens
       public async Task<Result<List<Screen>>> Handle(Query request, CancellationToken cancellationToken)
       {
         var screens = await _context.Screens
-        .Where(s => s.ScreenType == ScreenType.TargetBased.Value)
+        .Where(s => s.ScreenType == ScreenType.Phenotypic.Value)
         .Include(s => s.Org)
         .ToListAsync();
 

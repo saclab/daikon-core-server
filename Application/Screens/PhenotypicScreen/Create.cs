@@ -11,7 +11,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Screens
+namespace Application.Screens.Phenotypic
 {
   public class Create
   {
@@ -45,14 +45,13 @@ namespace Application.Screens
       {
         Guid ScreenGid = Guid.NewGuid();
 
-
-        var baseTarget = await _context.Targets.FirstOrDefaultAsync
-            (t => t.Id == request.NewScreen.TargetId);
+        var checkScreenName = await _context.Screens.FirstOrDefaultAsync
+            (s => s.ScreenName == request.NewScreen.ScreenName);
 
         /*chek if gene id is correct*/
-        if (baseTarget == null)
+        if (checkScreenName != null)
         {
-          return Result<Screen>.Failure("Invalid Target ID");
+          return Result<Screen>.Failure("Screen name already exists. Please choose a different screen name");
         }
 
         var org = await _context.AppOrgs.FirstOrDefaultAsync(a => a.Id == request.NewScreen.Org.Id);
@@ -62,36 +61,11 @@ namespace Application.Screens
         }
 
 
-        /*Screen Name Sequence Number */
-        string screenName = null;
-
-        var testScreen = await _context.Screens.Where((s) => s.TargetId
-                                                          == request.NewScreen.TargetId)
-                                                          .OrderByDescending(s => s.ScreenName).ToListAsync();
-
-
-        if (!testScreen.Any())
-        {
-          screenName = baseTarget.Name + "-" + "1";
-        }
-        else
-        {
-          var lastScreenName = testScreen.First().ScreenName;
-          var lastScreenNumber = lastScreenName != null ? Int32.Parse(lastScreenName.Split('-').Last()) : 0;
-          lastScreenNumber = lastScreenNumber + 1;
-          screenName = baseTarget.Name + "-" + lastScreenNumber.ToString();
-        }
-
-
-
         var ScreenToCreate = new Screen
         {
           Id = ScreenGid,
-          BaseTarget = baseTarget,
-          ScreenType = ScreenType.TargetBased.Value,
-          TargetId = baseTarget.Id,
-          TargetName = baseTarget.Name,
-          ScreenName = screenName,
+          ScreenType = ScreenType.Phenotypic.Value,
+          ScreenName = request.NewScreen.ScreenName,
           Method = request.NewScreen.Method,
           Status = "New",
           Promoter = _userAccessor.GetUsername(),
