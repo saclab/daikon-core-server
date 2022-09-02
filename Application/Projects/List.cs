@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -34,6 +35,7 @@ namespace Application.Projects
         // .ThenInclude(h => h.BaseHit)
         // .Include(p => p.RepresentationStructure)
         .Include(P => P.PrimaryOrg)
+        .OrderByDescending(p => p.LastModified)
         // .Include(p => p.SupportingOrgs)
         // .ThenInclude(o => o.AppOrg)
         .ToListAsync();
