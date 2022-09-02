@@ -98,6 +98,8 @@ namespace Application.Projects
         projectToEdit.ClinicalP1PredictedStart = request.project.ClinicalP1PredictedStart;
         projectToEdit.ClinicalP1Description = request.project.ClinicalP1Description;
 
+        projectToEdit.LastModified = DateTime.UtcNow;
+
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
         if (!success) return Result<Project>.Failure("Failed to edit project");
