@@ -45,13 +45,25 @@ namespace Application.Screens.Phenotypic
       {
         Guid ScreenGid = Guid.NewGuid();
 
-        var checkScreenName = await _context.Screens.FirstOrDefaultAsync
-            (s => s.ScreenName == request.NewScreen.ScreenName);
+        string screenName = request.NewScreen.ScreenName;
+        // int idx = screenName.LastIndexOf('-');
+        // string baseScreenName = screenName.Substring(0, idx);
+
+        var checkScreenName = await _context.Screens.Where((s) => (s.ScreenName.Contains(screenName)
+                                                          ) && (s.ScreenType == ScreenType.Phenotypic.Value))
+                                                          .OrderByDescending(s => s.ScreenName).ToListAsync();
 
         /*chek if gene id is correct*/
-        if (checkScreenName != null)
+        if (!checkScreenName.Any())
         {
-          return Result<Screen>.Failure("Screen name already exists. Please choose a different screen name");
+          screenName = screenName + "-" + "1";
+        }
+        else
+        {
+          var lastScreenName = checkScreenName.First().ScreenName;
+          var lastScreenNumber = lastScreenName != null ? Int32.Parse(lastScreenName.Split('-').Last()) : 0;
+          lastScreenNumber = lastScreenNumber + 1;
+          screenName = screenName + "-" + lastScreenNumber.ToString();
         }
 
         var org = await _context.AppOrgs.FirstOrDefaultAsync(a => a.Id == request.NewScreen.Org.Id);
@@ -65,7 +77,7 @@ namespace Application.Screens.Phenotypic
         {
           Id = ScreenGid,
           ScreenType = ScreenType.Phenotypic.Value,
-          ScreenName = request.NewScreen.ScreenName,
+          ScreenName = screenName,
           Method = request.NewScreen.Method,
           Status = "New",
           Promoter = _userAccessor.GetUsername(),
