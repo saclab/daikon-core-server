@@ -52,6 +52,7 @@ namespace Application.Projects
         project.TeamProbabilityDescription = request.projectPriorityProbabilityDTO.TeamProbabilityDescription;
         project.TeamPriority = request.projectPriorityProbabilityDTO.TeamPriority;
         project.TeamPriorityDescription = request.projectPriorityProbabilityDTO.TeamPriorityDescription;
+        project.LastModified = DateTime.UtcNow;
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
