@@ -72,6 +72,7 @@ namespace Application.Projects
         Project.CurrentStage = ProjectStage.H2L.Value;
         Project.Status = ProjectStatus.Active.Value;
         Project.H2LEnabled = true;
+        Project.LastModified = request.H2LDetails.H2LStart;
 
         /* Prediction of Next Stage Start Date */
         var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "H2LAnticipatedDays");
