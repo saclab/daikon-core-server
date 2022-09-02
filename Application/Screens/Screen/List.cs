@@ -33,6 +33,7 @@ namespace Application.Screens
         var screens = await _context.Screens
         .Where(s => s.ScreenType == ScreenType.TargetBased.Value)
         .Include(s => s.Org)
+        .OrderBy(s => s.ScreenName)
         .ToListAsync();
 
 
