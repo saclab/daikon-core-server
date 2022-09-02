@@ -67,6 +67,7 @@ namespace Application.Projects
         /* Promote the project to H2L*/
 
         projectToTerminate.Status = ProjectStatus.Terminated.Value;
+        projectToTerminate.TerminationDate = DateTime.UtcNow;
 
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
