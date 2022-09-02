@@ -81,5 +81,9 @@ namespace Domain
     public DateTime ClinicalP1PredictedStart { get; set; }
     public string ClinicalP1Description { get; set; }
 
+    public DateTime LastModified { get; set; }
+    public DateTime? TerminationDate { get; set; }
+    public DateTime? EOLDate { get; set; }
+
   }
 }
