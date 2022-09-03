@@ -71,6 +71,7 @@ namespace Application.Projects
         newProject.Id = newProjectGuid;
         newProject.ScreenId = baseScreen.Id;
         newProject.BaseScreen = baseScreen;
+        newProject.ScreenName = baseScreen.ScreenName; 
         newProject.ProjectName = request.NewProject.ProjectName;
         newProject.TargetName = baseScreen.TargetName;
         newProject.TargetId = baseScreen.TargetId;
