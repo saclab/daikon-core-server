@@ -83,16 +83,21 @@ namespace Application.Projects
         }
         else
         {
+          Console.WriteLine("[Will try] to CREATE compound (rep structure)");
+
+          var newCompoundId = Guid.NewGuid();
           compoundFromDb = new Compound()
           {
-            Id = Guid.NewGuid(),
+            Id = newCompoundId,
             Smile = request.NewProjectForm.RepresentationStructureSMILE,
             ExternalCompoundIds = request.NewProjectForm.RepresentationStructureExternalCompoundIds,
             MolWeight = request.NewProjectForm.MolWeight,
             MolArea = request.NewProjectForm.MolArea
           };
-
           _context.Compounds.Add(compoundFromDb);
+          Console.WriteLine("[Complete] Creating compound");
+          newProject.RepresentationStructureId = newCompoundId;
+          newProject.RepresentationStructure = compoundFromDb;
         }
 
         /* verify the primaryorg*/
