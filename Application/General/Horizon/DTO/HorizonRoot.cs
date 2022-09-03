@@ -17,6 +17,7 @@ namespace Application.General.Horizon.DTO
       public string AccessionNumber { get; set; }
       public string RootName { get; set; }
       public string TargetName { get; set; }
+      public string Link { get; set; }
 
     }
 
