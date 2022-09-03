@@ -77,6 +77,7 @@ namespace Application.General.Horizon
             horizonRoot.Children = new List<HorizonTarget>();
             horizonRoot.Name = "Gene";
             horizonRoot.Attributes.AccessionNumber = "Unknown";
+            horizonRoot.Attributes.TargetName=request.TargetName;
 
             var blankHorizonTarget = new HorizonTarget
             {
@@ -167,6 +168,7 @@ namespace Application.General.Horizon
           horizonRoot.Children = new List<HorizonTarget>();
           horizonRoot.Name = "Gene";
           horizonRoot.Attributes.AccessionNumber = "Unknown";
+          horizonRoot.Attributes.TargetName=request.TargetName;
 
           var blankHorizonTarget2 = new HorizonTarget
           {
