@@ -75,6 +75,13 @@ namespace Application.Projects
         newProject.TargetName = baseScreen.TargetName;
         newProject.TargetId = baseScreen.TargetId;
 
+        if(baseScreen.TargetName == null){
+          newProject.ProjectType = ProjectTypes.Phenotypic.Value;
+        }
+        else{
+          newProject.ProjectType = ProjectTypes.TargetBased.Value;
+        }
+
 
         Console.WriteLine("[Complete] new project");
 
