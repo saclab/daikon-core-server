@@ -13,6 +13,7 @@ namespace Domain
     public string CreatedBy { get; set; }
     public Guid? ScreenId { get; set; }
     public Screen BaseScreen { get; set; }
+    public string ScreenName { get; set; }
     public string TargetName { get; set; }
     public Guid? TargetId { get; set; }
 
