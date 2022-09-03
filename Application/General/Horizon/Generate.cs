@@ -17,7 +17,7 @@ namespace Application.General.Horizon
   {
     public class Query : IRequest<Result<HorizonRoot>>
     {
-      public String TargetName { get; set; }
+      public String EntryPointName { get; set; }
     }
 
     public class Handler : IRequestHandler<Query, Result<HorizonRoot>>
@@ -55,20 +55,20 @@ namespace Application.General.Horizon
         /*Now lets check if we have a target */
         var target = await _context.Targets
           .Include(t => t.TargetGenes)
-          .FirstOrDefaultAsync(t => t.Name == request.TargetName);
+          .FirstOrDefaultAsync(t => t.Name == request.EntryPointName);
 
         if (target == null)
         {
 
           /* Check if it has screen */
-          var checkScreen = await _context.Screens.Where((s) => (s.ScreenName.Contains(request.TargetName)
+          var checkScreen = await _context.Screens.Where((s) => (s.ScreenName.Contains(request.EntryPointName)
                                                             ) && (s.ScreenType == ScreenType.Phenotypic.Value))
                                                             .OrderByDescending(s => s.ScreenName).ToListAsync();
 
           if (!checkScreen.Any())
           {
             /* check if it is an unlinked project */
-            var project = await _context.Projects.FirstOrDefaultAsync(p => p.ProjectName == request.TargetName);
+            var project = await _context.Projects.FirstOrDefaultAsync(p => p.ProjectName == request.EntryPointName);
 
             if (project == null)
             {
@@ -77,7 +77,7 @@ namespace Application.General.Horizon
             horizonRoot.Children = new List<HorizonTarget>();
             horizonRoot.Name = "Gene";
             horizonRoot.Attributes.AccessionNumber = "Unknown";
-            horizonRoot.Attributes.TargetName=request.TargetName;
+            horizonRoot.Attributes.TargetName=request.EntryPointName;
 
             var blankHorizonTarget = new HorizonTarget
             {
@@ -168,7 +168,7 @@ namespace Application.General.Horizon
           horizonRoot.Children = new List<HorizonTarget>();
           horizonRoot.Name = "Gene";
           horizonRoot.Attributes.AccessionNumber = "Unknown";
-          horizonRoot.Attributes.TargetName=request.TargetName;
+          horizonRoot.Attributes.TargetName=request.EntryPointName;
 
           var blankHorizonTarget2 = new HorizonTarget
           {
@@ -185,7 +185,7 @@ namespace Application.General.Horizon
 
 
 
-          var screens2 = await _context.Screens.Where((s) => (s.ScreenName.Contains(request.TargetName)
+          var screens2 = await _context.Screens.Where((s) => (s.ScreenName.Contains(request.EntryPointName)
                                                             ) && (s.ScreenType == ScreenType.Phenotypic.Value))
                                                             .OrderByDescending(s => s.ScreenName).ToListAsync();
 
@@ -322,6 +322,7 @@ namespace Application.General.Horizon
         /* Now lets check for screens */
 
         var screens = await _context.Screens.Where(s => s.TargetId == target.Id)
+        .OrderByDescending(s => s.ScreenName)
         .ToListAsync();
 
         if (screens == null)
