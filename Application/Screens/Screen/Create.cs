@@ -76,10 +76,14 @@ namespace Application.Screens
         }
         else
         {
-          var lastScreenName = testScreen.First().ScreenName;
-          var lastScreenNumber = lastScreenName != null ? Int32.Parse(lastScreenName.Split('-').Last()) : 0;
-          lastScreenNumber = lastScreenNumber + 1;
-          screenName = baseTarget.Name + "-" + lastScreenNumber.ToString();
+          int maxScreen = 1;
+          foreach (var t in testScreen)
+          {
+            int screenNum = Int32.Parse(t.ScreenName.Split('-').Last());
+            maxScreen = maxScreen > screenNum ? maxScreen : screenNum;
+          }
+          maxScreen = maxScreen + 1;
+          screenName = baseTarget.Name + "-" + maxScreen.ToString();
         }
 
 

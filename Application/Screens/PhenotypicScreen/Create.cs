@@ -60,10 +60,14 @@ namespace Application.Screens.Phenotypic
         }
         else
         {
-          var lastScreenName = checkScreenName.First().ScreenName;
-          var lastScreenNumber = lastScreenName != null ? Int32.Parse(lastScreenName.Split('-').Last()) : 0;
-          lastScreenNumber = lastScreenNumber + 1;
-          screenName = screenName + "-" + lastScreenNumber.ToString();
+          int maxScreen = 1;
+          foreach (var t in checkScreenName)
+          {
+            int screenNum = Int32.Parse(t.ScreenName.Split('-').Last());
+            maxScreen = maxScreen > screenNum ? maxScreen : screenNum;
+          }
+          maxScreen = maxScreen + 1;
+          screenName = screenName + "-" + maxScreen.ToString();
         }
 
         var org = await _context.AppOrgs.FirstOrDefaultAsync(a => a.Id == request.NewScreen.Org.Id);
