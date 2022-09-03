@@ -63,6 +63,7 @@ namespace Application.Projects
         var newProjectGuid = Guid.NewGuid();
         newProject.Id = newProjectGuid;
         newProject.ProjectName = request.NewProjectForm.ProjectName;
+        newProject.ProjectType = ProjectTypes.Unlinked.Value;
 
 
 
