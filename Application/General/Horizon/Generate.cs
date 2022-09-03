@@ -77,7 +77,7 @@ namespace Application.General.Horizon
             horizonRoot.Children = new List<HorizonTarget>();
             horizonRoot.Name = "Gene";
             horizonRoot.Attributes.AccessionNumber = "Unknown";
-            horizonRoot.Attributes.TargetName=request.EntryPointName;
+            horizonRoot.Attributes.TargetName = request.EntryPointName;
 
             var blankHorizonTarget = new HorizonTarget
             {
@@ -99,7 +99,7 @@ namespace Application.General.Horizon
 
                   ScreenName = "Unknown",
                   TargetName = "Unknown",
-                  ScreenMethod = "Phenotypic"
+                  ScreenMethod = "Unknown"
 
               }
             };
@@ -114,6 +114,7 @@ namespace Application.General.Horizon
                   TargetName = "Unknown",
                   ProjectName = project.ProjectName,
                   Status = project.Status,
+                  Link = project.Id.ToString()
                 }
             };
 
@@ -128,7 +129,8 @@ namespace Application.General.Horizon
                   TargetName = project.TargetName,
                   ProjectName = project.ProjectName,
                   Status = project.Status,
-                  CurrentStage = project.CurrentStage
+                  CurrentStage = project.CurrentStage,
+                  Link = project.Id.ToString()
                   }
               };
 
@@ -146,7 +148,8 @@ namespace Application.General.Horizon
                   TargetName = project.TargetName,
                   ProjectName = project.ProjectName,
                   Status = project.Status,
-                  CurrentStage = project.CurrentStage
+                  CurrentStage = project.CurrentStage,
+                  Link = project.Id.ToString()
                   }
                 };
 
@@ -168,7 +171,7 @@ namespace Application.General.Horizon
           horizonRoot.Children = new List<HorizonTarget>();
           horizonRoot.Name = "Gene";
           horizonRoot.Attributes.AccessionNumber = "Unknown";
-          horizonRoot.Attributes.TargetName=request.EntryPointName;
+          horizonRoot.Attributes.TargetName = request.EntryPointName;
 
           var blankHorizonTarget2 = new HorizonTarget
           {
@@ -202,7 +205,8 @@ namespace Application.General.Horizon
                   Id = screen.Id,
                   ScreenName = screen.ScreenName,
                   TargetName = "Phenotypic",
-                  ScreenMethod = "Phenotypic"
+                  ScreenMethod = "Phenotypic",
+                  Link = request.EntryPointName
               }
             };
             blankHorizonTarget2.Children.Add(horizonScreen);
@@ -223,6 +227,7 @@ namespace Application.General.Horizon
                   TargetName = project.TargetName,
                   ProjectName = project.ProjectName,
                   Status = project.Status,
+                  Link = project.Id.ToString()
                 }
                 };
 
@@ -239,7 +244,8 @@ namespace Application.General.Horizon
                   TargetName = project.TargetName,
                   ProjectName = project.ProjectName,
                   Status = project.Status,
-                  CurrentStage = project.CurrentStage
+                  CurrentStage = project.CurrentStage,
+                  Link = project.Id.ToString()
                   }
                   };
 
@@ -257,7 +263,8 @@ namespace Application.General.Horizon
                   TargetName = project.TargetName,
                   ProjectName = project.ProjectName,
                   Status = project.Status,
-                  CurrentStage = project.CurrentStage
+                  CurrentStage = project.CurrentStage,
+                  Link = project.Id.ToString()
                   }
                     };
 
@@ -291,6 +298,7 @@ namespace Application.General.Horizon
           horizonRoot.Name = "Gene";
           horizonRoot.Attributes.Id = target.TargetGenes.First().GeneId;
           horizonRoot.Attributes.AccessionNumber = target.TargetGenes.First().AccessionNumber;
+          horizonRoot.Attributes.Link = target.TargetGenes.First().GeneId.ToString();
         }
 
         if (target.Type == "protein-complex")
@@ -312,7 +320,8 @@ namespace Application.General.Horizon
                 Id = target.Id,
                 TargetName = target.Name,
                 TargetType = target.Type,
-                BucketScore = target.Bucket
+                BucketScore = target.Bucket,
+                Link=target.Id.ToString()
             }
         };
 
@@ -340,8 +349,8 @@ namespace Application.General.Horizon
                   Id = screen.Id,
                   ScreenName = screen.ScreenName,
                   TargetName = screen.TargetName,
-                  ScreenMethod = screen.Method
-
+                  ScreenMethod = screen.Method,
+                  Link=screen.TargetName
               }
           };
           horizonTarget.Children.Add(horizonScreen);
@@ -361,6 +370,7 @@ namespace Application.General.Horizon
                   TargetName = project.TargetName,
                   ProjectName = project.ProjectName,
                   Status = project.Status,
+                  Link=project.Id.ToString()
                 }
               };
 
@@ -377,7 +387,8 @@ namespace Application.General.Horizon
                   TargetName = project.TargetName,
                   ProjectName = project.ProjectName,
                   Status = project.Status,
-                  CurrentStage = project.CurrentStage
+                  CurrentStage = project.CurrentStage,
+                  Link=project.Id.ToString()
                   }
                 };
 
@@ -395,7 +406,8 @@ namespace Application.General.Horizon
                   TargetName = project.TargetName,
                   ProjectName = project.ProjectName,
                   Status = project.Status,
-                  CurrentStage = project.CurrentStage
+                  CurrentStage = project.CurrentStage,
+                  Link=project.Id.ToString()
                   }
                   };
 

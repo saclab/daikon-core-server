@@ -14,6 +14,7 @@ namespace Application.General.Horizon.DTO
       public string TargetName { get; set; }
       public string TargetType { get; set; }
       public string BucketScore { get; set; }
+      public string Link { get; set; }
 
     }
 

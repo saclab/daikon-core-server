@@ -15,6 +15,7 @@ namespace Application.General.Horizon.DTO
       public string ProjectName { get; set; }
       public string Status { get; set; }
       public string OrgAlias { get; set; }
+      public string Link { get; set; }
 
     }
 
