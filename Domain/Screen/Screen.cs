@@ -8,8 +8,9 @@ namespace Domain
     public Guid Id { get; set; }
     public Guid StrainId { get; set; }
     public Target BaseTarget { get; set; }
-    public Guid TargetId { get; set; }
+    public Guid? TargetId { get; set; }
     public String ScreenName { get; set; }
+    public String ScreenType { get; set; }
     public string Method { get; set; }
     public string TargetName { get; set; }
     public string GeneName { get; set; }

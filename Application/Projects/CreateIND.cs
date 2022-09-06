@@ -73,6 +73,7 @@ namespace Application.Projects
         Project.CurrentStage = ProjectStage.IND.Value;
         Project.Status = ProjectStatus.Active.Value;
         Project.INDEnabled = true;
+        Project.LastModified = request.INDDetails.INDStart;
 
         /* Prediction of Next Stage Start Date */
         var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "INDAnticipatedDays");

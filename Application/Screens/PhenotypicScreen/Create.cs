@@ -11,7 +11,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Screens
+namespace Application.Screens.Phenotypic
 {
   public class Create
   {
@@ -45,14 +45,29 @@ namespace Application.Screens
       {
         Guid ScreenGid = Guid.NewGuid();
 
+        string screenName = request.NewScreen.ScreenName;
+        // int idx = screenName.LastIndexOf('-');
+        // string baseScreenName = screenName.Substring(0, idx);
 
-        var baseTarget = await _context.Targets.FirstOrDefaultAsync
-            (t => t.Id == request.NewScreen.TargetId);
+        var checkScreenName = await _context.Screens.Where((s) => (s.ScreenName.Contains(screenName)
+                                                          ) && (s.ScreenType == ScreenType.Phenotypic.Value))
+                                                          .OrderByDescending(s => s.ScreenName).ToListAsync();
 
         /*chek if gene id is correct*/
-        if (baseTarget == null)
+        if (!checkScreenName.Any())
         {
-          return Result<Screen>.Failure("Invalid Target ID");
+          screenName = screenName + "-" + "1";
+        }
+        else
+        {
+          int maxScreen = 1;
+          foreach (var t in checkScreenName)
+          {
+            int screenNum = Int32.Parse(t.ScreenName.Split('-').Last());
+            maxScreen = maxScreen > screenNum ? maxScreen : screenNum;
+          }
+          maxScreen = maxScreen + 1;
+          screenName = screenName + "-" + maxScreen.ToString();
         }
 
         var org = await _context.AppOrgs.FirstOrDefaultAsync(a => a.Id == request.NewScreen.Org.Id);
@@ -62,39 +77,10 @@ namespace Application.Screens
         }
 
 
-        /*Screen Name Sequence Number */
-        string screenName = null;
-
-        var testScreen = await _context.Screens.Where((s) => s.TargetId
-                                                          == request.NewScreen.TargetId)
-                                                          .OrderByDescending(s => s.ScreenName).ToListAsync();
-
-
-        if (!testScreen.Any())
-        {
-          screenName = baseTarget.Name + "-" + "1";
-        }
-        else
-        {
-          int maxScreen = 1;
-          foreach (var t in testScreen)
-          {
-            int screenNum = Int32.Parse(t.ScreenName.Split('-').Last());
-            maxScreen = maxScreen > screenNum ? maxScreen : screenNum;
-          }
-          maxScreen = maxScreen + 1;
-          screenName = baseTarget.Name + "-" + maxScreen.ToString();
-        }
-
-
-
         var ScreenToCreate = new Screen
         {
           Id = ScreenGid,
-          BaseTarget = baseTarget,
-          ScreenType = ScreenType.TargetBased.Value,
-          TargetId = baseTarget.Id,
-          TargetName = baseTarget.Name,
+          ScreenType = ScreenType.Phenotypic.Value,
           ScreenName = screenName,
           Method = request.NewScreen.Method,
           Status = "New",

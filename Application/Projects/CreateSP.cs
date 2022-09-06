@@ -72,6 +72,7 @@ namespace Application.Projects
         Project.CurrentStage = ProjectStage.SP.Value;
         Project.Status = ProjectStatus.Active.Value;
         Project.SPEnabled = true;
+        Project.LastModified = request.SPDetails.SPStart;
 
         /* Prediction of Next Stage Start Date */
         var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "SPAnticipatedDays");
