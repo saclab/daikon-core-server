@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220830154646_PhenotypicScreen")]
+    partial class PhenotypicScreen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -924,9 +926,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("DisclosureDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime?>("EOLDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("FHADescription")
                         .HasColumnType("text");
 
@@ -975,9 +974,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("LOStart")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<DateTime>("PCDDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -1008,9 +1004,6 @@ namespace Persistence.Migrations
                     b.Property<string>("ProjectName")
                         .HasColumnType("text");
 
-                    b.Property<string>("ProjectType")
-                        .HasColumnType("text");
-
                     b.Property<Guid>("RepresentationStructureId")
                         .HasColumnType("uuid");
 
@@ -1035,9 +1028,6 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("ScreenId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ScreenName")
-                        .HasColumnType("text");
-
                     b.Property<string>("Status")
                         .HasColumnType("text");
 
@@ -1061,9 +1051,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("TeamProbabilityDescription")
                         .HasColumnType("text");
-
-                    b.Property<DateTime?>("TerminationDate")
-                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 

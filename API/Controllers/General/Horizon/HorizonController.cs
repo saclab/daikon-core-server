@@ -10,10 +10,10 @@ namespace API.Controllers.General
   public class HorizonController : ApiControllerBase
   {
 
-    [HttpGet("{targetName}")]
-    public async Task<IActionResult> GenerateHorizon(String targetName)
+    [HttpGet("{entryPointName}")]
+    public async Task<IActionResult> GenerateHorizon(String entryPointName)
     {
-      return HandleResult(await Mediator.Send(new Application.General.Horizon.Generate.Query { TargetName = targetName }));
+      return HandleResult(await Mediator.Send(new Application.General.Horizon.Generate.Query { EntryPointName = entryPointName }));
     }
 
     [HttpGet("by-accession/{accessionNumber}")]

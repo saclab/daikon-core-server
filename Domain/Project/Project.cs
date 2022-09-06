@@ -8,12 +8,14 @@ namespace Domain
     public Guid Id { get; set; }
     public Guid StrainId { get; set; }
     public string ProjectName { get; set; }
+    public string ProjectType { get; set; }
     public DateTime CreatedAt { get; set; }
     public string CreatedBy { get; set; }
     public Guid? ScreenId { get; set; }
     public Screen BaseScreen { get; set; }
+    public string ScreenName { get; set; }
     public string TargetName { get; set; }
-    public Guid TargetId { get; set; }
+    public Guid? TargetId { get; set; }
 
     public List<ProjectBaseHits> BaseHits { get; set; }
     public Guid RepresentationStructureId { get; set; }
@@ -80,6 +82,10 @@ namespace Domain
     public DateTime ClinicalP1Start { get; set; }
     public DateTime ClinicalP1PredictedStart { get; set; }
     public string ClinicalP1Description { get; set; }
+
+    public DateTime LastModified { get; set; }
+    public DateTime? TerminationDate { get; set; }
+    public DateTime? EOLDate { get; set; }
 
   }
 }

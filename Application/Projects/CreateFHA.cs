@@ -71,9 +71,17 @@ namespace Application.Projects
         newProject.Id = newProjectGuid;
         newProject.ScreenId = baseScreen.Id;
         newProject.BaseScreen = baseScreen;
+        newProject.ScreenName = baseScreen.ScreenName; 
         newProject.ProjectName = request.NewProject.ProjectName;
         newProject.TargetName = baseScreen.TargetName;
         newProject.TargetId = baseScreen.TargetId;
+
+        if(baseScreen.TargetName == null){
+          newProject.ProjectType = ProjectTypes.Phenotypic.Value;
+        }
+        else{
+          newProject.ProjectType = ProjectTypes.TargetBased.Value;
+        }
 
 
         Console.WriteLine("[Complete] new project");
@@ -156,6 +164,7 @@ namespace Application.Projects
         newProject.CurrentStage = ProjectStage.FHA.Value;
         newProject.Status = ProjectStatus.Active.Value;
         newProject.FHAEnabled = true;
+        newProject.LastModified = request.NewProject.FHAStart;
 
         /* Prediction of Next Stage Start Date */
         var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "FHAAnticipatedDays");

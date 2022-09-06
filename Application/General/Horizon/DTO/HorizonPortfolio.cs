@@ -16,6 +16,7 @@ namespace Application.General.Horizon.DTO
       public string Status { get; set; }
       public string OrgAlias { get; set; }
       public string CurrentStage { get; set; }
+      public string Link { get; set; }
 
     }
 

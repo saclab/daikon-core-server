@@ -63,6 +63,7 @@ namespace Application.Projects
         var newProjectGuid = Guid.NewGuid();
         newProject.Id = newProjectGuid;
         newProject.ProjectName = request.NewProjectForm.ProjectName;
+        newProject.ProjectType = ProjectTypes.Unlinked.Value;
 
 
 
@@ -83,16 +84,21 @@ namespace Application.Projects
         }
         else
         {
+          Console.WriteLine("[Will try] to CREATE compound (rep structure)");
+
+          var newCompoundId = Guid.NewGuid();
           compoundFromDb = new Compound()
           {
-            Id = Guid.NewGuid(),
+            Id = newCompoundId,
             Smile = request.NewProjectForm.RepresentationStructureSMILE,
             ExternalCompoundIds = request.NewProjectForm.RepresentationStructureExternalCompoundIds,
             MolWeight = request.NewProjectForm.MolWeight,
             MolArea = request.NewProjectForm.MolArea
           };
-
           _context.Compounds.Add(compoundFromDb);
+          Console.WriteLine("[Complete] Creating compound");
+          newProject.RepresentationStructureId = newCompoundId;
+          newProject.RepresentationStructure = compoundFromDb;
         }
 
         /* verify the primaryorg*/
@@ -135,6 +141,7 @@ namespace Application.Projects
         newProject.CurrentStage = ProjectStage.FHA.Value;
         newProject.Status = ProjectStatus.Active.Value;
         newProject.FHAEnabled = true;
+        newProject.LastModified = DateTime.UtcNow;
 
         /* Prediction of Next Stage Start Date */
         var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "FHAAnticipatedDays");

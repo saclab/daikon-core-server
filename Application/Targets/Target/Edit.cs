@@ -53,11 +53,21 @@ namespace Application.Targets
 
         targetToEdit.Bucket = request.ModifiedTarget.Bucket;
         targetToEdit.LikeScore = request.ModifiedTarget.LikeScore;
+        targetToEdit.LikeComplete = request.ModifiedTarget.LikeComplete;
         targetToEdit.ImpactScore = request.ModifiedTarget.ImpactScore;
+        targetToEdit.ImpactComplete = request.ModifiedTarget.ImpactComplete;
+        targetToEdit.ScreeningComplete = request.ModifiedTarget.ScreeningComplete;
+        targetToEdit.ScreeningScore = request.ModifiedTarget.ScreeningScore;
         targetToEdit.HTSFeasibility = request.ModifiedTarget.HTSFeasibility;
         targetToEdit.SBDFeasibility = request.ModifiedTarget.SBDFeasibility;
         targetToEdit.Progressibility = request.ModifiedTarget.Progressibility;
         targetToEdit.Safety = request.ModifiedTarget.Safety;
+        targetToEdit.StructureComplete = request.ModifiedTarget.StructureComplete;
+        targetToEdit.StructureScore = request.ModifiedTarget.StructureScore;
+        targetToEdit.VulnerabilityRank = request.ModifiedTarget.VulnerabilityRank;
+        targetToEdit.VulnerabilityRatio = request.ModifiedTarget.VulnerabilityRatio;
+
+
 
         if (request.ModifiedTarget.TargetScorecard != null)
         {

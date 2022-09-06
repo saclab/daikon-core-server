@@ -73,6 +73,7 @@ namespace Application.Projects
         Project.CurrentStage = ProjectStage.LO.Value;
         Project.Status = ProjectStatus.Active.Value;
         Project.LOEnabled = true;
+        Project.LastModified = request.LODetails.LOStart;
 
         /* Prediction of Next Stage Start Date */
         var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "LOAnticipatedDays");

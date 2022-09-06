@@ -14,6 +14,7 @@ namespace Application.General.Horizon.DTO
       public string TargetName { get; set; }
       public string ScreenName { get; set; }
       public string ScreenMethod { get; set; }
+      public string Link { get; set; }
 
     }
 
