@@ -29,17 +29,20 @@ namespace API.Extensions
           opt.UseNpgsql(buildConnectionString);
         });
 
-      /* Add CORS */
-      services.AddCors(opt =>
+            /* Add CORS */
+
+           
+
+        services.AddCors(opt =>
         {
           opt.AddPolicy("CorsPolicy", policy =>
             {
-              policy
-                  .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials()
-                  .WithExposedHeaders("WWW-Authenticate", "Pagination")
-                  .WithOrigins(Environment.GetEnvironmentVariable("CORS_ORIGINS"));
+                policy
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    .WithExposedHeaders("WWW-Authenticate", "Pagination")
+                    .WithOrigins(Environment.GetEnvironmentVariable("CORS_ORIGINS"));
             });
         });
 
