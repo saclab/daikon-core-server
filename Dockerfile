@@ -8,6 +8,7 @@ COPY ./Domain/Domain.csproj ./Domain/
 COPY ./Infrastructure/Infrastructure.csproj ./Infrastructure/
 COPY ./Persistence/Persistence.csproj ./Persistence/
 COPY ./API/API.csproj ./API/
+COPY ./DataView/DataView.csproj ./DataView/
 
 RUN dotnet restore
 
