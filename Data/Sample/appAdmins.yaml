@@ -1,6 +1,7 @@
 Name: InitialAppAdmins
 Type: string
 Data:
+  - sid@tamu.edu
   - aaron.brown@gatesfoundation.org
   - aaron@teamfigaro.com
   - panda@tamu.edu
