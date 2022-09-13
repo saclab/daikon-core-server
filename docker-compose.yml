@@ -12,7 +12,7 @@ services:
       - ./db:/var/lib/postgresql/data
 
   api-backend:
-    container_name: project_api
+    container_name: project_api_prod
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -26,11 +26,13 @@ services:
       - /app/Application/bin
       - /app/Domain/bin
       - /app/Persistence/bin
+      - /app/DataView/bin
       - /app/API/obj
       - /app/Infrastructure/obj
       - /app/Application/obj
       - /app/Domain/obj
       - /app/Persistence/obj
+      - /app/DataView/obj
       - ./:/app
     environment:
       - AZURE_VAILD_AUDIENCE=${AZURE_VAILD_AUDIENCE}
