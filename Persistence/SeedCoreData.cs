@@ -34,8 +34,8 @@ namespace Persistence
       await seedAdmins("/app/Data/Sample/appAdmins.yaml");
 
       /* Create Basic App Data */
-      if (!_context.Questions.Any())
-        await seedTargetPromotionQuestions("/app/Data/Sample/targetPromotionQuestions.yaml");
+      // if (!_context.Questions.Any())
+      //   await seedTargetPromotionQuestions("/app/Data/Sample/targetPromotionQuestions.yaml");
 
       if (!_context.AppVals.Any())
         await seedAppVals("/app/Data/Sample/appVals.yaml");

@@ -2,9 +2,9 @@ version: "3"
 services:
   postgres:
     image: postgres:14.5
-    container_name: project_db
+    container_name: daikon_core_project_db
     environment:
-      - POSTGRES_USER=tpt_user
+      - POSTGRES_USER=daikon_user
       - POSTGRES_PASSWORD=${PGPASSWORD}
     ports:
       - "40000:5432"
@@ -12,10 +12,10 @@ services:
       - ./db:/var/lib/postgresql/data
 
   api-backend:
-    container_name: project_api_prod
+    container_name: daikon_core_server_dev
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     depends_on:
       - "postgres"
     ports:

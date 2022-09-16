@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0
 WORKDIR /app
 EXPOSE 5005
 
-COPY ./tpt-backend.sln ./
+COPY ./daikon-core-server.sln ./
 COPY ./Application/Application.csproj ./Application/
 COPY ./Domain/Domain.csproj ./Domain/
 COPY ./Infrastructure/Infrastructure.csproj ./Infrastructure/
