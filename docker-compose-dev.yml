@@ -1,10 +1,23 @@
 version: "3"
 services:
+  postgres:
+    image: postgres:14.5
+    container_name: project_db
+    environment:
+      - POSTGRES_USER=tpt_user
+      - POSTGRES_PASSWORD=${PGPASSWORD}
+    ports:
+      - "40000:5432"
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
   api-backend:
     container_name: project_api_prod
     build:
       context: .
       dockerfile: Dockerfile
+    depends_on:
+      - "postgres"
     ports:
       - 5005:5005
     volumes:
@@ -27,7 +40,7 @@ services:
       - LOCAL_TOKENKEY=${LOCAL_TOKENKEY}
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - ASPNETCORE_URLS=http://*:5005
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - PGSQL_CONNECTION_STRING=${PGSQL_CONNECTION_STRING}
       - PGPGUSER=${PGPGUSER}
       - PGPASSWORD=${PGPASSWORD}
