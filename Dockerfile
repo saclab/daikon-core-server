@@ -20,8 +20,8 @@ RUN dotnet publish -c Release -o out
 
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS tpt-backend-prod
-WORKDIR /app/
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS project_api_prod
+WORKDIR /daikon-server/
 EXPOSE 5005
 COPY --from=tpt-backend-prod-build /app/API/out .
 ENTRYPOINT ["dotnet", "API.dll"]
