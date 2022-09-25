@@ -12,7 +12,7 @@ services:
       - ./db:/var/lib/postgresql/data
 
   api-backend:
-    container_name: project_api_prod
+    container_name: daikon_core_server_dev
     build:
       context: .
       dockerfile: Dockerfile

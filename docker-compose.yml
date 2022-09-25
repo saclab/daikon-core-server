@@ -1,7 +1,7 @@
 version: "3"
 services:
   api-backend:
-    container_name: project_api_prod
+    container_name: daikon_core_server
     build:
       context: .
       dockerfile: Dockerfile
