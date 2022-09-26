@@ -13,7 +13,7 @@ namespace Application.General.Horizon.DTO
       public Guid Id { get; set; }
       public string TargetName { get; set; }
       public string TargetType { get; set; }
-      public string BucketScore { get; set; }
+      public string TargetRank { get; set; }
       public string Link { get; set; }
 
     }

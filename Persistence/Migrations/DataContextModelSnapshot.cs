@@ -1383,9 +1383,6 @@ namespace Persistence.Migrations
                     b.Property<string>("Background")
                         .HasColumnType("text");
 
-                    b.Property<string>("Bucket")
-                        .HasColumnType("text");
-
                     b.Property<string>("Challenges")
                         .HasColumnType("text");
 
@@ -1398,37 +1395,19 @@ namespace Persistence.Migrations
                     b.Property<string>("Enablement")
                         .HasColumnType("text");
 
-                    b.Property<double>("HTSFeasibility")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("ImpactComplete")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("ImpactScore")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("LikeComplete")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("LikeScore")
-                        .HasColumnType("double precision");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<double>("Progressibility")
+                    b.Property<string>("Rank")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Score1")
                         .HasColumnType("double precision");
 
-                    b.Property<double>("SBDFeasibility")
+                    b.Property<double>("Score2")
                         .HasColumnType("double precision");
 
-                    b.Property<double>("Safety")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("ScreeningComplete")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("ScreeningScore")
+                    b.Property<double>("Score3")
                         .HasColumnType("double precision");
 
                     b.Property<Guid>("StrainId")
@@ -1437,20 +1416,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Strategy")
                         .HasColumnType("text");
 
-                    b.Property<double>("StructureComplete")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("StructureScore")
-                        .HasColumnType("double precision");
-
                     b.Property<string>("Type")
                         .HasColumnType("text");
-
-                    b.Property<double>("VulnerabilityRank")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("VulnerabilityRatio")
-                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 

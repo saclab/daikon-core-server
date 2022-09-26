@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class Refresh7 : Migration
+    public partial class Refresh : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -209,21 +209,10 @@ namespace Persistence.Migrations
                     StrainId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<string>(type: "text", nullable: true),
-                    Bucket = table.Column<string>(type: "text", nullable: true),
-                    ImpactScore = table.Column<double>(type: "double precision", nullable: false),
-                    ImpactComplete = table.Column<double>(type: "double precision", nullable: false),
-                    LikeScore = table.Column<double>(type: "double precision", nullable: false),
-                    LikeComplete = table.Column<double>(type: "double precision", nullable: false),
-                    ScreeningScore = table.Column<double>(type: "double precision", nullable: false),
-                    ScreeningComplete = table.Column<double>(type: "double precision", nullable: false),
-                    StructureScore = table.Column<double>(type: "double precision", nullable: false),
-                    StructureComplete = table.Column<double>(type: "double precision", nullable: false),
-                    VulnerabilityRatio = table.Column<double>(type: "double precision", nullable: false),
-                    VulnerabilityRank = table.Column<double>(type: "double precision", nullable: false),
-                    HTSFeasibility = table.Column<double>(type: "double precision", nullable: false),
-                    SBDFeasibility = table.Column<double>(type: "double precision", nullable: false),
-                    Progressibility = table.Column<double>(type: "double precision", nullable: false),
-                    Safety = table.Column<double>(type: "double precision", nullable: false),
+                    Rank = table.Column<string>(type: "text", nullable: true),
+                    Score1 = table.Column<double>(type: "double precision", nullable: false),
+                    Score2 = table.Column<double>(type: "double precision", nullable: false),
+                    Score3 = table.Column<double>(type: "double precision", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     Background = table.Column<string>(type: "text", nullable: true),

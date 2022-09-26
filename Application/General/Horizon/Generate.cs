@@ -320,7 +320,7 @@ namespace Application.General.Horizon
                 Id = target.Id,
                 TargetName = target.Name,
                 TargetType = target.Type,
-                BucketScore = target.Bucket,
+                TargetRank = target.Rank,
                 Link=target.Id.ToString()
             }
         };

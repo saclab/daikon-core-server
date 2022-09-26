@@ -89,21 +89,11 @@ namespace Application.Targets
           Name = request.TargetImportDTO.TargetName,
           Type = "simple-protein",
           TargetGenes = targetGenes,
-          Bucket = request.TargetImportDTO.Bucket,
-          ImpactScore = request.TargetImportDTO.ImpactScore,
-          ImpactComplete = request.TargetImportDTO.ImpactComplete,
-          LikeScore = request.TargetImportDTO.LikeScore,
-          LikeComplete = request.TargetImportDTO.LikeComplete,
-          ScreeningScore = request.TargetImportDTO.ScreeningScore,
-          ScreeningComplete = request.TargetImportDTO.ScreeningComplete,
-          StructureScore = request.TargetImportDTO.StructureScore,
-          StructureComplete = request.TargetImportDTO.StructureComplete,
-          VulnerabilityRatio = request.TargetImportDTO.VulnerabilityRatio,
-          VulnerabilityRank = request.TargetImportDTO.VulnerabilityRank,
-          HTSFeasibility = request.TargetImportDTO.HTSFeasibility,
-          SBDFeasibility = request.TargetImportDTO.SBDFeasibility,
-          Progressibility = request.TargetImportDTO.Progressibility,
-          Safety = request.TargetImportDTO.Safety,
+          Rank = request.TargetImportDTO.Rank,
+          Score1 = request.TargetImportDTO.Score1,
+          Score2 = request.TargetImportDTO.Score2,
+          Score3 = request.TargetImportDTO.Score3,
+          
 
           TargetScorecard = new TargetScorecard
           {

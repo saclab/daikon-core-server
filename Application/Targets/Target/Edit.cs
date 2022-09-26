@@ -51,21 +51,10 @@ namespace Application.Targets
 
         if (targetToEdit == null) return null;
 
-        targetToEdit.Bucket = request.ModifiedTarget.Bucket;
-        targetToEdit.LikeScore = request.ModifiedTarget.LikeScore;
-        targetToEdit.LikeComplete = request.ModifiedTarget.LikeComplete;
-        targetToEdit.ImpactScore = request.ModifiedTarget.ImpactScore;
-        targetToEdit.ImpactComplete = request.ModifiedTarget.ImpactComplete;
-        targetToEdit.ScreeningComplete = request.ModifiedTarget.ScreeningComplete;
-        targetToEdit.ScreeningScore = request.ModifiedTarget.ScreeningScore;
-        targetToEdit.HTSFeasibility = request.ModifiedTarget.HTSFeasibility;
-        targetToEdit.SBDFeasibility = request.ModifiedTarget.SBDFeasibility;
-        targetToEdit.Progressibility = request.ModifiedTarget.Progressibility;
-        targetToEdit.Safety = request.ModifiedTarget.Safety;
-        targetToEdit.StructureComplete = request.ModifiedTarget.StructureComplete;
-        targetToEdit.StructureScore = request.ModifiedTarget.StructureScore;
-        targetToEdit.VulnerabilityRank = request.ModifiedTarget.VulnerabilityRank;
-        targetToEdit.VulnerabilityRatio = request.ModifiedTarget.VulnerabilityRatio;
+        targetToEdit.Rank = request.ModifiedTarget.Rank;
+        targetToEdit.Score1 = request.ModifiedTarget.Score1;
+        targetToEdit.Score2 = request.ModifiedTarget.Score2;
+        targetToEdit.Score3 = request.ModifiedTarget.Score3;
 
 
 

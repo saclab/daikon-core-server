@@ -10,9 +10,11 @@ namespace DataView
     public Guid Id { get; set; }
     public string Name { get; set; }
     public string Type { get; set; }
-    public string Bucket { get; set; }
-    public double ImpactScore { get; set; }
-    public double LikeScore { get; set; }
+    public string Rank { get; set; }
+    public double Score1 { get; set; }
+    public double Score2 { get; set; }
+    public double Score3 { get; set; }
+
     public string CurrentStage { get; set; }
 
   }

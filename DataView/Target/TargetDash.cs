@@ -43,9 +43,10 @@ namespace DataView
           targetDashItem.Name = target.Name;
           targetDashItem.Id = target.Id;
           targetDashItem.Type = target.Type;
-          targetDashItem.Bucket = target.Bucket;
-          targetDashItem.ImpactScore = target.ImpactScore;
-          targetDashItem.LikeScore = target.LikeScore;
+          targetDashItem.Rank = target.Rank;
+          targetDashItem.Score1 = target.Score1;
+          targetDashItem.Score2 = target.Score2;
+          targetDashItem.Score3 = target.Score3;
           targetDashItem.CurrentStage = "Target";
 
           var screen = await _context.Screens.

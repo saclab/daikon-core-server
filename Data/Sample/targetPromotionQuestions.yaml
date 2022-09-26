@@ -1,0 +1,30 @@
+Name: TargetPromotionQuestions
+Type: Question
+Data:
+  - Identification : t1
+    Module : TargetPromotionQuestions
+    SubModule : PromotionDocument
+    QuestionBody: Is Target promotion Document Available?
+    ToolTip: Please link to the target promotion document if available
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : t2
+    Module : TargetPromotionQuestions
+    SubModule : PromotionFields
+    QuestionBody: Is the target Druggable?
+    ToolTip: Is the target Druggable
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
+  - Identification : t3
+    Module : TargetPromotionQuestions
+    SubModule : PromotionFields
+    QuestionBody: InVitro Essentiality Available ?
+    ToolTip: InVitro Essentiality Available, Please Link to Document.
+    PossibleAnswers:
+      - Yes
+      - No
+      - Unknown
