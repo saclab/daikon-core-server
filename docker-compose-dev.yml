@@ -15,7 +15,7 @@ services:
     container_name: daikon_core_server_tpt_dev
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     depends_on:
       - "postgres"
     ports:
@@ -45,3 +45,4 @@ services:
       - PGPGUSER=${PGPGUSER}
       - PGPASSWORD=${PGPASSWORD}
       - CORS_ORIGINS=${CORS_ORIGINS}
+      - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
