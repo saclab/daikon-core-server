@@ -18,7 +18,7 @@ namespace Application.Projects.CompoundEvolution
   {
     public class Command : IRequest<Result<ProjectCompoundEvolution>>
     {
-      public CompoundEvolutionAddDTO NewProjectCompoundEvolution { get; set; }
+      public CompoundEvolutionDTO NewProjectCompoundEvolution { get; set; }
     }
 
     // public class CommandValidator : AbstractValidator<Command>

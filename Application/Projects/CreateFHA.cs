@@ -181,7 +181,7 @@ namespace Application.Projects
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
         /* To Strat of the compond evolution timeline, add the primary hit as a starting point */
-        var projectCompoundEvolution = new CompoundEvolutionAddDTO
+        var projectCompoundEvolution = new CompoundEvolutionDTO
         {
           Smile = compoundFromDb.Smile,
           MolWeight = compoundFromDb.MolWeight,
