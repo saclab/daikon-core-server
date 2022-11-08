@@ -105,10 +105,10 @@ namespace Application.General.Horizon
             };
             blankHorizonTarget.Children.Add(blankHorizonScreen);
 
-            blankHorizonScreen.Children = new List<HorizonFHA>();
-            var unlinkedHorizionFHA = new HorizonFHA
+            blankHorizonScreen.Children = new List<HorizonHA>();
+            var unlinkedHorizionHA = new HorizonHA
             {
-              Name = "FHA",
+              Name = "HA",
               Attributes = {
                   Id = project.Id,
                   TargetName = "Unknown",
@@ -157,12 +157,12 @@ namespace Application.General.Horizon
                 unlinkedHorizonPortfolio.Children.Add(unlinkedHorizionPostPortfolio);
               }
 
-              unlinkedHorizionFHA.Children = new List<HorizonPortfolio>();
-              unlinkedHorizionFHA.Children.Add(unlinkedHorizonPortfolio);
+              unlinkedHorizionHA.Children = new List<HorizonPortfolio>();
+              unlinkedHorizionHA.Children.Add(unlinkedHorizonPortfolio);
 
             }
 
-            blankHorizonScreen.Children.Add(unlinkedHorizionFHA);
+            blankHorizonScreen.Children.Add(unlinkedHorizionHA);
 
             return Result<HorizonRoot>.Success(horizonRoot);
 
@@ -216,12 +216,12 @@ namespace Application.General.Horizon
             var projects = await _context.Projects.Where(p => p.ScreenId == screen.Id).ToListAsync();
             if (projects != null)
             {
-              horizonScreen.Children = new List<HorizonFHA>();
+              horizonScreen.Children = new List<HorizonHA>();
               foreach (var project in projects)
               {
-                var horizionFHA = new HorizonFHA
+                var horizionHA = new HorizonHA
                 {
-                  Name = "FHA",
+                  Name = "HA",
                   Attributes = {
                   Id = project.Id,
                   TargetName = project.TargetName,
@@ -272,12 +272,12 @@ namespace Application.General.Horizon
                     horizonPortfolio.Children.Add(horizionPostPortfolio);
                   }
 
-                  horizionFHA.Children = new List<HorizonPortfolio>();
-                  horizionFHA.Children.Add(horizonPortfolio);
+                  horizionHA.Children = new List<HorizonPortfolio>();
+                  horizionHA.Children.Add(horizonPortfolio);
 
                 }
 
-                horizonScreen.Children.Add(horizionFHA);
+                horizonScreen.Children.Add(horizionHA);
               }
             }
           }
@@ -359,12 +359,12 @@ namespace Application.General.Horizon
           var projects = await _context.Projects.Where(p => p.ScreenId == screen.Id).ToListAsync();
           if (projects != null)
           {
-            horizonScreen.Children = new List<HorizonFHA>();
+            horizonScreen.Children = new List<HorizonHA>();
             foreach (var project in projects)
             {
-              var horizionFHA = new HorizonFHA
+              var horizionHA = new HorizonHA
               {
-                Name = "FHA",
+                Name = "HA",
                 Attributes = {
                   Id = project.Id,
                   TargetName = project.TargetName,
@@ -415,12 +415,12 @@ namespace Application.General.Horizon
                   horizonPortfolio.Children.Add(horizionPostPortfolio);
                 }
 
-                horizionFHA.Children = new List<HorizonPortfolio>();
-                horizionFHA.Children.Add(horizonPortfolio);
+                horizionHA.Children = new List<HorizonPortfolio>();
+                horizionHA.Children.Add(horizonPortfolio);
 
               }
 
-              horizonScreen.Children.Add(horizionFHA);
+              horizonScreen.Children.Add(horizionHA);
             }
           }
         }

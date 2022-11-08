@@ -57,9 +57,9 @@ namespace Application.Projects
           return Result<Project>.Failure("Denied : Cannot modify a terminated project");
         }
 
-        /* check if the project is in FHA Stage */
+        /* check if the project is in HA Stage */
 
-        if (Project.CurrentStage != ProjectStage.FHA.Value)
+        if (Project.CurrentStage != ProjectStage.HA.Value)
         {
           return Result<Project>.Failure("Denied : Invalid previous stage");
         }

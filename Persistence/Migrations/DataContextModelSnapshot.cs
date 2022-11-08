@@ -927,18 +927,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("EOLDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("FHADescription")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("FHAEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("FHAPredictedStart")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("FHAStart")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("H2LDescription")
                         .HasColumnType("text");
 
@@ -949,6 +937,18 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("H2LStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("HADescription")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("HAEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("HAPredictedStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("HAStart")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("INDDescription")

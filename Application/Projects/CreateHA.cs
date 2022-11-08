@@ -14,7 +14,7 @@ using Persistence;
 
 namespace Application.Projects
 {
-  public class CreateFHA
+  public class CreateHA
   {
     public class Command : IRequest<Result<Project>>
     {
@@ -158,16 +158,16 @@ namespace Application.Projects
           }
         }
 
-        // FHA Details
-        newProject.FHAStart = request.NewProject.FHAStart;
-        newProject.FHADescription = request.NewProject.FHADescription;
-        newProject.CurrentStage = ProjectStage.FHA.Value;
+        // HA Details
+        newProject.HAStart = request.NewProject.HAStart;
+        newProject.HADescription = request.NewProject.HADescription;
+        newProject.CurrentStage = ProjectStage.HA.Value;
         newProject.Status = ProjectStatus.Active.Value;
-        newProject.FHAEnabled = true;
-        newProject.LastModified = request.NewProject.FHAStart;
+        newProject.HAEnabled = true;
+        newProject.LastModified = request.NewProject.HAStart;
 
         /* Prediction of Next Stage Start Date */
-        var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "FHAAnticipatedDays");
+        var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "HAAnticipatedDays");
         
         double daysToAdd = 350; /* This is the default value, unless overridden by database */
         if (fetchPredictedDaysToAdd != null)
@@ -175,7 +175,7 @@ namespace Application.Projects
           daysToAdd = Double.Parse(fetchPredictedDaysToAdd.Value);
         }
        
-        newProject.H2LPredictedStart = newProject.FHAStart.AddDays(daysToAdd);
+        newProject.H2LPredictedStart = newProject.HAStart.AddDays(daysToAdd);
         
         _context.Projects.Add(newProject);
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
@@ -187,7 +187,7 @@ namespace Application.Projects
           MolWeight = compoundFromDb.MolWeight,
           MolArea = compoundFromDb.MolArea,
           ProjectId = newProjectGuid,
-          Notes = "Initial FHA Compound",
+          Notes = "Initial HA Compound",
           MIC = request.NewProject.BaseHits.Find((h) => h.CompoundId == compoundFromDb.Id).MIC,
           IC50 = request.NewProject.BaseHits.Find((h) => h.CompoundId == compoundFromDb.Id).IC50,
           CreatedAt = DateTime.UtcNow,

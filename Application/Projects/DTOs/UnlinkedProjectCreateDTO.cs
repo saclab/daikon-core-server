@@ -14,8 +14,8 @@ namespace Application.Projects.DTOs
     public string RepresentationStructureExternalCompoundIds { get; set; }
     public AppOrg PrimaryOrg { get; set; }
     public List<AppOrg> SupportingOrgs { get; set; }
-    public DateTime FHAStart { get; set; }
-    public string FHADescription { get; set; }
+    public DateTime HAStart { get; set; }
+    public string HADescription { get; set; }
     public string MolWeight { get; set; }
     public string MolArea { get; set; }
     public double MIC { get; set; }

@@ -19,7 +19,7 @@ namespace Application.General.Horizon.DTO
     }
 
     public Attribute Attributes { get; set; }
-    public List<HorizonFHA> Children { get; set; }
+    public List<HorizonHA> Children { get; set; }
 
     public HorizonScreen()
     {

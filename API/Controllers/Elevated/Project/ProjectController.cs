@@ -7,14 +7,14 @@ namespace API.Controllers.Elevated
   public class ProjectController : ApiControllerBaseElevated
   {
 
-    /* Create a new project with FHA Data */
+    /* Create a new project with HA Data */
     [HttpPost]
     public async Task<IActionResult> CreateProject(Application.Projects.DTOs.ProjectCreateDTO newProject)
     {
-      return HandleResult(await Mediator.Send(new Application.Projects.CreateFHA.Command { NewProject = newProject }));
+      return HandleResult(await Mediator.Send(new Application.Projects.CreateHA.Command { NewProject = newProject }));
     }
 
-    /* Create a new unlinked project with FHA Data */
+    /* Create a new unlinked project with HA Data */
     [HttpPost("unlinked")]
     public async Task<IActionResult> CreateUnlinkedProject(Application.Projects.DTOs.UnlinkedProjectCreateDTO newProject)
     {

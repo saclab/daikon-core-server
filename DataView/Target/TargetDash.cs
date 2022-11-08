@@ -58,7 +58,7 @@ namespace DataView
           if (projects.Count != 0)
           {
             /*
-            0 = FHA
+            0 = HA
             1 = Portfolio
             2 = PostPortfolio
             */
@@ -74,7 +74,7 @@ namespace DataView
                 highestState = highestState >= 1 ? highestState : 1;
               }
             }
-            if (highestState == 0) targetDashItem.CurrentStage = "FHA";
+            if (highestState == 0) targetDashItem.CurrentStage = "HA";
             else if (highestState == 1) targetDashItem.CurrentStage = "Portfolio";
             else targetDashItem.CurrentStage = "PostPortfolio";
 

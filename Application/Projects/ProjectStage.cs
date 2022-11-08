@@ -6,7 +6,6 @@ namespace Application.Projects
 
     public string Value { get; private set; }
 
-    public static ProjectStage FHA { get { return new ProjectStage("FHA"); } }
     public static ProjectStage HA { get { return new ProjectStage("HA"); } }
     public static ProjectStage H2L { get { return new ProjectStage("H2L"); } }
     public static ProjectStage LO { get { return new ProjectStage("LO"); } }

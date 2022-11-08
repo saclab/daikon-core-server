@@ -144,12 +144,12 @@ namespace Application.General.Horizon
             var projects = await _context.Projects.Where(p => p.ScreenId == screen.Id).ToListAsync();
             if (projects != null)
             {
-              horizonScreen.Children = new List<HorizonFHA>();
+              horizonScreen.Children = new List<HorizonHA>();
               foreach (var project in projects)
               {
-                var horizionFHA = new HorizonFHA
+                var horizionHA = new HorizonHA
                 {
-                  Name = "FHA",
+                  Name = "HA",
                   Attributes = {
                   Id = project.Id,
                   TargetName = project.TargetName,
@@ -195,12 +195,12 @@ namespace Application.General.Horizon
                   }
 
 
-                  horizionFHA.Children = new List<HorizonPortfolio>();
-                  horizionFHA.Children.Add(horizonPortfolio);
+                  horizionHA.Children = new List<HorizonPortfolio>();
+                  horizionHA.Children.Add(horizonPortfolio);
 
                 }
 
-                horizonScreen.Children.Add(horizionFHA);
+                horizonScreen.Children.Add(horizionHA);
               }
             }
 

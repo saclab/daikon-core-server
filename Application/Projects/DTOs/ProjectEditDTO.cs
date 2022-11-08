@@ -18,9 +18,9 @@ namespace Application.Projects.DTOs
     public string TeamProbability { get; set; }
     public string TeamProbabilityDescription { get; set; }
     
-    public DateTime FHAStart { get; set; }
-    public DateTime FHAPredictedStart { get; set; }
-    public string FHADescription { get; set; }
+    public DateTime HAStart { get; set; }
+    public DateTime HAPredictedStart { get; set; }
+    public string HADescription { get; set; }
 
     public DateTime H2LStart { get; set; }
     public DateTime H2LPredictedStart { get; set; }
