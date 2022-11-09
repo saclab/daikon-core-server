@@ -14,7 +14,7 @@ namespace Application.General.AppValues.DTO
 
         public int ScreenCount { get; set; }
 
-        public int FHACount { get; set; }
+        public int HACount { get; set; }
 
         public int PortfolioCount { get; set; }
 

@@ -71,9 +71,9 @@ namespace Application.Projects
         projectToEdit.TeamProbability = request.project.TeamProbability;
         projectToEdit.TeamProbabilityDescription = request.project.TeamProbabilityDescription;
 
-        projectToEdit.FHAStart = request.project.FHAStart;
-        projectToEdit.FHAPredictedStart = request.project.FHAPredictedStart;
-        projectToEdit.FHADescription = request.project.FHADescription;
+        projectToEdit.HAStart = request.project.HAStart;
+        projectToEdit.HAPredictedStart = request.project.HAPredictedStart;
+        projectToEdit.HADescription = request.project.HADescription;
 
         projectToEdit.H2LStart = request.project.H2LStart;
         projectToEdit.H2LPredictedStart = request.project.H2LPredictedStart;

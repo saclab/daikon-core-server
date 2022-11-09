@@ -14,7 +14,7 @@ namespace Application.Projects.DTOs
     public Compound RepresentationStructure { get; set; }
     public AppOrg PrimaryOrg { get; set; }
     public List<AppOrg> SupportingOrgs { get; set; }
-    public DateTime FHAStart { get; set; }
-    public string FHADescription { get; set; }
+    public DateTime HAStart { get; set; }
+    public string HADescription { get; set; }
   }
 }

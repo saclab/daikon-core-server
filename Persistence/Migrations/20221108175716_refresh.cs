@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+#nullable disable
+
 namespace Persistence.Migrations
 {
-    public partial class refresh6 : Migration
+    public partial class refresh : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,8 +60,8 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<string>(type: "text", nullable: true),
-                    DateCreated = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DateCompleted = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DateCompleted = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,7 +80,7 @@ namespace Persistence.Migrations
                     OldValue = table.Column<string>(type: "text", nullable: true),
                     NewValue = table.Column<string>(type: "text", nullable: true),
                     ModifiedBy = table.Column<string>(type: "text", nullable: true),
-                    DateChanged = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    DateChanged = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,11 +93,11 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     StrainId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ExternalCompundIds = table.Column<string>(type: "text", nullable: true),
+                    ExternalCompoundIds = table.Column<string>(type: "text", nullable: true),
                     Smile = table.Column<string>(type: "text", nullable: true),
                     MolWeight = table.Column<string>(type: "text", nullable: true),
                     MolArea = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -112,7 +114,7 @@ namespace Persistence.Migrations
                     Topic = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     PostedBy = table.Column<string>(type: "text", nullable: true),
-                    Timestamp = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Mentions = table.Column<string>(type: "text", nullable: true),
                     Tags = table.Column<string>(type: "text", nullable: true)
                 },
@@ -191,7 +193,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     CanonicalName = table.Column<string>(type: "text", nullable: true),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -222,8 +224,12 @@ namespace Persistence.Migrations
                     SBDFeasibility = table.Column<double>(type: "double precision", nullable: false),
                     Progressibility = table.Column<double>(type: "double precision", nullable: false),
                     Safety = table.Column<double>(type: "double precision", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    CreatedBy = table.Column<string>(type: "text", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    Background = table.Column<string>(type: "text", nullable: true),
+                    Enablement = table.Column<string>(type: "text", nullable: true),
+                    Strategy = table.Column<string>(type: "text", nullable: true),
+                    Challenges = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -240,8 +246,8 @@ namespace Persistence.Migrations
                     Neutral = table.Column<int>(type: "integer", nullable: false),
                     Negative = table.Column<int>(type: "integer", nullable: false),
                     IsVotingAllowed = table.Column<bool>(type: "boolean", nullable: false),
-                    LastModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -258,7 +264,7 @@ namespace Persistence.Migrations
                     Bio = table.Column<string>(type: "text", nullable: true),
                     OrgId = table.Column<Guid>(type: "uuid", nullable: true),
                     Lock = table.Column<bool>(type: "boolean", nullable: false),
-                    Archived = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Archived = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -281,8 +287,7 @@ namespace Persistence.Migrations
                         name: "FK_AspNetUsers_AppOrgs_OrgId",
                         column: x => x.OrgId,
                         principalTable: "AppOrgs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -313,12 +318,12 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ProjectId = table.Column<Guid>(type: "uuid", nullable: false),
                     CompoundId = table.Column<Guid>(type: "uuid", nullable: false),
-                    AddedOnDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    AddedOnDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     AddedOnStage = table.Column<string>(type: "text", nullable: true),
                     Notes = table.Column<string>(type: "text", nullable: true),
                     MIC = table.Column<double>(type: "double precision", nullable: false),
                     IC50 = table.Column<double>(type: "double precision", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -340,7 +345,7 @@ namespace Persistence.Migrations
                     DiscussionId = table.Column<Guid>(type: "uuid", nullable: false),
                     Body = table.Column<string>(type: "text", nullable: true),
                     PostedBy = table.Column<string>(type: "text", nullable: true),
-                    Timestamp = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Mentions = table.Column<string>(type: "text", nullable: true),
                     Tags = table.Column<string>(type: "text", nullable: true)
                 },
@@ -382,7 +387,7 @@ namespace Persistence.Migrations
                     GeneId = table.Column<Guid>(type: "uuid", nullable: false),
                     GeneAccessionNumber = table.Column<string>(type: "text", nullable: true),
                     CRISPRiStrain = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -409,7 +414,7 @@ namespace Persistence.Migrations
                     Method = table.Column<string>(type: "text", nullable: true),
                     Reference = table.Column<string>(type: "text", nullable: true),
                     Notes = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -417,6 +422,29 @@ namespace Persistence.Migrations
                     table.PrimaryKey("PK_GeneEssentiality", x => x.Id);
                     table.ForeignKey(
                         name: "FK_GeneEssentiality_Genes_GeneId",
+                        column: x => x.GeneId,
+                        principalTable: "Genes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GeneExternalIds",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    GeneId = table.Column<Guid>(type: "uuid", nullable: false),
+                    GeneAccessionNumber = table.Column<string>(type: "text", nullable: true),
+                    ExternalIdRef = table.Column<string>(type: "text", nullable: true),
+                    ExternalId = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GeneExternalIds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GeneExternalIds_Genes_GeneId",
                         column: x => x.GeneId,
                         principalTable: "Genes",
                         principalColumn: "Id",
@@ -459,7 +487,7 @@ namespace Persistence.Migrations
                     GeneAccessionNumber = table.Column<string>(type: "text", nullable: true),
                     KnockdownStrain = table.Column<string>(type: "text", nullable: true),
                     Phenotype = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -483,7 +511,7 @@ namespace Persistence.Migrations
                     Activity = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<string>(type: "text", nullable: true),
                     Throughput = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -507,8 +535,8 @@ namespace Persistence.Migrations
                     Production = table.Column<string>(type: "text", nullable: true),
                     Method = table.Column<string>(type: "text", nullable: true),
                     Purity = table.Column<string>(type: "text", nullable: true),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -576,7 +604,7 @@ namespace Persistence.Migrations
                     Compound = table.Column<string>(type: "text", nullable: true),
                     ShiftInMIC = table.Column<string>(type: "text", nullable: true),
                     Org = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -601,7 +629,7 @@ namespace Persistence.Migrations
                     Method = table.Column<string>(type: "text", nullable: true),
                     Resolution = table.Column<string>(type: "text", nullable: true),
                     Ligands = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -630,7 +658,7 @@ namespace Persistence.Migrations
                     Operon = table.Column<string>(type: "text", nullable: true),
                     Confounded = table.Column<string>(type: "text", nullable: true),
                     Shell2015Operon = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -678,17 +706,18 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     StrainId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TargetId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uuid", nullable: true),
                     ScreenName = table.Column<string>(type: "text", nullable: true),
+                    ScreenType = table.Column<string>(type: "text", nullable: true),
                     Method = table.Column<string>(type: "text", nullable: true),
                     TargetName = table.Column<string>(type: "text", nullable: true),
                     GeneName = table.Column<string>(type: "text", nullable: true),
                     Status = table.Column<string>(type: "text", nullable: true),
                     OrgId = table.Column<Guid>(type: "uuid", nullable: false),
-                    PromotionDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    PromotionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Promoter = table.Column<string>(type: "text", nullable: true),
                     Notes = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -704,8 +733,7 @@ namespace Persistence.Migrations
                         name: "FK_Screens_Targets_TargetId",
                         column: x => x.TargetId,
                         principalTable: "Targets",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -742,7 +770,7 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TargetID = table.Column<Guid>(type: "uuid", nullable: false),
                     TargetName = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -766,7 +794,7 @@ namespace Persistence.Migrations
                     VotedPositive = table.Column<bool>(type: "boolean", nullable: false),
                     VotedNeutral = table.Column<bool>(type: "boolean", nullable: false),
                     VotedNegative = table.Column<bool>(type: "boolean", nullable: false),
-                    VotedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    VotedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Comment = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -880,7 +908,7 @@ namespace Persistence.Migrations
                     IC50 = table.Column<double>(type: "double precision", nullable: false),
                     ClusterGroup = table.Column<int>(type: "integer", nullable: false),
                     CompoundId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     VoteId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -914,45 +942,60 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     StrainId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProjectName = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ProjectType = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
-                    ScreenId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ScreenId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ScreenName = table.Column<string>(type: "text", nullable: true),
                     TargetName = table.Column<string>(type: "text", nullable: true),
-                    TargetId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TargetId = table.Column<Guid>(type: "uuid", nullable: true),
                     RepresentationStructureId = table.Column<Guid>(type: "uuid", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: true),
                     CurrentStage = table.Column<string>(type: "text", nullable: true),
                     CurrentStageDescription = table.Column<string>(type: "text", nullable: true),
                     PrimaryOrgId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProjectDisclosure = table.Column<string>(type: "text", nullable: true),
-                    DisclosureDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DisclosureDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Priority = table.Column<string>(type: "text", nullable: true),
                     PriorityDescription = table.Column<string>(type: "text", nullable: true),
                     Probability = table.Column<string>(type: "text", nullable: true),
                     ProbabilityDescription = table.Column<string>(type: "text", nullable: true),
+                    TeamPriority = table.Column<string>(type: "text", nullable: true),
+                    TeamPriorityDescription = table.Column<string>(type: "text", nullable: true),
+                    TeamProbability = table.Column<string>(type: "text", nullable: true),
+                    TeamProbabilityDescription = table.Column<string>(type: "text", nullable: true),
                     Resource = table.Column<string>(type: "text", nullable: true),
                     ResourceDescription = table.Column<string>(type: "text", nullable: true),
-                    FHAEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    FHAStart = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    FHADescription = table.Column<string>(type: "text", nullable: true),
+                    HAEnabled = table.Column<bool>(type: "boolean", nullable: false),
+                    HAStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    HAPredictedStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    HADescription = table.Column<string>(type: "text", nullable: true),
                     H2LEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    H2LStart = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    H2LStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    H2LPredictedStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     H2LDescription = table.Column<string>(type: "text", nullable: true),
                     LOEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    LOStart = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LOStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    LOPredictedStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LODescription = table.Column<string>(type: "text", nullable: true),
                     SPEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    SPStart = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    SPStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    SPPredictedStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     SPDescription = table.Column<string>(type: "text", nullable: true),
                     PCDEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    PCDDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    PCDDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     PCDDescription = table.Column<string>(type: "text", nullable: true),
                     INDEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    INDStart = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    INDStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    INDPredictedStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     INDDescription = table.Column<string>(type: "text", nullable: true),
-                    P1Enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    P1Start = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    P1Description = table.Column<string>(type: "text", nullable: true)
+                    ClinicalP1Enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    ClinicalP1Start = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ClinicalP1PredictedStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ClinicalP1Description = table.Column<string>(type: "text", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    TerminationDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    EOLDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -973,8 +1016,7 @@ namespace Persistence.Migrations
                         name: "FK_Projects_Screens_ScreenId",
                         column: x => x.ScreenId,
                         principalTable: "Screens",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -988,12 +1030,12 @@ namespace Persistence.Migrations
                     Protocol = table.Column<string>(type: "text", nullable: true),
                     Library = table.Column<string>(type: "text", nullable: true),
                     Scientist = table.Column<string>(type: "text", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UnverifiedHitCount = table.Column<int>(type: "integer", nullable: false),
                     NoOfCompoundsScreened = table.Column<int>(type: "integer", nullable: false),
                     Concentration = table.Column<float>(type: "real", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -1164,6 +1206,11 @@ namespace Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_GeneEssentiality_GeneId",
                 table: "GeneEssentiality",
+                column: "GeneId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GeneExternalIds_GeneId",
+                table: "GeneExternalIds",
                 column: "GeneId");
 
             migrationBuilder.CreateIndex(
@@ -1381,6 +1428,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "GeneEssentiality");
+
+            migrationBuilder.DropTable(
+                name: "GeneExternalIds");
 
             migrationBuilder.DropTable(
                 name: "GeneGroupGenes");

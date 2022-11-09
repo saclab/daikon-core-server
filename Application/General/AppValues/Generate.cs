@@ -51,7 +51,7 @@ namespace Application.General.AppValues
                  appValues.AppCount.GeneCount = await _context.Genes.CountAsync();
                  appValues.AppCount.TargetCount = await _context.Targets.CountAsync();
                  appValues.AppCount.ScreenCount = await _context.Screens.CountAsync();
-                 appValues.AppCount.FHACount = await _context.Projects.CountAsync(p => p.FHAEnabled == true);
+                 appValues.AppCount.HACount = await _context.Projects.CountAsync(p => p.HAEnabled == true);
                  appValues.AppCount.PortfolioCount = await _context.Projects.CountAsync(p => p.H2LEnabled == true);
                  appValues.AppCount.PostPortfolioCount = await _context.Projects.CountAsync(p => p.INDEnabled == true);
                 

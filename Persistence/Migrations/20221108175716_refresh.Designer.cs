@@ -7,19 +7,22 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
 
+#nullable disable
+
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220302004226_refresh6")]
-    partial class refresh6
+    [Migration("20221108175716_refresh")]
+    partial class refresh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.10")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.AppOrg", b =>
                 {
@@ -67,7 +70,7 @@ namespace Persistence.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("Domain.AppUser", b =>
@@ -79,7 +82,7 @@ namespace Persistence.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Archived")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Bio")
                         .HasColumnType("text");
@@ -148,7 +151,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("OrgId");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.AppVals", b =>
@@ -178,7 +181,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateChanged")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("EntityName")
                         .HasColumnType("text");
@@ -213,9 +216,9 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("ExternalCompundIds")
+                    b.Property<string>("ExternalCompoundIds")
                         .HasColumnType("text");
 
                     b.Property<string>("MolArea")
@@ -260,7 +263,7 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Timestamp")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Topic")
                         .HasColumnType("text");
@@ -309,7 +312,7 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -340,7 +343,7 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -370,6 +373,37 @@ namespace Persistence.Migrations
                     b.ToTable("GeneEssentiality");
                 });
 
+            modelBuilder.Entity("Domain.GeneExternalId", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ExternalId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ExternalIdRef")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GeneAccessionNumber")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GeneId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GeneId");
+
+                    b.ToTable("GeneExternalIds");
+                });
+
             modelBuilder.Entity("Domain.GeneHypomorph", b =>
                 {
                     b.Property<Guid>("Id")
@@ -377,7 +411,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -480,7 +514,7 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -511,13 +545,13 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
@@ -637,7 +671,7 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -677,7 +711,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -717,7 +751,7 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -769,7 +803,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -865,8 +899,20 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ClinicalP1Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("ClinicalP1Enabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("ClinicalP1PredictedStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("ClinicalP1Start")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -878,16 +924,10 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("DisclosureDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("FHADescription")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("FHAEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("FHAStart")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateTime?>("EOLDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("H2LDescription")
                         .HasColumnType("text");
@@ -895,8 +935,23 @@ namespace Persistence.Migrations
                     b.Property<bool>("H2LEnabled")
                         .HasColumnType("boolean");
 
+                    b.Property<DateTime>("H2LPredictedStart")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("H2LStart")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("HADescription")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("HAEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("HAPredictedStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("HAStart")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("INDDescription")
                         .HasColumnType("text");
@@ -904,8 +959,11 @@ namespace Persistence.Migrations
                     b.Property<bool>("INDEnabled")
                         .HasColumnType("boolean");
 
+                    b.Property<DateTime>("INDPredictedStart")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("INDStart")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LODescription")
                         .HasColumnType("text");
@@ -913,20 +971,17 @@ namespace Persistence.Migrations
                     b.Property<bool>("LOEnabled")
                         .HasColumnType("boolean");
 
+                    b.Property<DateTime>("LOPredictedStart")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("LOStart")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("P1Description")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("P1Enabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("P1Start")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("PCDDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PCDDescription")
                         .HasColumnType("text");
@@ -955,6 +1010,9 @@ namespace Persistence.Migrations
                     b.Property<string>("ProjectName")
                         .HasColumnType("text");
 
+                    b.Property<string>("ProjectType")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("RepresentationStructureId")
                         .HasColumnType("uuid");
 
@@ -970,11 +1028,17 @@ namespace Persistence.Migrations
                     b.Property<bool>("SPEnabled")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("SPStart")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<DateTime>("SPPredictedStart")
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("ScreenId")
+                    b.Property<DateTime>("SPStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("ScreenId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("ScreenName")
+                        .HasColumnType("text");
 
                     b.Property<string>("Status")
                         .HasColumnType("text");
@@ -982,11 +1046,26 @@ namespace Persistence.Migrations
                     b.Property<Guid>("StrainId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("TargetId")
+                    b.Property<Guid?>("TargetId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("TargetName")
                         .HasColumnType("text");
+
+                    b.Property<string>("TeamPriority")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TeamPriorityDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TeamProbability")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TeamProbabilityDescription")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("TerminationDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -1027,7 +1106,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("AddedOnDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("AddedOnStage")
                         .HasColumnType("text");
@@ -1036,7 +1115,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -1156,7 +1235,7 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("Timestamp")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -1172,7 +1251,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -1193,9 +1272,12 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("PromotionDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ScreenName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ScreenType")
                         .HasColumnType("text");
 
                     b.Property<string>("Status")
@@ -1204,7 +1286,7 @@ namespace Persistence.Migrations
                     b.Property<Guid>("StrainId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("TargetId")
+                    b.Property<Guid?>("TargetId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("TargetName")
@@ -1229,13 +1311,13 @@ namespace Persistence.Migrations
                         .HasColumnType("real");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("EndDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Library")
                         .HasColumnType("text");
@@ -1256,7 +1338,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("TargetName")
                         .HasColumnType("text");
@@ -1281,7 +1363,7 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -1300,13 +1382,22 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Background")
+                        .HasColumnType("text");
+
                     b.Property<string>("Bucket")
                         .HasColumnType("text");
 
+                    b.Property<string>("Challenges")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Enablement")
                         .HasColumnType("text");
 
                     b.Property<double>("HTSFeasibility")
@@ -1344,6 +1435,9 @@ namespace Persistence.Migrations
 
                     b.Property<Guid>("StrainId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Strategy")
+                        .HasColumnType("text");
 
                     b.Property<double>("StructureComplete")
                         .HasColumnType("double precision");
@@ -1395,6 +1489,32 @@ namespace Persistence.Migrations
                     b.ToTable("TargetGenes");
                 });
 
+            modelBuilder.Entity("Domain.TargetScorecard", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TargetID")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TargetName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TargetID")
+                        .IsUnique();
+
+                    b.ToTable("TargetScorecards");
+                });
+
             modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1437,32 +1557,6 @@ namespace Persistence.Migrations
                     b.ToTable("TargetScoreCardValues");
                 });
 
-            modelBuilder.Entity("Domain.TargetScorecard", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("TargetID")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("TargetName")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TargetID")
-                        .IsUnique();
-
-                    b.ToTable("TargetScorecards");
-                });
-
             modelBuilder.Entity("Domain.Tasks.BTask", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1470,10 +1564,10 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("DateCompleted")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Status")
                         .HasColumnType("text");
@@ -1493,7 +1587,7 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
@@ -1505,7 +1599,7 @@ namespace Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("LastModified")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Negative")
                         .HasColumnType("integer");
@@ -1540,7 +1634,7 @@ namespace Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<DateTime>("VotedOn")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("VotedPositive")
                         .HasColumnType("boolean");
@@ -1559,8 +1653,9 @@ namespace Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -1576,15 +1671,16 @@ namespace Persistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("text");
@@ -1600,7 +1696,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -1622,7 +1718,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -1637,7 +1733,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -1656,7 +1752,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Domain.AppUser", b =>
@@ -1681,6 +1777,15 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Gene", null)
                         .WithMany("GeneEssentiality")
+                        .HasForeignKey("GeneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.GeneExternalId", b =>
+                {
+                    b.HasOne("Domain.Gene", null)
+                        .WithMany("GeneExternalIds")
                         .HasForeignKey("GeneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1833,9 +1938,7 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Screen", "BaseScreen")
                         .WithMany()
-                        .HasForeignKey("ScreenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ScreenId");
 
                     b.Navigation("BaseScreen");
 
@@ -1925,9 +2028,7 @@ namespace Persistence.Migrations
 
                     b.HasOne("Domain.Target", "BaseTarget")
                         .WithMany()
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TargetId");
 
                     b.Navigation("BaseTarget");
 
@@ -1960,6 +2061,15 @@ namespace Persistence.Migrations
                     b.Navigation("Gene");
                 });
 
+            modelBuilder.Entity("Domain.TargetScorecard", b =>
+                {
+                    b.HasOne("Domain.Target", null)
+                        .WithOne("TargetScorecard")
+                        .HasForeignKey("Domain.TargetScorecard", "TargetID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
                 {
                     b.HasOne("Domain.Question", "Question")
@@ -1975,15 +2085,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("Domain.TargetScorecard", b =>
-                {
-                    b.HasOne("Domain.Target", null)
-                        .WithOne("TargetScorecard")
-                        .HasForeignKey("Domain.TargetScorecard", "TargetID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Voter", b =>
@@ -2056,6 +2157,8 @@ namespace Persistence.Migrations
                     b.Navigation("GeneCRISPRiStrain");
 
                     b.Navigation("GeneEssentiality");
+
+                    b.Navigation("GeneExternalIds");
 
                     b.Navigation("GeneHypomorphs");
 

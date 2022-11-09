@@ -11,8 +11,8 @@ namespace Application.Projects
     {
       switch (stage)
       {
-        case "FHA":
-          return ProjectStage.FHA.Value;
+        case "HA":
+          return ProjectStage.HA.Value;
         case "H2L":
           return ProjectStage.H2L.Value;
         case "LO":
@@ -25,8 +25,6 @@ namespace Application.Projects
           return ProjectStage.IND.Value;
         case "P1":
           return ProjectStage.P1.Value;
-        case "HA":
-          return ProjectStage.HA.Value;
         default:
           throw new ArgumentException(
             "Invalid Project Stage", stage);

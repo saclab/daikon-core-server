@@ -49,10 +49,10 @@ namespace Domain
     public string Resource { get; set; }
     public string ResourceDescription { get; set; }
 
-    public bool FHAEnabled { get; set; }
-    public DateTime FHAStart { get; set; }
-    public DateTime FHAPredictedStart { get; set; }
-    public string FHADescription { get; set; }
+    public bool HAEnabled { get; set; }
+    public DateTime HAStart { get; set; }
+    public DateTime HAPredictedStart { get; set; }
+    public string HADescription { get; set; }
 
     public bool H2LEnabled { get; set; }
     public DateTime H2LStart { get; set; }

@@ -58,7 +58,7 @@ namespace Application.Projects
         }
 
 
-        /* check if the project is in FHA Stage */
+        /* check if the project is in HA Stage */
 
         if (Project.CurrentStage != ProjectStage.H2L.Value)
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Application.General.Horizon.DTO
 {
-  public class HorizonFHA
+  public class HorizonHA
   {
     public string Name { get; set; }
     public class Attribute
@@ -22,7 +22,7 @@ namespace Application.General.Horizon.DTO
     public Attribute Attributes { get; set; }
     public List<HorizonPortfolio> Children { get; set; }
 
-    public HorizonFHA()
+    public HorizonHA()
     {
       this.Attributes = new Attribute();
     }
