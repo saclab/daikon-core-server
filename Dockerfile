@@ -23,5 +23,6 @@ RUN dotnet publish -c Release -o out
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS project_api_prod
 WORKDIR /daikon-server/
 EXPOSE 5005
+COPY ./Data /app/
 COPY --from=tpt-backend-prod-build /app/API/out .
 ENTRYPOINT ["dotnet", "API.dll"]
