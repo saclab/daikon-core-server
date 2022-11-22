@@ -16,8 +16,7 @@ namespace API.Controllers.Elevated.Screen
             Mediator.Send(
                 new Application.Screens.Merge.ScreenMerge.Command
                 {
-                  BaseScreenId = screenMergeIdDTO.FirstScreenId,
-                  MergeScreenId = screenMergeIdDTO.MergeScreenId
+                  ScreenMergeIdDTO = screenMergeIdDTO
                 }));
     }
 
