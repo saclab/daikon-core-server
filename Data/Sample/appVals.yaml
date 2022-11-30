@@ -4,6 +4,8 @@ Data:
   - Key: ScreeningMethod
     Value: Virtual Screening
   - Key: ScreeningMethod
+    Value: Legacy
+  - Key: ScreeningMethod
     Value: DNA Encoded Del Screen
   - Key: ScreeningMethod
     Value: Biochemical screen
