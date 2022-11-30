@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Application.Projects.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Elevated
@@ -92,6 +93,14 @@ namespace API.Controllers.Elevated
       projectCompoundEvolution.Id = compoundEvolutionId;
 
       return HandleResult(await Mediator.Send(new Application.Projects.CompoundEvolution.Edit.Command { EditedProjectCompoundEvolution = projectCompoundEvolution }));
+    }
+
+    /* Override Project Stage */
+    [HttpPost("{id}/override-stage")]
+    public async Task<IActionResult> OverideStage(Guid id, ProjectStageOverrideDTO projectStageOverrideDTO)
+    {
+      projectStageOverrideDTO.ProjectId = id;
+      return HandleResult(await Mediator.Send(new Application.Projects.StargeOverride.Command { projectStageOverrideDTO = projectStageOverrideDTO }));
     }
 
 

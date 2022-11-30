@@ -36,6 +36,8 @@ namespace Application.Core
       CreateMap<Hit, HitDTO>();
       CreateMap<Vote, VoteDTO>();
 
+      CreateMap<ScreenDTO, Screen>();
+
       CreateMap<Compound, Compound>();
 
     }

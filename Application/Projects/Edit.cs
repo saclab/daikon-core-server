@@ -59,8 +59,6 @@ namespace Application.Projects
           return Result<Project>.Failure("Denied : Cannot modify a terminated project");
         }
 
-        /* Promote the project to H2L*/
-
         projectToEdit.Priority = request.project.Priority;
         projectToEdit.PriorityDescription = request.project.PriorityDescription;
         projectToEdit.Probability = request.project.Probability;
