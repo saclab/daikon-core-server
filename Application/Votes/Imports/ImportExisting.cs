@@ -54,7 +54,7 @@ namespace Application.Votes.Imports
         var existingVote = _context.Votes.FirstOrDefault(v => v.Id == request.importVote.Id);
         if (existingVote == null)
         {
-          return Result<Unit>.Failure("Invaild voting Id");
+          return Result<Unit>.Failure("Invalid voting Id");
         }
 
         /*
