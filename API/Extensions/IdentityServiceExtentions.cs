@@ -21,7 +21,7 @@ namespace API.Extensions
       // IdentityBuilder builder = services.AddIdentityCore<AppUser>();
       // Console.WriteLine("*************************** ENVIRONMENT CONFIG *****************");
       // Console.WriteLine("Authority : " + Environment.GetEnvironmentVariable("AZURE_AUTHORITY"));
-      // Console.WriteLine("ValidAudience : " + Environment.GetEnvironmentVariable("AZURE_VAILD_AUDIENCE"));
+      // Console.WriteLine("ValidAudience : " + Environment.GetEnvironmentVariable("AZURE_VALID_AUDIENCE"));
 
 
       services.AddScoped<IAuthorizationHandler, RequireAppRoleHandler>();
@@ -41,7 +41,7 @@ namespace API.Extensions
         options.Authority = Environment.GetEnvironmentVariable("AZURE_AUTHORITY");
         options.TokenValidationParameters = new TokenValidationParameters()
         {
-            //ValidAudience = Environment.GetEnvironmentVariable("AZURE_VAILD_AUDIENCE")
+            //ValidAudience = Environment.GetEnvironmentVariable("AZURE_VALID_AUDIENCE")
             ValidateAudience = false
         };
       });

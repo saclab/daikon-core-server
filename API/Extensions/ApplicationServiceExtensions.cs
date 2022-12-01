@@ -23,7 +23,7 @@ namespace API.Extensions
         {
 
           //opt.UseSqlite(config.GetConnectionString("SQLiteConnection"));
-          var buildConnectionString = "Username=" + Environment.GetEnvironmentVariable("PGPGUSER") + ";"
+          var buildConnectionString = "Username=" + Environment.GetEnvironmentVariable("PGUSER") + ";"
           + "Password=" + Environment.GetEnvironmentVariable("PGPASSWORD") + ";"
           + Environment.GetEnvironmentVariable("PGSQL_CONNECTION_STRING");
           opt.UseNpgsql(buildConnectionString);
