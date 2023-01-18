@@ -28,7 +28,7 @@ namespace API.Controllers.General
     }
 
     [HttpPost("{id}/summary")]
-    public async Task<IActionResult> EditSummaryActivity(Guid id, Application.Targets.DTOs.TargetSummaryDTO targetSummary )
+    public async Task<IActionResult> EditSummaryActivity(Guid id, Application.Targets.DTOs.TargetSummaryDTO targetSummary)
     {
       targetSummary.Id = id;
       return HandleResult(await Mediator.Send(new Application.Targets.EditSummary.Command { ModifiedTarget = targetSummary }));
