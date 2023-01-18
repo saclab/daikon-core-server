@@ -27,5 +27,12 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Targets.History.Query { Id = id }));
     }
 
+    [HttpPost("{id}/summary")]
+    public async Task<IActionResult> EditSummaryActivity(Guid id, Application.Targets.DTOs.TargetSummaryDTO targetSummary )
+    {
+      targetSummary.Id = id;
+      return HandleResult(await Mediator.Send(new Application.Targets.EditSummary.Command { ModifiedTarget = targetSummary }));
+    }
+
   }
 }

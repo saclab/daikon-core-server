@@ -20,13 +20,6 @@ namespace API.Controllers.Elevated
       return HandleResult(await Mediator.Send(new Application.Targets.Edit.Command { ModifiedTarget = target }));
     }
 
-    [HttpPost("{id}/summary")]
-    public async Task<IActionResult> EditSummaryActivity(Guid id, Application.Targets.DTOs.TargetSummaryDTO targetSummary )
-    {
-      targetSummary.Id = id;
-      return HandleResult(await Mediator.Send(new Application.Targets.EditSummary.Command { ModifiedTarget = targetSummary }));
-    }
-
     [HttpPost("import")]
     public async Task<IActionResult> ImportActivity(Application.Targets.DTOs.TargetImportDTO TargetImportDTO)
     {
