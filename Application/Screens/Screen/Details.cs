@@ -48,7 +48,7 @@ namespace Application.Screens
 
         foreach (var hit in screenDTO.ValidatedHits)
         {
-          var uVotes = await _context.Voters.FirstOrDefaultAsync(v => 
+          var uVotes = await _context.Voters.FirstOrDefaultAsync(v =>
           (v.VoteId == hit.VoteId) && (v.VoterEmail == _userAccessor.GetUsername()));
           if (uVotes == null)
           {

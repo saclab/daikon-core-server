@@ -60,14 +60,14 @@ namespace Application.Projects.CompoundEvolution
         }
 
 
-        
+
         Console.WriteLine("[Project] Found");
-        
+
         /* check if the compound smile exists */
         var compound = await _context.Compounds.FirstOrDefaultAsync
         (c => c.Smile == request.NewProjectCompoundEvolution.Smile);
 
-        
+
 
         if (compound == null)
         {
@@ -81,7 +81,7 @@ namespace Application.Projects.CompoundEvolution
         }
 
         Console.WriteLine("[Compound] is now");
-        Console.WriteLine(compound.Id); 
+        Console.WriteLine(compound.Id);
 
 
         /* Create the new ProjectCompoundEvolution */
@@ -90,7 +90,7 @@ namespace Application.Projects.CompoundEvolution
 
         newProjectCompoundEvolution.Id = newProjectCompoundEvolutionGuid;
         newProjectCompoundEvolution.ProjectId = baseProject.Id;
-        
+
         newProjectCompoundEvolution.CompoundId = compound.Id;
         newProjectCompoundEvolution.AddedOnDate = DateTime.UtcNow;
         newProjectCompoundEvolution.AddedOnStage = baseProject.CurrentStage;

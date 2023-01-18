@@ -33,7 +33,7 @@ namespace Application.Discussions
       public async Task<Result<List<Discussion>>> Handle(Query request, CancellationToken cancellationToken)
       {
         var discussion = await _context.Discussions
-        .Include(r => r.Replies.OrderByDescending(r=> r.Timestamp))
+        .Include(r => r.Replies.OrderByDescending(r => r.Timestamp))
         .Where(d => d.Reference == request.Reference.ToLower())
         .OrderByDescending(d => d.Timestamp)
         .ToListAsync();

@@ -39,25 +39,25 @@ namespace API
        config.RegisterValidatorsFromAssemblyContaining<Create>();
      });
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
+      // Register the Swagger generator, defining 1 or more Swagger documents
+      services.AddSwaggerGen(c =>
+      {
+        c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
 
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+          Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
                   Enter 'Bearer' [space] and then your token in the text input below.
                   \r\n\r\nExample: 'Bearer 12345abcdef'",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
+          Name = "Authorization",
+          In = ParameterLocation.Header,
+          Type = SecuritySchemeType.ApiKey,
+          Scheme = "Bearer"
+        });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-          {
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
             {
               new OpenApiSecurityScheme
               {
@@ -73,13 +73,13 @@ namespace API
                     },
                     new List<string>()
                   }
-            });
-                //        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                //c.IncludeXmlComments(xmlPath);
-            });
+      });
+        //        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        //c.IncludeXmlComments(xmlPath);
+      });
 
-            services.AddApplicationServices(_config);
+      services.AddApplicationServices(_config);
       services.AddIdentityServices(_config);
 
     }
@@ -87,9 +87,9 @@ namespace API
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-      
+
       app.UseMiddleware<ExceptionMiddleware>();
-      
+
       if (env.IsDevelopment())
       {
         //app.UseDeveloperExceptionPage();
@@ -102,7 +102,7 @@ namespace API
 
       app.UseRouting();
 
-      
+
       app.UseCors("CorsPolicy");
 
       app.UseAuthentication();
@@ -111,7 +111,7 @@ namespace API
 
       app.UseMiddleware<APIRequestLogsMiddleware>();
 
-      
+
 
       app.UseEndpoints(endpoints =>
       {

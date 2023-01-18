@@ -19,6 +19,6 @@ namespace Application.Screens.ValidatedHits.DTOs
     public string MolWeight { get; set; }
     public string MolArea { get; set; }
 
-    
+
   }
 }

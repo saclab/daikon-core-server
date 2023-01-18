@@ -8,7 +8,7 @@ namespace API.Controllers.DView
 {
   [ApiController]
   [Route("api/data-view/[controller]")]
-  
+
   public class ApiControllerBaseDView : ControllerBase
   {
     private IMediator _mediator;

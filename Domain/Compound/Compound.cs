@@ -12,6 +12,6 @@ namespace Domain
     public string MolWeight { get; set; }
     public string MolArea { get; set; }
     public DateTime CreatedAt { get; set; }
-    
+
   }
 }

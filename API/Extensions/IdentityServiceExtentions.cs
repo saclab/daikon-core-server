@@ -41,8 +41,8 @@ namespace API.Extensions
         options.Authority = Environment.GetEnvironmentVariable("AZURE_AUTHORITY");
         options.TokenValidationParameters = new TokenValidationParameters()
         {
-            //ValidAudience = Environment.GetEnvironmentVariable("AZURE_VALID_AUDIENCE")
-            ValidateAudience = false
+          //ValidAudience = Environment.GetEnvironmentVariable("AZURE_VALID_AUDIENCE")
+          ValidateAudience = false
         };
       });
 

@@ -19,6 +19,6 @@ namespace Application.Votes.DTOs
     public string UsersVote { get; set; }
     public DateTime LastModified { get; set; }
 
-    
+
   }
 }

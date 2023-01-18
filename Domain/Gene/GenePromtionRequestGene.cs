@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    public class GenePromtionRequestGene
-    {
-        public Guid Id { get; set; }
-        public Guid GenePromotionRequestId { get; set; }
-        public Guid GeneId { get; set; }
+  public class GenePromtionRequestGene
+  {
+    public Guid Id { get; set; }
+    public Guid GenePromotionRequestId { get; set; }
+    public Guid GeneId { get; set; }
 
-    }
+  }
 }

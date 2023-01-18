@@ -48,7 +48,7 @@ namespace Application.Targets
         (target != null && (h.EntityName == "Target"
             && h.PrimaryKeyValue == target.Id.ToString()))
         || (target.TargetScorecard.TargetScoreCardValues != null && (h.EntityName == "TargetScoreCardValue"
-            && (h.PropertyName == "Answer" || h.PropertyName== "Description")
+            && (h.PropertyName == "Answer" || h.PropertyName == "Description")
             && answerIds.Contains(h.PrimaryKeyValue)))
         ).OrderByDescending(h => h.DateChanged).ToListAsync();
 
