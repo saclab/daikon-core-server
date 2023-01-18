@@ -10,6 +10,6 @@ namespace Application.Projects.DTOs
   {
     public Guid Id { get; set; }
     public string ProjectName { get; set; }
-   
+
   }
 }

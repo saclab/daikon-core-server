@@ -79,7 +79,7 @@ namespace Application.Screens.ScreenSequences
           Concentration = request.NewScreenSequence.Concentration,
           NoOfCompoundsScreened = request.NewScreenSequence.NoOfCompoundsScreened
         };
-        
+
         ScreenSequenceToCreate.CreatedAt = DateTime.UtcNow;
         ScreenSequenceToCreate.CreatedBy = _userAccessor.GetUsername();
 

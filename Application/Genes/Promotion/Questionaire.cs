@@ -18,10 +18,10 @@ namespace Application.Genes.Promotion
     public class Handler : IRequestHandler<Query, Result<List<Question>>>
     {
       private readonly DataContext _context;
-      
+
       public Handler(DataContext context)
       {
-       
+
         _context = context;
 
       }

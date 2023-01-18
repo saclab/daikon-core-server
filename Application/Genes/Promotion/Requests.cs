@@ -43,7 +43,7 @@ namespace Application.Genes.Promotion
 
       public async Task<Result<List<GenePromotionRequest>>> Handle(Query request, CancellationToken cancellationToken)
       {
-        
+
         var genePromotionRequests = await _context.GenePromotionRequests
         .Include(p => p.GenePromtionRequestGenes)
         .Include(s => s.GenePromotionRequestValues)

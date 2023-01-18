@@ -10,7 +10,7 @@ namespace Domain
       in DNA that encodes the synthesis of a gene product, either RNA or protein.
     */
 
-    
+
     public Guid Id { get; set; }
     public Guid StrainId { get; set; }
     public string AccessionNumber { get; set; }

@@ -12,7 +12,7 @@ using Persistence;
 
 namespace Application.Projects.CompoundEvolution
 {
-    public class Details
+  public class Details
   {
     public class Query : IRequest<Result<List<ProjectCompoundEvolution>>>
     {

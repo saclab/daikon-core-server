@@ -53,9 +53,9 @@ namespace Application.Projects
         ).ToListAsync();
 
         /* Loop through all the projects and replace */
-        foreach(var project in projects)
+        foreach (var project in projects)
         {
-            project.ScreenId = request.newScreenId;
+          project.ScreenId = request.newScreenId;
         }
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;

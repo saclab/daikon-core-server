@@ -7,8 +7,8 @@ namespace Application.Discussions.Replies
   {
     public ReplyValidator()
     {
-         RuleFor(reply => reply.DiscussionId).NotEmpty();
-         RuleFor(reply => reply.Body).NotEmpty();
+      RuleFor(reply => reply.DiscussionId).NotEmpty();
+      RuleFor(reply => reply.Body).NotEmpty();
     }
   }
 }

@@ -71,15 +71,17 @@ namespace Application.Projects
         newProject.Id = newProjectGuid;
         newProject.ScreenId = baseScreen.Id;
         newProject.BaseScreen = baseScreen;
-        newProject.ScreenName = baseScreen.ScreenName; 
+        newProject.ScreenName = baseScreen.ScreenName;
         newProject.ProjectName = request.NewProject.ProjectName;
         newProject.TargetName = baseScreen.TargetName;
         newProject.TargetId = baseScreen.TargetId;
 
-        if(baseScreen.TargetName == null){
+        if (baseScreen.TargetName == null)
+        {
           newProject.ProjectType = ProjectTypes.Phenotypic.Value;
         }
-        else{
+        else
+        {
           newProject.ProjectType = ProjectTypes.TargetBased.Value;
         }
 
@@ -168,15 +170,15 @@ namespace Application.Projects
 
         /* Prediction of Next Stage Start Date */
         var fetchPredictedDaysToAdd = await _context.AppVals.FirstOrDefaultAsync((v) => v.Key == "HAAnticipatedDays");
-        
+
         double daysToAdd = 350; /* This is the default value, unless overridden by database */
         if (fetchPredictedDaysToAdd != null)
         {
           daysToAdd = Double.Parse(fetchPredictedDaysToAdd.Value);
         }
-       
+
         newProject.H2LPredictedStart = newProject.HAStart.AddDays(daysToAdd);
-        
+
         _context.Projects.Add(newProject);
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 

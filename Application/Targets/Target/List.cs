@@ -16,7 +16,7 @@ namespace Application.Targets
   {
     public class Query : IRequest<Result<List<Target>>>
     {
-     
+
     }
 
     public class Handler : IRequestHandler<Query, Result<List<Target>>>

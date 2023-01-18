@@ -49,7 +49,7 @@ namespace Application.Genes
         };
 
         var newGenePublicData = new GenePublicData();
-         _mapper.Map(request.Gene.GenePublicData, newGenePublicData);
+        _mapper.Map(request.Gene.GenePublicData, newGenePublicData);
         Guid newGenePublicDataGid = Guid.NewGuid();
         newGenePublicData.Id = newGenePublicDataGid;
         newGenePublicData.GeneId = gid;
@@ -73,7 +73,7 @@ namespace Application.Genes
 
 
         _context.Genes.Add(GeneToCreate);
-        
+
 
         var success = await _context.SaveChangesAsync() > 0;
 

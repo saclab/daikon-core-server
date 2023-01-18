@@ -10,2214 +10,2214 @@ using Persistence;
 
 namespace Persistence.Migrations
 {
-    [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+  [DbContext(typeof(DataContext))]
+  partial class DataContextModelSnapshot : ModelSnapshot
+  {
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "6.0.6")
+          .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+      NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.AppOrg", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.AppOrg", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("text");
+            b.Property<string>("Address")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Alias")
-                        .HasColumnType("text");
+            b.Property<string>("Alias")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+            b.Property<string>("Name")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("AppOrgs");
-                });
+            b.ToTable("AppOrgs");
+          });
 
-            modelBuilder.Entity("Domain.AppRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+      modelBuilder.Entity("Domain.AppRole", b =>
+          {
+            b.Property<string>("Id")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text");
+            b.Property<string>("ConcurrencyStamp")
+                      .IsConcurrencyToken()
+                      .HasColumnType("text");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
+            b.Property<string>("Description")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+            b.Property<string>("Name")
+                      .HasMaxLength(256)
+                      .HasColumnType("character varying(256)");
 
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+            b.Property<string>("NormalizedName")
+                      .HasMaxLength(256)
+                      .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
+            b.HasIndex("NormalizedName")
+                      .IsUnique()
+                      .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
-                });
+            b.ToTable("AspNetRoles", (string)null);
+          });
 
-            modelBuilder.Entity("Domain.AppUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+      modelBuilder.Entity("Domain.AppUser", b =>
+          {
+            b.Property<string>("Id")
+                      .HasColumnType("text");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer");
+            b.Property<int>("AccessFailedCount")
+                      .HasColumnType("integer");
 
-                    b.Property<DateTime>("Archived")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("Archived")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Bio")
-                        .HasColumnType("text");
+            b.Property<string>("Bio")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text");
+            b.Property<string>("ConcurrencyStamp")
+                      .IsConcurrencyToken()
+                      .HasColumnType("text");
 
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("text");
+            b.Property<string>("DisplayName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+            b.Property<string>("Email")
+                      .HasMaxLength(256)
+                      .HasColumnType("character varying(256)");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
+            b.Property<bool>("EmailConfirmed")
+                      .HasColumnType("boolean");
 
-                    b.Property<bool>("Lock")
-                        .HasColumnType("boolean");
+            b.Property<bool>("Lock")
+                      .HasColumnType("boolean");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("LockoutEnabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTimeOffset?>("LockoutEnd")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+            b.Property<string>("NormalizedEmail")
+                      .HasMaxLength(256)
+                      .HasColumnType("character varying(256)");
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+            b.Property<string>("NormalizedUserName")
+                      .HasMaxLength(256)
+                      .HasColumnType("character varying(256)");
 
-                    b.Property<Guid?>("OrgId")
-                        .HasColumnType("uuid");
+            b.Property<Guid?>("OrgId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
+            b.Property<string>("PasswordHash")
+                      .HasColumnType("text");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
+            b.Property<string>("PhoneNumber")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean");
+            b.Property<bool>("PhoneNumberConfirmed")
+                      .HasColumnType("boolean");
 
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text");
+            b.Property<string>("SecurityStamp")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("TwoFactorEnabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+            b.Property<string>("UserName")
+                      .HasMaxLength(256)
+                      .HasColumnType("character varying(256)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
+            b.HasIndex("NormalizedEmail")
+                      .HasDatabaseName("EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
+            b.HasIndex("NormalizedUserName")
+                      .IsUnique()
+                      .HasDatabaseName("UserNameIndex");
 
-                    b.HasIndex("OrgId");
+            b.HasIndex("OrgId");
 
-                    b.ToTable("AspNetUsers", (string)null);
-                });
+            b.ToTable("AspNetUsers", (string)null);
+          });
 
-            modelBuilder.Entity("Domain.AppVals", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.AppVals", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
+            b.Property<string>("Key")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Value")
-                        .HasColumnType("text");
+            b.Property<string>("Value")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("AppVals");
-                });
+            b.ToTable("AppVals");
+          });
 
-            modelBuilder.Entity("Domain.ChangeLog", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.ChangeLog", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("DateChanged")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("DateChanged")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("EntityName")
-                        .HasColumnType("text");
+            b.Property<string>("EntityName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasColumnType("text");
+            b.Property<string>("ModifiedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("NewValue")
-                        .HasColumnType("text");
+            b.Property<string>("NewValue")
+                      .HasColumnType("text");
 
-                    b.Property<string>("OldValue")
-                        .HasColumnType("text");
+            b.Property<string>("OldValue")
+                      .HasColumnType("text");
 
-                    b.Property<string>("PrimaryKeyValue")
-                        .HasColumnType("text");
+            b.Property<string>("PrimaryKeyValue")
+                      .HasColumnType("text");
 
-                    b.Property<string>("PropertyName")
-                        .HasColumnType("text");
+            b.Property<string>("PropertyName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
+            b.Property<string>("Type")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("ChangeLogs");
-                });
+            b.ToTable("ChangeLogs");
+          });
 
-            modelBuilder.Entity("Domain.Compound", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Compound", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("ExternalCompoundIds")
-                        .HasColumnType("text");
+            b.Property<string>("ExternalCompoundIds")
+                      .HasColumnType("text");
 
-                    b.Property<string>("MolArea")
-                        .HasColumnType("text");
+            b.Property<string>("MolArea")
+                      .HasColumnType("text");
 
-                    b.Property<string>("MolWeight")
-                        .HasColumnType("text");
+            b.Property<string>("MolWeight")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Smile")
-                        .HasColumnType("text");
+            b.Property<string>("Smile")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Compounds");
-                });
+            b.ToTable("Compounds");
+          });
 
-            modelBuilder.Entity("Domain.Discussion", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Discussion", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
+            b.Property<string>("Description")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Mentions")
-                        .HasColumnType("text");
+            b.Property<string>("Mentions")
+                      .HasColumnType("text");
 
-                    b.Property<string>("PostedBy")
-                        .HasColumnType("text");
+            b.Property<string>("PostedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Reference")
-                        .HasColumnType("text");
+            b.Property<string>("Reference")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Section")
-                        .HasColumnType("text");
+            b.Property<string>("Section")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Tags")
-                        .HasColumnType("text");
+            b.Property<string>("Tags")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("Timestamp")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Topic")
-                        .HasColumnType("text");
+            b.Property<string>("Topic")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Discussions");
-                });
+            b.ToTable("Discussions");
+          });
 
-            modelBuilder.Entity("Domain.Gene", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Gene", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("AccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("AccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Function")
-                        .HasColumnType("text");
+            b.Property<string>("Function")
+                      .HasColumnType("text");
 
-                    b.Property<string>("FunctionalCategory")
-                        .HasColumnType("text");
+            b.Property<string>("FunctionalCategory")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneName")
-                        .HasColumnType("text");
+            b.Property<string>("GeneName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Product")
-                        .HasColumnType("text");
+            b.Property<string>("Product")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Genes");
-                });
+            b.ToTable("Genes");
+          });
 
-            modelBuilder.Entity("Domain.GeneCRISPRiStrain", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneCRISPRiStrain", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("CRISPRiStrain")
-                        .HasColumnType("text");
+            b.Property<string>("CRISPRiStrain")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneCRISPRiStrains");
-                });
+            b.ToTable("GeneCRISPRiStrains");
+          });
 
-            modelBuilder.Entity("Domain.GeneEssentiality", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneEssentiality", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Classification")
-                        .HasColumnType("text");
+            b.Property<string>("Classification")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Condition")
-                        .HasColumnType("text");
+            b.Property<string>("Condition")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Method")
-                        .HasColumnType("text");
+            b.Property<string>("Method")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
+            b.Property<string>("Notes")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Reference")
-                        .HasColumnType("text");
+            b.Property<string>("Reference")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Strain")
-                        .HasColumnType("text");
+            b.Property<string>("Strain")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneEssentiality");
-                });
+            b.ToTable("GeneEssentiality");
+          });
 
-            modelBuilder.Entity("Domain.GeneExternalId", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneExternalId", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("text");
+            b.Property<string>("ExternalId")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ExternalIdRef")
-                        .HasColumnType("text");
+            b.Property<string>("ExternalIdRef")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneExternalIds");
-                });
+            b.ToTable("GeneExternalIds");
+          });
 
-            modelBuilder.Entity("Domain.GeneHypomorph", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneHypomorph", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("KnockdownStrain")
-                        .HasColumnType("text");
+            b.Property<string>("KnockdownStrain")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Phenotype")
-                        .HasColumnType("text");
+            b.Property<string>("Phenotype")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneHypomorphs");
-                });
+            b.ToTable("GeneHypomorphs");
+          });
 
-            modelBuilder.Entity("Domain.GenePromotionRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GenePromotionRequest", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("GenePromotionRequestStatus")
-                        .HasColumnType("text");
+            b.Property<string>("GenePromotionRequestStatus")
+                      .HasColumnType("text");
 
-                    b.Property<string>("TargetName")
-                        .HasColumnType("text");
+            b.Property<string>("TargetName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("TargetType")
-                        .HasColumnType("text");
+            b.Property<string>("TargetType")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("GenePromotionRequests");
-                });
+            b.ToTable("GenePromotionRequests");
+          });
 
-            modelBuilder.Entity("Domain.GenePromotionRequestValue", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GenePromotionRequestValue", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Answer")
-                        .HasColumnType("text");
+            b.Property<string>("Answer")
+                      .HasColumnType("text");
 
-                    b.Property<string>("AnswerdBy")
-                        .HasColumnType("text");
+            b.Property<string>("AnswerdBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
+            b.Property<string>("Description")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GenePromotionRequestId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GenePromotionRequestId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("QuestionId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GenePromotionRequestId");
+            b.HasIndex("GenePromotionRequestId");
 
-                    b.HasIndex("QuestionId");
+            b.HasIndex("QuestionId");
 
-                    b.ToTable("GenePromotionRequestValues");
-                });
+            b.ToTable("GenePromotionRequestValues");
+          });
 
-            modelBuilder.Entity("Domain.GenePromtionRequestGene", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GenePromtionRequestGene", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("GenePromotionRequestId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GenePromotionRequestId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GenePromotionRequestId");
+            b.HasIndex("GenePromotionRequestId");
 
-                    b.ToTable("GenePromtionRequestGenes");
-                });
+            b.ToTable("GenePromtionRequestGenes");
+          });
 
-            modelBuilder.Entity("Domain.GeneProteinActivityAssay", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneProteinActivityAssay", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Activity")
-                        .HasColumnType("text");
+            b.Property<string>("Activity")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Throughput")
-                        .HasColumnType("text");
+            b.Property<string>("Throughput")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
+            b.Property<string>("Type")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneProteinActivityAssays");
-                });
+            b.ToTable("GeneProteinActivityAssays");
+          });
 
-            modelBuilder.Entity("Domain.GeneProteinProduction", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneProteinProduction", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("Date")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Method")
-                        .HasColumnType("text");
+            b.Property<string>("Method")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Production")
-                        .HasColumnType("text");
+            b.Property<string>("Production")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Purity")
-                        .HasColumnType("text");
+            b.Property<string>("Purity")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneProteinProductions");
-                });
+            b.ToTable("GeneProteinProductions");
+          });
 
-            modelBuilder.Entity("Domain.GenePublicData", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GenePublicData", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Comments")
-                        .HasColumnType("text");
+            b.Property<string>("Comments")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Cryo")
-                        .HasColumnType("text");
+            b.Property<string>("Cryo")
+                      .HasColumnType("text");
 
-                    b.Property<string>("End")
-                        .HasColumnType("text");
+            b.Property<string>("End")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("GeneLength")
-                        .HasColumnType("text");
+            b.Property<string>("GeneLength")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneSequence")
-                        .HasColumnType("text");
+            b.Property<string>("GeneSequence")
+                      .HasColumnType("text");
 
-                    b.Property<string>("IsoelectricPoint")
-                        .HasColumnType("text");
+            b.Property<string>("IsoelectricPoint")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Ligand")
-                        .HasColumnType("text");
+            b.Property<string>("Ligand")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("text");
+            b.Property<string>("Location")
+                      .HasColumnType("text");
 
-                    b.Property<string>("M_Leprae")
-                        .HasColumnType("text");
+            b.Property<string>("M_Leprae")
+                      .HasColumnType("text");
 
-                    b.Property<string>("M_Marinum")
-                        .HasColumnType("text");
+            b.Property<string>("M_Marinum")
+                      .HasColumnType("text");
 
-                    b.Property<string>("M_Smegmatis")
-                        .HasColumnType("text");
+            b.Property<string>("M_Smegmatis")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Model")
-                        .HasColumnType("text");
+            b.Property<string>("Model")
+                      .HasColumnType("text");
 
-                    b.Property<string>("MolecularMass")
-                        .HasColumnType("text");
+            b.Property<string>("MolecularMass")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Mutant")
-                        .HasColumnType("text");
+            b.Property<string>("Mutant")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Orientation")
-                        .HasColumnType("text");
+            b.Property<string>("Orientation")
+                      .HasColumnType("text");
 
-                    b.Property<string>("PFAM")
-                        .HasColumnType("text");
+            b.Property<string>("PFAM")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ProteinLength")
-                        .HasColumnType("text");
+            b.Property<string>("ProteinLength")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ProteinSequence")
-                        .HasColumnType("text");
+            b.Property<string>("ProteinSequence")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Proteomics")
-                        .HasColumnType("text");
+            b.Property<string>("Proteomics")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Start")
-                        .HasColumnType("text");
+            b.Property<string>("Start")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
+            b.Property<string>("Type")
+                      .HasColumnType("text");
 
-                    b.Property<string>("XRay")
-                        .HasColumnType("text");
+            b.Property<string>("XRay")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId")
-                        .IsUnique();
+            b.HasIndex("GeneId")
+                      .IsUnique();
 
-                    b.ToTable("GenePublicData");
-                });
+            b.ToTable("GenePublicData");
+          });
 
-            modelBuilder.Entity("Domain.GeneResistanceMutation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneResistanceMutation", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Compound")
-                        .HasColumnType("text");
+            b.Property<string>("Compound")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Isolate")
-                        .HasColumnType("text");
+            b.Property<string>("Isolate")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Mutation")
-                        .HasColumnType("text");
+            b.Property<string>("Mutation")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Org")
-                        .HasColumnType("text");
+            b.Property<string>("Org")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ParentStrain")
-                        .HasColumnType("text");
+            b.Property<string>("ParentStrain")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ShiftInMIC")
-                        .HasColumnType("text");
+            b.Property<string>("ShiftInMIC")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneResistanceMutations");
-                });
+            b.ToTable("GeneResistanceMutations");
+          });
 
-            modelBuilder.Entity("Domain.GeneUnpublishedStructures", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneUnpublishedStructures", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Ligands")
-                        .HasColumnType("text");
+            b.Property<string>("Ligands")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Method")
-                        .HasColumnType("text");
+            b.Property<string>("Method")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Organization")
-                        .HasColumnType("text");
+            b.Property<string>("Organization")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Resolution")
-                        .HasColumnType("text");
+            b.Property<string>("Resolution")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneUnpublishedStructures");
-                });
+            b.ToTable("GeneUnpublishedStructures");
+          });
 
-            modelBuilder.Entity("Domain.GeneVulnerability", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.GeneVulnerability", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Confounded")
-                        .HasColumnType("text");
+            b.Property<string>("Confounded")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneAccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("GeneAccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("IVi")
-                        .HasColumnType("text");
+            b.Property<string>("IVi")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Operon")
-                        .HasColumnType("text");
+            b.Property<string>("Operon")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Rank")
-                        .HasColumnType("text");
+            b.Property<string>("Rank")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Shell2015Operon")
-                        .HasColumnType("text");
+            b.Property<string>("Shell2015Operon")
+                      .HasColumnType("text");
 
-                    b.Property<string>("UVi")
-                        .HasColumnType("text");
+            b.Property<string>("UVi")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ViRatio")
-                        .HasColumnType("text");
+            b.Property<string>("ViRatio")
+                      .HasColumnType("text");
 
-                    b.Property<string>("VulnerabilityCondition")
-                        .HasColumnType("text");
+            b.Property<string>("VulnerabilityCondition")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneVulnerability");
-                });
+            b.ToTable("GeneVulnerability");
+          });
 
-            modelBuilder.Entity("Domain.Hit", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Hit", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<int>("ClusterGroup")
-                        .HasColumnType("integer");
+            b.Property<int>("ClusterGroup")
+                      .HasColumnType("integer");
 
-                    b.Property<Guid>("CompoundId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("CompoundId")
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<double>("IC50")
-                        .HasColumnType("double precision");
+            b.Property<double>("IC50")
+                      .HasColumnType("double precision");
 
-                    b.Property<string>("Library")
-                        .HasColumnType("text");
+            b.Property<string>("Library")
+                      .HasColumnType("text");
 
-                    b.Property<double>("MIC")
-                        .HasColumnType("double precision");
+            b.Property<double>("MIC")
+                      .HasColumnType("double precision");
 
-                    b.Property<string>("MICCondition")
-                        .HasColumnType("text");
+            b.Property<string>("MICCondition")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Method")
-                        .HasColumnType("text");
+            b.Property<string>("Method")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("ScreenId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("ScreenId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Source")
-                        .HasColumnType("text");
+            b.Property<string>("Source")
+                      .HasColumnType("text");
 
-                    b.Property<string>("TargetName")
-                        .HasColumnType("text");
+            b.Property<string>("TargetName")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("VoteId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("VoteId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("CompoundId");
+            b.HasIndex("CompoundId");
 
-                    b.HasIndex("ScreenId");
+            b.HasIndex("ScreenId");
 
-                    b.HasIndex("VoteId");
+            b.HasIndex("VoteId");
 
-                    b.ToTable("Hits");
-                });
+            b.ToTable("Hits");
+          });
 
-            modelBuilder.Entity("Domain.Models.GeneGroup", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Models.GeneGroup", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+            b.Property<string>("Name")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
+            b.Property<string>("Type")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("GeneGroups");
-                });
+            b.ToTable("GeneGroups");
+          });
 
-            modelBuilder.Entity("Domain.Models.GeneGroupGenes", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Models.GeneGroupGenes", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("AccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("AccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneGroupId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneGroupId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneGroupId");
+            b.HasIndex("GeneGroupId");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.ToTable("GeneGroupGenes");
-                });
+            b.ToTable("GeneGroupGenes");
+          });
 
-            modelBuilder.Entity("Domain.Project", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Project", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("ClinicalP1Description")
-                        .HasColumnType("text");
+            b.Property<string>("ClinicalP1Description")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("ClinicalP1Enabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("ClinicalP1Enabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTime>("ClinicalP1PredictedStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("ClinicalP1PredictedStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("ClinicalP1Start")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("ClinicalP1Start")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("CurrentStage")
-                        .HasColumnType("text");
+            b.Property<string>("CurrentStage")
+                      .HasColumnType("text");
 
-                    b.Property<string>("CurrentStageDescription")
-                        .HasColumnType("text");
+            b.Property<string>("CurrentStageDescription")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("DisclosureDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("DisclosureDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime?>("EOLDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime?>("EOLDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("H2LDescription")
-                        .HasColumnType("text");
+            b.Property<string>("H2LDescription")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("H2LEnabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("H2LEnabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTime>("H2LPredictedStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("H2LPredictedStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("H2LStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("H2LStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("HADescription")
-                        .HasColumnType("text");
+            b.Property<string>("HADescription")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("HAEnabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("HAEnabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTime>("HAPredictedStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("HAPredictedStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("HAStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("HAStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("INDDescription")
-                        .HasColumnType("text");
+            b.Property<string>("INDDescription")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("INDEnabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("INDEnabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTime>("INDPredictedStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("INDPredictedStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("INDStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("INDStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("LODescription")
-                        .HasColumnType("text");
+            b.Property<string>("LODescription")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("LOEnabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("LOEnabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LOPredictedStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("LOPredictedStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("LOStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("LOStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("LastModified")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("PCDDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("PCDDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("PCDDescription")
-                        .HasColumnType("text");
+            b.Property<string>("PCDDescription")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("PCDEnabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("PCDEnabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<Guid>("PrimaryOrgId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("PrimaryOrgId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Priority")
-                        .HasColumnType("text");
+            b.Property<string>("Priority")
+                      .HasColumnType("text");
 
-                    b.Property<string>("PriorityDescription")
-                        .HasColumnType("text");
+            b.Property<string>("PriorityDescription")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Probability")
-                        .HasColumnType("text");
+            b.Property<string>("Probability")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ProbabilityDescription")
-                        .HasColumnType("text");
+            b.Property<string>("ProbabilityDescription")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ProjectDisclosure")
-                        .HasColumnType("text");
+            b.Property<string>("ProjectDisclosure")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ProjectName")
-                        .HasColumnType("text");
+            b.Property<string>("ProjectName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ProjectType")
-                        .HasColumnType("text");
+            b.Property<string>("ProjectType")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("RepresentationStructureId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("RepresentationStructureId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Resource")
-                        .HasColumnType("text");
+            b.Property<string>("Resource")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ResourceDescription")
-                        .HasColumnType("text");
+            b.Property<string>("ResourceDescription")
+                      .HasColumnType("text");
 
-                    b.Property<string>("SPDescription")
-                        .HasColumnType("text");
+            b.Property<string>("SPDescription")
+                      .HasColumnType("text");
 
-                    b.Property<bool>("SPEnabled")
-                        .HasColumnType("boolean");
+            b.Property<bool>("SPEnabled")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTime>("SPPredictedStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("SPPredictedStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("SPStart")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("SPStart")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("ScreenId")
-                        .HasColumnType("uuid");
+            b.Property<Guid?>("ScreenId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("ScreenName")
-                        .HasColumnType("text");
+            b.Property<string>("ScreenName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+            b.Property<string>("Status")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid?>("TargetId")
-                        .HasColumnType("uuid");
+            b.Property<Guid?>("TargetId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("TargetName")
-                        .HasColumnType("text");
+            b.Property<string>("TargetName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("TeamPriority")
-                        .HasColumnType("text");
+            b.Property<string>("TeamPriority")
+                      .HasColumnType("text");
 
-                    b.Property<string>("TeamPriorityDescription")
-                        .HasColumnType("text");
+            b.Property<string>("TeamPriorityDescription")
+                      .HasColumnType("text");
 
-                    b.Property<string>("TeamProbability")
-                        .HasColumnType("text");
+            b.Property<string>("TeamProbability")
+                      .HasColumnType("text");
 
-                    b.Property<string>("TeamProbabilityDescription")
-                        .HasColumnType("text");
+            b.Property<string>("TeamProbabilityDescription")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime?>("TerminationDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime?>("TerminationDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("PrimaryOrgId");
+            b.HasIndex("PrimaryOrgId");
 
-                    b.HasIndex("RepresentationStructureId");
+            b.HasIndex("RepresentationStructureId");
 
-                    b.HasIndex("ScreenId");
+            b.HasIndex("ScreenId");
 
-                    b.ToTable("Projects");
-                });
+            b.ToTable("Projects");
+          });
 
-            modelBuilder.Entity("Domain.ProjectBaseHits", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.ProjectBaseHits", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("HitId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("HitId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("ProjectId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("HitId");
+            b.HasIndex("HitId");
 
-                    b.HasIndex("ProjectId");
+            b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectBaseHits");
-                });
+            b.ToTable("ProjectBaseHits");
+          });
 
-            modelBuilder.Entity("Domain.ProjectCompoundEvolution", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.ProjectCompoundEvolution", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("AddedOnDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("AddedOnDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("AddedOnStage")
-                        .HasColumnType("text");
+            b.Property<string>("AddedOnStage")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("CompoundId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("CompoundId")
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<double>("IC50")
-                        .HasColumnType("double precision");
+            b.Property<double>("IC50")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("MIC")
-                        .HasColumnType("double precision");
+            b.Property<double>("MIC")
+                      .HasColumnType("double precision");
 
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
+            b.Property<string>("Notes")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("ProjectId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("CompoundId");
+            b.HasIndex("CompoundId");
 
-                    b.ToTable("ProjectCompoundEvolutions");
-                });
+            b.ToTable("ProjectCompoundEvolutions");
+          });
 
-            modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("AppOrgId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("AppOrgId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("ProjectId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("AppOrgId");
+            b.HasIndex("AppOrgId");
 
-                    b.HasIndex("ProjectId");
+            b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectParticipatingOrgs");
-                });
+            b.ToTable("ProjectParticipatingOrgs");
+          });
 
-            modelBuilder.Entity("Domain.ProjectSupportingOrg", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.ProjectSupportingOrg", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("AppOrgId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("AppOrgId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("ProjectId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("AppOrgId");
+            b.HasIndex("AppOrgId");
 
-                    b.HasIndex("ProjectId");
+            b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectSupportingOrgs");
-                });
+            b.ToTable("ProjectSupportingOrgs");
+          });
 
-            modelBuilder.Entity("Domain.Question", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Question", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Identification")
-                        .HasColumnType("text");
+            b.Property<string>("Identification")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Module")
-                        .HasColumnType("text");
+            b.Property<string>("Module")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
+            b.Property<string>("Notes")
+                      .HasColumnType("text");
 
-                    b.Property<string>("PossibleAnswers")
-                        .HasColumnType("text");
+            b.Property<string>("PossibleAnswers")
+                      .HasColumnType("text");
 
-                    b.Property<string>("QuestionBody")
-                        .HasColumnType("text");
+            b.Property<string>("QuestionBody")
+                      .HasColumnType("text");
 
-                    b.Property<string>("SubModule")
-                        .HasColumnType("text");
+            b.Property<string>("SubModule")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ToolTip")
-                        .HasColumnType("text");
+            b.Property<string>("ToolTip")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Questions");
-                });
+            b.ToTable("Questions");
+          });
 
-            modelBuilder.Entity("Domain.Reply", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Reply", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Body")
-                        .HasColumnType("text");
+            b.Property<string>("Body")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("DiscussionId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("DiscussionId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Mentions")
-                        .HasColumnType("text");
+            b.Property<string>("Mentions")
+                      .HasColumnType("text");
 
-                    b.Property<string>("PostedBy")
-                        .HasColumnType("text");
+            b.Property<string>("PostedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Tags")
-                        .HasColumnType("text");
+            b.Property<string>("Tags")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("Timestamp")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("Timestamp")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("DiscussionId");
+            b.HasIndex("DiscussionId");
 
-                    b.ToTable("Replies");
-                });
+            b.ToTable("Replies");
+          });
 
-            modelBuilder.Entity("Domain.Screen", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Screen", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("GeneName")
-                        .HasColumnType("text");
+            b.Property<string>("GeneName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Method")
-                        .HasColumnType("text");
+            b.Property<string>("Method")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
+            b.Property<string>("Notes")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("OrgId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("OrgId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Promoter")
-                        .HasColumnType("text");
+            b.Property<string>("Promoter")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("PromotionDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("PromotionDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("ScreenName")
-                        .HasColumnType("text");
+            b.Property<string>("ScreenName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ScreenType")
-                        .HasColumnType("text");
+            b.Property<string>("ScreenType")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+            b.Property<string>("Status")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid?>("TargetId")
-                        .HasColumnType("uuid");
+            b.Property<Guid?>("TargetId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("TargetName")
-                        .HasColumnType("text");
+            b.Property<string>("TargetName")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("OrgId");
+            b.HasIndex("OrgId");
 
-                    b.HasIndex("TargetId");
+            b.HasIndex("TargetId");
 
-                    b.ToTable("Screens");
-                });
+            b.ToTable("Screens");
+          });
 
-            modelBuilder.Entity("Domain.ScreenSequence", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.ScreenSequence", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<float>("Concentration")
-                        .HasColumnType("real");
+            b.Property<float>("Concentration")
+                      .HasColumnType("real");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime?>("EndDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Library")
-                        .HasColumnType("text");
+            b.Property<string>("Library")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Method")
-                        .HasColumnType("text");
+            b.Property<string>("Method")
+                      .HasColumnType("text");
 
-                    b.Property<int>("NoOfCompoundsScreened")
-                        .HasColumnType("integer");
+            b.Property<int>("NoOfCompoundsScreened")
+                      .HasColumnType("integer");
 
-                    b.Property<string>("Protocol")
-                        .HasColumnType("text");
+            b.Property<string>("Protocol")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Scientist")
-                        .HasColumnType("text");
+            b.Property<string>("Scientist")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("ScreenId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("ScreenId")
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("StartDate")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("TargetName")
-                        .HasColumnType("text");
+            b.Property<string>("TargetName")
+                      .HasColumnType("text");
 
-                    b.Property<int>("UnverifiedHitCount")
-                        .HasColumnType("integer");
+            b.Property<int>("UnverifiedHitCount")
+                      .HasColumnType("integer");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("ScreenId");
+            b.HasIndex("ScreenId");
 
-                    b.ToTable("ScreenSequences");
-                });
+            b.ToTable("ScreenSequences");
+          });
 
-            modelBuilder.Entity("Domain.Strain", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Strain", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("CanonicalName")
-                        .HasColumnType("text");
+            b.Property<string>("CanonicalName")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+            b.Property<string>("Name")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Strains");
-                });
+            b.ToTable("Strains");
+          });
 
-            modelBuilder.Entity("Domain.Target", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Target", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Background")
-                        .HasColumnType("text");
+            b.Property<string>("Background")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Bucket")
-                        .HasColumnType("text");
+            b.Property<string>("Bucket")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Challenges")
-                        .HasColumnType("text");
+            b.Property<string>("Challenges")
+                      .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Enablement")
-                        .HasColumnType("text");
+            b.Property<string>("Enablement")
+                      .HasColumnType("text");
 
-                    b.Property<double>("HTSFeasibility")
-                        .HasColumnType("double precision");
+            b.Property<double>("HTSFeasibility")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("ImpactComplete")
-                        .HasColumnType("double precision");
+            b.Property<double>("ImpactComplete")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("ImpactScore")
-                        .HasColumnType("double precision");
+            b.Property<double>("ImpactScore")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("LikeComplete")
-                        .HasColumnType("double precision");
+            b.Property<double>("LikeComplete")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("LikeScore")
-                        .HasColumnType("double precision");
+            b.Property<double>("LikeScore")
+                      .HasColumnType("double precision");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+            b.Property<string>("Name")
+                      .HasColumnType("text");
 
-                    b.Property<double>("Progressibility")
-                        .HasColumnType("double precision");
+            b.Property<double>("Progressibility")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("SBDFeasibility")
-                        .HasColumnType("double precision");
+            b.Property<double>("SBDFeasibility")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("Safety")
-                        .HasColumnType("double precision");
+            b.Property<double>("Safety")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("ScreeningComplete")
-                        .HasColumnType("double precision");
+            b.Property<double>("ScreeningComplete")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("ScreeningScore")
-                        .HasColumnType("double precision");
+            b.Property<double>("ScreeningScore")
+                      .HasColumnType("double precision");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Strategy")
-                        .HasColumnType("text");
+            b.Property<string>("Strategy")
+                      .HasColumnType("text");
 
-                    b.Property<double>("StructureComplete")
-                        .HasColumnType("double precision");
+            b.Property<double>("StructureComplete")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("StructureScore")
-                        .HasColumnType("double precision");
+            b.Property<double>("StructureScore")
+                      .HasColumnType("double precision");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
+            b.Property<string>("Type")
+                      .HasColumnType("text");
 
-                    b.Property<double>("VulnerabilityRank")
-                        .HasColumnType("double precision");
+            b.Property<double>("VulnerabilityRank")
+                      .HasColumnType("double precision");
 
-                    b.Property<double>("VulnerabilityRatio")
-                        .HasColumnType("double precision");
+            b.Property<double>("VulnerabilityRatio")
+                      .HasColumnType("double precision");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+            b.HasIndex("Name")
+                      .IsUnique();
 
-                    b.ToTable("Targets");
-                });
+            b.ToTable("Targets");
+          });
 
-            modelBuilder.Entity("Domain.TargetGene", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.TargetGene", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("AccessionNumber")
-                        .HasColumnType("text");
+            b.Property<string>("AccessionNumber")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("GeneId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("GeneId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("StrainId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("StrainId")
+                      .HasColumnType("uuid");
 
-                    b.Property<Guid>("TargetId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("TargetId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("GeneId");
+            b.HasIndex("GeneId");
 
-                    b.HasIndex("TargetId");
+            b.HasIndex("TargetId");
 
-                    b.ToTable("TargetGenes");
-                });
+            b.ToTable("TargetGenes");
+          });
 
-            modelBuilder.Entity("Domain.TargetScorecard", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.TargetScorecard", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("TargetID")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("TargetID")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("TargetName")
-                        .HasColumnType("text");
+            b.Property<string>("TargetName")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("TargetID")
-                        .IsUnique();
+            b.HasIndex("TargetID")
+                      .IsUnique();
 
-                    b.ToTable("TargetScorecards");
-                });
+            b.ToTable("TargetScorecards");
+          });
 
-            modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Answer")
-                        .HasColumnType("text");
+            b.Property<string>("Answer")
+                      .HasColumnType("text");
 
-                    b.Property<string>("AnswerdBy")
-                        .HasColumnType("text");
+            b.Property<string>("AnswerdBy")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
+            b.Property<string>("Description")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("QuestionId")
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("QuestionIdentification")
-                        .HasColumnType("text");
+            b.Property<string>("QuestionIdentification")
+                      .HasColumnType("text");
 
-                    b.Property<string>("QuestionModule")
-                        .HasColumnType("text");
+            b.Property<string>("QuestionModule")
+                      .HasColumnType("text");
 
-                    b.Property<string>("QuestionSubModule")
-                        .HasColumnType("text");
+            b.Property<string>("QuestionSubModule")
+                      .HasColumnType("text");
 
-                    b.Property<string>("TargetName")
-                        .HasColumnType("text");
+            b.Property<string>("TargetName")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("TargetScorecardId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("TargetScorecardId")
+                      .HasColumnType("uuid");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("QuestionId");
+            b.HasIndex("QuestionId");
 
-                    b.HasIndex("TargetScorecardId");
+            b.HasIndex("TargetScorecardId");
 
-                    b.ToTable("TargetScoreCardValues");
-                });
+            b.ToTable("TargetScoreCardValues");
+          });
 
-            modelBuilder.Entity("Domain.Tasks.BTask", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Tasks.BTask", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("DateCompleted")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("DateCompleted")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("DateCreated")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+            b.Property<string>("Status")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
+            b.Property<string>("Type")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("BTask");
-                });
+            b.ToTable("BTask");
+          });
 
-            modelBuilder.Entity("Domain.Vote", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Vote", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
+            b.Property<string>("CreatedBy")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("ElementId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("ElementId")
+                      .HasColumnType("uuid");
 
-                    b.Property<bool>("IsVotingAllowed")
-                        .HasColumnType("boolean");
+            b.Property<bool>("IsVotingAllowed")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("LastModified")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Negative")
-                        .HasColumnType("integer");
+            b.Property<int>("Negative")
+                      .HasColumnType("integer");
 
-                    b.Property<int>("Neutral")
-                        .HasColumnType("integer");
+            b.Property<int>("Neutral")
+                      .HasColumnType("integer");
 
-                    b.Property<int>("Positive")
-                        .HasColumnType("integer");
+            b.Property<int>("Positive")
+                      .HasColumnType("integer");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Votes");
-                });
+            b.ToTable("Votes");
+          });
 
-            modelBuilder.Entity("Domain.Voter", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+      modelBuilder.Entity("Domain.Voter", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uuid");
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("text");
+            b.Property<string>("Comment")
+                      .HasColumnType("text");
 
-                    b.Property<Guid>("VoteId")
-                        .HasColumnType("uuid");
+            b.Property<Guid>("VoteId")
+                      .HasColumnType("uuid");
 
-                    b.Property<bool>("VotedNegative")
-                        .HasColumnType("boolean");
+            b.Property<bool>("VotedNegative")
+                      .HasColumnType("boolean");
 
-                    b.Property<bool>("VotedNeutral")
-                        .HasColumnType("boolean");
+            b.Property<bool>("VotedNeutral")
+                      .HasColumnType("boolean");
 
-                    b.Property<DateTime>("VotedOn")
-                        .HasColumnType("timestamp with time zone");
+            b.Property<DateTime>("VotedOn")
+                      .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool>("VotedPositive")
-                        .HasColumnType("boolean");
+            b.Property<bool>("VotedPositive")
+                      .HasColumnType("boolean");
 
-                    b.Property<string>("VoterEmail")
-                        .HasColumnType("text");
+            b.Property<string>("VoterEmail")
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("VoteId");
+            b.HasIndex("VoteId");
 
-                    b.ToTable("Voters");
-                });
+            b.ToTable("Voters");
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+          {
+            b.Property<int>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("text");
+            b.Property<string>("ClaimType")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
+            b.Property<string>("ClaimValue")
+                      .HasColumnType("text");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("text");
+            b.Property<string>("RoleId")
+                      .IsRequired()
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+            b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
+            b.ToTable("AspNetRoleClaims", (string)null);
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+          {
+            b.Property<int>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+            NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("text");
+            b.Property<string>("ClaimType")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
+            b.Property<string>("ClaimValue")
+                      .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+            b.Property<string>("UserId")
+                      .IsRequired()
+                      .HasColumnType("text");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+            b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
+            b.ToTable("AspNetUserClaims", (string)null);
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+          {
+            b.Property<string>("LoginProvider")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("text");
+            b.Property<string>("ProviderKey")
+                      .HasColumnType("text");
 
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("text");
+            b.Property<string>("ProviderDisplayName")
+                      .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+            b.Property<string>("UserId")
+                      .IsRequired()
+                      .HasColumnType("text");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+            b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasIndex("UserId");
+            b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
+            b.ToTable("AspNetUserLogins", (string)null);
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+          {
+            b.Property<string>("UserId")
+                      .HasColumnType("text");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("text");
+            b.Property<string>("RoleId")
+                      .HasColumnType("text");
 
-                    b.HasKey("UserId", "RoleId");
+            b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
+            b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
+            b.ToTable("AspNetUserRoles", (string)null);
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+          {
+            b.Property<string>("UserId")
+                      .HasColumnType("text");
 
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+            b.Property<string>("LoginProvider")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+            b.Property<string>("Name")
+                      .HasColumnType("text");
 
-                    b.Property<string>("Value")
-                        .HasColumnType("text");
+            b.Property<string>("Value")
+                      .HasColumnType("text");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+            b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
+            b.ToTable("AspNetUserTokens", (string)null);
+          });
 
-            modelBuilder.Entity("Domain.AppUser", b =>
-                {
-                    b.HasOne("Domain.AppOrg", "Org")
-                        .WithMany()
-                        .HasForeignKey("OrgId");
+      modelBuilder.Entity("Domain.AppUser", b =>
+          {
+            b.HasOne("Domain.AppOrg", "Org")
+                      .WithMany()
+                      .HasForeignKey("OrgId");
 
-                    b.Navigation("Org");
-                });
+            b.Navigation("Org");
+          });
 
-            modelBuilder.Entity("Domain.GeneCRISPRiStrain", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneCRISPRiStrain")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneCRISPRiStrain", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneCRISPRiStrain")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GeneEssentiality", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneEssentiality")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneEssentiality", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneEssentiality")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GeneExternalId", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneExternalIds")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneExternalId", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneExternalIds")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GeneHypomorph", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneHypomorphs")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneHypomorph", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneHypomorphs")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GenePromotionRequestValue", b =>
-                {
-                    b.HasOne("Domain.GenePromotionRequest", null)
-                        .WithMany("GenePromotionRequestValues")
-                        .HasForeignKey("GenePromotionRequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.GenePromotionRequestValue", b =>
+          {
+            b.HasOne("Domain.GenePromotionRequest", null)
+                      .WithMany("GenePromotionRequestValues")
+                      .HasForeignKey("GenePromotionRequestId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Question", "Question")
+                      .WithMany()
+                      .HasForeignKey("QuestionId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("Question");
-                });
+            b.Navigation("Question");
+          });
 
-            modelBuilder.Entity("Domain.GenePromtionRequestGene", b =>
-                {
-                    b.HasOne("Domain.GenePromotionRequest", null)
-                        .WithMany("GenePromtionRequestGenes")
-                        .HasForeignKey("GenePromotionRequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GenePromtionRequestGene", b =>
+          {
+            b.HasOne("Domain.GenePromotionRequest", null)
+                      .WithMany("GenePromtionRequestGenes")
+                      .HasForeignKey("GenePromotionRequestId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GeneProteinActivityAssay", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneProteinActivityAssay")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneProteinActivityAssay", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneProteinActivityAssay")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GeneProteinProduction", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneProteinProduction")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneProteinProduction", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneProteinProduction")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GenePublicData", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithOne("GenePublicData")
-                        .HasForeignKey("Domain.GenePublicData", "GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GenePublicData", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithOne("GenePublicData")
+                      .HasForeignKey("Domain.GenePublicData", "GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GeneResistanceMutation", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneResistanceMutation")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneResistanceMutation", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneResistanceMutation")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GeneUnpublishedStructures", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneUnpublishedStructures")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneUnpublishedStructures", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneUnpublishedStructures")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.GeneVulnerability", b =>
-                {
-                    b.HasOne("Domain.Gene", null)
-                        .WithMany("GeneVulnerability")
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.GeneVulnerability", b =>
+          {
+            b.HasOne("Domain.Gene", null)
+                      .WithMany("GeneVulnerability")
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.Hit", b =>
-                {
-                    b.HasOne("Domain.Compound", "Compound")
-                        .WithMany()
-                        .HasForeignKey("CompoundId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.Hit", b =>
+          {
+            b.HasOne("Domain.Compound", "Compound")
+                      .WithMany()
+                      .HasForeignKey("CompoundId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Screen", null)
-                        .WithMany("ValidatedHits")
-                        .HasForeignKey("ScreenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Screen", null)
+                      .WithMany("ValidatedHits")
+                      .HasForeignKey("ScreenId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Vote", "Vote")
-                        .WithMany()
-                        .HasForeignKey("VoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Vote", "Vote")
+                      .WithMany()
+                      .HasForeignKey("VoteId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("Compound");
+            b.Navigation("Compound");
 
-                    b.Navigation("Vote");
-                });
+            b.Navigation("Vote");
+          });
 
-            modelBuilder.Entity("Domain.Models.GeneGroupGenes", b =>
-                {
-                    b.HasOne("Domain.Models.GeneGroup", null)
-                        .WithMany("Genes")
-                        .HasForeignKey("GeneGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.Models.GeneGroupGenes", b =>
+          {
+            b.HasOne("Domain.Models.GeneGroup", null)
+                      .WithMany("Genes")
+                      .HasForeignKey("GeneGroupId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Gene", "Gene")
-                        .WithMany()
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Gene", "Gene")
+                      .WithMany()
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("Gene");
-                });
+            b.Navigation("Gene");
+          });
 
-            modelBuilder.Entity("Domain.Project", b =>
-                {
-                    b.HasOne("Domain.AppOrg", "PrimaryOrg")
-                        .WithMany()
-                        .HasForeignKey("PrimaryOrgId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.Project", b =>
+          {
+            b.HasOne("Domain.AppOrg", "PrimaryOrg")
+                      .WithMany()
+                      .HasForeignKey("PrimaryOrgId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Compound", "RepresentationStructure")
-                        .WithMany()
-                        .HasForeignKey("RepresentationStructureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Compound", "RepresentationStructure")
+                      .WithMany()
+                      .HasForeignKey("RepresentationStructureId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Screen", "BaseScreen")
-                        .WithMany()
-                        .HasForeignKey("ScreenId");
+            b.HasOne("Domain.Screen", "BaseScreen")
+                      .WithMany()
+                      .HasForeignKey("ScreenId");
 
-                    b.Navigation("BaseScreen");
+            b.Navigation("BaseScreen");
 
-                    b.Navigation("PrimaryOrg");
+            b.Navigation("PrimaryOrg");
 
-                    b.Navigation("RepresentationStructure");
-                });
+            b.Navigation("RepresentationStructure");
+          });
 
-            modelBuilder.Entity("Domain.ProjectBaseHits", b =>
-                {
-                    b.HasOne("Domain.Hit", "BaseHit")
-                        .WithMany()
-                        .HasForeignKey("HitId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.ProjectBaseHits", b =>
+          {
+            b.HasOne("Domain.Hit", "BaseHit")
+                      .WithMany()
+                      .HasForeignKey("HitId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Project", null)
-                        .WithMany("BaseHits")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Project", null)
+                      .WithMany("BaseHits")
+                      .HasForeignKey("ProjectId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("BaseHit");
-                });
+            b.Navigation("BaseHit");
+          });
 
-            modelBuilder.Entity("Domain.ProjectCompoundEvolution", b =>
-                {
-                    b.HasOne("Domain.Compound", "Compound")
-                        .WithMany()
-                        .HasForeignKey("CompoundId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.ProjectCompoundEvolution", b =>
+          {
+            b.HasOne("Domain.Compound", "Compound")
+                      .WithMany()
+                      .HasForeignKey("CompoundId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("Compound");
-                });
+            b.Navigation("Compound");
+          });
 
-            modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
-                {
-                    b.HasOne("Domain.AppOrg", "AppOrg")
-                        .WithMany()
-                        .HasForeignKey("AppOrgId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.ProjectParticipatingOrg", b =>
+          {
+            b.HasOne("Domain.AppOrg", "AppOrg")
+                      .WithMany()
+                      .HasForeignKey("AppOrgId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Project", null)
-                        .WithMany("ParticipatingOrgs")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Project", null)
+                      .WithMany("ParticipatingOrgs")
+                      .HasForeignKey("ProjectId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("AppOrg");
-                });
+            b.Navigation("AppOrg");
+          });
 
-            modelBuilder.Entity("Domain.ProjectSupportingOrg", b =>
-                {
-                    b.HasOne("Domain.AppOrg", "AppOrg")
-                        .WithMany()
-                        .HasForeignKey("AppOrgId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.ProjectSupportingOrg", b =>
+          {
+            b.HasOne("Domain.AppOrg", "AppOrg")
+                      .WithMany()
+                      .HasForeignKey("AppOrgId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Project", null)
-                        .WithMany("SupportingOrgs")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Project", null)
+                      .WithMany("SupportingOrgs")
+                      .HasForeignKey("ProjectId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("AppOrg");
-                });
+            b.Navigation("AppOrg");
+          });
 
-            modelBuilder.Entity("Domain.Reply", b =>
-                {
-                    b.HasOne("Domain.Discussion", null)
-                        .WithMany("Replies")
-                        .HasForeignKey("DiscussionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.Reply", b =>
+          {
+            b.HasOne("Domain.Discussion", null)
+                      .WithMany("Replies")
+                      .HasForeignKey("DiscussionId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.Screen", b =>
-                {
-                    b.HasOne("Domain.AppOrg", "Org")
-                        .WithMany()
-                        .HasForeignKey("OrgId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.Screen", b =>
+          {
+            b.HasOne("Domain.AppOrg", "Org")
+                      .WithMany()
+                      .HasForeignKey("OrgId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Target", "BaseTarget")
-                        .WithMany()
-                        .HasForeignKey("TargetId");
+            b.HasOne("Domain.Target", "BaseTarget")
+                      .WithMany()
+                      .HasForeignKey("TargetId");
 
-                    b.Navigation("BaseTarget");
+            b.Navigation("BaseTarget");
 
-                    b.Navigation("Org");
-                });
+            b.Navigation("Org");
+          });
 
-            modelBuilder.Entity("Domain.ScreenSequence", b =>
-                {
-                    b.HasOne("Domain.Screen", null)
-                        .WithMany("ScreenSequences")
-                        .HasForeignKey("ScreenId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.ScreenSequence", b =>
+          {
+            b.HasOne("Domain.Screen", null)
+                      .WithMany("ScreenSequences")
+                      .HasForeignKey("ScreenId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.TargetGene", b =>
-                {
-                    b.HasOne("Domain.Gene", "Gene")
-                        .WithMany()
-                        .HasForeignKey("GeneId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.TargetGene", b =>
+          {
+            b.HasOne("Domain.Gene", "Gene")
+                      .WithMany()
+                      .HasForeignKey("GeneId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.Target", null)
-                        .WithMany("TargetGenes")
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.Target", null)
+                      .WithMany("TargetGenes")
+                      .HasForeignKey("TargetId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("Gene");
-                });
+            b.Navigation("Gene");
+          });
 
-            modelBuilder.Entity("Domain.TargetScorecard", b =>
-                {
-                    b.HasOne("Domain.Target", null)
-                        .WithOne("TargetScorecard")
-                        .HasForeignKey("Domain.TargetScorecard", "TargetID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.TargetScorecard", b =>
+          {
+            b.HasOne("Domain.Target", null)
+                      .WithOne("TargetScorecard")
+                      .HasForeignKey("Domain.TargetScorecard", "TargetID")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
-                {
-                    b.HasOne("Domain.Question", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Domain.TargetScoreCardValue", b =>
+          {
+            b.HasOne("Domain.Question", "Question")
+                      .WithMany()
+                      .HasForeignKey("QuestionId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.TargetScorecard", null)
-                        .WithMany("TargetScoreCardValues")
-                        .HasForeignKey("TargetScorecardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Domain.TargetScorecard", null)
+                      .WithMany("TargetScoreCardValues")
+                      .HasForeignKey("TargetScorecardId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("Question");
-                });
+            b.Navigation("Question");
+          });
 
-            modelBuilder.Entity("Domain.Voter", b =>
-                {
-                    b.HasOne("Domain.Vote", null)
-                        .WithMany("Voters")
-                        .HasForeignKey("VoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Domain.Voter", b =>
+          {
+            b.HasOne("Domain.Vote", null)
+                      .WithMany("Voters")
+                      .HasForeignKey("VoteId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Domain.AppRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+          {
+            b.HasOne("Domain.AppRole", null)
+                      .WithMany()
+                      .HasForeignKey("RoleId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("Domain.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+          {
+            b.HasOne("Domain.AppUser", null)
+                      .WithMany()
+                      .HasForeignKey("UserId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("Domain.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+          {
+            b.HasOne("Domain.AppUser", null)
+                      .WithMany()
+                      .HasForeignKey("UserId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Domain.AppRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+          {
+            b.HasOne("Domain.AppRole", null)
+                      .WithMany()
+                      .HasForeignKey("RoleId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Domain.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            b.HasOne("Domain.AppUser", null)
+                      .WithMany()
+                      .HasForeignKey("UserId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("Domain.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+          {
+            b.HasOne("Domain.AppUser", null)
+                      .WithMany()
+                      .HasForeignKey("UserId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Domain.Discussion", b =>
-                {
-                    b.Navigation("Replies");
-                });
+      modelBuilder.Entity("Domain.Discussion", b =>
+          {
+            b.Navigation("Replies");
+          });
 
-            modelBuilder.Entity("Domain.Gene", b =>
-                {
-                    b.Navigation("GeneCRISPRiStrain");
+      modelBuilder.Entity("Domain.Gene", b =>
+          {
+            b.Navigation("GeneCRISPRiStrain");
 
-                    b.Navigation("GeneEssentiality");
+            b.Navigation("GeneEssentiality");
 
-                    b.Navigation("GeneExternalIds");
+            b.Navigation("GeneExternalIds");
 
-                    b.Navigation("GeneHypomorphs");
+            b.Navigation("GeneHypomorphs");
 
-                    b.Navigation("GeneProteinActivityAssay");
+            b.Navigation("GeneProteinActivityAssay");
 
-                    b.Navigation("GeneProteinProduction");
+            b.Navigation("GeneProteinProduction");
 
-                    b.Navigation("GenePublicData");
+            b.Navigation("GenePublicData");
 
-                    b.Navigation("GeneResistanceMutation");
+            b.Navigation("GeneResistanceMutation");
 
-                    b.Navigation("GeneUnpublishedStructures");
+            b.Navigation("GeneUnpublishedStructures");
 
-                    b.Navigation("GeneVulnerability");
-                });
+            b.Navigation("GeneVulnerability");
+          });
 
-            modelBuilder.Entity("Domain.GenePromotionRequest", b =>
-                {
-                    b.Navigation("GenePromotionRequestValues");
+      modelBuilder.Entity("Domain.GenePromotionRequest", b =>
+          {
+            b.Navigation("GenePromotionRequestValues");
 
-                    b.Navigation("GenePromtionRequestGenes");
-                });
+            b.Navigation("GenePromtionRequestGenes");
+          });
 
-            modelBuilder.Entity("Domain.Models.GeneGroup", b =>
-                {
-                    b.Navigation("Genes");
-                });
+      modelBuilder.Entity("Domain.Models.GeneGroup", b =>
+          {
+            b.Navigation("Genes");
+          });
 
-            modelBuilder.Entity("Domain.Project", b =>
-                {
-                    b.Navigation("BaseHits");
+      modelBuilder.Entity("Domain.Project", b =>
+          {
+            b.Navigation("BaseHits");
 
-                    b.Navigation("ParticipatingOrgs");
+            b.Navigation("ParticipatingOrgs");
 
-                    b.Navigation("SupportingOrgs");
-                });
+            b.Navigation("SupportingOrgs");
+          });
 
-            modelBuilder.Entity("Domain.Screen", b =>
-                {
-                    b.Navigation("ScreenSequences");
+      modelBuilder.Entity("Domain.Screen", b =>
+          {
+            b.Navigation("ScreenSequences");
 
-                    b.Navigation("ValidatedHits");
-                });
+            b.Navigation("ValidatedHits");
+          });
 
-            modelBuilder.Entity("Domain.Target", b =>
-                {
-                    b.Navigation("TargetGenes");
+      modelBuilder.Entity("Domain.Target", b =>
+          {
+            b.Navigation("TargetGenes");
 
-                    b.Navigation("TargetScorecard");
-                });
+            b.Navigation("TargetScorecard");
+          });
 
-            modelBuilder.Entity("Domain.TargetScorecard", b =>
-                {
-                    b.Navigation("TargetScoreCardValues");
-                });
+      modelBuilder.Entity("Domain.TargetScorecard", b =>
+          {
+            b.Navigation("TargetScoreCardValues");
+          });
 
-            modelBuilder.Entity("Domain.Vote", b =>
-                {
-                    b.Navigation("Voters");
-                });
+      modelBuilder.Entity("Domain.Vote", b =>
+          {
+            b.Navigation("Voters");
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }

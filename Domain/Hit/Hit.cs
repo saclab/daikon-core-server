@@ -22,7 +22,7 @@ namespace Domain
     public Guid VoteId { get; set; }
     public Vote Vote { get; set; }
 
-    
+
 
   }
 }

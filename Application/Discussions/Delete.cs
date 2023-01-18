@@ -25,7 +25,7 @@ namespace Application.Discussions
       public Handler(DataContext context, IUserAccessor userAccessor)
       {
         _context = context;
-       
+
         _userAccessor = userAccessor;
       }
 

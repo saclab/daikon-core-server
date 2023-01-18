@@ -10,7 +10,7 @@ namespace API.Controllers.Batch.Gene
 {
   [ApiController]
   [Route("api/batch/gene/[controller]")]
-  
+
   public class Sync
   {
     private readonly IBackgroundQueue<BTask> _queue;
@@ -42,10 +42,10 @@ namespace API.Controllers.Batch.Gene
     {
       Sequence sequence = SequenceFileReader.ReadSingleFromFile("/app/DevFiles/test.fasta");
 
-      
-          Console.WriteLine(">>>>> Header : " + sequence.Header.Items[4]);
-    
-      
+
+      Console.WriteLine(">>>>> Header : " + sequence.Header.Items[4]);
+
+
       return sequence;
     }
 

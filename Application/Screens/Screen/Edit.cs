@@ -43,7 +43,7 @@ namespace Application.Screens
       }
       public async Task<Result<Screen>> Handle(Command request, CancellationToken cancellationToken)
       {
-        
+
         var screen = await _context.Screens
         .Include(h => h.Org)
         .FirstOrDefaultAsync(s => s.Id == request.ModifiedScreen.Id);

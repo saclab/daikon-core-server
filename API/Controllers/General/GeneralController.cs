@@ -9,7 +9,7 @@ namespace API.Controllers.General
   public class GeneralController : ApiControllerBase
   {
     private readonly ILogger<ApiControllerBase> _logger;
-    
+
 
 
     [HttpGet("app-vars")]

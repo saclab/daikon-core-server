@@ -39,7 +39,7 @@ namespace Application.Genes
           .Include(g => g.GenePublicData)
           // .Include(g => g.GeneNonPublicData)
           .Include(g => g.GeneEssentiality)
-          .Include(g=> g.GeneVulnerability)
+          .Include(g => g.GeneVulnerability)
           .AsSplitQuery()
           .FirstOrDefaultAsync(g => g.Id == request.Id);
 

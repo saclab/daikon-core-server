@@ -6,20 +6,20 @@ using Domain;
 
 namespace Application.General.AppValues.DTO
 {
-    public class AppCount
-    {
-        public int GeneCount { get; set; }
+  public class AppCount
+  {
+    public int GeneCount { get; set; }
 
-        public int TargetCount { get; set; }
+    public int TargetCount { get; set; }
 
-        public int ScreenCount { get; set; }
+    public int ScreenCount { get; set; }
 
-        public int HACount { get; set; }
+    public int HACount { get; set; }
 
-        public int PortfolioCount { get; set; }
+    public int PortfolioCount { get; set; }
 
-        public int PostPortfolioCount { get; set; }
+    public int PostPortfolioCount { get; set; }
 
-        /* Count of Domain */
-    }
+    /* Count of Domain */
+  }
 }
