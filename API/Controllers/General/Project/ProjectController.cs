@@ -34,5 +34,22 @@ namespace API.Controllers.General.Project
       projectPriorityProbability.Id = id;
       return HandleResult(await Mediator.Send(new Application.Projects.SetPriorityProbability.Command { projectPriorityProbabilityDTO = projectPriorityProbability }));
     }
+
+    [HttpPost("{projectId}/compoundevolution")]
+    public async Task<IActionResult> AddCompoundEvolution(Guid projectId, Application.Projects.DTOs.CompoundEvolutionDTO projectCompoundEvolution)
+    {
+      projectCompoundEvolution.ProjectId = projectId;
+      return HandleResult(await Mediator.Send(new Application.Projects.CompoundEvolution.Add.Command { NewProjectCompoundEvolution = projectCompoundEvolution }));
+    }
+
+    [HttpPost("{projectId}/compoundevolution/{compoundEvolutionId}")]
+    public async Task<IActionResult> EditCompoundEvolution(Guid projectId, Guid compoundEvolutionId, Application.Projects.DTOs.CompoundEvolutionDTO projectCompoundEvolution)
+    {
+      projectCompoundEvolution.ProjectId = projectId;
+      projectCompoundEvolution.Id = compoundEvolutionId;
+
+      return HandleResult(await Mediator.Send(new Application.Projects.CompoundEvolution.Edit.Command { EditedProjectCompoundEvolution = projectCompoundEvolution }));
+    }
+
   }
 }
