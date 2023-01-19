@@ -31,8 +31,8 @@ namespace API
         var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
         await context.Database.MigrateAsync();
 
-
-        await Seed.SeedData(context, userManager, roleManager);
+        // TODO: (AJB) Commented out for the moment until the process can be fixed to work in Azure
+        //await Seed.SeedData(context, userManager, roleManager);
 
       }
 
