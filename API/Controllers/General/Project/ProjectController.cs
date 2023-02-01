@@ -58,6 +58,12 @@ namespace API.Controllers.General.Project
       supportingOrgDTO.ProjectId = projectId;
       return HandleResult(await Mediator.Send(new Application.Projects.EditSupportingOrgs.Command { supportingOrgDTO = supportingOrgDTO }));
     }
+    [HttpPost("{projectId}/edit-predicted-dates")]
+    public async Task<IActionResult> EditPredictedDates(Guid projectId, Application.Projects.DTOs.ProjectEditDTO projectEditDTO)
+    {
+      projectEditDTO.Id = projectId;
+      return HandleResult(await Mediator.Send(new Application.Projects.EditPredictedDates.Command { project = projectEditDTO }));
+    }
 
   }
 }
