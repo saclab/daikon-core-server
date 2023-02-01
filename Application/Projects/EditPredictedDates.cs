@@ -79,7 +79,7 @@ namespace Application.Projects
           secondaryOrgIds.Add(sorg.AppOrgId);
         }
 
-        if (!isInPrimaryGroup || !secondaryOrgIds.Contains(userOrgId) || !isAdmin || !isProjectManager)
+        if (!(isInPrimaryGroup || secondaryOrgIds.Contains(userOrgId) || isAdmin || isProjectManager))
         {
           return Result<Project>.Failure("Denied : Not enough permissions to edit");
         }
