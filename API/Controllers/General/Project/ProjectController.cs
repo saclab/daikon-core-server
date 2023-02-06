@@ -51,5 +51,19 @@ namespace API.Controllers.General.Project
       return HandleResult(await Mediator.Send(new Application.Projects.CompoundEvolution.Edit.Command { EditedProjectCompoundEvolution = projectCompoundEvolution }));
     }
 
+
+    [HttpPost("{projectId}/edit-supporting-org")]
+    public async Task<IActionResult> EditSecondaryOrgs(Guid projectId, Application.Projects.DTOs.SupportingOrgDTO supportingOrgDTO)
+    {
+      supportingOrgDTO.ProjectId = projectId;
+      return HandleResult(await Mediator.Send(new Application.Projects.EditSupportingOrgs.Command { supportingOrgDTO = supportingOrgDTO }));
+    }
+    [HttpPost("{projectId}/edit-predicted-dates")]
+    public async Task<IActionResult> EditPredictedDates(Guid projectId, Application.Projects.DTOs.ProjectEditDTO projectEditDTO)
+    {
+      projectEditDTO.Id = projectId;
+      return HandleResult(await Mediator.Send(new Application.Projects.EditPredictedDates.Command { project = projectEditDTO }));
+    }
+
   }
 }

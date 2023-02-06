@@ -30,7 +30,7 @@ namespace Application.General.AppValues
       {
         var appValues = new AppValuesDTO();
 
-        var orgs = await _context.AppOrgs.ToListAsync();
+        var orgs = await _context.AppOrgs.OrderBy(a => a.Alias).ToListAsync();
         appValues.AppOrgs = new List<AppOrg>(orgs);
         appValues.AppOrgsFlattened = new List<string>();
         appValues.AppOrgsAliasFlattened = new List<string>();
@@ -40,7 +40,7 @@ namespace Application.General.AppValues
           appValues.AppOrgsAliasFlattened.Add(org.Alias);
         }
 
-        var users = await _context.Users.ToListAsync();
+        var users = await _context.Users.OrderBy(u => u.UserName).ToListAsync();
         appValues.AppUsersFlattened = new List<string>();
         foreach (var user in users)
         {
@@ -60,6 +60,7 @@ namespace Application.General.AppValues
             await _context
                 .AppVals
                 .Where(a => a.Key == "ScreeningMethod")
+                .OrderBy(a => a.Value)
                 .ToListAsync();
 
         appValues.ScreeningMethods =
