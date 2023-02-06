@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -32,6 +33,13 @@ namespace API.Controllers.General
     {
       targetSummary.Id = id;
       return HandleResult(await Mediator.Send(new Application.Targets.EditSummary.Command { ModifiedTarget = targetSummary }));
+    }
+
+    [HttpPost("{id}/promotion-info")]
+    public async Task<IActionResult> EditPromotionInfo(Guid id, List<Application.Targets.DTOs.TargetPromotionDataDTO> targetPromotionDataDTOs)
+    {
+
+      return HandleResult(await Mediator.Send(new Application.Targets.EditTargetPromotionData.Command { TargetId = id, TargetPromotionDataDTOs = targetPromotionDataDTOs }));
     }
 
   }
