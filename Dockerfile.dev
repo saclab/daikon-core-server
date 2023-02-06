@@ -4,13 +4,13 @@ ENV DOTNET_USE_POLLING_FILE_WATCHER 1
 WORKDIR /app
 EXPOSE 5005
 
-# COPY ./tpt-backend.sln ./
-# COPY ./Application/Application.csproj ./Application/
-# COPY ./Domain/Domain.csproj ./Domain/
-# COPY ./Infrastructure/Infrastructure.csproj ./Infrastructure/
-# COPY ./Persistence/Persistence.csproj ./Persistence/
-# COPY ./API/API.csproj ./API/
-# COPY ./DataView/DataView.csproj ./DataView/
+COPY ./tpt-backend.sln ./
+COPY ./Application/Application.csproj ./Application/
+COPY ./Domain/Domain.csproj ./Domain/
+COPY ./Infrastructure/Infrastructure.csproj ./Infrastructure/
+COPY ./Persistence/Persistence.csproj ./Persistence/
+COPY ./API/API.csproj ./API/
+COPY ./DataView/DataView.csproj ./DataView/
 
 RUN dotnet restore
 
