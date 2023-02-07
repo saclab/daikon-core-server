@@ -22,7 +22,7 @@
         "dotnetRunMessages": "true",
         "launchBrowser": false,
         "launchUrl": "swagger",
-        "applicationUrl": "https://tbda-dev-backend.azurewebsites.net",
+        "applicationUrl": "https://*:5005",
         "environmentVariables": {
           "ASPNETCORE_ENVIRONMENT": "Development",
           "ASPNETCORE_URLS": "http://*:5005"
