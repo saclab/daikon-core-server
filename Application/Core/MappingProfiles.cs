@@ -27,6 +27,8 @@ namespace Application.Core
       CreateMap<GeneResistanceMutation, GeneResistanceMutation>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GeneUnpublishedStructures, GeneUnpublishedStructures>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GenePublicData, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
+      CreateMap<GeneExternalId, GeneExternalId>().ForMember(x => x.Id, opt => opt.Ignore());
+
 
 
       CreateMap<Project, Project>();

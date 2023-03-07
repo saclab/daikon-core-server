@@ -8,6 +8,13 @@ namespace API.Controllers.General
 {
   public class CompoundController : ApiControllerBase
   {
+    [HttpGet]
+    public async Task<IActionResult> List()
+    {
+      return HandleResult(await Mediator.Send(new Application.Compounds.List.Query { }));
+    }
+
+
     [HttpGet("by-external-id/{externalCompoundId}")]
     public async Task<IActionResult> GetCompoundByCId(string externalCompoundId)
     {
