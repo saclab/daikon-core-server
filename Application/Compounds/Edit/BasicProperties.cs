@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Compounds.DTOs;
 using Application.Core;
 using Application.Interfaces;
 using AutoMapper;
@@ -17,7 +18,7 @@ namespace Application.Compounds.Edit
   {
     public class Command : IRequest<Result<Compound>>
     {
-      public Compound EditedCompound { get; set; }
+      public CompoundEditDTO EditedCompound { get; set; }
     }
 
     // public class CommandValidator : AbstractValidator<Command>
@@ -59,7 +60,7 @@ namespace Application.Compounds.Edit
         /* Allow modifying compound MolArea and MolWeight Only  */
         existingCompound.MolArea = request.EditedCompound.MolArea;
         existingCompound.MolWeight = request.EditedCompound.MolWeight;
-        existingCompound.Smile = request.EditedCompound.Smile;
+        existingCompound.Smile = request.EditedCompound.Smiles;
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 
