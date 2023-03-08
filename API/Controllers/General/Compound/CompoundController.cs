@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Compounds.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,14 +29,14 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Compounds.Details.BySMILE.Query { SMILE = smile }));
     }
 
-    [HttpPost("edit/{id}")]
-    public async Task<IActionResult> Edit(Guid id, Compound compound)
+    [HttpPost("{id}/edit")]
+    public async Task<IActionResult> Edit(Guid id, CompoundEditDTO compound)
     {
       compound.Id = id;
       return HandleResult(await Mediator.Send(new Application.Compounds.Edit.BasicProperties.Command { EditedCompound = compound }));
     }
 
-    [HttpPost("edit-external-id/{id}")]
+    [HttpPost("{id}/edit-external-id")]
     public async Task<IActionResult> EditExternalId(Guid id, Compound compound)
     {
       compound.Id = id;
