@@ -1,8 +1,9 @@
 using System;
+using Domain.Core;
 
 namespace Domain
 {
-  public class Reply
+  public class Reply : Metadata
   {
     public Guid Id { get; set; }
     public Guid DiscussionId { get; set; }

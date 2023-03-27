@@ -1,8 +1,9 @@
 using System;
+using Domain.Core;
 
 namespace Domain
 {
-  public class GenePublicData
+  public class GenePublicData : Metadata
   {
     public Guid Id { get; set; }
     public Guid GeneId { get; set; }
@@ -23,14 +24,18 @@ namespace Domain
 
     /* Section 3: Gene summary information */
     public string GeneLength { get; set; }
+    public string GeneLengthUnit { get; set; }
     public string Location { get; set; }
     public string GeneSequence { get; set; }
 
 
     /* Section 4: Protein summary information */
     public string MolecularMass { get; set; }
+    public string MolecularMassUnit { get; set; }
     public string IsoelectricPoint { get; set; }
+    public string IsoelectricPointUnit { get; set; }
     public string ProteinLength { get; set; }
+    public string ProteinLengthUnit { get; set; }
     public string ProteinSequence { get; set; }
 
 

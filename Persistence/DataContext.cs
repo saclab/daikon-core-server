@@ -64,16 +64,88 @@ namespace Persistence
 
     }
 
-    public virtual async Task<int> SaveChangesAsync(string userId = null)
+    public virtual async Task<int> SaveChangesAsync(string userId)
     {
+      userId = userId ?? "System";
+      isModifyingAllowed();
       TrackChanges(userId);
+      updateEntityTimeStamp(userId);
       var result = await base.SaveChangesAsync();
       return result;
     }
 
-
-    private void TrackChanges(string userId = null)
+    private void isModifyingAllowed()
     {
+      var entities = ChangeTracker.Entries()
+            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
+            .Select(e => e.Entity);
+
+      // Check if any of the entities have isReadOnly set to true
+      bool anyReadOnly = entities.Any(e => e.GetType().GetProperty("IsReadOnly") != null && (bool)e.GetType().GetProperty("IsReadOnly").GetValue(e));
+
+      if (anyReadOnly)
+      {
+        // Throw an exception or log an error, since we cannot save changes when isReadOnly is true
+        throw new InvalidOperationException("Cannot save changes when property is Read Only.");
+      }
+
+      bool anyIsLocked = entities.Any(e => e.GetType().GetProperty("IsLocked") != null && (bool)e.GetType().GetProperty("IsLocked").GetValue(e));
+      if (anyIsLocked)
+      {
+        throw new InvalidOperationException("Cannot save changes when property is Locked.");
+      }
+
+    }
+
+    private void updateEntityTimeStamp(string userId)
+    {
+      userId = userId ?? "System";
+
+      // For new Entries
+      var entities = ChangeTracker.Entries()
+            .Where(e => e.State == EntityState.Modified)
+            .Select(e => e.Entity);
+
+      foreach (var entity in entities)
+      {
+        var lastEditAtColumn = entity.GetType().GetProperty("LastEditAt");
+        if (lastEditAtColumn != null)
+        {
+          lastEditAtColumn.SetValue(entity, DateTime.UtcNow);
+        }
+
+        var lastEditByColumn = entity.GetType().GetProperty("LastEditBy");
+        if (lastEditByColumn != null)
+        {
+          var user = userId ?? "System";
+          lastEditByColumn.SetValue(entity, user);
+        }
+      }
+
+      // For Existing Entries
+      var entities2 = ChangeTracker.Entries()
+            .Where(e => e.State == EntityState.Added)
+            .Select(e => e.Entity);
+      foreach (var entity in entities2)
+      {
+        var createdAtColumn = entity.GetType().GetProperty("CreatedAt");
+        if (createdAtColumn != null)
+        {
+          createdAtColumn.SetValue(entity, DateTime.UtcNow);
+        }
+
+        var createdByColumn = entity.GetType().GetProperty("CreatedBy");
+        if (createdByColumn != null)
+        {
+          var user = userId ?? "System";
+          createdByColumn.SetValue(entity, user);
+        }
+      }
+    }
+
+    private void TrackChanges(string userId)
+    {
+      userId = userId ?? "System";
       ChangeTracker.DetectChanges();
 
       var changed = ChangeTracker.Entries().ToList();

@@ -1,8 +1,9 @@
 using System;
+using Domain.Core;
 
 namespace Domain
 {
-  public class ProjectParticipatingOrg
+  public class ProjectParticipatingOrg : Metadata
   {
     public Guid Id { get; set; }
     public Guid ProjectId { get; set; }

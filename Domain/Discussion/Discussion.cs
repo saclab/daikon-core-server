@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Domain.Core;
 
 namespace Domain
 {
-  public class Discussion
+  public class Discussion : Metadata
   {
     public Guid Id { get; set; }
     public string Reference { get; set; }

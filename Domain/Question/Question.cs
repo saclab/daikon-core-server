@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain.Core;
 
 namespace Domain
 {
-  public class Question
+  public class Question : Metadata
   {
 
     public Guid Id { get; set; }

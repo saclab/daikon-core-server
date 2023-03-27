@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Domain.Core;
 
 namespace Domain
 {
-  public class Screen
+  public class Screen : Metadata
   {
     public Guid Id { get; set; }
     public Guid StrainId { get; set; }
@@ -22,8 +23,6 @@ namespace Domain
     public List<ScreenSequence> ScreenSequences { get; set; }
     public List<Hit> ValidatedHits { get; set; }
     public string Notes { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public string CreatedBy { get; set; }
 
   }
 }

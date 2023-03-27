@@ -1,8 +1,9 @@
 using System;
+using Domain.Core;
 
 namespace Domain
 {
-  public class TargetScoreCardValue
+  public class TargetScoreCardValue : Metadata
   {
     public Guid Id { get; set; }
     public Guid TargetScorecardId { get; set; }
