@@ -16,7 +16,9 @@ namespace Domain
     public string Resolution { get; set; }
     public string ResolutionUnit { get; set; }
     public string Ligands { get; set; }
+    public string Researcher { get; set; }
     public string URL { get; set; }
     public string Reference { get; set; }
+    public string Notes { get; set; }
   }
 }

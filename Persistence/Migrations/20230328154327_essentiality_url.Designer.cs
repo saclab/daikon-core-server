@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230328154327_essentiality_url")]
+    partial class essentiality_url
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1316,9 +1318,6 @@ namespace Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("DateProduced")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
 
@@ -1646,9 +1645,6 @@ namespace Persistence.Migrations
                     b.Property<string>("Reference")
                         .HasColumnType("text");
 
-                    b.Property<string>("Researcher")
-                        .HasColumnType("text");
-
                     b.Property<string>("ShiftInMIC")
                         .HasColumnType("text");
 
@@ -1741,9 +1737,6 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Reference")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Researcher")
                         .HasColumnType("text");
 
                     b.Property<string>("Resolution")

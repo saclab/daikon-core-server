@@ -21,6 +21,7 @@ namespace Domain
     public Guid GeneId { get; set; }
     public string GeneAccessionNumber { get; set; }
     public string CRISPRiStrain { get; set; }
+    public string Notes { get; set; }
 
   }
 }

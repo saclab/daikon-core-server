@@ -13,9 +13,11 @@ namespace Domain
     public string GeneAccessionNumber { get; set; }
     public string Production { get; set; }
     public string Method { get; set; }
+    public DateTime DateProduced { get; set; }
     public string URL { get; set; }
     public string PMID { get; set; }
     public string Purity { get; set; }
+    public string Notes { get; set; }
 
   }
 }

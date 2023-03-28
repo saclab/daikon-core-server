@@ -13,6 +13,7 @@ namespace Domain
     public string GeneAccessionNumber { get; set; }
     public string KnockdownStrain { get; set; }
     public string Phenotype { get; set; }
+    public string Notes { get; set; }
 
   }
 }

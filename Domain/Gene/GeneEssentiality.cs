@@ -13,6 +13,7 @@ namespace Domain
     public string Strain { get; set; }
     public string Method { get; set; }
     public string Reference { get; set; }
+    public string URL { get; set; }
     public string Notes { get; set; }
 
   }

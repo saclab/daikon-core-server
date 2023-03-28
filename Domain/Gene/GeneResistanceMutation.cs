@@ -17,7 +17,9 @@ namespace Domain
     public string Compound { get; set; }
     public string ShiftInMIC { get; set; }
     public string Org { get; set; }
+    public string Researcher { get; set; }
     public string Reference { get; set; }
+    public string Notes { get; set; }
 
   }
 }
