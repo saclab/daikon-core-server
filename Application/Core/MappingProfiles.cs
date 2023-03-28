@@ -1,3 +1,4 @@
+using System.Linq;
 using Application.BackgroundTasks.GeneSync.DTO;
 using Application.Genes.DTOs;
 using Application.Projects.DTOs;
@@ -5,6 +6,7 @@ using Application.Screens.DTOs;
 using Application.Votes.DTOs;
 using AutoMapper;
 using Domain;
+using Domain.Core;
 
 namespace Application.Core
 {
@@ -12,6 +14,17 @@ namespace Application.Core
   {
     public MappingProfiles()
     {
+
+      /* !CRITICAL SECURITY CODE: */
+      /* Ignore Metadata Properties for auto mapping*/
+      /* How? Use reflection to dynamically get the member names of the Metadata class 
+      and exclude them from being mapped in the MappingProfiles class. */
+
+      var metadataProperties = typeof(Metadata).GetProperties().Select(p => p.Name);
+      ShouldMapProperty = p => !metadataProperties.Contains(p.Name);
+
+      /* Other Maps */
+
       CreateMap<Gene, Gene>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GeneCSV, Gene>().ForMember(x => x.Id, opt => opt.Ignore());
       CreateMap<GeneCSV, GenePublicData>().ForMember(x => x.Id, opt => opt.Ignore());
