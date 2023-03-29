@@ -72,17 +72,13 @@ namespace Application.Screens.ScreenSequences
           Method = request.NewScreenSequence.Method,
           Protocol = request.NewScreenSequence.Protocol,
           Library = request.NewScreenSequence.Library,
-          Scientist = _userAccessor.GetUsername(),
+          Scientist = request.NewScreenSequence.Scientist,
           StartDate = request.NewScreenSequence.StartDate,
           EndDate = request.NewScreenSequence.EndDate,
           UnverifiedHitCount = request.NewScreenSequence.UnverifiedHitCount,
           Concentration = request.NewScreenSequence.Concentration,
           NoOfCompoundsScreened = request.NewScreenSequence.NoOfCompoundsScreened
         };
-
-        ScreenSequenceToCreate.CreatedAt = DateTime.UtcNow;
-        ScreenSequenceToCreate.CreatedBy = _userAccessor.GetUsername();
-
 
 
 
