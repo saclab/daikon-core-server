@@ -14,7 +14,7 @@ namespace Application.Screens.ValidatedHits.DTOs
     public double MIC { get; set; }
     public string MICCondition { get; set; }
     public double IC50 { get; set; }
-    public string ClusterGroup { get; set; }
+    public int ClusterGroup { get; set; }
     public string Smile { get; set; }
     public string MolWeight { get; set; }
     public string MolArea { get; set; }

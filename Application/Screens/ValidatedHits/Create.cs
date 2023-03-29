@@ -107,7 +107,7 @@ namespace Application.Screens.ValidatedHits
           MIC = request.NewHit.MIC,
           MICCondition = request.NewHit.MICCondition,
           IC50 = request.NewHit.IC50,
-          ClusterGroup = Int32.Parse(request.NewHit.ClusterGroup),
+          ClusterGroup = request.NewHit.ClusterGroup,
           Vote = VoteToCreate,
           VoteId = VoteGid
         };
