@@ -54,27 +54,35 @@ namespace Application.Screens.ValidatedHits
           return Result<Hit>.Failure("Invalid Screen ID");
         }
 
+        // check if compound exists already
+        var compoundToAttach = new Compound();
 
-        /*check if screen exists already */
-        // var testTarget = await _context.Targets.FirstOrDefaultAsync(
-        //    t => t.GeneId == request.GenePromotionQuestionaireAnswers.GeneID
-        // );
-        // if(testTarget!=null) {
-        //   return Result<Target>.Failure("Target already exists");
-        // }
-
-        Guid CompoundGid = Guid.NewGuid();
-
-        var CompoundToCreate = new Compound
+        // TODO: Check by SMILE STRING when the app is ready for CHEM CARTRIDGE integration
+        var testCompound = await _context.Compounds.FirstOrDefaultAsync(
+           c => c.ExternalCompoundIds == request.NewHit.ExternalCompoundIds
+        );
+        if (testCompound != null)
         {
-          Id = CompoundGid,
-          Smile = request.NewHit.Smile,
-          ExternalCompoundIds = request.NewHit.ExternalCompoundIds,
-          MolWeight = request.NewHit.MolWeight,
-          MolArea = request.NewHit.MolArea
-        };
+          compoundToAttach = testCompound;
+          compoundToAttach.Id = testCompound.Id;
+        }
+        else
+        {
+          Guid CompoundGid = Guid.NewGuid();
+          var CompoundToCreate = new Compound
+          {
+            Id = CompoundGid,
+            Smile = request.NewHit.Smile,
+            ExternalCompoundIds = request.NewHit.ExternalCompoundIds,
+            MolWeight = request.NewHit.MolWeight,
+            MolArea = request.NewHit.MolArea
+          };
+          _context.Compounds.Add(CompoundToCreate);
 
-        _context.Compounds.Add(CompoundToCreate);
+          compoundToAttach = CompoundToCreate;
+          compoundToAttach.Id = CompoundGid;
+        }
+
 
         Guid VoteGid = Guid.NewGuid();
 
@@ -101,8 +109,8 @@ namespace Application.Screens.ValidatedHits
           Library = request.NewHit.Library,
           Source = request.NewHit.Source,
           TargetName = baseScreen.TargetName,
-          CompoundId = CompoundGid,
-          Compound = CompoundToCreate,
+          CompoundId = compoundToAttach.Id,
+          Compound = compoundToAttach,
           Method = request.NewHit.Method,
           MIC = request.NewHit.MIC,
           MICCondition = request.NewHit.MICCondition,
