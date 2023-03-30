@@ -71,7 +71,7 @@ namespace Application.BackgroundTasks.GeneSync
       var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser();
       var GeneSequences = await fetchIndividualGeneSequencesFromMycobrowser();
       var ProteinSequences = await fetchIndividualProteinSequencesFromMycobrowser();
-      var CSVVulnerabilities = fetchCSVVulnerability();
+      //var CSVVulnerabilities = fetchCSVVulnerability();
       _logger.LogInformation("Genes pulled " + GeneSequences.Count());
 
       /* Read each line */
@@ -263,16 +263,16 @@ namespace Application.BackgroundTasks.GeneSync
       return records;
     }
 
-    public IEnumerable<GeneVulnerabilityCSV> fetchCSVVulnerability()
-    {
+    // public IEnumerable<GeneVulnerabilityCSV> fetchCSVVulnerability()
+    // {
 
-      StreamReader streamReader = new StreamReader("/app/TempFiles/GeneVulnerability.csv");
+    //   StreamReader streamReader = new StreamReader("/app/TempFiles/GeneVulnerability.csv");
 
-      var csv = new CsvReader(streamReader, DefaultCSVConfig);
-      var records = csv.GetRecords<GeneVulnerabilityCSV>();
+    //   var csv = new CsvReader(streamReader, DefaultCSVConfig);
+    //   var records = csv.GetRecords<GeneVulnerabilityCSV>();
 
-      return records;
-    }
+    //   return records;
+    // }
 
 
     public async Task<List<GeneSequence>> fetchIndividualGeneSequencesFromMycobrowser()
