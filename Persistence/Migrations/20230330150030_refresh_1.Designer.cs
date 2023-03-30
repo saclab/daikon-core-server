@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230328154327_essentiality_url")]
-    partial class essentiality_url
+    [Migration("20230330150030_refresh_1")]
+    partial class refresh_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1318,6 +1318,9 @@ namespace Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
+                    b.Property<DateTime>("DateProduced")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("GeneAccessionNumber")
                         .HasColumnType("text");
 
@@ -1645,6 +1648,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Reference")
                         .HasColumnType("text");
 
+                    b.Property<string>("Researcher")
+                        .HasColumnType("text");
+
                     b.Property<string>("ShiftInMIC")
                         .HasColumnType("text");
 
@@ -1737,6 +1743,9 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Reference")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Researcher")
                         .HasColumnType("text");
 
                     b.Property<string>("Resolution")
