@@ -195,33 +195,34 @@ namespace Application.BackgroundTasks.GeneSync
       _logger.LogInformation("Gene Vulnerability Data");
 
       // Vulnerability Data
-      foreach (var CSVVulnerability in CSVVulnerabilities)
-      {
-        Gene findGene = await _context.Genes
-          .Include(g => g.GenePublicData)
-          // .Include(g => g.GeneNonPublicData)
-          .Include(g => g.GeneEssentiality)
-          .Include(g => g.GeneVulnerability)
-          .FirstOrDefaultAsync(g => g.AccessionNumber == CSVVulnerability.GeneAccessionNumber);
+      // IGNORE: GeneVulnerability is imported using API
+      // foreach (var CSVVulnerability in CSVVulnerabilities)
+      // {
+      //   Gene findGene = await _context.Genes
+      //     .Include(g => g.GenePublicData)
+      //     // .Include(g => g.GeneNonPublicData)
+      //     .Include(g => g.GeneEssentiality)
+      //     .Include(g => g.GeneVulnerability)
+      //     .FirstOrDefaultAsync(g => g.AccessionNumber == CSVVulnerability.GeneAccessionNumber);
 
-        if (findGene != null && findGene.GeneVulnerability.Count == 0)
-        {
-          var newGeneVulnerability = new GeneVulnerability();
-          _mapper.Map(CSVVulnerability, newGeneVulnerability);
-          newGeneVulnerability.GeneId = findGene.Id;
-          newGeneVulnerability.GeneAccessionNumber = findGene.AccessionNumber;
-          newGeneVulnerability.CreatedAt = DateTime.UtcNow;
-          newGeneVulnerability.CreatedBy = "System Sync";
-          newGeneVulnerability.GeneId = findGene.Id;
-          findGene.GeneVulnerability = new List<GeneVulnerability>();
-          findGene.GeneVulnerability.Add(newGeneVulnerability);
+      //   if (findGene != null && findGene.GeneVulnerability.Count == 0)
+      //   {
+      //     var newGeneVulnerability = new GeneVulnerability();
+      //     _mapper.Map(CSVVulnerability, newGeneVulnerability);
+      //     newGeneVulnerability.GeneId = findGene.Id;
+      //     newGeneVulnerability.GeneAccessionNumber = findGene.AccessionNumber;
+      //     newGeneVulnerability.CreatedAt = DateTime.UtcNow;
+      //     newGeneVulnerability.CreatedBy = "System Sync";
+      //     newGeneVulnerability.GeneId = findGene.Id;
+      //     findGene.GeneVulnerability = new List<GeneVulnerability>();
+      //     findGene.GeneVulnerability.Add(newGeneVulnerability);
 
-          _context.GeneVulnerability.Add(newGeneVulnerability);
-          await _context.SaveChangesAsync();
-          _logger.LogInformation("Added Vulnerability for Gene" + CSVVulnerability.GeneAccessionNumber);
-        }
+      //     _context.GeneVulnerability.Add(newGeneVulnerability);
+      //     await _context.SaveChangesAsync();
+      //     _logger.LogInformation("Added Vulnerability for Gene" + CSVVulnerability.GeneAccessionNumber);
+      //   }
 
-      }
+      // }
 
 
       // 4. Update the job to complete 
