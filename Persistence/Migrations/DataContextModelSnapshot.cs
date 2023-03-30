@@ -1840,8 +1840,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
-                    b.Property<string>("Rank")
-                        .HasColumnType("text");
+                    b.Property<int?>("Rank")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Reference")
                         .HasColumnType("text");
@@ -1852,17 +1852,17 @@ namespace Persistence.Migrations
                     b.Property<string>("URL")
                         .HasColumnType("text");
 
-                    b.Property<string>("VILowerBound")
-                        .HasColumnType("text");
+                    b.Property<double?>("VILowerBound")
+                        .HasColumnType("double precision");
 
-                    b.Property<string>("VIUpperBound")
-                        .HasColumnType("text");
+                    b.Property<double?>("VIUpperBound")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("VulnerabilityCondition")
                         .HasColumnType("text");
 
-                    b.Property<string>("VulnerabilityIndex")
-                        .HasColumnType("text");
+                    b.Property<double?>("VulnerabilityIndex")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 

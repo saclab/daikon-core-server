@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class refresh_1 : Migration
+    public partial class refresh_2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -1118,10 +1118,10 @@ namespace Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     GeneId = table.Column<Guid>(type: "uuid", nullable: false),
                     GeneAccessionNumber = table.Column<string>(type: "text", nullable: true),
-                    Rank = table.Column<string>(type: "text", nullable: true),
-                    VIUpperBound = table.Column<string>(type: "text", nullable: true),
-                    VILowerBound = table.Column<string>(type: "text", nullable: true),
-                    VulnerabilityIndex = table.Column<string>(type: "text", nullable: true),
+                    Rank = table.Column<int>(type: "integer", nullable: true),
+                    VIUpperBound = table.Column<double>(type: "double precision", nullable: true),
+                    VILowerBound = table.Column<double>(type: "double precision", nullable: true),
+                    VulnerabilityIndex = table.Column<double>(type: "double precision", nullable: true),
                     VulnerabilityCondition = table.Column<string>(type: "text", nullable: true),
                     TnseqEss = table.Column<string>(type: "text", nullable: true),
                     CrisprEss = table.Column<string>(type: "text", nullable: true),
