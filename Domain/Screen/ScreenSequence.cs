@@ -19,7 +19,7 @@ namespace Domain
     public DateTime? EndDate { get; set; }
     public int UnverifiedHitCount { get; set; }
     public int NoOfCompoundsScreened { get; set; }
-    public float Concentration { get; set; }
+    public string Concentration { get; set; }
     public string ConcentrationUnit { get; set; }
 
 

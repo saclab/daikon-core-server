@@ -11,10 +11,10 @@ namespace Domain
     public string Library { get; set; }
     public string Source { get; set; }
     public string Method { get; set; }
-    public double MIC { get; set; }
+    public string MIC { get; set; }
     public string MICUnit { get; set; }
     public string MICCondition { get; set; }
-    public double IC50 { get; set; }
+    public string IC50 { get; set; }
     public string IC50Unit { get; set; }
     public int ClusterGroup { get; set; }
     public string Notes { get; set; }
