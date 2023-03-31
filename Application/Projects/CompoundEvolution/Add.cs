@@ -65,11 +65,16 @@ namespace Application.Projects.CompoundEvolution
 
         /* First check if the compound exists by external id */
 
-        var compound = await _context.Compounds.FirstOrDefaultAsync
+        Compound compound = null;
+
+        if (request.NewProjectCompoundEvolution.ExternalCompoundIds != null)
+        {
+          compound = await _context.Compounds.FirstOrDefaultAsync
           (c => c.ExternalCompoundIds == request.NewProjectCompoundEvolution.ExternalCompoundIds);
+        }
 
 
-        /* check if the compound smile exists */
+        /* check if the compound SMILES exists */
         if (compound == null)
         {
           Console.WriteLine("[Compound] was null by externalIds, checking by smile");
@@ -81,6 +86,7 @@ namespace Application.Projects.CompoundEvolution
           Console.WriteLine("[Compound] was null, creating");
           compound = new Compound();
           compound.Smile = request.NewProjectCompoundEvolution.Smile;
+          compound.ExternalCompoundIds = request.NewProjectCompoundEvolution.ExternalCompoundIds;
           compound.MolArea = request.NewProjectCompoundEvolution.MolArea;
           compound.MolWeight = request.NewProjectCompoundEvolution.MolWeight;
           compound.Id = Guid.NewGuid();
