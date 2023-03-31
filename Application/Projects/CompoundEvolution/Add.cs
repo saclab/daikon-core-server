@@ -105,7 +105,10 @@ namespace Application.Projects.CompoundEvolution
         newProjectCompoundEvolution.ProjectId = baseProject.Id;
 
         newProjectCompoundEvolution.CompoundId = compound.Id;
-        newProjectCompoundEvolution.AddedOnDate = DateTime.UtcNow;
+        newProjectCompoundEvolution.AddedOnDate =
+            (request.NewProjectCompoundEvolution.AddedOnDate == null) ?
+                          DateTime.UtcNow : request.NewProjectCompoundEvolution.AddedOnDate;
+
         newProjectCompoundEvolution.AddedOnStage =
                         (request.NewProjectCompoundEvolution.AddedOnStage == null || request.NewProjectCompoundEvolution.AddedOnStage == "") ?
                           baseProject.CurrentStage : request.NewProjectCompoundEvolution.AddedOnStage;
