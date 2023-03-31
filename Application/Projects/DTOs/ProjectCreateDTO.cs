@@ -9,6 +9,7 @@ namespace Application.Projects.DTOs
   public class ProjectCreateDTO
   {
     public string ProjectName { get; set; }
+    public string ProjectLegacyId { get; set; }
     public Guid ScreenId { get; set; }
     public List<Hit> BaseHits { get; set; }
     public Compound RepresentationStructure { get; set; }
