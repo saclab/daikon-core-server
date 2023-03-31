@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230330184559_refresh_2")]
-    partial class refresh_2
+    [Migration("20230331190724_refresh_3")]
+    partial class refresh_3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1891,8 +1891,8 @@ namespace Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<double>("IC50")
-                        .HasColumnType("double precision");
+                    b.Property<string>("IC50")
+                        .HasColumnType("text");
 
                     b.Property<string>("IC50Unit")
                         .HasColumnType("text");
@@ -1951,8 +1951,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Library")
                         .HasColumnType("text");
 
-                    b.Property<double>("MIC")
-                        .HasColumnType("double precision");
+                    b.Property<string>("MIC")
+                        .HasColumnType("text");
 
                     b.Property<string>("MICCondition")
                         .HasColumnType("text");
@@ -2494,8 +2494,8 @@ namespace Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<double>("IC50")
-                        .HasColumnType("double precision");
+                    b.Property<string>("IC50")
+                        .HasColumnType("text");
 
                     b.Property<string>("IC50Unit")
                         .HasColumnType("text");
@@ -2551,8 +2551,8 @@ namespace Persistence.Migrations
                     b.Property<string>("LastEditBy")
                         .HasColumnType("text");
 
-                    b.Property<double>("MIC")
-                        .HasColumnType("double precision");
+                    b.Property<string>("MIC")
+                        .HasColumnType("text");
 
                     b.Property<string>("MICUnit")
                         .HasColumnType("text");
@@ -3017,8 +3017,8 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<float>("Concentration")
-                        .HasColumnType("real");
+                    b.Property<string>("Concentration")
+                        .HasColumnType("text");
 
                     b.Property<string>("ConcentrationUnit")
                         .HasColumnType("text");

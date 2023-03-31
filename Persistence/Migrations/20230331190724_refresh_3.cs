@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class refresh_2 : Migration
+    public partial class refresh_3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -537,9 +537,9 @@ namespace Persistence.Migrations
                     AddedOnDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     AddedOnStage = table.Column<string>(type: "text", nullable: true),
                     Notes = table.Column<string>(type: "text", nullable: true),
-                    MIC = table.Column<double>(type: "double precision", nullable: false),
+                    MIC = table.Column<string>(type: "text", nullable: true),
                     MICUnit = table.Column<string>(type: "text", nullable: true),
-                    IC50 = table.Column<double>(type: "double precision", nullable: false),
+                    IC50 = table.Column<string>(type: "text", nullable: true),
                     IC50Unit = table.Column<string>(type: "text", nullable: true),
                     LastEditAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LastEditBy = table.Column<string>(type: "text", nullable: true),
@@ -1482,10 +1482,10 @@ namespace Persistence.Migrations
                     Library = table.Column<string>(type: "text", nullable: true),
                     Source = table.Column<string>(type: "text", nullable: true),
                     Method = table.Column<string>(type: "text", nullable: true),
-                    MIC = table.Column<double>(type: "double precision", nullable: false),
+                    MIC = table.Column<string>(type: "text", nullable: true),
                     MICUnit = table.Column<string>(type: "text", nullable: true),
                     MICCondition = table.Column<string>(type: "text", nullable: true),
-                    IC50 = table.Column<double>(type: "double precision", nullable: false),
+                    IC50 = table.Column<string>(type: "text", nullable: true),
                     IC50Unit = table.Column<string>(type: "text", nullable: true),
                     ClusterGroup = table.Column<int>(type: "integer", nullable: false),
                     Notes = table.Column<string>(type: "text", nullable: true),
@@ -1653,7 +1653,7 @@ namespace Persistence.Migrations
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UnverifiedHitCount = table.Column<int>(type: "integer", nullable: false),
                     NoOfCompoundsScreened = table.Column<int>(type: "integer", nullable: false),
-                    Concentration = table.Column<float>(type: "real", nullable: false),
+                    Concentration = table.Column<string>(type: "text", nullable: true),
                     ConcentrationUnit = table.Column<string>(type: "text", nullable: true),
                     LastEditAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LastEditBy = table.Column<string>(type: "text", nullable: true),
