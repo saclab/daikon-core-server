@@ -75,6 +75,7 @@ namespace Application.Projects
         newProject.ProjectName = request.NewProject.ProjectName;
         newProject.TargetName = baseScreen.TargetName;
         newProject.TargetId = baseScreen.TargetId;
+        newProject.ProjectLegacyId = request.NewProject.ProjectLegacyId;
 
         if (baseScreen.TargetName == null)
         {
