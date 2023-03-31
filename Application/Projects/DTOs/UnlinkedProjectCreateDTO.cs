@@ -18,7 +18,7 @@ namespace Application.Projects.DTOs
     public string HADescription { get; set; }
     public string MolWeight { get; set; }
     public string MolArea { get; set; }
-    public double MIC { get; set; }
-    public double IC50 { get; set; }
+    public string MIC { get; set; }
+    public string IC50 { get; set; }
   }
 }

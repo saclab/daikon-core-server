@@ -11,10 +11,10 @@ namespace Application.Screens.ValidatedHits.DTOs
     public string Library { get; set; }
     public string Source { get; set; }
     public string Method { get; set; }
-    public double MIC { get; set; }
+    public string MIC { get; set; }
     public string MICCondition { get; set; }
-    public double IC50 { get; set; }
-    public string ClusterGroup { get; set; }
+    public string IC50 { get; set; }
+    public int ClusterGroup { get; set; }
     public string Smile { get; set; }
     public string MolWeight { get; set; }
     public string MolArea { get; set; }

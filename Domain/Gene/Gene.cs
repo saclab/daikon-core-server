@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Domain.Core;
 
 namespace Domain
 {
-  public class Gene
+  public class Gene : Metadata
   {
     /*
       Define: A gene is a basic unit of heredity and a sequence of nucleotides 

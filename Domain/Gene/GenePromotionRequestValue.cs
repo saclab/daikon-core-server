@@ -1,8 +1,9 @@
 using System;
+using Domain.Core;
 
 namespace Domain
 {
-  public class GenePromotionRequestValue
+  public class GenePromotionRequestValue : Metadata
   {
     public Guid Id { get; set; }
     public Guid GenePromotionRequestId { get; set; }

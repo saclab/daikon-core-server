@@ -48,7 +48,7 @@ namespace Application.Projects.CompoundEvolution
         var baseProject = await _context.Projects.FirstOrDefaultAsync
             (p => p.Id == request.NewProjectCompoundEvolution.ProjectId);
 
-        /*chek if screen id is correct*/
+        /* check if screen id is correct*/
         if (baseProject == null)
         {
           return Result<ProjectCompoundEvolution>.Failure("Invalid Project ID" + request.NewProjectCompoundEvolution.ProjectId);
@@ -63,17 +63,30 @@ namespace Application.Projects.CompoundEvolution
 
         Console.WriteLine("[Project] Found");
 
-        /* check if the compound smile exists */
-        var compound = await _context.Compounds.FirstOrDefaultAsync
-        (c => c.Smile == request.NewProjectCompoundEvolution.Smile);
+        /* First check if the compound exists by external id */
+
+        Compound compound = null;
+
+        if (request.NewProjectCompoundEvolution.ExternalCompoundIds != null)
+        {
+          compound = await _context.Compounds.FirstOrDefaultAsync
+          (c => c.ExternalCompoundIds == request.NewProjectCompoundEvolution.ExternalCompoundIds);
+        }
 
 
+        /* check if the compound SMILES exists */
+        if (compound == null)
+        {
+          Console.WriteLine("[Compound] was null by externalIds, checking by smile");
+          compound = await _context.Compounds.FirstOrDefaultAsync(c => c.Smile == request.NewProjectCompoundEvolution.Smile);
+        }
 
         if (compound == null)
         {
           Console.WriteLine("[Compound] was null, creating");
           compound = new Compound();
           compound.Smile = request.NewProjectCompoundEvolution.Smile;
+          compound.ExternalCompoundIds = request.NewProjectCompoundEvolution.ExternalCompoundIds;
           compound.MolArea = request.NewProjectCompoundEvolution.MolArea;
           compound.MolWeight = request.NewProjectCompoundEvolution.MolWeight;
           compound.Id = Guid.NewGuid();
@@ -92,8 +105,14 @@ namespace Application.Projects.CompoundEvolution
         newProjectCompoundEvolution.ProjectId = baseProject.Id;
 
         newProjectCompoundEvolution.CompoundId = compound.Id;
-        newProjectCompoundEvolution.AddedOnDate = DateTime.UtcNow;
-        newProjectCompoundEvolution.AddedOnStage = baseProject.CurrentStage;
+        newProjectCompoundEvolution.AddedOnDate =
+            (request.NewProjectCompoundEvolution.AddedOnDate == null) ?
+                          DateTime.UtcNow : request.NewProjectCompoundEvolution.AddedOnDate;
+
+        newProjectCompoundEvolution.AddedOnStage =
+                        (request.NewProjectCompoundEvolution.AddedOnStage == null || request.NewProjectCompoundEvolution.AddedOnStage == "") ?
+                          baseProject.CurrentStage : request.NewProjectCompoundEvolution.AddedOnStage;
+
         newProjectCompoundEvolution.Notes = request.NewProjectCompoundEvolution.Notes;
         newProjectCompoundEvolution.MIC = request.NewProjectCompoundEvolution.MIC;
         newProjectCompoundEvolution.IC50 = request.NewProjectCompoundEvolution.IC50;

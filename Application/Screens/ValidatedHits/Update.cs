@@ -54,7 +54,7 @@ namespace Application.Screens.ValidatedHits
         hit.MIC = request.ModifiedHit.MIC;
         hit.MICCondition = request.ModifiedHit.MICCondition;
         hit.IC50 = request.ModifiedHit.IC50;
-        hit.ClusterGroup = Int32.Parse(request.ModifiedHit.ClusterGroup);
+        hit.ClusterGroup = request.ModifiedHit.ClusterGroup;
 
         var success = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
 

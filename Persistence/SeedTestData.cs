@@ -80,14 +80,15 @@ namespace Persistence
 
                   GeneVulnerability = new List<GeneVulnerability>{
                     new GeneVulnerability {
-                    Rank = "Rank Data",
-                    UVi = "U_Vi Data",
-                    IVi = "I_Vi Data",
-                    ViRatio = "Vi_Ratio Data",
+                    Rank = 1,
+                    VIUpperBound = 2,
+                    VILowerBound = 1,
+                    VulnerabilityIndex = 0.5,
                     VulnerabilityCondition = "Vulnerability Condition Data",
-                    Operon = "Operon Data",
-                    Confounded = "Confounded Data",
-                    Shell2015Operon = "Shell_2015Operon Data",
+                    TnseqEss = "Operon Data",
+                    CrisprEss = "Confounded Data",
+                    HighConfidenceVulnerabilityCall = "Shell_2015Operon Data",
+                    Reference = "Reference Data",
                   }}
                   ,
 

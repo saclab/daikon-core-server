@@ -75,6 +75,7 @@ namespace Application.Projects
         newProject.ProjectName = request.NewProject.ProjectName;
         newProject.TargetName = baseScreen.TargetName;
         newProject.TargetId = baseScreen.TargetId;
+        newProject.ProjectLegacyId = request.NewProject.ProjectLegacyId;
 
         if (baseScreen.TargetName == null)
         {
@@ -192,7 +193,8 @@ namespace Application.Projects
           Notes = "Initial HA Compound",
           MIC = request.NewProject.BaseHits.Find((h) => h.CompoundId == compoundFromDb.Id).MIC,
           IC50 = request.NewProject.BaseHits.Find((h) => h.CompoundId == compoundFromDb.Id).IC50,
-          CreatedAt = DateTime.UtcNow,
+          ExternalCompoundIds = compoundFromDb.ExternalCompoundIds,
+          AddedOnDate = request.NewProject.HAStart == null ? DateTime.UtcNow : request.NewProject.HAStart,
           CreatedBy = _userAccessor.GetUsername()
         };
         await _mediator.Send(new Application.Projects.CompoundEvolution.Add.Command { NewProjectCompoundEvolution = projectCompoundEvolution });

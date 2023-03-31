@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Core;
 
 namespace Domain
 {
-  public class GeneCRISPRiStrain
+  public class GeneCRISPRiStrain : Metadata
   {
     /*
       Define: CRISPR stands for Clustered Regularly Interspaced Short Palindromic Repeats
@@ -20,8 +21,7 @@ namespace Domain
     public Guid GeneId { get; set; }
     public string GeneAccessionNumber { get; set; }
     public string CRISPRiStrain { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public string CreatedBy { get; set; }
+    public string Notes { get; set; }
 
   }
 }

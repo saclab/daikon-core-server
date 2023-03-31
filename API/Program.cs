@@ -32,14 +32,17 @@ namespace API
         await context.Database.MigrateAsync();
 
         // TODO: (AJB) Commented out for the moment until the process can be fixed to work in Azure
-        //await Seed.SeedData(context, userManager, roleManager);
-
+        // FIX: (SID) Checking if files exist before trying to seed them; if not ignore them
+        // a volume must be mounted to the container /app/Data/Sample/ with the files to bootstrap the database
+        // Paths are hard coded in Persistence/SeedCoreData.cs
+        // TODO: (SID) Read paths from setting or environment variable
+        await Seed.SeedData(context, userManager, roleManager);
       }
 
       catch (Exception ex)
       {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occured during migration");
+        logger.LogError(ex, "An error occurred during migration");
       }
 
       await host.RunAsync();

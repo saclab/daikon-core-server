@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Domain.Core;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain
 {
-  public class Target
+  public class Target : Metadata
   {
     public Guid Id { get; set; }
 
@@ -48,9 +49,6 @@ namespace Domain
 
     public TargetScorecard TargetScorecard { get; set; }
 
-    public DateTime CreatedAt { get; set; }
-
-    public string CreatedBy { get; set; }
 
     /*Summary*/
     public string Background { get; set; }

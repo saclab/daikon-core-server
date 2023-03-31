@@ -4,7 +4,9 @@ services:
     container_name: daikon_core_server_tpt
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      # TODO: TEMP FIX to use Dockerfile.dev (@AJB)
+      # (SID) Swapping to Dockerfile to use production build
+      dockerfile: Dockerfile
     ports:
       - 5005:5005
     volumes:

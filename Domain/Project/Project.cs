@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
+using Domain.Core;
 
 namespace Domain
 {
-  public class Project
+  public class Project : Metadata
   {
     public Guid Id { get; set; }
     public Guid StrainId { get; set; }
     public string ProjectName { get; set; }
     public string ProjectType { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public string CreatedBy { get; set; }
+    public string ProjectLegacyId { get; set; }
     public Guid? ScreenId { get; set; }
     public Screen BaseScreen { get; set; }
     public string ScreenName { get; set; }
@@ -86,6 +86,8 @@ namespace Domain
     public DateTime LastModified { get; set; }
     public DateTime? TerminationDate { get; set; }
     public DateTime? EOLDate { get; set; }
+    public DateTime? CompletionDate { get; set; }
+    public bool isCompleted { get; set; }
 
   }
 }

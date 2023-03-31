@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using Domain.Core;
 
 namespace Domain
 {
-  public class GenePromotionRequest
+  public class GenePromotionRequest : Metadata
   {
     public Guid Id { get; set; }
     public List<GenePromtionRequestGene> GenePromtionRequestGenes { get; set; }
