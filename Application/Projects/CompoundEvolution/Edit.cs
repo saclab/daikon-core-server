@@ -58,7 +58,7 @@ namespace Application.Projects.CompoundEvolution
         var baseProject = await _context.Projects.FirstOrDefaultAsync
             (p => p.Id == request.EditedProjectCompoundEvolution.ProjectId);
 
-        /*chek if screen id is correct*/
+        /* check if screen id is correct */
         if (baseProject == null)
         {
           return Result<ProjectCompoundEvolution>.Failure("Invalid Project ID" + request.EditedProjectCompoundEvolution.ProjectId);

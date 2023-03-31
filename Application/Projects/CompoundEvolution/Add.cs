@@ -48,7 +48,7 @@ namespace Application.Projects.CompoundEvolution
         var baseProject = await _context.Projects.FirstOrDefaultAsync
             (p => p.Id == request.NewProjectCompoundEvolution.ProjectId);
 
-        /*chek if screen id is correct*/
+        /* check if screen id is correct*/
         if (baseProject == null)
         {
           return Result<ProjectCompoundEvolution>.Failure("Invalid Project ID" + request.NewProjectCompoundEvolution.ProjectId);
@@ -63,11 +63,18 @@ namespace Application.Projects.CompoundEvolution
 
         Console.WriteLine("[Project] Found");
 
-        /* check if the compound smile exists */
+        /* First check if the compound exists by external id */
+
         var compound = await _context.Compounds.FirstOrDefaultAsync
-        (c => c.Smile == request.NewProjectCompoundEvolution.Smile);
+          (c => c.ExternalCompoundIds == request.NewProjectCompoundEvolution.ExternalCompoundIds);
 
 
+        /* check if the compound smile exists */
+        if (compound == null)
+        {
+          Console.WriteLine("[Compound] was null by externalIds, checking by smile");
+          compound = await _context.Compounds.FirstOrDefaultAsync(c => c.Smile == request.NewProjectCompoundEvolution.Smile);
+        }
 
         if (compound == null)
         {
@@ -93,7 +100,10 @@ namespace Application.Projects.CompoundEvolution
 
         newProjectCompoundEvolution.CompoundId = compound.Id;
         newProjectCompoundEvolution.AddedOnDate = DateTime.UtcNow;
-        newProjectCompoundEvolution.AddedOnStage = baseProject.CurrentStage;
+        newProjectCompoundEvolution.AddedOnStage =
+                        (request.NewProjectCompoundEvolution.AddedOnStage == null || request.NewProjectCompoundEvolution.AddedOnStage == "") ?
+                          baseProject.CurrentStage : request.NewProjectCompoundEvolution.AddedOnStage;
+
         newProjectCompoundEvolution.Notes = request.NewProjectCompoundEvolution.Notes;
         newProjectCompoundEvolution.MIC = request.NewProjectCompoundEvolution.MIC;
         newProjectCompoundEvolution.IC50 = request.NewProjectCompoundEvolution.IC50;
