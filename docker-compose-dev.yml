@@ -2,7 +2,7 @@ version: "3"
 services:
   postgres:
     image: postgres:14.5
-    container_name: project_db
+    container_name: daikon_project_db_dev
     environment:
       - POSTGRES_USER=tpt_user
       - POSTGRES_PASSWORD=${PGPASSWORD}
@@ -14,7 +14,7 @@ services:
       - ./db:/var/lib/postgresql/data
 
   api-backend:
-    container_name: daikon_core_server_tpt
+    container_name: daikon_core_server_ce_dev
     build:
       context: .
       dockerfile: Dockerfile.dev

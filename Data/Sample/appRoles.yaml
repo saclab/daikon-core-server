@@ -1,9 +1,9 @@
 Name: InitialAppRoles
 Type: AppRole
 Data:
-  - Name: root
-  - Name: admin
-  - Name: user
-  - Name: projectManager
-  - Name: screener
-  - Name: voter
+  - Name : root
+  - Name : admin
+  - Name : user
+  - Name : projectManager
+  - Name : screener
+  - Name : voter

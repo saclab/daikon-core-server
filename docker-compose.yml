@@ -1,11 +1,9 @@
 version: "3"
 services:
   api-backend:
-    container_name: daikon_core_server_tpt
+    container_name: daikon_core_server_ce
     build:
       context: .
-      # TODO: TEMP FIX to use Dockerfile.dev (@AJB)
-      # (SID) Swapping to Dockerfile to use production build
       dockerfile: Dockerfile
     ports:
       - 5005:5005

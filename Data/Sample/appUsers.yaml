@@ -1,27 +1,27 @@
 Name: InitialAppRoles
 Type: AppRole
 Data:
-  - DisplayName: sid
+  - DisplayName : sid
     UserName: sid
     Email: sid@tamu.edu
-  - DisplayName: Siddhant Rath
+  - DisplayName : Siddhant Rath
     UserName: sidx
     Email: rath.siddhant@outlook.com
-  - DisplayName: Saswati Panda
+  - DisplayName : Saswati Panda
     UserName: panda
     Email: panda@tamu.edu
-  - DisplayName: Steve Berthel
+  - DisplayName : Steve Berthel
     UserName: steve
     Email: steve.berthel@panoramaglobal.org
-  - DisplayName: Betsy Russel
+  - DisplayName : Betsy Russel
     UserName: betsy
     Email: betsy.russell@gatesmri.org
-  - DisplayName: James Sacchettini
+  - DisplayName : James Sacchettini
     UserName: jim
     Email: sacchett@tamu.edu
-  - DisplayName: Aaron Brown
+  - DisplayName : Aaron Brown
     UserName: aaron
     Email: aaron.brown@gatesfoundation.org
-  - DisplayName: Aaron Brown (temp)
+  - DisplayName : Aaron Brown (temp)
     UserName: aarontemp
     Email: aaron@teamfigaro.com

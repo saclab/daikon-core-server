@@ -4,8 +4,6 @@ Data:
   - Key: ScreeningMethod
     Value: Virtual Screening
   - Key: ScreeningMethod
-    Value: Legacy
-  - Key: ScreeningMethod
     Value: DNA Encoded Del Screen
   - Key: ScreeningMethod
     Value: Biochemical screen
@@ -13,7 +11,7 @@ Data:
     Value: Hypomorph
   - Key: ScreeningMethod
     Value: Fragment screen
-  - Key: HAAnticipatedDays
+  - Key: FHAAnticipatedDays
     Value: 350
   - Key: H2LAnticipatedDays
     Value: 475
