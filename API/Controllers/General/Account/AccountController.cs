@@ -49,16 +49,13 @@ namespace API.Controllers
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
-      Console.WriteLine("GetCurrentUser");
-      foreach (Claim claim in HttpContext.User.Claims)
-      {
-        Console.WriteLine("{0} = {1}", claim.Type, claim.Value);
-      }
-
-      Console.WriteLine("userEmailFromToken: " + HttpContext.User.FindFirstValue(ClaimTypes.Email));
+      // Console.WriteLine("GetCurrentUser");
+      // foreach (Claim claim in HttpContext.User.Claims)
+      // {
+      //   Console.WriteLine("{0} = {1}", claim.Type, claim.Value);
+      // }
 
       var userEmailFromToken = HttpContext.User.FindFirstValue(ClaimTypes.Email);
-      Console.WriteLine("userEmailFromToken: " + userEmailFromToken);
 
       if (userEmailFromToken == null)
       {
