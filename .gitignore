@@ -227,11 +227,13 @@ project.lock.json
 # .env file contains default environment variables for docker
 .env
 .env.*
+*.env
 
 # CUSTOM
 *.db
 *.db-*
 db/
+keycloak-db-pg
 appsettings.json
 appsettings.Development.json
 .DS_Store

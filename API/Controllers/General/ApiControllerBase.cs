@@ -1,6 +1,7 @@
 using Application.Core;
 using Application.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Logging;
 namespace API.Controllers.General
 {
   [ApiController]
+  [Authorize(Policy = "RequireUserRole")]
   [Route("api/[controller]")]
   public class ApiControllerBase : ControllerBase
   {

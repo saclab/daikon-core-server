@@ -12,6 +12,8 @@ services:
       - "40000:5432"
     volumes:
       - ./db:/var/lib/postgresql/data
+    networks:
+      - daikon-ce-network
 
   api-backend:
     container_name: daikon_core_server_ce_dev
@@ -36,7 +38,7 @@ services:
       - ./:/app
     environment:
       - AZURE_VALID_AUDIENCE=${AZURE_VALID_AUDIENCE}
-      - AZURE_AUTHORITY=${AZURE_AUTHORITY}
+      - SSO_AUTHORITY=${SSO_AUTHORITY}
       - LOCAL_TOKENKEY=${LOCAL_TOKENKEY}
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - ASPNETCORE_URLS=http://*:5005
@@ -48,3 +50,28 @@ services:
       - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
       - TZ='GMT+0'
       - PGTZ='GMT+0'
+    networks:
+      - daikon-ce-network
+  
+  keycloak:
+    image: jboss/keycloak
+    env_file: ./keycloak.env
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - daikon-ce-network
+    ports:
+      - 8080:8080
+
+  keycloak-db:
+    env_file: ./keycloak.env
+    image: postgres:10.1
+    volumes:
+      - ./keycloak-db-pg:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - daikon-ce-network
+
+networks:
+  daikon-ce-network:
+    driver: bridge
