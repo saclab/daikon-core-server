@@ -1,0 +1,10 @@
+Name: InitialAppOrganism
+Type: Organism
+Data:
+  - Name: Mycobacterium tuberculosis
+    CanonicalName: mycobacterium_tuberculosis
+  - Name: Mycobacterium smegmatis
+    CanonicalName: mycobacterium_smegmatis
+  - Name: Mycobacterium leprae
+    CanonicalName: mycobacterium_leprae
+  

@@ -1,0 +1,12 @@
+Name: InitialAppOrganism
+Type: Strain
+Data:
+  - Name: Mycobacterium tuberculosis H37Rv
+    CanonicalName: mycobacterium_tuberculosis_h37_rv
+    OrganismCanonicalName: mycobacterium_tuberculosis
+  - Name: Mycobacterium tuberculosis 18b
+    CanonicalName: mycobacterium_tuberculosis_18b
+    OrganismCanonicalName: mycobacterium_tuberculosis
+  - Name: Mycobacterium leprae TN
+    CanonicalName: mycobacterium_leprae_tn
+    OrganismCanonicalName: mycobacterium_leprae

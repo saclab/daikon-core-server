@@ -231,6 +231,7 @@ namespace Persistence
     public DbSet<AppVals> AppVals { get; set; }
 
     /* Strain */
+    public DbSet<Organism> Organisms { get; set; }
     public DbSet<Strain> Strains { get; set; }
 
     /* Gene */

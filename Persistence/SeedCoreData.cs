@@ -8,6 +8,7 @@ using YamlDotNet.Serialization;
 using System.Security.Cryptography;
 using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
@@ -22,6 +23,8 @@ namespace Persistence
     private string _appAdminPath;
     private string _appValPath;
     private string _targetPromotionQuestionPath;
+    private string _appOrganismPath;
+    private string _appStrainPath;
 
 
     public SeedCoreData(DataContext context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
@@ -34,6 +37,9 @@ namespace Persistence
       _appUserPath = "/app/Data/Sample/appUsers.yaml";
       _appAdminPath = "/app/Data/Sample/appAdmins.yaml";
       _appValPath = "/app/Data/Sample/appVals.yaml";
+      _targetPromotionQuestionPath = "/app/Data/Sample/targetPromotionQuestions.yaml";
+      _appOrganismPath = "/app/Data/Sample/appOrganisms.yaml";
+      _appStrainPath = "/app/Data/Sample/appStrains.yaml";
       _targetPromotionQuestionPath = "/app/Data/Sample/targetPromotionQuestions.yaml";
     }
 
@@ -114,6 +120,24 @@ namespace Persistence
         if (File.Exists(_appValPath))
         {
           await seedAppVals(_appValPath);
+        }
+      }
+
+      /* Create Default Organisms */
+      if (!_context.Organisms.Any())
+      {
+        if (File.Exists(_appOrganismPath))
+        {
+          await seedAppOrganisms(_appOrganismPath);
+        }
+      }
+
+      /* Create Default Strains */
+      if (!_context.Strains.Any())
+      {
+        if (File.Exists(_appStrainPath))
+        {
+          await seedAppStrains(_appStrainPath);
         }
       }
 
@@ -211,5 +235,45 @@ namespace Persistence
 
     }
 
+    private async Task seedAppOrganisms(string path)
+    {
+      string ymlFileContent = File.ReadAllText(path);
+      var deserializer = new DeserializerBuilder()
+      .Build();
+
+      var appOrganismYml = deserializer.Deserialize<YAMLListDTO<Organism>>(ymlFileContent);
+      await _context.Organisms.AddRangeAsync(appOrganismYml.Data);
+
+    }
+
+    private async Task seedAppStrains(string path)
+    { 
+      Console.WriteLine("INIT : Seeding App Strains");
+      string ymlFileContent = File.ReadAllText(path);
+      var deserializer = new DeserializerBuilder()
+      .Build();
+
+      var appStrainYml = deserializer.Deserialize<YAMLListDTO<YAMLStrainDTO>>(ymlFileContent);
+
+      foreach (var strain in appStrainYml.Data)
+      {
+        Console.WriteLine("Strain: ");
+        Console.WriteLine(strain.Name);
+        var _organism = await _context.Organisms.FirstOrDefaultAsync(o => o.CanonicalName == strain.OrganismCanonicalName);
+        Console.WriteLine("Organism: ");
+        Console.WriteLine(_organism.Name);
+
+        if (_organism != null)
+        {
+          var _strainToAdd = new Strain()
+          {
+            Name = strain.Name,
+            CanonicalName = strain.CanonicalName,
+            OrganismId = _organism.Id,
+          };
+          await _context.Strains.AddAsync(_strainToAdd);
+        }
+      }
+    }
   }
 }
