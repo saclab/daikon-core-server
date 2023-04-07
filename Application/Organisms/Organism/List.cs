@@ -27,7 +27,7 @@ namespace Application.Organisms
 
             public async Task<Result<List<Organism>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var organisms = await _context.Organisms
+                var organisms = await _context.Organisms.Include(o => o.Strains)
                     .OrderBy(o => o.Name).ToListAsync();
 
                 return Result<List<Organism>>.Success(organisms);

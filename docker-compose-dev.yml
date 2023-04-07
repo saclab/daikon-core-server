@@ -53,24 +53,24 @@ services:
     networks:
       - daikon-ce-network
   
-  keycloak:
-    image: jboss/keycloak
-    env_file: ./keycloak.env
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-    networks:
-      - daikon-ce-network
-    ports:
-      - 8080:8080
+  # keycloak:
+  #   image: jboss/keycloak
+  #   env_file: ./keycloak.env
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
+  #   networks:
+  #     - daikon-ce-network
+  #   ports:
+  #     - 8080:8080
 
-  keycloak-db:
-    env_file: ./keycloak.env
-    image: postgres:10.1
-    volumes:
-      - ./keycloak-db-pg:/var/lib/postgresql/data
-      - /etc/localtime:/etc/localtime:ro
-    networks:
-      - daikon-ce-network
+  # keycloak-db:
+  #   env_file: ./keycloak.env
+  #   image: postgres:10.1
+  #   volumes:
+  #     - ./keycloak-db-pg:/var/lib/postgresql/data
+  #     - /etc/localtime:/etc/localtime:ro
+  #   networks:
+  #     - daikon-ce-network
 
 networks:
   daikon-ce-network:

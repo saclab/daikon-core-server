@@ -53,7 +53,15 @@ namespace Application.Organisms
         organism.GenomeSequence = request.Organism.GenomeSequence ?? organism.GenomeSequence;
         organism.Description = request.Organism.Description ?? organism.Description;
 
-        var result = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
+        var result = false;
+        try {
+          result = await _context.SaveChangesAsync(_userAccessor.GetUsername()) > 0;
+        }
+        catch (Exception e) {
+          Console.WriteLine(e.Message);
+        }
+
+         
 
         if (!result) return Result<Organism>.Failure("Failed to update organism");
 
