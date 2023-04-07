@@ -37,17 +37,7 @@ namespace API.Controllers.Batch.Gene
 
     }
 
-    [HttpGet("{id}")]
-    public async Task<Sequence> EditActivity()
-    {
-      Sequence sequence = SequenceFileReader.ReadSingleFromFile("/app/DevFiles/test.fasta");
-
-
-      Console.WriteLine(">>>>> Header : " + sequence.Header.Items[4]);
-
-
-      return sequence;
-    }
+    
 
   }
 }
