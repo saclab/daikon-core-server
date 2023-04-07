@@ -29,12 +29,14 @@ services:
       - /app/Domain/bin
       - /app/Persistence/bin
       - /app/DataView/bin
+      - /app/Adapter/bin
       - /app/API/obj
       - /app/Infrastructure/obj
       - /app/Application/obj
       - /app/Domain/obj
       - /app/Persistence/obj
       - /app/DataView/obj
+      - /app/Adapter/obj
       - ./:/app
     environment:
       - AZURE_VALID_AUDIENCE=${AZURE_VALID_AUDIENCE}

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataView", "DataView\DataView.csproj", "{38309CE2-848E-4F54-BC77-E88B3E158D33}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "Adapter\Adapter.csproj", "{58D07E3D-63A4-4461-BDBA-2652730307B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,5 +102,17 @@ Global
 		{38309CE2-848E-4F54-BC77-E88B3E158D33}.Release|x64.Build.0 = Release|Any CPU
 		{38309CE2-848E-4F54-BC77-E88B3E158D33}.Release|x86.ActiveCfg = Release|Any CPU
 		{38309CE2-848E-4F54-BC77-E88B3E158D33}.Release|x86.Build.0 = Release|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Debug|x64.Build.0 = Debug|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Debug|x86.Build.0 = Debug|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Release|x64.ActiveCfg = Release|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Release|x64.Build.0 = Release|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Release|x86.ActiveCfg = Release|Any CPU
+		{58D07E3D-63A4-4461-BDBA-2652730307B5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

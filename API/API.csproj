@@ -23,6 +23,7 @@
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\DataView\DataView.csproj" />
+    <ProjectReference Include="..\Adapter\Adapter.csproj" />
   </ItemGroup>
 
 </Project>

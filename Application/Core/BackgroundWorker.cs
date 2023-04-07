@@ -23,7 +23,7 @@ namespace Application.Core
       _queue = queue;
       _scopeFactory = scopeFactory;
       _logger = logger;
-      _logger.LogInformation("BackgroundWorker has been Inititated");
+      _logger.LogInformation("BackgroundWorker has been Initiated");
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
