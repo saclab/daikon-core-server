@@ -1,39 +1,34 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Adapter.GenePool.Mycobrowser.Configuration;
 using Adapter.GenePool.Mycobrowser.DTO;
-using Application.Interfaces;
-using AutoMapper;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Domain;
-using MediatR;
 using Microsoft.Extensions.Logging;
-using Persistence;
 using Xyaneon.Bioinformatics.FASTA.IO;
 
 namespace Adapter.GenePool.Mycobrowser
 {
-  public class MycobrowserConnecter : IAdapterGenePool
+  public class MycobrowserConnecter : IGenePoolAdapter
   {
-    private static string _ADAPTER_NAME = "Mycobrowser";
+    private static string _ADAPTER_NAME = "MycobrowserConnecter";
+    private static string _ADAPTER_TYPE = "GenePoolSync";
     private static string _ADAPTER_VERSION = "1.0.0";
     private readonly ILogger<MycobrowserConnecter> _logger;
     private static readonly HttpClient _client = new HttpClient();
-    private readonly IMapper _mapper;
-    private IMediator _mediator;
+
+    private MycobrowswerAdapterGeneSyncConfiguration Conf { get; set; }
+
 
     private CsvConfiguration _mycobrowserCSVConfig;
 
 
-    public MycobrowserConnecter(IMapper mapper, ILogger<MycobrowserConnecter> logger, IMediator mediator)
+
+    public MycobrowserConnecter()
     {
-      _logger = logger;
-      _mapper = mapper;
-      _mediator = mediator;
+      _logger = new LoggerFactory().CreateLogger<MycobrowserConnecter>();
+
 
       _mycobrowserCSVConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
       {
@@ -59,12 +54,100 @@ namespace Adapter.GenePool.Mycobrowser
       return _ADAPTER_VERSION;
     }
 
-    public Task<List<Gene>> SyncPool(string genePoolConfigurationName)
+    public string GetAdapterType()
+    {
+      return _ADAPTER_TYPE;
+    }
+
+    public void Init(IGeneSyncAdapterConfiguration configuration)
+    {
+      if (configuration == null)
+      {
+        throw new ArgumentNullException(nameof(configuration));
+      }
+
+      if (configuration.GetType() != typeof(MycobrowswerAdapterGeneSyncConfiguration))
+      {
+        throw new ArgumentException("Configuration is not of type MycobrowswerAdapterGeneSyncConfiguration");
+      }
+
+      Conf = (MycobrowswerAdapterGeneSyncConfiguration)configuration;
+    }
+
+    public async Task<List<Gene>> FetchGenes()
     {
 
       // Fetch the configuration for the gene pool
-      
-      throw new NotImplementedException();
+
+      List<Gene> FormattedGenes = new List<Gene>();
+
+      var CSVRecordsFromMycobrowser = await fetchCSVFromMycobrowser(Conf.GeneFileURL);
+      _logger.LogDebug("CSVRecordsFromMycobrowser.Count : " + CSVRecordsFromMycobrowser.Count());
+      var geneSequencesFromMycobrowser = await fetchGeneSequencesFromMycobrowser(Conf.GeneFASTAFileURL);
+      var proteinSequenceFromMycobrowser = await fetchProteinSequencesFromMycobrowser(Conf.ProteinFASTAFileURL);
+
+      foreach (MycobrowserGeneCSVModel geneCSVRecord in CSVRecordsFromMycobrowser)
+      {
+        _logger.LogDebug("Dealing with : " + geneCSVRecord.AccessionNumber);
+        Gene FormattedGene = new Gene();
+        FormattedGene.AccessionNumber = geneCSVRecord.AccessionNumber;
+        FormattedGene.GeneName = geneCSVRecord.GeneName;
+        FormattedGene.Function = geneCSVRecord.Function;
+        FormattedGene.Product = geneCSVRecord.Product;
+        FormattedGene.FunctionalCategory = geneCSVRecord.FunctionalCategory;
+        FormattedGene.GenePublicData = new GenePublicData();
+
+        // Gene Sequence Data
+        var geneSequenceData =
+                (from geneSequence in geneSequencesFromMycobrowser
+                 where geneSequence.GeneName == FormattedGene.AccessionNumber
+                 select new
+                 {
+                   GeneLength = geneSequence.GeneLength,
+                   GeneName = geneSequence.GeneName,
+                   geneSequence = geneSequence.GeneSequenceData
+                 }).FirstOrDefault();
+
+        if (geneSequenceData != null)
+        {
+          string[] geneLengthString = geneSequenceData.GeneLength.Split('-');
+          FormattedGene.GenePublicData.Location = geneLengthString[0];
+          FormattedGene.GenePublicData.GeneLength = (Int32.Parse(geneLengthString[1]) - Int32.Parse(geneLengthString[0]) + 1).ToString();
+          FormattedGene.GenePublicData.GeneSequence = geneSequenceData.geneSequence;
+        }
+
+        // Protein Sequence Data
+        var proteinSequenceData =
+                 (from proteinSequence in proteinSequenceFromMycobrowser
+                  where proteinSequence.ProteinName == FormattedGene.AccessionNumber
+                  select new
+                  {
+                    Product = proteinSequence.Product,
+                    ProteinLength = proteinSequence.ProteinLength,
+                    ProteinSequence = proteinSequence.ProteinSequenceData
+                  }).FirstOrDefault();
+
+        if (proteinSequenceData != null)
+        {
+          FormattedGene.GenePublicData.ProteinLength = proteinSequenceData.ProteinLength;
+          FormattedGene.GenePublicData.ProteinSequence = proteinSequenceData.ProteinSequence;
+        }
+
+        var uniProtGeneExternalID = new GeneExternalId
+        {
+          GeneAccessionNumber = geneCSVRecord.AccessionNumber,
+          ExternalIdRef = "UniProt",
+          ExternalId = geneCSVRecord.UniProt
+        };
+
+        FormattedGene.GeneExternalIds = new List<GeneExternalId>();
+        FormattedGene.GeneExternalIds.Add(uniProtGeneExternalID);
+
+        FormattedGenes.Add(FormattedGene);
+      }
+
+      return FormattedGenes;
+
     }
 
     // Fetch core gene data from mycobrowser
@@ -117,6 +200,10 @@ namespace Adapter.GenePool.Mycobrowser
       {
         throw new ArgumentNullException(nameof(mycobrowserFileURL));
       }
+      if (Conf.TempFilesDir == null)
+      {
+        throw new ArgumentNullException(nameof(Conf.TempFilesDir));
+      }
       _client.DefaultRequestHeaders.Accept.Clear();
       _logger.LogDebug("[STARTED] fetchGeneSequencesFromMycobrowser()");
       _logger.LogDebug("Fetching data from mycobrowser: " + mycobrowserFileURL);
@@ -141,7 +228,18 @@ namespace Adapter.GenePool.Mycobrowser
       }
 
       // write parsedAPIData to a temporary file
-      string tempFilePath = "/app/TempFiles/Mycobacterium_tuberculosis_H37Rv.fasta";
+      string tempFileBasePath = Conf.TempFilesDir + "/" + this.GetAdapterType() + "/" + this.GetAdapterName() + "/" + this.GetAdapterVersion() + "/";
+      string tempFileName = Conf.StrainName ?? "UNKNOWN_GENE_SEQ.fasta" + "_GENE.fasta";
+      string tempFilePath = Path.Combine(tempFileBasePath, tempFileName);
+
+
+      if (!Directory.Exists(tempFileBasePath))
+      {
+        // If the directory doesn't exist, create it
+        Directory.CreateDirectory(tempFileBasePath);
+      }
+
+
       using (var stream = new FileStream(tempFilePath, FileMode.Create))
       {
         using (var writer = new StreamWriter(stream))
@@ -180,6 +278,10 @@ namespace Adapter.GenePool.Mycobrowser
       {
         throw new ArgumentNullException(nameof(mycobrowserFileURL));
       }
+      if (Conf.TempFilesDir == null)
+      {
+        throw new ArgumentNullException(nameof(Conf.TempFilesDir));
+      }
 
       _client.DefaultRequestHeaders.Accept.Clear();
       _logger.LogDebug("[STARTED] fetchProteinSequencesFromMycobrowser()");
@@ -202,12 +304,25 @@ namespace Adapter.GenePool.Mycobrowser
         _logger.LogCritical("Failed to fetch data from mycobrowser" + mycobrowserFileURL);
         throw new Exception("Failed to fetch data from mycobrowser");
       }
-    
 
-    // Clean the data as some have line breaks.
+
+      // Clean the data as some have line breaks.
       parsedAPIDataCleaned = parsedAPIData.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-      var tempFile = "/app/TempFiles/Mycobacterium_tuberculosis_H37Rv_protein.fasta";
-      using (StreamWriter outputFile = new StreamWriter(tempFile))
+
+      string tempFileBasePath = Conf.TempFilesDir + "/" + this.GetAdapterType() + "/" + this.GetAdapterName() + "/" + this.GetAdapterVersion() + "/";
+      string tempFileName = Conf.StrainName ?? "UNKNOWN_PROT_SEQ.fasta" + "_PROT.fasta";
+      string tempFilePath = Path.Combine(tempFileBasePath, tempFileName);
+
+
+      if (!Directory.Exists(tempFileBasePath))
+      {
+        // If the directory doesn't exist, create it
+        Directory.CreateDirectory(tempFileBasePath);
+      }
+
+
+
+      using (StreamWriter outputFile = new StreamWriter(tempFilePath))
       {
         foreach (string line in parsedAPIDataCleaned)
         {
@@ -222,7 +337,7 @@ namespace Adapter.GenePool.Mycobrowser
 
       try
       {
-        var proteinSequences = SequenceFileReader.ReadMultipleFromFile(tempFile);
+        var proteinSequences = SequenceFileReader.ReadMultipleFromFile(tempFilePath);
         foreach (var protSeq in proteinSequences)
         {
           try

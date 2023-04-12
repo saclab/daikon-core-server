@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.AppConfiguration;
+using Domain.AppConfigurations;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Elevated.AppConfigurations

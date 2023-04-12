@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Application.Core;
 using Application.Interfaces;
 using AutoMapper;
-using Domain.AppConfiguration;
+using Domain.AppConfigurations;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

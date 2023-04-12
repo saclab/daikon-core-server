@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using Application.Interfaces;
 
-namespace Application.Core
+namespace Application.BackgroundServices
 {
   public class BackgroundQueue<T> : IBackgroundQueue<T> where T : class
   {

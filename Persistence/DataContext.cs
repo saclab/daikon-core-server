@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Domain.Tasks;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Domain.Models;
-using Domain.AppConfiguration;
+using Domain.AppConfigurations;
 using Domain.AppBackgroundTasks;
 
 namespace Persistence
@@ -228,7 +228,7 @@ namespace Persistence
     public DbSet<AppOrg> AppOrgs { get; set; }
 
     public DbSet<AppConfiguration> AppConfigurations { get; set; }
-    public DbSet<AppBackgroundTask> AppBackgroundTasks { get; set; }
+    public DbSet<AppBackgroundTaskLog> AppBackgroundTasksLog { get; set; }
 
     /* Business Core */
     public DbSet<Question> Questions { get; set; }

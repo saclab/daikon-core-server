@@ -41,6 +41,7 @@ namespace Application.Genes
         var GeneToCreate = new Gene
         {
           Id = gid,
+          StrainId = request.Gene.StrainId,
           AccessionNumber = request.Gene.AccessionNumber,
           GeneName = request.Gene.GeneName,
           Function = request.Gene.Function,

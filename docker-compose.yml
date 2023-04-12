@@ -22,7 +22,9 @@ services:
       - /app/Persistence/obj
       - /app/DataView/obj
       - /app/Adapter/obj
+      - ./AppData:/AppData
       - ./:/app
+
     environment:
       - AZURE_VALID_AUDIENCE=${AZURE_VALID_AUDIENCE}
       - SSO_AUTHORITY=${SSO_AUTHORITY}

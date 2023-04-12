@@ -89,7 +89,7 @@ namespace Application.Projects
 
         if (projectToEdit.CurrentStage == ProjectStage.HA.Value)
         {
-          if (request.project.H2LPredictedStart < DateTime.Now)
+          if (request.project.H2LPredictedStart < DateTime.UtcNow)
           {
             return Result<Project>.Failure("Failed : Predicted Date needs to be in the future.");
           }
@@ -99,7 +99,7 @@ namespace Application.Projects
 
         if (projectToEdit.CurrentStage == ProjectStage.H2L.Value)
         {
-          if (request.project.LOPredictedStart < DateTime.Now)
+          if (request.project.LOPredictedStart < DateTime.UtcNow)
           {
             return Result<Project>.Failure("Failed : Predicted Date needs to be in the future.");
           }
@@ -109,7 +109,7 @@ namespace Application.Projects
 
         if (projectToEdit.CurrentStage == ProjectStage.LO.Value)
         {
-          if (request.project.SPPredictedStart < DateTime.Now)
+          if (request.project.SPPredictedStart < DateTime.UtcNow)
           {
             return Result<Project>.Failure("Failed : Predicted Date needs to be in the future.");
           }
@@ -118,7 +118,7 @@ namespace Application.Projects
         }
         if (projectToEdit.CurrentStage == ProjectStage.SP.Value)
         {
-          if (request.project.INDPredictedStart < DateTime.Now)
+          if (request.project.INDPredictedStart < DateTime.UtcNow)
           {
             return Result<Project>.Failure("Failed : Predicted Date needs to be in the future.");
           }
@@ -127,7 +127,7 @@ namespace Application.Projects
         }
         if (projectToEdit.CurrentStage == ProjectStage.IND.Value)
         {
-          if (request.project.ClinicalP1PredictedStart < DateTime.Now)
+          if (request.project.ClinicalP1PredictedStart < DateTime.UtcNow)
           {
             return Result<Project>.Failure("Failed : Predicted Date needs to be in the future.");
           }

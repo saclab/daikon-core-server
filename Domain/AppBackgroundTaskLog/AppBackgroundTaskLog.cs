@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Core;
 
 namespace Domain.AppBackgroundTasks
 {
-  public class AppBackgroundTask
+  public class AppBackgroundTaskLog : Metadata
   {
     // Background Task properties that needs to be tracked
     public Guid Id { get; set; }
     public string TaskName { get; set; }
+    public string TaskConfigurationKey { get; set; }
     public string TaskDescription { get; set; }
     public string TaskStatus { get; set; }
     public string TaskType { get; set; }

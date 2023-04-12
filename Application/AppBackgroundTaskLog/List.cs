@@ -1,27 +1,25 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
 using Application.Interfaces;
 using AutoMapper;
-using Domain.AppConfigurations;
-using FluentValidation;
+using Domain.AppBackgroundTasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
-namespace Application.AppConfigurations
+namespace Application.AppBackgroundTasksLog
 {
   public class List
   {
-    public class Query : IRequest<Result<List<AppConfiguration>>>
+    public class Query : IRequest<Result<List<AppBackgroundTaskLog>>>
     {
 
     }
 
 
 
-    public class Handler : IRequestHandler<Query, Result<List<AppConfiguration>>>
+    public class Handler : IRequestHandler<Query, Result<List<AppBackgroundTaskLog>>>
     {
       private readonly DataContext _context;
       private readonly IMapper _mapper;
@@ -34,12 +32,12 @@ namespace Application.AppConfigurations
         _userAccessor = userAccessor;
       }
 
-      public async Task<Result<List<AppConfiguration>>> Handle(Query request, CancellationToken cancellationToken)
+      public async Task<Result<List<AppBackgroundTaskLog>>> Handle(Query request, CancellationToken cancellationToken)
       {
         // List all configurations
-        var configs = await _context.AppConfigurations.ToListAsync();
+        var tasks = await _context.AppBackgroundTasksLog.ToListAsync();
 
-        return Result<List<AppConfiguration>>.Success(configs);
+        return Result<List<AppBackgroundTaskLog>>.Success(tasks);
       }
     }
   }

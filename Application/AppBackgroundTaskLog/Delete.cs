@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Application.AppBackgroundTasks
+namespace Application.AppBackgroundTasksLog
 {
     public class Delete
     {
