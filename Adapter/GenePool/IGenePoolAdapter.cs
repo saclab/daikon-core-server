@@ -6,12 +6,10 @@ using Domain;
 
 namespace Adapter.GenePool
 {
-    public interface IGenePoolAdapter
-    {
-        public string GetAdapterName();
-        
-        public void Init(IGeneSyncAdapterConfiguration configuration);
-        public Task<List<Gene>> FetchGenes();
+  public interface IGenePoolAdapter : IAdapter
+  {
+    public void Init(IGeneSyncAdapterConfiguration configuration);
+    public Task<List<Gene>> FetchGenes();
 
-    }
+  }
 }

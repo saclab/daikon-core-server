@@ -14,9 +14,15 @@ namespace API.Controllers.General
   {
 
     [HttpGet]
-    public async Task<IActionResult> ListActivities()
+    public async Task<IActionResult> List()
     {
       return HandleResult(await Mediator.Send(new Application.Genes.List.Query()));
+    }
+
+    [HttpGet("strain/{strainId}")]
+    public async Task<IActionResult> ListStrainFilter(Guid strainId)
+    {
+      return HandleResult(await Mediator.Send(new Application.Genes.List.Query { StrainFilter = strainId }));
     }
 
     [HttpGet("{id}")]

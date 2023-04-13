@@ -13,7 +13,7 @@ namespace Adapter.GenePool.Mycobrowser
   public class MycobrowserConnecter : IGenePoolAdapter
   {
     private static string _ADAPTER_NAME = "MycobrowserConnecter";
-    private static string _ADAPTER_TYPE = "GenePoolSync";
+    private static string _ADAPTER_TYPE = "GenePoolAdapter";
     private static string _ADAPTER_VERSION = "1.0.0";
     private readonly ILogger<MycobrowserConnecter> _logger;
     private static readonly HttpClient _client = new HttpClient();
@@ -229,7 +229,8 @@ namespace Adapter.GenePool.Mycobrowser
 
       // write parsedAPIData to a temporary file
       string tempFileBasePath = Conf.TempFilesDir + "/" + this.GetAdapterType() + "/" + this.GetAdapterName() + "/" + this.GetAdapterVersion() + "/";
-      string tempFileName = Conf.StrainName ?? "UNKNOWN_GENE_SEQ.fasta" + "_GENE.fasta";
+      string tempFileName = Conf.StrainName ?? DateTime.Now.ToString("yyyyMMddHHmmss") + "_UNKNOWN_GENE_SEQ.fasta";
+      tempFileName = tempFileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")  + "_GENE.fasta";
       string tempFilePath = Path.Combine(tempFileBasePath, tempFileName);
 
 
@@ -310,7 +311,8 @@ namespace Adapter.GenePool.Mycobrowser
       parsedAPIDataCleaned = parsedAPIData.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
       string tempFileBasePath = Conf.TempFilesDir + "/" + this.GetAdapterType() + "/" + this.GetAdapterName() + "/" + this.GetAdapterVersion() + "/";
-      string tempFileName = Conf.StrainName ?? "UNKNOWN_PROT_SEQ.fasta" + "_PROT.fasta";
+      string tempFileName = Conf.StrainName ?? DateTime.Now.ToString("yyyyMMddHHmmss") + "_UNKNOWN_PROT_SEQ.fasta";
+      tempFileName = tempFileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss")  + "_PROT.fasta";
       string tempFilePath = Path.Combine(tempFileBasePath, tempFileName);
 
 
