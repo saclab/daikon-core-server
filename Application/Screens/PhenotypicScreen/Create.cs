@@ -80,6 +80,7 @@ namespace Application.Screens.Phenotypic
         var ScreenToCreate = new Screen
         {
           Id = ScreenGid,
+          StrainId = request.NewScreen.StrainId,
           ScreenType = ScreenType.Phenotypic.Value,
           ScreenName = screenName,
           Method = request.NewScreen.Method,

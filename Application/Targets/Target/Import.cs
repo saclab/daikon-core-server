@@ -74,6 +74,7 @@ namespace Application.Targets
           TargetId = TargetGid,
           GeneId = simpleProteinToPromote.Id,
           Gene = simpleProteinToPromote,
+          StrainId = simpleProteinToPromote.StrainId,
           AccessionNumber = simpleProteinToPromote.AccessionNumber
         };
 

@@ -58,6 +58,7 @@ namespace Application.Targets
         var TargetToCreate = new Target
         {
           Id = TargetGid,
+          StrainId = request.GenePromotionRequest.StrainId,
           Name = request.GenePromotionRequest.TargetName,
           Type = request.GenePromotionRequest.TargetType,
 

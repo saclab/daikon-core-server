@@ -69,6 +69,7 @@ namespace Application.Projects
         var newProject = new Project();
         var newProjectGuid = Guid.NewGuid();
         newProject.Id = newProjectGuid;
+        newProject.StrainId = baseScreen.StrainId;
         newProject.ScreenId = baseScreen.Id;
         newProject.BaseScreen = baseScreen;
         newProject.ScreenName = baseScreen.ScreenName;

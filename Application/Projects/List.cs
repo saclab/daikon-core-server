@@ -35,6 +35,7 @@ namespace Application.Projects
         // .ThenInclude(h => h.BaseHit)
         // .Include(p => p.RepresentationStructure)
         .Include(P => P.PrimaryOrg)
+        .Include(s => s.Strain)
         .OrderByDescending(p => p.LastModified)
         // .Include(p => p.SupportingOrgs)
         // .ThenInclude(o => o.AppOrg)

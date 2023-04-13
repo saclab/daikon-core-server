@@ -48,7 +48,7 @@ namespace Application.Genes.Promotion
         var checkIfTargetExists = _context.Targets.Where(q => (
            q.Name == request.GenePromotionRequest.TargetName));
 
-        if (checkIfTargetExists.Count() != 0) return Result<Unit>.Failure("The inteded target is already promoted");
+        if (checkIfTargetExists.Count() != 0) return Result<Unit>.Failure("The intended target is already promoted");
 
         var checkIfSubmissionExists = _context.GenePromotionRequests.Where(q => (
             q.TargetName == request.GenePromotionRequest.TargetName));
@@ -62,11 +62,21 @@ namespace Application.Genes.Promotion
         {
           Id = newGenePromotionRequestId,
           TargetName = request.GenePromotionRequest.TargetName,
+          
           TargetType = request.GenePromotionRequest.TargetType,
           GenePromtionRequestGenes = new List<GenePromtionRequestGene>(),
           GenePromotionRequestStatus = "Submitted",
           GenePromotionRequestValues = new List<GenePromotionRequestValue>()
         };
+
+        // Add strain ID
+
+        var firstGeneId = request.GenePromotionRequest.GenePromtionRequestGenes.FirstOrDefault().GeneId;
+        var firstGene = await _context.Genes.FirstOrDefaultAsync(g => g.Id == firstGeneId);
+        if (firstGene != null)
+        {
+          newGenePromotionRequest.StrainId = firstGene.StrainId;
+        }
 
         foreach (var gene in request.GenePromotionRequest.GenePromtionRequestGenes)
         {

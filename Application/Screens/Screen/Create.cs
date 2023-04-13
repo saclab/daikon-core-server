@@ -91,6 +91,7 @@ namespace Application.Screens
         var ScreenToCreate = new Screen
         {
           Id = ScreenGid,
+          StrainId = baseTarget.StrainId,
           BaseTarget = baseTarget,
           ScreenType = ScreenType.TargetBased.Value,
           TargetId = baseTarget.Id,
