@@ -76,10 +76,10 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Details.Query { TargetName = targetName }));
     }
 
-    [HttpGet("{targetName}/validateNewTargetName")]
-    public async Task<IActionResult> ValidateNewTargetName(String targetName)
+    [HttpGet("validate-new-target-name/{strainId}/{targetName}/")]
+    public async Task<IActionResult> ValidateNewTargetName(Guid strainId, String targetName)
     {
-      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.NameValidator.Query { TargetName = targetName }));
+      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.NameValidator.Query { StrainId = strainId, TargetName = targetName }));
     }
 
     [HttpPost("{geneId}/essentiality")]

@@ -26,11 +26,6 @@ namespace Persistence
     {
       base.OnModelCreating(modelBuilder);
 
-      /* Making Gene Id column unique*/
-      modelBuilder.Entity<Target>()
-            .HasIndex(gd => gd.Name)
-            .IsUnique();
-
       /* Making Key column unique in AppConfiguration */
       modelBuilder.Entity<AppConfiguration>()
         .HasIndex(p => p.Key)

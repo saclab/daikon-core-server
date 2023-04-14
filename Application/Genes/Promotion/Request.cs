@@ -46,14 +46,14 @@ namespace Application.Genes.Promotion
 
         Console.WriteLine("+++++++++++++++++++Application.Genes.Promotion");
         var checkIfTargetExists = _context.Targets.Where(q => (
-           q.Name == request.GenePromotionRequest.TargetName));
+           q.Name == request.GenePromotionRequest.TargetName && q.StrainId == request.GenePromotionRequest.StrainId));
 
         if (checkIfTargetExists.Count() != 0) return Result<Unit>.Failure("The intended target is already promoted");
 
         var checkIfSubmissionExists = _context.GenePromotionRequests.Where(q => (
-            q.TargetName == request.GenePromotionRequest.TargetName));
+            q.TargetName == request.GenePromotionRequest.TargetName && q.StrainId == request.GenePromotionRequest.StrainId));
 
-        if (checkIfSubmissionExists.Count() != 0) return Result<Unit>.Failure("There is already a submission");
+        if (checkIfSubmissionExists.Count() != 0) return Result<Unit>.Failure("The intended target is already submitted for promotion and is pending review");
 
         var newGenePromotionRequestId = new Guid();
 
@@ -62,7 +62,7 @@ namespace Application.Genes.Promotion
         {
           Id = newGenePromotionRequestId,
           TargetName = request.GenePromotionRequest.TargetName,
-          
+
           TargetType = request.GenePromotionRequest.TargetType,
           GenePromtionRequestGenes = new List<GenePromtionRequestGene>(),
           GenePromotionRequestStatus = "Submitted",

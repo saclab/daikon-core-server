@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Core;
@@ -35,7 +36,9 @@ namespace Application.AppBackgroundTasksLog
       public async Task<Result<List<AppBackgroundTaskLog>>> Handle(Query request, CancellationToken cancellationToken)
       {
         // List all configurations
-        var tasks = await _context.AppBackgroundTasksLog.ToListAsync();
+        var tasks = await _context.AppBackgroundTasksLog
+        .OrderByDescending(x => x.TaskCreated)
+        .ToListAsync();
 
         return Result<List<AppBackgroundTaskLog>>.Success(tasks);
       }

@@ -1,0 +1,44 @@
+Name: TargetPromotionQuestions
+Type: Questionnaire
+Version: 2
+Data:
+  Sections:
+    - Index: 1
+      Identification: A
+      Name: Impact of Chemical Inhibition
+      Icon: none
+      Enabled: true
+      Modules:
+        - During infections
+        - On replication Mtb in vitro
+      Questions:
+        - Identification : q1
+          Enabled: true
+          Mandatory: true
+          Module : During infections
+          QuestionBody: Is Target promotion Document Available?
+          ToolTip: Please link to the target promotion document if available
+          AnswerType: Dropdown
+          PossibleAnswers:
+            - Yes
+            - No
+            - Unknown
+        - Identification : q2
+          Enabled: true
+          Mandatory: false
+          Module : During infections
+          QuestionBody: Is the target Druggable?
+          ToolTip: Is the target Druggable
+          AnswerType: Dropdown
+          PossibleAnswers:
+            - Yes
+            - No
+            - Unknown
+        - Identification : q3
+          Enabled: true
+          Mandatory: true
+          Module : On replication Mtb in vitro
+          QuestionBody: InVitro Essentiality Available ?
+          ToolTip: InVitro Essentiality Available, Please Link to Document.
+          AnswerType: Text
+          

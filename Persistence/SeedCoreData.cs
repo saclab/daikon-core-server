@@ -152,6 +152,7 @@ namespace Persistence
 
       var questionsYml = deserializer.Deserialize<YAMLListDTO<Question>>(ymlFileContent);
       await _context.Questions.AddRangeAsync(questionsYml.Data);
+      await _context.SaveChangesAsync();
     }
 
     private async Task seedAppRoles(string path)
@@ -169,6 +170,7 @@ namespace Persistence
         Console.WriteLine(role.Name);
         await _roleManager.CreateAsync(role);
       }
+      await _context.SaveChangesAsync();
 
     }
 
@@ -191,6 +193,7 @@ namespace Persistence
         // User sign in is only allowed via SSO. Set a random password that would never be used.
         await _userManager.CreateAsync(user, GenerateStrongPassword(24));
       }
+      await _context.SaveChangesAsync();
 
     }
 
@@ -221,6 +224,7 @@ namespace Persistence
           await _userManager.AddToRoleAsync(_user, "admin");
         }
       }
+      await _context.SaveChangesAsync();
 
     }
 
@@ -232,17 +236,21 @@ namespace Persistence
 
       var appValueYml = deserializer.Deserialize<YAMLListDTO<AppVals>>(ymlFileContent);
       await _context.AppVals.AddRangeAsync(appValueYml.Data);
-
+      await _context.SaveChangesAsync();
     }
 
     private async Task seedAppOrganisms(string path)
     {
+      Console.WriteLine("INIT : Seeding App Organisms");
       string ymlFileContent = File.ReadAllText(path);
       var deserializer = new DeserializerBuilder()
       .Build();
 
       var appOrganismYml = deserializer.Deserialize<YAMLListDTO<Organism>>(ymlFileContent);
+      Console.WriteLine("Organisms: ");
+      Console.WriteLine(appOrganismYml.Data.Count);
       await _context.Organisms.AddRangeAsync(appOrganismYml.Data);
+      await _context.SaveChangesAsync();
 
     }
 
@@ -274,6 +282,7 @@ namespace Persistence
           await _context.Strains.AddAsync(_strainToAdd);
         }
       }
+      await _context.SaveChangesAsync();
     }
   }
 }
