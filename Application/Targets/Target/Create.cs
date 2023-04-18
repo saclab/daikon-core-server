@@ -48,16 +48,17 @@ namespace Application.Targets
         Guid TargetScorecardGid = Guid.NewGuid();
 
 
-        /*check if target exists already */
+        /* Check if target name already exists for the strain */
         var checkIfTargetExists = _context.Targets.Where(q => (
-          q.Name == request.GenePromotionRequest.TargetName));
+          q.Name == request.GenePromotionRequest.TargetName && q.StrainId == request.GenePromotionRequest.StrainId));
 
-        if (checkIfTargetExists.Count() != 0) return Result<Target>.Failure("The inteded target is already promoted");
+        if (checkIfTargetExists.Count() != 0) return Result<Target>.Failure("The intended target is already promoted");
 
 
         var TargetToCreate = new Target
         {
           Id = TargetGid,
+          StrainId = request.GenePromotionRequest.StrainId,
           Name = request.GenePromotionRequest.TargetName,
           Type = request.GenePromotionRequest.TargetType,
 

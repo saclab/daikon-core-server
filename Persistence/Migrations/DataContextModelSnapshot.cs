@@ -22,6 +22,213 @@ namespace Persistence.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.AppBackgroundTasks.AppBackgroundTaskLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDisabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDraft")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsExpired")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPending")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPrivate")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsReadOnly")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsRejected")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastEditBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TaskConfigurationKey")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TaskCreated")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TaskCreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TaskDescription")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TaskEndTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("TaskLastUpdated")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TaskModule")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TaskName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TaskResult")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TaskResultData")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TaskResultMessage")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TaskStartTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TaskStatus")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TaskSubModule")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TaskType")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppBackgroundTasksLog");
+                });
+
+            modelBuilder.Entity("Domain.AppConfigurations.AppConfiguration", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Component")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDisabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDraft")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsExpired")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPending")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPrivate")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsReadOnly")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsRejected")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastEditBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("isValueInJSON")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("isValueInYAML")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Key")
+                        .IsUnique();
+
+                    b.ToTable("AppConfigurations");
+                });
+
             modelBuilder.Entity("Domain.AppOrg", b =>
                 {
                     b.Property<Guid>("Id")
@@ -621,6 +828,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StrainId");
+
                     b.ToTable("Genes");
                 });
 
@@ -1035,6 +1244,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("LastEditBy")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("StrainId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("TargetName")
                         .HasColumnType("text");
@@ -2148,6 +2360,89 @@ namespace Persistence.Migrations
                     b.ToTable("GeneGroupGenes");
                 });
 
+            modelBuilder.Entity("Domain.Organism", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CanonicalName")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("GeneCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("GenomeSequence")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDisabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDraft")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsExpired")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsLocked")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPending")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPrivate")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsReadOnly")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsRejected")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastEditBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organisms");
+                });
+
             modelBuilder.Entity("Domain.Project", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2389,6 +2684,8 @@ namespace Persistence.Migrations
                     b.HasIndex("RepresentationStructureId");
 
                     b.HasIndex("ScreenId");
+
+                    b.HasIndex("StrainId");
 
                     b.ToTable("Projects");
                 });
@@ -3004,6 +3301,8 @@ namespace Persistence.Migrations
 
                     b.HasIndex("OrgId");
 
+                    b.HasIndex("StrainId");
+
                     b.HasIndex("TargetId");
 
                     b.ToTable("Screens");
@@ -3130,6 +3429,15 @@ namespace Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("DrugResistanceLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("GenomeSequence")
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsApproved")
                         .HasColumnType("boolean");
 
@@ -3184,7 +3492,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
+                    b.Property<Guid>("OrganismId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OrganismId");
 
                     b.ToTable("Strains");
                 });
@@ -3320,8 +3633,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                    b.HasIndex("StrainId");
 
                     b.ToTable("Targets");
                 });
@@ -3901,6 +4213,17 @@ namespace Persistence.Migrations
                     b.Navigation("Org");
                 });
 
+            modelBuilder.Entity("Domain.Gene", b =>
+                {
+                    b.HasOne("Domain.Strain", "Strain")
+                        .WithMany()
+                        .HasForeignKey("StrainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Strain");
+                });
+
             modelBuilder.Entity("Domain.GeneCRISPRiStrain", b =>
                 {
                     b.HasOne("Domain.Gene", null)
@@ -4077,11 +4400,19 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("ScreenId");
 
+                    b.HasOne("Domain.Strain", "Strain")
+                        .WithMany()
+                        .HasForeignKey("StrainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("BaseScreen");
 
                     b.Navigation("PrimaryOrg");
 
                     b.Navigation("RepresentationStructure");
+
+                    b.Navigation("Strain");
                 });
 
             modelBuilder.Entity("Domain.ProjectBaseHits", b =>
@@ -4163,6 +4494,12 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Strain", "Strain")
+                        .WithMany()
+                        .HasForeignKey("StrainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Target", "BaseTarget")
                         .WithMany()
                         .HasForeignKey("TargetId");
@@ -4170,6 +4507,8 @@ namespace Persistence.Migrations
                     b.Navigation("BaseTarget");
 
                     b.Navigation("Org");
+
+                    b.Navigation("Strain");
                 });
 
             modelBuilder.Entity("Domain.ScreenSequence", b =>
@@ -4179,6 +4518,26 @@ namespace Persistence.Migrations
                         .HasForeignKey("ScreenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Strain", b =>
+                {
+                    b.HasOne("Domain.Organism", null)
+                        .WithMany("Strains")
+                        .HasForeignKey("OrganismId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Target", b =>
+                {
+                    b.HasOne("Domain.Strain", "Strain")
+                        .WithMany()
+                        .HasForeignKey("StrainId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Strain");
                 });
 
             modelBuilder.Entity("Domain.TargetGene", b =>
@@ -4322,6 +4681,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Models.GeneGroup", b =>
                 {
                     b.Navigation("Genes");
+                });
+
+            modelBuilder.Entity("Domain.Organism", b =>
+                {
+                    b.Navigation("Strains");
                 });
 
             modelBuilder.Entity("Domain.Project", b =>

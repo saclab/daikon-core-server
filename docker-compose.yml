@@ -14,16 +14,20 @@ services:
       - /app/Domain/bin
       - /app/Persistence/bin
       - /app/DataView/bin
+      - /app/Adapter/bin
       - /app/API/obj
       - /app/Infrastructure/obj
       - /app/Application/obj
       - /app/Domain/obj
       - /app/Persistence/obj
       - /app/DataView/obj
+      - /app/Adapter/obj
+      - ./AppData:/AppData
       - ./:/app
+
     environment:
       - AZURE_VALID_AUDIENCE=${AZURE_VALID_AUDIENCE}
-      - AZURE_AUTHORITY=${AZURE_AUTHORITY}
+      - SSO_AUTHORITY=${SSO_AUTHORITY}
       - LOCAL_TOKENKEY=${LOCAL_TOKENKEY}
       - DOTNET_USE_POLLING_FILE_WATCHER=1
       - ASPNETCORE_URLS=http://*:5005

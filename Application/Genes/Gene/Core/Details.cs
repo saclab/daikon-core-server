@@ -48,6 +48,7 @@ namespace Application.Genes
         .Include(g => g.GeneUnpublishedStructures)
         .Include(g => g.GeneHypomorphs)
         .Include(g => g.GeneExternalIds)
+        .Include(g => g.Strain)
         .AsSplitQuery()
         .FirstOrDefaultAsync(g => g.Id == request.Id);
         return Result<Gene>.Success(gene);

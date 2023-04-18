@@ -82,7 +82,8 @@ namespace Application.Targets
             TargetId = TargetGid,
             GeneId = geneGroupGene.GeneId,
             Gene = geneGroupGene.Gene,
-            AccessionNumber = geneGroupGene.Gene.AccessionNumber
+            AccessionNumber = geneGroupGene.Gene.AccessionNumber,
+            StrainId = geneGroupGene.Gene.StrainId
           };
           _context.TargetGenes.Add(targetGeneToAdd);
           targetGenes.Add(targetGeneToAdd);
@@ -93,6 +94,7 @@ namespace Application.Targets
         {
           Id = TargetGid,
           Name = request.TargetImportDTO.TargetName,
+          StrainId = request.TargetImportDTO.StrainId,
           Type = "protein-complex",
           TargetGenes = targetGenes,
           Bucket = request.TargetImportDTO.Bucket,

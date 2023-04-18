@@ -18,6 +18,7 @@ namespace Application.Genes.Promotion
     public class Query : IRequest<Result<String>>
     {
       public string TargetName { get; set; }
+      public Guid StrainId { get; set; }
     }
 
     // public class CommandValidator : AbstractValidator<Command>
@@ -46,13 +47,13 @@ namespace Application.Genes.Promotion
 
         var validateNameTarget = await _context.Targets
         .FirstOrDefaultAsync(q => (
-            q.Name == request.TargetName));
+            q.Name == request.TargetName && q.StrainId == request.StrainId));
 
         if (validateNameTarget != null) return Result<String>.Success("TargetExists");
 
         var validateNamePromotionReq = await _context.GenePromotionRequests
         .FirstOrDefaultAsync(q => (
-            q.TargetName == request.TargetName));
+            q.TargetName == request.TargetName && q.StrainId == request.StrainId));
 
         if (validateNamePromotionReq != null) return Result<String>.Success("PromotionRequestExists");
 

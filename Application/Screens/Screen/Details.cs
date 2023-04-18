@@ -35,6 +35,7 @@ namespace Application.Screens
       public async Task<Result<ScreenDTO>> Handle(Query request, CancellationToken cancellationToken)
       {
         var screen = await _context.Screens
+        .Include(s => s.Strain)
         .Include(h => h.ValidatedHits.OrderBy(v => v.ClusterGroup))
         .ThenInclude(h => h.Compound)
         .Include(h => h.ValidatedHits)

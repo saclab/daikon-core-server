@@ -68,6 +68,9 @@ namespace Application.General.AppValues
                     .Select(e => e.Value)
                     .ToList());
 
+        var strains = await _context.Strains.OrderBy(s => s.CanonicalName).ToListAsync();
+        appValues.Strains = new List<Strain>(strains);
+
         return Result<AppValuesDTO>.Success(appValues);
       }
     }

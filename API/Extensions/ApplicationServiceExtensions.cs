@@ -8,8 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Persistence;
 using Application.Genes;
 using Domain.Tasks;
-using Application.BackgroundTasks.GeneSync;
 using System;
+using Application.BackgroundServices;
+using Application.BackgroundTasks.Genes;
+using Domain.AppBackgroundTasks;
 
 namespace API.Extensions
 {
@@ -56,12 +58,13 @@ namespace API.Extensions
       /* Add User Accessor from Indfrastructure */
       services.AddScoped<IUserAccessor, UserAccessor>();
 
-      /* Add Background Service */
-      services.AddHostedService<BackgroundWorker>();
-      services.AddSingleton<IBackgroundQueue<BTask>, BackgroundQueue<BTask>>();
+      /* Add Background Services */
+      // Gene Pool Sync Services
+      services.AddHostedService<GenePoolBackgroundWorker>();
+      services.AddSingleton<IBackgroundQueue<GenePoolBackgroundTask>, BackgroundQueue<GenePoolBackgroundTask>>();
 
       /* Background Tasks */
-      services.AddScoped<IGeneSync, GeneSync>();
+      services.AddScoped<IGeneSynchronizer, GeneSynchronizer>();
 
       return services;
     }

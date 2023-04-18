@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Domain.Tasks;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Domain.Models;
+using Domain.AppConfigurations;
+using Domain.AppBackgroundTasks;
 
 namespace Persistence
 {
@@ -24,15 +26,10 @@ namespace Persistence
     {
       base.OnModelCreating(modelBuilder);
 
-      /* Making Gene Id column unique*/
-      modelBuilder.Entity<Target>()
-            .HasIndex(gd => gd.Name)
-            .IsUnique();
-
-      //  modelBuilder.Entity<Gene>()
-      //     .HasOne<GenePublicData>(g => g.GenePublicData)r
-      //     .WithOne(gpd => gpd.Gene)
-      //     .HasForeignKey<GenePublicData>(gpd => gpd.RefGeneID);
+      /* Making Key column unique in AppConfiguration */
+      modelBuilder.Entity<AppConfiguration>()
+        .HasIndex(p => p.Key)
+        .IsUnique();
 
 
 
@@ -225,12 +222,15 @@ namespace Persistence
     public DbSet<BTask> BTask { get; set; }
     public DbSet<AppOrg> AppOrgs { get; set; }
 
+    public DbSet<AppConfiguration> AppConfigurations { get; set; }
+    public DbSet<AppBackgroundTaskLog> AppBackgroundTasksLog { get; set; }
 
     /* Business Core */
     public DbSet<Question> Questions { get; set; }
     public DbSet<AppVals> AppVals { get; set; }
 
     /* Strain */
+    public DbSet<Organism> Organisms { get; set; }
     public DbSet<Strain> Strains { get; set; }
 
     /* Gene */

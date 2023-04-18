@@ -7,6 +7,7 @@ namespace Domain
   public class GenePromotionRequest : Metadata
   {
     public Guid Id { get; set; }
+    public Guid StrainId { get; set; }
     public List<GenePromtionRequestGene> GenePromtionRequestGenes { get; set; }
     public string TargetName { get; set; }
     public string TargetType { get; set; }

@@ -49,8 +49,14 @@ namespace API.Controllers
     [HttpGet]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
+      // Console.WriteLine("GetCurrentUser");
+      // foreach (Claim claim in HttpContext.User.Claims)
+      // {
+      //   Console.WriteLine("{0} = {1}", claim.Type, claim.Value);
+      // }
 
       var userEmailFromToken = HttpContext.User.FindFirstValue(ClaimTypes.Email);
+
       if (userEmailFromToken == null)
       {
         return Unauthorized();
@@ -58,9 +64,9 @@ namespace API.Controllers
 
       var user = await _userManager.FindByEmailAsync(userEmailFromToken);
 
-      var roles = await _userManager.GetRolesAsync(user);
+      if (user == null) return Unauthorized();
 
-      if (user == null) return null;
+      var roles = await _userManager.GetRolesAsync(user);
 
       return CreateUserObject(user, roles);
 

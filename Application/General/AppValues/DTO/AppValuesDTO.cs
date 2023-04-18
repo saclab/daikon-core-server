@@ -22,5 +22,7 @@ namespace Application.General.AppValues.DTO
     public AppCount AppCount { get; set; }
 
     /* Count of Domain */
+
+    public List<Strain> Strains { get; set; }
   }
 }

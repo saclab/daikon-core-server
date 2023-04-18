@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -16,12 +16,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.21.0" />
     <PackageReference Include="Xyaneon.Bioinformatics.FASTA" Version="0.1.0" />
+
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\DataView\DataView.csproj" />
+    <ProjectReference Include="..\Adapter\Adapter.csproj" />
   </ItemGroup>
 
 </Project>

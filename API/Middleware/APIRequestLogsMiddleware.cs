@@ -35,7 +35,7 @@ namespace API.Middleware
 
       var username = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
       var endpoint = context.GetEndpoint();
-      DateTime now = DateTime.Now;
+      DateTime now = DateTime.UtcNow;
       if (endpoint != null)
       {
         var controllerActionDescriptor = endpoint.Metadata.GetMetadata<ControllerActionDescriptor>();

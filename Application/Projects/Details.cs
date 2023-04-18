@@ -31,6 +31,7 @@ namespace Application.Projects
       public async Task<Result<Project>> Handle(Query request, CancellationToken cancellationToken)
       {
         var project = await _context.Projects
+        .Include(s => s.Strain)
         .Include(p => p.BaseHits)
         .ThenInclude(h => h.BaseHit)
         .ThenInclude(h => h.Compound)

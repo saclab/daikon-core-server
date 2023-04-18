@@ -14,9 +14,15 @@ namespace API.Controllers.General
   {
 
     [HttpGet]
-    public async Task<IActionResult> ListActivities()
+    public async Task<IActionResult> List()
     {
       return HandleResult(await Mediator.Send(new Application.Genes.List.Query()));
+    }
+
+    [HttpGet("strain/{strainId}")]
+    public async Task<IActionResult> ListStrainFilter(Guid strainId)
+    {
+      return HandleResult(await Mediator.Send(new Application.Genes.List.Query { StrainFilter = strainId }));
     }
 
     [HttpGet("{id}")]
@@ -70,10 +76,10 @@ namespace API.Controllers.General
       return HandleResult(await Mediator.Send(new Application.Genes.Promotion.Details.Query { TargetName = targetName }));
     }
 
-    [HttpGet("{targetName}/validateNewTargetName")]
-    public async Task<IActionResult> ValidateNewTargetName(String targetName)
+    [HttpGet("validate-new-target-name/{strainId}/{targetName}/")]
+    public async Task<IActionResult> ValidateNewTargetName(Guid strainId, String targetName)
     {
-      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.NameValidator.Query { TargetName = targetName }));
+      return HandleResult(await Mediator.Send(new Application.Genes.Promotion.NameValidator.Query { StrainId = strainId, TargetName = targetName }));
     }
 
     [HttpPost("{geneId}/essentiality")]

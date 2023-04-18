@@ -8,6 +8,7 @@ namespace Domain
   {
     public Guid Id { get; set; }
     public Guid StrainId { get; set; }
+    public Strain Strain { get; set; }
     public string ProjectName { get; set; }
     public string ProjectType { get; set; }
     public string ProjectLegacyId { get; set; }

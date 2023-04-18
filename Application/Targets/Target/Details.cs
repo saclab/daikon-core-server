@@ -31,6 +31,7 @@ namespace Application.Targets
       {
         var target = await _context.Targets
         .Include(t => t.TargetGenes)
+        .Include(s => s.Strain)
         .Include(t => t.TargetScorecard)
         .ThenInclude(s => s.TargetScoreCardValues)
         .ThenInclude(q => q.Question)
