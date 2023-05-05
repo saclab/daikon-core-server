@@ -49,7 +49,7 @@ namespace Application.Screens
         var baseTarget = await _context.Targets.FirstOrDefaultAsync
             (t => t.Id == request.NewScreen.TargetId);
 
-        /*chek if gene id is correct*/
+        /* check if gene id is correct*/
         if (baseTarget == null)
         {
           return Result<Screen>.Failure("Invalid Target ID");
